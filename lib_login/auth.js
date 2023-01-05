@@ -1,13 +1,13 @@
 var express = require('express');
 var router = express.Router();
 
-var template = require('./template.js');
+var log_template = require('./log_template.js');
 var db = require('../db');
 
 // 로그인 화면
 router.get('/login', function (request, response) {
     var title = '로그인';
-    var html = template.HTML(title,`
+    var html = log_template.HTML(title,`
             <h2>로그인</h2>
             <form action="/auth/login_process" method="post">
             <p><input class="login" type="text" name="username" placeholder="아이디"></p>
@@ -56,7 +56,7 @@ router.get('/logout', function (request, response) {
 // 회원가입 화면
 router.get('/register', function(request, response) {
     var title = '회원가입';    
-    var html = template.HTML(title, `
+    var html = log_template.HTML(title, `
     <h2>회원가입</h2>
     <form action="/auth/register_process" method="post">
    
@@ -85,12 +85,12 @@ router.post('/register_process', function(request, response) {
     var recommendID = request.body.recommendID;
 
 
-    if (username && password && password2) {
+    if (username && password && password2 && number && address && email ) { //필수정보
         
         db.query('SELECT * FROM usertable WHERE username = ?', [username], function(error, results, fields) { // DB에 같은 이름의 회원아이디가 있는지 확인
             if (error) throw error;
             if (results.length <= 0 && password == password2) {     // DB에 같은 이름의 회원아이디가 없고, 비밀번호가 올바르게 입력된 경우 
-                db.query('INSERT INTO usertable (username, password) VALUES(?,?)', [username, password], function (error, data) {
+                db.query('INSERT INTO usertable (username, password, number, address, email, recommendID ) VALUES(?,?,?,?,?,?)', [username, password, number, address, email, recommendID], function (error, data) {
                     if (error) throw error2;
                     response.send(`<script type="text/javascript">alert("회원가입이 완료되었습니다!");
                     document.location.href="/";</script>`);
