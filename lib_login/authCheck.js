@@ -13,6 +13,8 @@ module.exports = {
         authStatusUI = `<div align="right">${request.session.nickname}님 환영합니다 
         <a href="/auth/logout"
         >로그아웃</a>
+        <a href="/myinfo"
+        >마이페이지</a>
         </div>
         `;
       }

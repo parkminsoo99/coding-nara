@@ -2,7 +2,7 @@ module.exports = {
     HTML: function (title, body, authStatusUI) {
       return `
       <!doctype html>
-      <html lang="en" dir="ltr">
+      <html>
       <head>    
         <title>Login TEST - ${title}</title>
         <meta charset="utf-8">
@@ -109,7 +109,7 @@ module.exports = {
           <ul class="nav-container">
             <li class="nav-item"><a href="/">코딩나라란</a><li>
             <li class="nav-item"><a href="/curriculum">커리큘럼</a><li>
-            <li class="nav-item"><a href="/enroll">수강신청</a><li>
+            <li class="nav-item"><a href="/enroll/sub">수강신청</a><li>
             <li class="nav-item"><a href="/review">강좌후기</a><li>
             <li class="nav-item"><a href="/ask">고객센터</a><li>
             
