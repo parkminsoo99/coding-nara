@@ -142,7 +142,6 @@ db.query(`SELECT * FROM topic`, function(error,topics){
   })
 )
 app.get('/page/:pageId', (request,response) =>
-
 db.query(`SELECT * FROM topic`, function(error,topics){
     if(error){
       throw error;
@@ -265,7 +264,6 @@ db.query(`SELECT * FROM topic`, function(error,topics){
 
     app.post('/update_process', function(request,response){
           var post = request.body;
-          console.log(post);
           db.query('UPDATE topic SET title=?, description=?, author_id=? WHERE id=?', [post.title, post.description, post.author, post.id], function(error, result){
             response.writeHead(302, {Location: `/page/${post.id}`});
             response.end();
@@ -285,6 +283,42 @@ db.query(`SELECT * FROM topic`, function(error,topics){
           });
       });
 
+
+      app.get('/myinfo', (request,response) =>
+      db.query(`SELECT * FROM Student`, function(error,topics){
+            var nickname = request.session.nickname;
+            
+            db.query('SELECT * FROM Student WHERE userid = ? ',[nickname], function(error2, authors){
+              console.log(authors);
+            var title = '내정보';
+            var list = template.list(topics);
+            if(authors[0].Point === null)
+            {
+              authors[0].Point=0;
+            }
+            var html = template.HTML(title, 'list',
+              `
+                <p>아이디 ${authors[0].userid}</p>
+                <p>이름 ${authors[0].username}</p>
+                <p>비밀번호 ${authors[0].password}</p>
+                <p>전화번호 ${authors[0].number}</p>
+                <p>주소 ${authors[0].address}</p>
+                <p>이메일 ${authors[0].email}</p>
+                <p>적립금 ${authors[0].Point}</p>
+            
+                <p>
+                  <input type="submit">
+                </p>
+              `,
+              `<a href="/create">수정</a>`,
+              authCheck.statusUI(request, response)
+            );
+            console.log(template.authorSelect(authors, topics[0].author_id, nickname));
+            response.writeHead(200);
+            response.end(html);
+          });
+        })
+        )
 
 
 

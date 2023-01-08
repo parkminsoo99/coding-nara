@@ -205,14 +205,17 @@ router.post('/register_process', function(request, response) {
     var address = request.body.address;
     var email = request.body.email;
     var recommendID = request.body.recommendID;
-
+    var Point = request.body.Point;
 
     if (userid &&username && password && password2 && number && address && email ) { //필수정보
-        
         db.query('SELECT * FROM student WHERE userid = ?', [userid], function(error, results, fields) { // DB에 같은 이름의 회원아이디가 있는지 확인
+            console.log(results);
             if (error) throw error;
-            if (results.length <= 0 && password == password2) {     // DB에 같은 이름의 회원아이디가 없고, 비밀번호가 올바르게 입력된 경우 
-                db.query('INSERT INTO student (userid,username, password, number, address, email, recommendID ) VALUES(?,?,?,?,?,?,?)', [userid, username, password, number, address, email, recommendID], function (error, data) {
+            if (results.length <= 0 && password == password2) {     // DB에 같은 이름의 회원아이디가 없고, 비밀번호가 올바르게 입력된 경우
+                db.query('SELECT * FROM student WHERE recommendID = ?', [recommendID], function(error, results_ID, fields){
+                
+            }) 
+                db.query('INSERT INTO student (userid,username, password, number, address, email, recommendID, Point ) VALUES(?,?,?,?,?,?,?,?)', [userid, username, password, number, address, email, recommendID, Point], function (error, data) {
                     if (error) throw error2;
                     response.send(`<script type="text/javascript">alert("회원가입이 완료되었습니다!");
                     document.location.href="/";</script>`);
