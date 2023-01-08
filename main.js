@@ -147,7 +147,7 @@ db.query(`SELECT * FROM topic`, function(error,topics){
     if(error){
       throw error;
     }
-    db.query(`SELECT * FROM topic LEFT JOIN author ON topic.author_id=author.id WHERE topic.id=?`,[request.params.pageId], function(error2, topic){
+    db.query(`SELECT * FROM topic LEFT JOIN Student ON topic.author_id=Student.Student_ID WHERE topic.id=?`,[request.params.pageId], function(error2, topic){
       if(error2){
         throw error2;
       }
@@ -159,7 +159,7 @@ db.query(`SELECT * FROM topic`, function(error,topics){
        `
        <h2>${title}</h2>
        ${description}
-       <p>by ${topic[0].name}</p>
+       <p>by ${topic[0].userid}</p>
        `,
        ` <a href="/create">create</a>
            <a href="/update/${request.params.pageId}">update</a>
@@ -176,7 +176,8 @@ db.query(`SELECT * FROM topic`, function(error,topics){
 
 app.get('/create', (request,response) =>
 db.query(`SELECT * FROM topic`, function(error,topics){
-    db.query('SELECT * FROM author', function(error2, authors){
+    db.query('SELECT * FROM Student', function(error2, authors){
+      var nickname = request.session.nickname;
       var title = 'Create';
       var list = template.list(topics);
       var html = template.HTML(title, list,
@@ -198,7 +199,7 @@ db.query(`SELECT * FROM topic`, function(error,topics){
         `<a href="/create">create</a>`,
         authCheck.statusUI(request, response)
       );
-      console.log(template.authorSelect(authors));
+      console.log(template.authorSelect(authors, topics[0].author_id, nickname));
       response.writeHead(200);
       response.end(html);
     });
@@ -207,10 +208,11 @@ db.query(`SELECT * FROM topic`, function(error,topics){
 
   app.post('/create_process',function(request,response){
           var post = request.body;
+          console.log(post);
           db.query(`
-            INSERT INTO topic (title, description, created, author_id) 
+            INSERT INTO topic (title, description, created, author_id ) 
               VALUES(?, ?, NOW(), ?)`,
-            [post.title, post.description, request.session.Student_id], 
+            [post.title, post.description, post.author], 
             function(error, result){
               if(error){
                 throw error;
@@ -231,7 +233,8 @@ db.query(`SELECT * FROM topic`, function(error,topics){
               if(error2){
                 throw error2;
               }
-              db.query('SELECT * FROM author', function(error2, authors){
+              db.query('SELECT * FROM Student', function(error2, authors){
+                var nickname = request.session.nickname;
                 var list = template.list(topics);
                 var html = template.HTML(topic[0].title, list,
                   `
@@ -242,7 +245,8 @@ db.query(`SELECT * FROM topic`, function(error,topics){
                       <textarea name="description" placeholder="description">${topic[0].description}</textarea>
                     </p>
                     <p>
-                      ${template.authorSelect(authors, topic[0].author_id)}
+                      ${template.authorSelect(authors, topic[0].author_id, nickname)}
+                      ${request.session.nickname}
                     </p>
                     <p>
                       <input type="submit">
@@ -261,6 +265,7 @@ db.query(`SELECT * FROM topic`, function(error,topics){
 
     app.post('/update_process', function(request,response){
           var post = request.body;
+          console.log(post);
           db.query('UPDATE topic SET title=?, description=?, author_id=? WHERE id=?', [post.title, post.description, post.author, post.id], function(error, result){
             response.writeHead(302, {Location: `/page/${post.id}`});
             response.end();
