@@ -1,0 +1,32 @@
+{
+  "name": "codingnara",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/parkminsoo99/coding-nara.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/parkminsoo99/coding-nara/issues"
+  },
+  "homepage": "https://github.com/parkminsoo99/coding-nara#readme",
+  "dependencies": {
+    "body-parser": "^1.20.1",
+    "express": "^4.18.2",
+    "express-session": "^1.17.3",
+    "mysql": "^2.18.1",
+    "mysql2": "^2.3.3",
+    "nodemon": "^2.0.20",
+    "ps": "^1.0.0",
+    "qs": "^6.11.0",
+    "sanitize": "^2.1.2",
+    "sanitize-html": "^2.8.1",
+    "session-file-store": "^1.5.0"
+  }
+}
