@@ -6,6 +6,8 @@ module.exports = {
       <head>    
         <title>Login TEST - ${title}</title>
         <meta charset="utf-8">
+        <script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
+        <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>  
         <style>
           @import url(http://fonts.googleapis.com/earlyaccess/notosanskr.css);
   
@@ -13,7 +15,6 @@ module.exports = {
               font-family: 'Noto Sans KR', sans-serif;
               background-color: #AAA2C2;
               margin: 50px;
-  
           }
           .background {
               background-color: white;

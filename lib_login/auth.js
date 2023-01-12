@@ -1,8 +1,9 @@
 var express = require('express');
 var router = express.Router();
-
+var qs = require('querystring');
 var log_template = require('./log_template.js');
 var db = require('../db');
+const axios = require('axios');
 
 // 로그인 화면
 router.get('/login', function (request, response) {
@@ -10,134 +11,96 @@ router.get('/login', function (request, response) {
     var html = log_template.HTML(title,`
             <h2>로그인</h2>
             <form action="/auth/login_process" method="post">
-            <p><input class="login" type="text" name="Login_ID" placeholder="아이디"></p>
-            <p><input class="login" type="password" name="pwd" placeholder="비밀번호"></p>
-            <p><input class="btn" type="submit" value="로그인"></p>
+                <p><input class="login" type="text" name="Login_ID" placeholder="아이디"></p>
+                <p><input class="login" type="password" name="pwd" placeholder="비밀번호"></p>
+                <p><input class="btn" type="submit" value="로그인"></p>
             </form> 
-            <ul>
-	<li>
-      <!-- 아래와같이 아이디를 꼭 써준다. -->
-      <a id="naverIdLogin_loginButton" href="javascript:void(0)">
-          <span>네이버 로그인</span>
-      </a>
-	</li>
-	<li onclick="naverLogout(); return false;">
-      <a href="javascript:void(0)">
-          <span>네이버 로그아웃</span>
-      </a>
-	</li>
-</ul>
+            <!-- 카카오 로그인 버튼 노출 영역 -->
 
-<!-- 네이버 스크립트 -->
-<script src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.2.js" charset="utf-8"></script>
+            <a id="kakao-login-btn" href="/auth/kakao/login">
+                <img src="https://k.kakaocdn.net/14/dn/btroDszwNrM/I6efHub1SN5KCJqLm1Ovx1/o.jpg" width="222"
+                     alt="카카오 로그인 버튼" />
+            </a>
 
-<script>
-
-var naverLogin = new naver.LoginWithNaverId(
-		{
-			clientId: "YOw2QsbgiQMXkMDVZmv_", //내 애플리케이션 정보에 cliendId를 입력해줍니다.
-			callbackUrl: "http://localhost:3000", // 내 애플리케이션 API설정의 Callback URL 을 입력해줍니다.
-			isPopup: false,
-			callbackHandle: true
-		}
-	);	
-
-naverLogin.init();
-
-window.addEventListener('load', function () {
-	naverLogin.getLoginStatus(function (status) {
-		if (status) {
-			var email = naverLogin.user.getEmail(); // 필수로 설정할것을 받아와 아래처럼 조건문을 줍니다.
-    		
-			console.log(naverLogin.user); 
-    		
-            if( email == undefined || email == null) {
-				alert("이메일은 필수정보입니다. 정보제공을 동의해주세요.");
-				naverLogin.reprompt();
-				return;
-			}
-		} else {
-			console.log("callback 처리에 실패하였습니다.");
-		}
-	});
-});
-
-
-var testPopUp;
-function openPopUp() {
-    testPopUp= window.open("https://nid.naver.com/nidlogin.logout", "_blank", "toolbar=yes,scrollbars=yes,resizable=yes,width=1,height=1");
-}
-function closePopUp(){
-    testPopUp.close();
-}
-
-function naverLogout() {
-	openPopUp();
-	setTimeout(function() {
-		closePopUp();
-		}, 1000);
-	
-	
-}
-</script> 
-<ul>
-	<li onclick="kakaoLogin();">
-      <a href="javascript:void(0)">
-          <span>카카오 로그인</span>
-      </a>
-	</li>
-	<li onclick="kakaoLogout();">
-      <a href="javascript:void(0)">
-          <span>카카오 로그아웃</span>
-      </a>
-	</li>
-</ul>
-<!-- 카카오 스크립트 -->
-<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
-<script>
-Kakao.init('6a78718988e7f6b814f7ab1a60c4e12a'); //발급받은 키 중 javascript키를 사용해준다.
-console.log(Kakao.isInitialized()); // sdk초기화여부판단
-//카카오로그인
-function kakaoLogin() {
-    Kakao.Auth.login({
-      success: function (response) {
-        Kakao.API.request({
-          url: '/v2/user/me',
-          success: function (response) {
-        	  console.log(response)
-          },
-          fail: function (error) {
-            console.log(error)
-          },
-        })
-      },
-      fail: function (error) {
-        console.log(error)
-      },
-    })
-  }
-//카카오로그아웃  
-function kakaoLogout() {
-    if (Kakao.Auth.getAccessToken()) {
-      Kakao.API.request({
-        url: '/v1/user/unlink',
-        success: function (response) {
-        	console.log(response)
-        },
-        fail: function (error) {
-          console.log(error)
-        },
-      })
-      Kakao.Auth.setAccessToken(undefined)
-    }
-  }  
-</script>          
+            <!-- 네이버 로그인 버튼 노출 영역 -->
+            
+            <div id="naver_id_login"></div>
+            <!-- //네이버 로그인 버튼 노출 영역 -->
+            <script type="text/javascript">
+                var naver_id_login = new naver_id_login("sIwGUXdmGRyOPin4mTnj", "http://localhost:3000/auth/naverLogin");
+                var state = naver_id_login.getUniqState();
+                naver_id_login.setButton("white", 2,40);
+                naver_id_login.setDomain("YOUR_SERVICE_URL");
+                naver_id_login.setState(state);
+                naver_id_login.setPopup();
+                naver_id_login.init_naver_id_login();
+            </script>          
             <p>계정이 없으신가요?  <a href="/auth/register">회원가입</a></p> 
         `, '');
     response.send(html);
 });
+const kakaoData = {
+    client_id : 'f28ca6f29082d1991b42941c3178fe60',
+    client_secret : 'fOdmb6jteLfVhsfoWVvqm4Us5CgRc6DS',
+    redirect_url : 'http://localhost:3000/auth/kakao'
+}
 
-// 로그인 프로세스
+router.get('/kakao/login',(req,res) => {
+    const kakaoAuthroize = `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${kakaoData.client_id}&redirect_uri=${kakaoData.redirect_url}`
+    console.log('inin');
+    res.redirect(kakaoAuthroize);
+})
+
+router.get('/kakao', async(req, res) => {
+    try{
+        const url = 'https://kauth.kakao.com/oauth/token'
+        const body = qs.stringify({
+            grant_type : 'authorization_code',
+            client_id: kakaoData.client_id,
+            client_secret : kakaoData.client_secret,
+            redirect_url : kakaoData.redirect_url,
+            code : req.query.code
+        })
+        const header = {'content-Type' : 'application/x-www-form-urlencoded;charset=utf-8'}
+        const response = await axios.post(url,body,header);
+        const token = response.data.access_token;
+        const user = await axios.get('https://kapi.kakao.com/v2/user/me',{
+            headers : {
+                'Content-Type' : 'application/x-www-form-urlencoded;charset=utf-8',
+                'Authorization':`Bearer ${token}`
+            }
+        })
+        const { nickname, profile_image} = user.data.properties
+        console.log('토큰!', token);
+        console.log('사용자 정보',nickname,profile_image);
+        res.redirect('/');
+    }catch{
+        console.log('실패!');
+    }
+})
+
+router.get('/naverLogin', function (request, response) {
+    var title = '로그인';
+    var html = log_template.HTML(title,
+        `
+        <body>
+        <script type="text/javascript">
+          var naver_id_login = new naver_id_login("sIwGUXdmGRyOPin4mTnj", "http://localhost:3000/auth/naverLogin");
+          // 접근 토큰 값 출력
+          alert(naver_id_login.oauthParams.access_token);
+          // 네이버 사용자 프로필 조회
+          naver_id_login.get_naver_userprofile("naverSignInCallback()");
+          // 네이버 사용자 프로필 조회 이후 프로필 정보를 처리할 callback function
+          function naverSignInCallback() {
+            alert(naver_id_login.getProfileData());
+            alert(naver_id_login.getProfileData('email'));
+            alert(naver_id_login.getProfileData('nickname'));
+            alert(naver_id_login.getProfileData('age'));
+          }
+        </script>
+        `, '');
+    response.send(html);
+});
 router.post('/login_process', function (request, response) {
     var Login_ID = request.body.Login_ID;
     var Student_ID= request.body.Login_ID;
