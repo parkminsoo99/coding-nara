@@ -17,9 +17,12 @@ router.get('/login', function (request, response) {
             </form> 
             <!-- 카카오 로그인 버튼 노출 영역 -->
 
-            <a id="kakao-login-btn" href="/auth/kakao/login">
+            <a id="kakao-login-btn" href="/auth/kakao/in">
                 <img src="https://k.kakaocdn.net/14/dn/btroDszwNrM/I6efHub1SN5KCJqLm1Ovx1/o.jpg" width="222"
                      alt="카카오 로그인 버튼" />
+            </a>
+            <a id="kakao-logout-btn" href="https://kauth.kakao.com/oauth/logout?client_id=f28ca6f29082d1991b42941c3178fe60&logout_redirect_uri=http://localhost:3000/auth/kakao/logout">
+                로그아웃
             </a>
 
             <!-- 네이버 로그인 버튼 노출 영역 -->
@@ -42,16 +45,19 @@ router.get('/login', function (request, response) {
 const kakaoData = {
     client_id : 'f28ca6f29082d1991b42941c3178fe60',
     client_secret : 'fOdmb6jteLfVhsfoWVvqm4Us5CgRc6DS',
-    redirect_url : 'http://localhost:3000/auth/kakao'
+    redirect_url : 'http://localhost:3000/auth/kakao/login',
+    logout_redirect_url : 'http://localhost:3000/auth/kakao/logout'
 }
 
-router.get('/kakao/login',(req,res) => {
+router.get('/kakao/in',(req,res) => {
     const kakaoAuthroize = `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${kakaoData.client_id}&redirect_uri=${kakaoData.redirect_url}`
-    console.log('inin');
     res.redirect(kakaoAuthroize);
 })
 
-router.get('/kakao', async(req, res) => {
+router.get('/kakao/logout', async (req,res)=>{
+    res.redirect('/');
+  })
+router.get('/kakao/login', async(req, res) => {
     try{
         const url = 'https://kauth.kakao.com/oauth/token'
         const body = qs.stringify({
@@ -70,9 +76,10 @@ router.get('/kakao', async(req, res) => {
                 'Authorization':`Bearer ${token}`
             }
         })
-        const { nickname, profile_image} = user.data.properties
+        const { nickname, profile_image} = user.data.properties;
+        const { email, Name, birthday} = user.data.kakao_account;
         console.log('토큰!', token);
-        console.log('사용자 정보',nickname,profile_image);
+        console.log('사용자 정보',email, birthday, Name, nickname, profile_image);
         res.redirect('/');
     }catch{
         console.log('실패!');
