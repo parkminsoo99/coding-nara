@@ -19,5 +19,11 @@ module.exports = {
         `;
       }
       return authStatusUI;
+    },
+    Payment_Username: function (request, response) {
+      if (this.isOwner(request, response)) {
+        authStatusUI = request.session.nickname
+      }
+      return authStatusUI;
     }
   }
