@@ -35,11 +35,13 @@ module.exports = {
         `;
       }
       return authStatusUI;
-    },
-    Payment_Username: function (request, response) {
-      if (this.isOwner(request, response)) {
-        authStatusUI = request.session.nickname
-      }
-      return authStatusUI;
     }
+    // ,
+    // Payment_Username: function (request, response) {
+    //   if (this.isOwner(request, response)) {
+    //     console.log('r_s_e',request.session.email);
+    //     authStatusUI = request.session.email;
+    //   }
+    //   return authStatusUI;
+    // }
   }
