@@ -5,6 +5,13 @@ var log_template = require('./log_template.js');
 var db = require('../db');
 const axios = require('axios');
 
+const kakaoData = {
+    client_id : 'f28ca6f29082d1991b42941c3178fe60',
+    client_secret : 'fOdmb6jteLfVhsfoWVvqm4Us5CgRc6DS',
+    redirect_url : 'http://localhost:3000/auth/kakao/login',
+    logout_redirect_url : 'http://localhost:3000/auth/kakao/logout'
+}
+
 // 로그인 화면
 router.get('/login', function (request, response) {
     var title = '로그인';
@@ -21,10 +28,6 @@ router.get('/login', function (request, response) {
                 <img src="https://k.kakaocdn.net/14/dn/btroDszwNrM/I6efHub1SN5KCJqLm1Ovx1/o.jpg" width="222"
                      alt="카카오 로그인 버튼" />
             </a>
-            <a id="kakao-logout-btn" href="https://kauth.kakao.com/oauth/logout?client_id=f28ca6f29082d1991b42941c3178fe60&logout_redirect_uri=http://localhost:3000/auth/kakao/logout">
-                로그아웃
-            </a>
-
             <!-- 네이버 로그인 버튼 노출 영역 -->
             
             <div id="naver_id_login"></div>
@@ -42,12 +45,6 @@ router.get('/login', function (request, response) {
         `, '');
     response.send(html);
 });
-const kakaoData = {
-    client_id : 'f28ca6f29082d1991b42941c3178fe60',
-    client_secret : 'fOdmb6jteLfVhsfoWVvqm4Us5CgRc6DS',
-    redirect_url : 'http://localhost:3000/auth/kakao/login',
-    logout_redirect_url : 'http://localhost:3000/auth/kakao/logout'
-}
 
 router.get('/kakao/in',(req,res) => {
     const kakaoAuthroize = `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${kakaoData.client_id}&redirect_uri=${kakaoData.redirect_url}`
@@ -55,10 +52,14 @@ router.get('/kakao/in',(req,res) => {
 })
 
 router.get('/kakao/logout', async (req,res)=>{
-    res.redirect('/');
+    req.session.destroy();
+    const kakaoAuthroize = 'https://kauth.kakao.com/oauth/logout?client_id=f28ca6f29082d1991b42941c3178fe60&logout_redirect_uri=http://localhost:3000/'
+    res.redirect(kakaoAuthroize);
   })
 router.get('/kakao/login', async(req, res) => {
     try{
+        var platform_type = "kakao";
+        console.log('inin');
         const url = 'https://kauth.kakao.com/oauth/token'
         const body = qs.stringify({
             grant_type : 'authorization_code',
@@ -70,50 +71,86 @@ router.get('/kakao/login', async(req, res) => {
         const header = {'content-Type' : 'application/x-www-form-urlencoded;charset=utf-8'}
         const response = await axios.post(url,body,header);
         const token = response.data.access_token;
+        console.log("res", response.data.account_email);
         const user = await axios.get('https://kapi.kakao.com/v2/user/me',{
             headers : {
                 'Content-Type' : 'application/x-www-form-urlencoded;charset=utf-8',
                 'Authorization':`Bearer ${token}`
             }
         })
-        const { nickname, profile_image} = user.data.properties;
-        const { email, Name, birthday} = user.data.kakao_account;
-        console.log('토큰!', token);
-        console.log('사용자 정보',email, birthday, Name, nickname, profile_image);
-        res.redirect('/');
+        const { nickname } = user.data.properties;
+        const { email, birthday } = user.data.kakao_account;
+        db.query(`SELECT * FROM Student WHERE Platform_type = ? and Email_Address = ? and Name = ? `, [platform_type, email, nickname],
+        function(error,results1){
+            console.log('result1',results1);
+            if(error) throw error;
+            if (results1.length > 0) {       // db에서의 반환값이 있으면 로그인 성공
+                req.session.type = platform_type;
+                req.session.is_logined = true;      // 세션 정보 갱신
+                req.session.nickname = nickname;
+                req.session.save(function () {
+                    res.redirect(`/`);
+                });
+            }
+            else{
+               console.log('토큰!', token);
+               res.redirect('/register');
+            }
+        })
     }catch{
         console.log('실패!');
+        res.redirect('/');
     }
 })
 
-router.get('/naverLogin', function (request, response) {
-    var title = '로그인';
-    var html = log_template.HTML(title,
-        `
-        <body>
-        <script type="text/javascript">
-          var naver_id_login = new naver_id_login("sIwGUXdmGRyOPin4mTnj", "http://localhost:3000/auth/naverLogin");
-          // 접근 토큰 값 출력
-          alert(naver_id_login.oauthParams.access_token);
-          // 네이버 사용자 프로필 조회
-          naver_id_login.get_naver_userprofile("naverSignInCallback()");
-          // 네이버 사용자 프로필 조회 이후 프로필 정보를 처리할 callback function
-          function naverSignInCallback() {
-            alert(naver_id_login.getProfileData());
-            alert(naver_id_login.getProfileData('email'));
-            alert(naver_id_login.getProfileData('nickname'));
-            alert(naver_id_login.getProfileData('age'));
-          }
-        </script>
+// 회원가입 화면
+router.get('/register', function(request, response) {
+    // console.log('req',request);
+    // if(request.query.kakao){
+    //     var title = '회원가입';    
+    //     var html = log_template.HTML(title, `
+    //     <h2>회원가입</h2>
+    //     <form action="/auth/register_process" method="post">
+    //         <p><input class="login" type="text" name="Login_ID" placeholder="아이디"  value=${email} disabled></p>   
+    //         <p><input class="login" type="text" name="username" placeholder="이름" value=${nickname} disabled></p>
+    //         <p><input class="login" type="password" name="pwd" placeholder="비밀번호" disabled></p>    
+    //         <p><input class="login" type="password" name="pwd2" placeholder="비밀번호 재확인" disabled></p>
+    //         <p><input class="login" type="text" name="number" placeholder="전화번호" value="010-1111-1111" disabled></p>
+    //         <p><input class="login" type="text" name="address" placeholder="주소" value="서울"></p>
+    //         <p><input class="login" type="text" name="email" placeholder="이메일" value=${email} disabled></p>
+    //         <p><input class="login" type="text" name="recommendID" placeholder="추천인ID" value=""></p>
+    //         <p><input class="btn" type="submit" value="제출"></p>
+    //     </form>            
+    //     <p><a href="/auth/login">로그인화면으로 돌아가기</a></p>
+    //     `, '');
+    //     response.send(html);
+    // }
+    
+        var title = '회원가입';    
+        var html = log_template.HTML(title, `
+        <h2>회원가입</h2>
+        <form action="/auth/register_process" method="post">
+            <p><input class="login" type="text" name="Login_ID" placeholder="아이디"  value="test"></p>   
+            <p><input class="login" type="text" name="username" placeholder="이름" value="장영재" ></p>
+            <p><input class="login" type="password" name="pwd" placeholder="비밀번호" value="11"></p>    
+            <p><input class="login" type="password" name="pwd2" placeholder="비밀번호 재확인" value="11"></p>
+            <p><input class="login" type="text" name="number" placeholder="전화번호" value="010-1111-1111"></p>
+            <p><input class="login" type="text" name="address" placeholder="주소" value="서울"></p>
+            <p><input class="login" type="text" name="email" placeholder="이메일" value="test@naver.com" ></p>
+            <p><input class="login" type="text" name="recommendID" placeholder="추천인ID" value=""></p>
+            <p><input class="btn" type="submit" value="제출"></p>
+        </form>            
+        <p><a href="/auth/login">로그인화면으로 돌아가기</a></p>
         `, '');
-    response.send(html);
+        response.send(html);
+    
 });
+
 router.post('/login_process', function (request, response) {
     var Login_ID = request.body.Login_ID;
     var Student_ID= request.body.Login_ID;
     var password = request.body.pwd;
     if (Login_ID && password) {             // id와 pw가 입력되었는지 확인
-        
         db.query('SELECT * FROM Student WHERE Login_ID = ? AND password = ?', [Login_ID, password], function(error, results, fields) {
             if (error) throw error;
             if (results.length > 0) {       // db에서의 반환값이 있으면 로그인 성공
@@ -143,26 +180,31 @@ router.get('/logout', function (request, response) {
 });
 
 
-// 회원가입 화면
-router.get('/register', function(request, response) {
-    var title = '회원가입';    
-    var html = log_template.HTML(title, `
-    <h2>회원가입</h2>
-    <form action="/auth/register_process" method="post">
-<p><input class="login" type="text" name="Login_ID" placeholder="아이디"  value="test"></p>   
-<p><input class="login" type="text" name="username" placeholder="이름" value="장영재" ></p>
-<p><input class="login" type="password" name="pwd" placeholder="비밀번호" value="11"></p>    
-<p><input class="login" type="password" name="pwd2" placeholder="비밀번호 재확인" value="11"></p>
-<p><input class="login" type="text" name="number" placeholder="전화번호" value="010-1111-1111"></p>
-<p><input class="login" type="text" name="address" placeholder="주소" value="서울"></p>
-<p><input class="login" type="text" name="email" placeholder="이메일" value="test@naver.com" ></p>
-<p><input class="login" type="text" name="recommendID" placeholder="추천인ID" value=""></p>
-    <p><input class="btn" type="submit" value="제출"></p>
-    </form>            
-    <p><a href="/auth/login">로그인화면으로 돌아가기</a></p>
-    `, '');
+
+
+router.get('/naverLogin', function (request, response) {
+    var title = '로그인';
+    var html = log_template.HTML(title,
+        `
+        <body>
+        <script type="text/javascript">
+          var naver_id_login = new naver_id_login("sIwGUXdmGRyOPin4mTnj", "http://localhost:3000/auth/naverLogin");
+          // 접근 토큰 값 출력
+          alert(naver_id_login.oauthParams.access_token);
+          // 네이버 사용자 프로필 조회
+          naver_id_login.get_naver_userprofile("naverSignInCallback()");
+          // 네이버 사용자 프로필 조회 이후 프로필 정보를 처리할 callback function
+          function naverSignInCallback() {
+            alert(naver_id_login.getProfileData());
+            alert(naver_id_login.getProfileData('email'));
+            alert(naver_id_login.getProfileData('nickname'));
+            alert(naver_id_login.getProfileData('age'));
+          }
+        </script>
+        `, '');
     response.send(html);
 });
+
  
 // 회원가입 프로세스
 router.post('/register_process', function(request, response) {    
