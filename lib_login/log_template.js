@@ -15,7 +15,6 @@ module.exports = {
               margin: 50px;
   
           }
-  
           .background {
               background-color: white;
               height: auto;

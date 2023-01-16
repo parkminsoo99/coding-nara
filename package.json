@@ -1,0 +1,57 @@
+{
+  "name": "zoom-clone",
+  "version": "1.0.0",
+  "type": "commonjs",
+  "description": "<img width=\"1440\" alt=\"스크린샷 2022-01-06 오후 3 38 36\" src=\"https://user-images.githubusercontent.com/85481204/148340109-146411dc-dff2-4963-ae96-52e50e0dc69e.png\">",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon",
+    "css": "gulp"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/insub4067/Zoom-Clone.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/insub4067/Zoom-Clone/issues"
+  },
+  "homepage": "https://github.com/insub4067/Zoom-Clone#readme",
+  "dependencies": {
+    "autoprefixer": "^9.7.0",
+    "babel-node": "^0.0.1-security",
+    "body-parser": "^1.20.1",
+    "express": "^4.17.2",
+    "express-session": "^1.17.3",
+    "localtunnel": "^2.0.2",
+    "mysql": "^2.18.1",
+    "mysql2": "^3.0.1",
+    "pug": "^3.0.2",
+    "qs": "^6.11.0",
+    "sanitize": "^2.1.2",
+    "sanitize-html": "^2.8.1",
+    "sass": "^1.45.2",
+    "session-file-store": "^1.5.0",
+    "socket.io": "^4.1.3",
+    "tailwindcss": "^3.2.4"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.16.0",
+    "@babel/core": "^7.16.5",
+    "@babel/node": "^7.16.5",
+    "@babel/preset-env": "^7.16.5",
+    "gulp": "^3.9.1",
+    "gulp-csso": "^4.0.1",
+    "gulp-postcss": "^9.0.1",
+    "gulp-sass": "^5.1.0",
+    "nodemon": "^2.0.15",
+    "postcss": "^8.4.5",
+    "postcss-cli": "^9.1.0"
+  },
+  "directories": {
+    "lib": "lib"
+  }
+}

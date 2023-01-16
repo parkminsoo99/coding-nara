@@ -1,0 +1,20 @@
+@tailwind base;
+@tailwind components;
+
+.myMessage {
+    word-wrap: break-word;
+    @apply self-end bg-gray-300 p-1 m-px rounded-lg w-9/10;
+}
+
+.othersMessage {
+    word-wrap: break-word;
+    @apply self-start bg-gray-300 p-1 m-px rounded-lg w-9/10;
+}
+
+.myFace {
+    transform: rotateY(180deg);
+    -webkit-transform: rotateY(180deg);
+    -moz-transform: rotateY(180deg);
+}
+
+@tailwind utilities;
