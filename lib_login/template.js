@@ -15,6 +15,86 @@ module.exports = {
               margin: 50px;
   
           }
+          .tree,
+.tree ul {
+  font-size: 30px;
+  margin:0 0 0 1em; /* indentation */
+  padding:0;
+  list-style:none;
+  color:#369;
+  position:relative;
+}
+
+.tree ul {margin-left:.5em} /* (indentation/2) */
+
+.tree:before,
+.tree ul:before {
+  content:"";
+  display:block;
+  width:0;
+  position:absolute;
+  top:0;
+  bottom:0;
+  left:0;
+  border-left:1px solid;
+}
+
+.tree li {
+  margin:0;
+  padding:0 1.5em; 
+  line-height:2em; 
+  font-weight:bold;
+  position:relative;
+}
+
+.tree li:before {
+  content:"";
+  display:block;
+  width:10px; /* same with indentation */
+  height:0;
+  border-top:1px solid;
+  margin-top:-1px; /* border top width */
+  position:absolute;
+  top:1em; /* (line-height/2) */
+  left:0;
+}
+
+.tree li:last-child:before {
+  background:white; /* same with body background */
+  height:auto;
+  top:1em; /* (line-height/2) */
+  bottom:0;
+}
+          
+          
+          .container{
+            width: 90%;
+            height: 100%;
+            overflow: hidden;
+          }
+          .container img{
+            max-width: 100%;
+            height: auto;
+            display: block;
+
+          }
+          .product-list{
+            width: 675px;
+            margin-left: auto;
+            margin-right: auto;
+          }
+          .product{
+            width: 225px;
+            text-align: center;
+            display: block;
+            color: #545454;
+            text=decoration: none;
+            float: left;
+          }
+          .product-name{
+            margin-top: 20px;
+            margin-bottom: 4px;
+          }
           
           header{
             margin-top: 80px;

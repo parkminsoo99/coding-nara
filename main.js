@@ -89,11 +89,12 @@ app.get('/main', (req, res) => {
     <p><h3>우리 아이에 적합한 교육 서비스를 경험해보세요<h3></p>
     <button class="button-arounder" >시작하기</button>
     <p><h1>코딩나라가 제공하는 서비스<h2></p><p><h1></h1></p>
-    <div id="borderDemo">
+    <div class="container" id="borderDemo">
         <h1>처음 접하는 아이들에게 맞춤교육</h1>
       <div id="bg2">
       </div>
       <h2 id="mg">코딩의 첫걸음을 쉽게 이끌어주도록 도와줍니다</h2>
+    </div>
     <p><h1>잘 성립된 커리큘럼</h1><p>
     <div id="bg3" align=center>
       </div>
@@ -109,7 +110,7 @@ app.get('/main', (req, res) => {
     <p><h1>원하는 시간을 선택</h1></p>
     <div id="bg6">
       </div>
-    </div>
+    
     <p><h3><h3></p>
     
     
@@ -127,9 +128,64 @@ app.get('/curriculum', (req, res) => {
   //   return false;
   // }
   var html = template_main.HTML('Welcome',
-    `<hr>
-        <h2>커리큘럼</h2>
-        `,   
+    `<br />
+    <div>
+  <p>코딩나라</p>
+  <ul class="tree">
+    <li>초급자
+      <ul>
+        <li>스크래치</li>
+        <li>ENTRY
+          <ul>
+            <li>Elephant</li>
+            <li>Mouse</li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li>중급자
+      <ul>
+        <li>앱 인벤터
+          <ul>
+            <li>웹 사이트 제작</li>
+            <li>Python
+              <ul>
+                <li>List item 1</li>
+                <li>List item 2
+                  <ul>
+                    <li>List item 2.1</li>
+                    <li>List item 2.2</li>
+                    <li>List item 2.3</li>
+                  </ul>
+                </li>
+                <li>List item 3</li>
+                <li>List item 4</li>
+                <li>List item 5
+                  <ul>
+                    <li>List item 5.1</li>
+                    <li>List item 5.2
+                      <ul>
+                        <li>List item 5.2.1</li>
+                        <li>List item 5.2.2</li>
+                        <li>List item 5.2.3</li>
+                        <li>List item 5.2.4</li>
+                      </ul>
+                    </li>
+                  </ul>
+                </li>
+                <li>List item 6</li>
+                <li>List item 7</li>
+                <li>List item 8</li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li>Trees</li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    `,   
     authCheck.statusUI(req, res)
   );
   res.send(html);
