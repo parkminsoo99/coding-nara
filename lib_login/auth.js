@@ -10,7 +10,7 @@ router.get('/login', function (request, response) {
     var html = log_template.HTML(title,`
             <h2>로그인</h2>
             <form action="/auth/login_process" method="post">
-            <p><input class="login" type="text" name="userid" placeholder="아이디"></p>
+            <p><input class="login" type="text" name="Login_ID" placeholder="아이디"></p>
             <p><input class="login" type="password" name="pwd" placeholder="비밀번호"></p>
             <p><input class="btn" type="submit" value="로그인"></p>
             </form> 
@@ -139,16 +139,16 @@ function kakaoLogout() {
 
 // 로그인 프로세스
 router.post('/login_process', function (request, response) {
-    var userid = request.body.userid;
-    var Student_ID= request.body.Student_ID;
+    var Login_ID = request.body.Login_ID;
+    var Student_ID= request.body.Login_ID;
     var password = request.body.pwd;
-    if (userid && password) {             // id와 pw가 입력되었는지 확인
+    if (Login_ID && password) {             // id와 pw가 입력되었는지 확인
         
-        db.query('SELECT * FROM Student WHERE userid = ? AND password = ?', [userid, password], function(error, results, fields) {
+        db.query('SELECT * FROM Student WHERE Login_ID = ? AND password = ?', [Login_ID, password], function(error, results, fields) {
             if (error) throw error;
             if (results.length > 0) {       // db에서의 반환값이 있으면 로그인 성공
                 request.session.is_logined = true;      // 세션 정보 갱신
-                request.session.nickname = userid;
+                request.session.nickname = Login_ID;
                 request.session.Student_Id = Student_ID;
                 request.session.save(function () {
                     response.redirect(`/`);
@@ -179,15 +179,14 @@ router.get('/register', function(request, response) {
     var html = log_template.HTML(title, `
     <h2>회원가입</h2>
     <form action="/auth/register_process" method="post">
-
-<p><input class="login" type="text" name="userid" placeholder="아이디"></p>   
-<p><input class="login" type="text" name="username" placeholder="이름"></p>
-<p><input class="login" type="password" name="pwd" placeholder="비밀번호"></p>    
-<p><input class="login" type="password" name="pwd2" placeholder="비밀번호 재확인"></p>
-<p><input class="login" type="number" name="number" placeholder="전화번호"></p>
-<p><input class="login" type="text" name="address" placeholder="주소"></p>
-<p><input class="login" type="text" name="email" placeholder="이메일"></p>
-<p><input class="login" type="text" name="recommendID" placeholder="추천인ID"></p>
+<p><input class="login" type="text" name="Login_ID" placeholder="아이디"  value="test"></p>   
+<p><input class="login" type="text" name="username" placeholder="이름" value="장영재" ></p>
+<p><input class="login" type="password" name="pwd" placeholder="비밀번호" value="11"></p>    
+<p><input class="login" type="password" name="pwd2" placeholder="비밀번호 재확인" value="11"></p>
+<p><input class="login" type="text" name="number" placeholder="전화번호" value="010-1111-1111"></p>
+<p><input class="login" type="text" name="address" placeholder="주소" value="서울"></p>
+<p><input class="login" type="text" name="email" placeholder="이메일" value="test@naver.com" ></p>
+<p><input class="login" type="text" name="recommendID" placeholder="추천인ID" value=""></p>
     <p><input class="btn" type="submit" value="제출"></p>
     </form>            
     <p><a href="/auth/login">로그인화면으로 돌아가기</a></p>
@@ -197,30 +196,35 @@ router.get('/register', function(request, response) {
  
 // 회원가입 프로세스
 router.post('/register_process', function(request, response) {    
-    var userid = request.body.userid
-    var username = request.body.username;
-    var password = request.body.pwd;    
-    var password2 = request.body.pwd2;
-    var number = request.body.number;
-    var address = request.body.address;
-    var email = request.body.email;
-    var recommendID = request.body.recommendID;
-    var Point = request.body.Point;
+    var Login_ID = request.body.Login_ID
+    var Name = request.body.username;
+    var Password = request.body.pwd;    
+    var Platform_type  = '';
+    var Password2 = request.body.pwd2;
+    var Phone_Number = request.body.number;
+    var Address = request.body.address;
+    var Email_Address = request.body.email;
+    var Recommand_ID = 0;
+    var Point = 0;
 
-    if (userid &&username && password && password2 && number && address && email ) { //필수정보
-        db.query('SELECT * FROM student WHERE userid = ?', [userid], function(error, results, fields) { // DB에 같은 이름의 회원아이디가 있는지 확인
+    if (Login_ID &&Name && Password && Password2 && Phone_Number && Address && Email_Address ) { //필수정보
+        db.query('SELECT * FROM student WHERE Login_ID = ?', [Login_ID], function(error, results, fields) { // DB에 같은 이름의 회원아이디가 있는지 확인
             console.log(results);
             if (error) throw error;
-            if (results.length <= 0 && password == password2) {     // DB에 같은 이름의 회원아이디가 없고, 비밀번호가 올바르게 입력된 경우
-                db.query('SELECT * FROM student WHERE recommendID = ?', [recommendID], function(error, results_ID, fields){
-                
-            }) 
-                db.query('INSERT INTO student (userid,username, password, number, address, email, recommendID, Point ) VALUES(?,?,?,?,?,?,?,?)', [userid, username, password, number, address, email, recommendID, Point], function (error, data) {
-                    if (error) throw error2;
+            if (results.length <= 0 && Password == Password2) {     // DB에 같은 이름의 회원아이디가 없고, 비밀번호가 올바르게 입력된 경우
+                db.query('SELECT * FROM student WHERE Login_ID = ?', [Recommand_ID], function(error, results_ID, fields){
+                if(results_ID.length>=0){
+                    Recommand_ID=1;
+                    Point=500;
+                }
+             
+                db.query('INSERT INTO Student (Platform_type , Name , Phone_Number , Email_Address , Login_ID , Password , Address , Date , Recommand_ID, Point ) VALUES(?, ?, ?, ?, ?, ?, ?, now(), ?, ?)', [Platform_type, Name, Phone_Number, Email_Address, Login_ID, Password, Address, Recommand_ID, Point], function (error, data) {
+                    if (error) throw error;
                     response.send(`<script type="text/javascript">alert("회원가입이 완료되었습니다!");
                     document.location.href="/";</script>`);
                 });
-            } else if (password != password2) {                     // 비밀번호가 올바르게 입력되지 않은 경우
+            })
+            } else if (Password != Password2) {                     // 비밀번호가 올바르게 입력되지 않은 경우
                 response.send(`<script type="text/javascript">alert("입력된 비밀번호가 서로 다릅니다."); 
                 document.location.href="/auth/register";</script>`);    
             }
