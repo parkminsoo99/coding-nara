@@ -1,3 +1,7 @@
+import path from "path";
+import SocketIO from "socket.io";
+import http from "http";
+
 const express = require('express')
 const session = require('express-session')
 const bodyParser = require('body-parser');
@@ -12,9 +16,19 @@ var template = require('./lib/template.js');
 var db = require('./db');
 const { response } = require('express');
 const { Enroll_list } = require('./lib/template.js');
+const handleListen = () => console.log("Listen on http://localhost:3000");
+
+const __dirname = path.resolve();
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+app.set("views", path.join(__dirname, "views"));
+app.set("view engine", "pug");
+app.use("/static", express.static(__dirname + "/static"));
+
+app.get("/myinfo/class", (req, res) => {
+  res.render("home");
+});
 
 app.post("/payments/complete", async (req, res) => {
   try {
@@ -744,40 +758,109 @@ db.query(`SELECT * FROM Review`, function(error,Reviews){
 
       app.get('/myinfo', (request,response) =>
       db.query(`SELECT * FROM Student`, function(error,Reviews){
-            db.query('SELECT * FROM Student WHERE Email_Address = ? ',[request.session.email], function(error2, authors){
-              console.log(authors);
-            var Title = '내정보';
-            var list = template.list(Reviews);
-            if(authors[0].Point === null)
-            {
-              authors[0].Point=0;
-            }
-            var html = template.HTML(Title, 'list',
-              `
-                <p>아이디 ${authors[0].Login_ID}</p>
-                <p>이름 ${authors[0].username}</p>
-                <p>비밀번호 ${authors[0].password}</p>
-                <p>전화번호 ${authors[0].number}</p>
-                <p>주소 ${authors[0].address}</p>
-                <p>이메일 ${authors[0].email}</p>
-                <p>적립금 ${authors[0].Point}</p>
+            var nickname = request.session.nickname;
             
-                <p>
-                  <input type="submit">
-                </p>
+            db.query('SELECT * FROM Student WHERE Login_ID = ? ',[nickname], function(error2, authors){
+            var Title = '내정보';
+            var html = template.HTML(Title, '',
+              `
+                <p>이름 ${authors[0].Name}</p>
+                <p>비밀번호 ${authors[0].Password}</p>
+                <p>전화번호 ${authors[0].Phone_Number}</p>
+                <p>주소 ${authors[0].Address}</p>
+                <p>이메일 ${authors[0].Email_Address}</p>
+                <p>적립금 ${authors[0].Point}</p>
               `,
-              `<a href="/create">수정</a>`,
+              `<a href="/myinfo/update">수정</a>
+               <a href="/myinfo/class">내강의실</a>
+              `,
               authCheck.statusUI(request, response)
             );
-            console.log(template.authorSelect(authors, Reviews[0].author_id));
             response.writeHead(200);
             response.end(html);
           });
         })
         )
 
-app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`)
-})
+        app.get('/myinfo/update', (request,response) =>
+      db.query(`SELECT * FROM Student`, function(error,Reviews){
+          if(error){
+          throw error;
+          }
+            var nickname = request.session.nickname;
+            
+            db.query('SELECT * FROM Student WHERE Login_ID = ? ',[nickname], function(error2, authors){
+                if(error2){
+                throw error2;
+              }
+            //console.log(authors);
+            var Title = '내정보';
+            
+            var html = template.HTML(Title, '',
+              `
+              <form action="/update_mypage" method="post">
+              <input type="hidden" name="id" value="${authors[0].Student_ID}">
+              <p>이름<input type="text" name="Name" placeholder="Name" value="${authors[0].Name}"></p>
+              <p>전화번호<input type="text" name="Phone_Number" placeholder="Phone_Number" value="${authors[0].Phone_Number}"></p>
+              <p>비밀번호<input type="text" name="Password" placeholder="Password" value="${authors[0].Password}"></p>
+              <p>주소<input type="text" name="Address" placeholder="Address" value="${authors[0].Address}"></p>
+              <p>이메일<input type="text" name="Email_Address" placeholder="Email_Address" value="${authors[0].Email_Address}"></p>
+              <p>
+                <input type="submit">
+              </p>
+              </form>
+              `,
+              ``,
+              authCheck.statusUI(request, response)
+            );
+            response.writeHead(200);
+            response.end(html);
+          });
+        })
+        )
+
+        app.post('/update_mypage', function(request,response){
+          var post = request.body;
+          console.log(post);
+          db.query('UPDATE Student SET Name=?, Phone_Number=? , Password=? ,Address=?, Email_Address=?  WHERE Student_ID=?', [post.Name, post.Phone_Number, post.Password, post.Address, post.Email_Address, post.id], function(error, result){
+            if(error){
+              throw error;
+              }  
+            response.writeHead(302, {Location: `/myinfo`});
+            response.end();
+          })
+      });
+
+
+// 서버 만들고
+const httpServer = http.createServer(app);
+// 소켓 서버랑 합치기
+const wsServer = SocketIO(httpServer);
+
+//소켓 연결시
+wsServer.on("connection", (socket) => {
+  // join Room
+  socket.on("join_room", (roomName) => {
+    socket.join(roomName);
+    socket.to(roomName).emit("welcome");
+  });
+
+  // offer
+  socket.on("offer", (offer, roomName) => {
+    socket.to(roomName).emit("offer", offer);
+  });
+
+  // answer
+  socket.on("answer", (answer, roomName) => {
+    socket.to(roomName).emit("answer", answer);
+  });
+
+  //ice
+  socket.on("ice", (ice, roomName) => {
+    socket.to(roomName).emit("ice", ice);
+  });
+});
+
+httpServer.listen(3000, handleListen);
 
  
