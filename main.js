@@ -1,6 +1,6 @@
 import express from "express";
 import path from "path";
-import SocketIO from "socket.io";
+import {Server} from "socket.io";
 import http from "http";
 const session = require('express-session')
 const bodyParser = require('body-parser');
@@ -424,7 +424,7 @@ db.query(`SELECT * FROM Review`, function(error,Reviews){
 // 서버 만들고
 const httpServer = http.createServer(app);
 // 소켓 서버랑 합치기
-const wsServer = SocketIO(httpServer);
+const wsServer = new Server(httpServer);
 
 //소켓 연결시
 wsServer.on("connection", (socket) => {
