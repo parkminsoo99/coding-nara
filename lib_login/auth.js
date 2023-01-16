@@ -212,18 +212,27 @@ router.post('/register_process', function(request, response) {
             console.log(results);
             if (error) throw error;
             if (results.length <= 0 && Password == Password2) {     // DB에 같은 이름의 회원아이디가 없고, 비밀번호가 올바르게 입력된 경우
+<<<<<<< HEAD
                 db.query('SELECT * FROM student WHERE Login_ID = ?', [Recommand_ID], function(error, results_ID, fields){
                 if(results_ID.length>=0){
                     Recommand_ID=1;
                     Point=500;
                 }
              
+=======
+                db.query('SELECT * FROM student WHERE recommendID = ?', [Recommand_ID], function(error, results_ID, fields){
+                
+            }) 
+>>>>>>> 0f35e68d (수강신청에 필요한 UI제작 및 디비에서 강사 정보+강의 시간등의 필요한 정보를 가져옴)
                 db.query('INSERT INTO Student (Platform_type , Name , Phone_Number , Email_Address , Login_ID , Password , Address , Date , Recommand_ID, Point ) VALUES(?, ?, ?, ?, ?, ?, ?, now(), ?, ?)', [Platform_type, Name, Phone_Number, Email_Address, Login_ID, Password, Address, Recommand_ID, Point], function (error, data) {
                     if (error) throw error;
                     response.send(`<script type="text/javascript">alert("회원가입이 완료되었습니다!");
                     document.location.href="/";</script>`);
                 });
+<<<<<<< HEAD
             })
+=======
+>>>>>>> 0f35e68d (수강신청에 필요한 UI제작 및 디비에서 강사 정보+강의 시간등의 필요한 정보를 가져옴)
             } else if (Password != Password2) {                     // 비밀번호가 올바르게 입력되지 않은 경우
                 response.send(`<script type="text/javascript">alert("입력된 비밀번호가 서로 다릅니다."); 
                 document.location.href="/auth/register";</script>`);    
