@@ -23,9 +23,18 @@ var db = require('./db');
 const { response } = require('express');
 const { Enroll_list } = require('./lib/template.js');
 const handleListen = () => console.log("Listen on http://localhost:3000");
+var cookie = require('cookie');
+cookie.setCookie = (res, token) => {
+  res.cookie("access_token", token, {
+    sameSite:'none',
+    secure: true, // https, ssl 모드에서만
+    maxAge: 1000*60*60*24*1, // 1D
+    httpOnly: true, // javascript 로 cookie에 접근하지 못하게 한다.
+  });
+}
 
 const __dirname = path.resolve();
-
+/*nsp check로 package.json에 있는 dependencies를 체크하여 문제가 있는 것들을 알려준다.*/
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.set("views", path.join(__dirname, "views"));
@@ -33,6 +42,23 @@ app.set("view engine", "pug");
 app.use("/static", express.static(__dirname + "/static"));
 app.use("/image", express.static(__dirname + "/image"));
 
+/*보안*/
+var helmet = require('helmet');
+app.use(helmet());
+app.use((req, res, next) => {
+  res.removeHeader("Cross-Origin-Embedder-Policy");
+  next();
+});
+app.use(helmet.contentSecurityPolicy({
+  directives: {
+    "default-src":["'self'","'unsafe-inline'"],
+    "frame-src" :['*'],
+    "form-action" : ["'self'",'*.inicis.com','*.localhost'],
+    "script-src": ["'self'","*.googleapis.com",'*.jquery.com','*.iamport.kr','*.inicis.com',"'unsafe-inline'", "'unsafe-eval'"],
+    "script-src-attr" : ["'self'","'unsafe-inline'"],
+    "img-src": ["'self'", 'data:', '*.daumcdn.net', '*.kakaocdn.net'],
+  },
+}));
 
 // app.use('/auth',bodyParser.urlencoded({ extended: false }));
 
@@ -41,6 +67,7 @@ app.use(session({
   resave: false,
   saveUninitialized: true,
   store:new FileStore({logFn: function(){}}),
+
 }))
 app.get('/', (req, res) => {
     res.redirect('/main');

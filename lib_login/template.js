@@ -1,3 +1,4 @@
+
 module.exports = {
     HTML: function (title, body, authStatusUI) {
       return `
@@ -6,6 +7,10 @@ module.exports = {
       <head>    
         <title>Login TEST - ${title}</title>
         <meta charset="utf-8">
+        
+        <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" nonce="1234567" ></script>
+        <!-- iamport.payment.js -->
+        <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js" nonce="13123"></script>
         <style>
           @import url(http://fonts.googleapis.com/earlyaccess/notosanskr.css);
   
@@ -66,11 +71,6 @@ module.exports = {
           html {
             font-size: 16px;
           }
-          
-          
-          
-          
-          
           
           .container{
             width: 90%;
@@ -451,7 +451,7 @@ module.exports = {
       
       <nav>
       <img src='http://localhost:3000/image/1.png'
-      alt="카카오 라이언" width="125" height="125" align="left" border="0">
+      alt="logo" width="125" height="125" align="left" border="0">
         <div class="background">
           <ul class="nav-container">
             <li class="nav-item"><a href="/">코딩나라란</a><li>
@@ -464,7 +464,6 @@ module.exports = {
       </nav>
       </head>
       <body>
- 
           ${authStatusUI}
           ${body}
       </body>

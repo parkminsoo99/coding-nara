@@ -12,6 +12,7 @@ var redirectURI = encodeURI("http://localhost:3000/auth/naver/login");
 var api_url = 'https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=' + client_id + '&redirect_uri=' + redirectURI + '&state=' + state;
 const request = require('request-promise');
 var platform_type = '';
+var sanitizeHtml = require('sanitize-html');
 /*카카오 로그인 관련 객체*/
 const kakaoData = {
     client_id : 'f28ca6f29082d1991b42941c3178fe60',
@@ -179,13 +180,13 @@ router.get('/register', function(request, response) {
         var html = log_template.HTML(title, `
         <h2>회원가입</h2>
         <form action="/auth/register_process" method="post">
-            <p><input class="login" type="text" name="Login_ID" placeholder="아이디"  value=${request.session.email} disabled></p>   
-            <p><input class="login" type="text" name="username" placeholder="이름" value=${request.session.nickname} disabled></p>
+            <p><input class="login" type="text" name="Login_ID" placeholder="아이디"  value=${sanitizeHtml(request.session.email)} disabled></p>   
+            <p><input class="login" type="text" name="username" placeholder="이름" value=${sanitizeHtml(request.session.nickname)} disabled></p>
             <p><input class="login" type="password" name="pwd" placeholder="비밀번호" disabled></p>    
             <p><input class="login" type="password" name="pwd2" placeholder="비밀번호 재확인" disabled></p>
-            <p><input class="login" type="text" name="number" placeholder="전화번호" value=${request.session.mobile}></p>
+            <p><input class="login" type="text" name="number" placeholder="전화번호" value=${sanitizeHtml(request.session.mobile)}></p>
             <p><input class="login" type="text" name="address" placeholder="주소" value="서울"></p>
-            <p><input class="login" type="text" name="email" placeholder="이메일" value=${request.session.email} disabled></p>
+            <p><input class="login" type="text" name="email" placeholder="이메일" value=${sanitizeHtml(request.session.email)} disabled></p>
             <p><input class="login" type="text" name="recommendID" placeholder="추천인ID" value=""></p>
             <p><input class="btn" type="submit" value="제출"></p>
         </form>            
@@ -199,13 +200,13 @@ router.get('/register', function(request, response) {
         var html = log_template.HTML(title, `
         <h2>회원가입</h2>
         <form action="/auth/register_process" method="post">
-            <p><input class="login" type="text" name="Login_ID" placeholder="아이디"  value=${request.session.email} disabled></p>   
-            <p><input class="login" type="text" name="username" placeholder="이름" value=${request.session.nickname} disabled></p>
+            <p><input class="login" type="text" name="Login_ID" placeholder="아이디"  value=${sanitizeHtml(request.session.email)} disabled></p>   
+            <p><input class="login" type="text" name="username" placeholder="이름" value=${sanitizeHtml(request.session.nickname)} disabled></p>
             <p><input class="login" type="password" name="pwd" placeholder="비밀번호" disabled></p>    
             <p><input class="login" type="password" name="pwd2" placeholder="비밀번호 재확인" disabled></p>
             <p><input class="login" type="text" name="number" placeholder="전화번호" value="010-1111-1111"></p>
             <p><input class="login" type="text" name="address" placeholder="주소" value="서울"></p>
-            <p><input class="login" type="text" name="email" placeholder="이메일" value=${request.session.email} disabled></p>
+            <p><input class="login" type="text" name="email" placeholder="이메일" value=${sanitizeHtml(request.session.email)} disabled></p>
             <p><input class="login" type="text" name="recommendID" placeholder="추천인ID" value=""></p>
             <p><input class="btn" type="submit" value="제출"></p>
         </form>            
@@ -340,16 +341,16 @@ router.post('/register_process', function(request, response) {
         }
     }
     else{
-        var Login_ID = request.body.Login_ID
-        var Name = request.body.username;
-        var Password = request.body.pwd;    
-        var Platform_type  = '';
-        var Password2 = request.body.pwd2;
-        var Phone_Number = request.body.number;
-        var Address = request.body.address;
-        var Email_Address = request.body.email;
-        var Recommand_ID = 0;
-        var Point = 0;
+        var Login_ID = sanitizeHtml(request.body.Login_ID);
+        var Name = sanitizeHtml(request.body.username);
+        var Password = sanitizeHtml(request.body.pwd);    
+        var Platform_type  = sanitizeHtml('');
+        var Password2 = sanitizeHtml(request.body.pwd2);
+        var Phone_Number = sanitizeHtml(request.body.number);
+        var Address = sanitizeHtml(request.body.address);
+        var Email_Address = sanitizeHtml(request.body.email);
+        var Recommand_ID = sanitizeHtml(0);
+        var Point = sanitizeHtml(0);
 
         if (Login_ID &&Name && Password && Password2 && Phone_Number && Address && Email_Address ) { //필수정보
             db.query('SELECT * FROM student WHERE Login_ID = ?', [Login_ID], function(error, results, fields) { // DB에 같은 이름의 회원아이디가 있는지 확인
