@@ -8,16 +8,19 @@ module.exports = {
         <title>Login TEST - ${title}</title>
         <meta charset="utf-8">
         
-        <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" nonce="1234567" ></script>
+        <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
         <!-- iamport.payment.js -->
-        <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js" nonce="13123"></script>
+        <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
         <style>
           @import url(http://fonts.googleapis.com/earlyaccess/notosanskr.css);
   
           body,head,footer{
-              font-family: 'Noto Sans KR', sans-serif;
-              background-color: white;
-              margin: 50px;
+            font-family: 'Noto Sans KR', sans-serif;
+            background-color: white;
+            margin: 0;
+            padding: 0;
+            width:100vw;
+            height: 100vh;
           }
          
           .number-circle-list {
@@ -82,8 +85,10 @@ module.exports = {
             display: block;
 
           }
-         
-          
+          .top_title{
+            margin: 40px auto 0;
+
+          }
           header{
             margin-top: 80px;
           }
@@ -446,6 +451,55 @@ module.exports = {
             width:50px;
             border-radius : 10px;
           }
+          .content {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width:100%;
+            height:100%;
+          }
+          .loader-wrapper {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            background-color: #242f3f;
+            display:flex;
+            justify-content: center;
+            align-items: center;
+          }
+          .loader {
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            position: relative;
+            border: 4px solid #Fff;
+            animation: loader 2s infinite ease;
+          }
+          .loader-inner {
+            vertical-align: top;
+            display: inline-block;
+            width: 100%;
+            background-color: #fff;
+            animation: loader-inner 2s infinite ease-in;
+          }
+          
+          @keyframes loader {
+            0% { transform: rotate(0deg);}
+            25% { transform: rotate(180deg);}
+            50% { transform: rotate(180deg);}
+            75% { transform: rotate(360deg);}
+            100% { transform: rotate(360deg);}
+          }
+          
+          @keyframes loader-inner {
+            0% { height: 0%;}
+            25% { height: 0%;}
+            50% { height: 100%;}
+            75% { height: 100%;}
+            100% { height: 0%;}
+          }
       </style>
       </head>
       <body>
@@ -463,10 +517,17 @@ module.exports = {
             </ul>
           </div>
         </nav>
+
           ${body}
-          <script>
-          document.cookie = "safeCookie1=foo; SameSite=Lax";
-          </script>
+          <div class="loader-wrapper">
+            <span class="loader"><span class="loader-inner"></span></span>
+          </div>
+
+        <script>
+        $(window).on("load",function(){
+          $(".loader-wrapper").fadeOut(1000);
+        });
+        </script>
       </body>
       </html>
       `;

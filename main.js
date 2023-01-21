@@ -1,7 +1,6 @@
 import path from "path";
 import SocketIO from "socket.io";
 import http from "http";
-
 const express = require('express')
 const session = require('express-session')
 const bodyParser = require('body-parser');
@@ -10,18 +9,12 @@ const app = express()
 const port = 3000
 var qs = require('querystring');
 var authRouter = require('./lib_login/auth');
-var authCheck = require('./lib_login/authCheck.js');
-var template_main = require('./lib_login/template.js');
-var template = require('./lib/template.js');
 var main_Router = require('./lib/main_page');
 var curi_Router = require('./lib/curi_page');
 var ask_Router = require('./lib/ask_page');
 var mypage_Router = require('./lib/my_page');
 var enroll_Router = require('./lib/enroll_page');
 var review_Router = require('./lib/review_page');
-var db = require('./db');
-const { response } = require('express');
-const { Enroll_list } = require('./lib/template.js');
 const handleListen = () => console.log("Listen on http://localhost:3000");
 
 const __dirname = path.resolve();
