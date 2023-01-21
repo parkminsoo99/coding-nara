@@ -23,15 +23,6 @@ var db = require('./db');
 const { response } = require('express');
 const { Enroll_list } = require('./lib/template.js');
 const handleListen = () => console.log("Listen on http://localhost:3000");
-var cookie = require('cookie');
-cookie.setCookie = (res, token) => {
-  res.cookie("access_token", token, {
-    sameSite:'none',
-    secure: true, // https, ssl 모드에서만
-    maxAge: 1000*60*60*24*1, // 1D
-    httpOnly: true, // javascript 로 cookie에 접근하지 못하게 한다.
-  });
-}
 
 const __dirname = path.resolve();
 /*nsp check로 package.json에 있는 dependencies를 체크하여 문제가 있는 것들을 알려준다.*/
@@ -41,10 +32,20 @@ app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "pug");
 app.use("/static", express.static(__dirname + "/static"));
 app.use("/image", express.static(__dirname + "/image"));
+app.use(session({
+  secret: '~~~',	// 원하는 문자 입력
+  resave: false,
+  saveUninitialized: true,
+  store:new FileStore({logFn: function(){}}),
 
+}))
 /*보안*/
 var helmet = require('helmet');
 app.use(helmet());
+app.use(helmet.xssFilter());
+app.disable("x-powered-by");
+app.use(helmet.frameguard("deny"));
+app.use(helmet.noSniff());
 app.use((req, res, next) => {
   res.removeHeader("Cross-Origin-Embedder-Policy");
   next();
@@ -54,42 +55,52 @@ app.use(helmet.contentSecurityPolicy({
     "default-src":["'self'","'unsafe-inline'"],
     "frame-src" :['*'],
     "form-action" : ["'self'",'*.inicis.com','*.localhost'],
-    "script-src": ["'self'","*.googleapis.com",'*.jquery.com','*.iamport.kr','*.inicis.com',"'unsafe-inline'", "'unsafe-eval'"],
+    "script-src": ["'self'",'*.naver.com',"*.googleapis.com","*.kakaocdn.net",'*.jquery.com','*.iamport.kr','*.inicis.com',"'unsafe-inline'"],
     "script-src-attr" : ["'self'","'unsafe-inline'"],
-    "img-src": ["'self'", 'data:', '*.daumcdn.net', '*.kakaocdn.net'],
+    "img-src": ["'self'", 'data:', "*.naver.com", "*.kakaocdn.net","localhost:3000","'unsafe-inline'"],
+    "connect-src" : ["'self'","'unsafe-inline'"],
+    "media-src" : ["'self'","'unsafe-inline'"],
   },
 }));
 
-// app.use('/auth',bodyParser.urlencoded({ extended: false }));
+/*CSRF*/
+var Tokens = require("csrf");
+var tokens = new Tokens();
 
-app.use(session({
-  secret: '~~~',	// 원하는 문자 입력
-  resave: false,
-  saveUninitialized: true,
-  store:new FileStore({logFn: function(){}}),
+/*DDOS*/
+var rateLimit = require("express-rate-limit"); 
+const apiLimiter =  rateLimit({ 
+  windowMs: 1*60*1000, 
+  max: 30,
+  standardHeaders: true,
+  legacyHeaders: false,
+})
+app.use("/main", apiLimiter); 
 
-}))
+
 app.get('/', (req, res) => {
-    res.redirect('/main');
+  apiLimiter,
+  res.redirect('/main');
 })
 
+
 // // 인증 라우터
-app.use('/auth', authRouter);
+app.use('/auth', apiLimiter, authRouter);
 
 // 메인 페이지
-app.use('/main', main_Router);
+app.use('/main', apiLimiter, main_Router);
 
 //커리큘럼
-app.use('/curriculum', curi_Router);
+app.use('/curriculum', apiLimiter, curi_Router);
 
-app.use('/ask', ask_Router);
+app.use('/ask', apiLimiter, ask_Router);
 
 //고객센터
-app.use('/enroll', enroll_Router);
+app.use('/enroll', apiLimiter, enroll_Router);
 
-app.use('/review', review_Router);
+app.use('/review', apiLimiter, review_Router);
 
-app.use('/myinfo', mypage_Router);//마이페이지
+app.use('/myinfo', apiLimiter, mypage_Router);//마이페이지
 
 
 // 서버 만들고
@@ -99,28 +110,33 @@ const wsServer = SocketIO(httpServer);
 
 //소켓 연결시
 wsServer.on("connection", (socket) => {
+  apiLimiter,
   // join Room
   socket.on("join_room", (roomName) => {
+    apiLimiter,
     socket.join(roomName);
     socket.to(roomName).emit("welcome");
   });
 
   // offer
   socket.on("offer", (offer, roomName) => {
+    apiLimiter,
     socket.to(roomName).emit("offer", offer);
   });
 
   // answer
   socket.on("answer", (answer, roomName) => {
+    apiLimiter,
     socket.to(roomName).emit("answer", answer);
   });
 
   //ice
   socket.on("ice", (ice, roomName) => {
+    apiLimiter,
     socket.to(roomName).emit("ice", ice);
   });
 });
 
-httpServer.listen(3000, handleListen);
+httpServer.listen(3000, apiLimiter,handleListen);
 
  

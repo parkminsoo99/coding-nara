@@ -14,13 +14,12 @@ module.exports = {
         <style>
           @import url(http://fonts.googleapis.com/earlyaccess/notosanskr.css);
   
-          body {
+          body,head,footer{
               font-family: 'Noto Sans KR', sans-serif;
               background-color: white;
               margin: 50px;
-  
           }
-          
+         
           .number-circle-list {
             list-style: none;
             padding-left: 1rem;
@@ -390,8 +389,6 @@ module.exports = {
             width: 300px;
           }
           
-        
-          
           .card-3 {
             box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
           }
@@ -444,28 +441,32 @@ module.exports = {
             border: 15px solid;
             border-color: #fff transparent transparent #fff;
           }
-          
-
-          
+          #kakaochannel{
+            height:50px;
+            width:50px;
+            border-radius : 10px;
+          }
       </style>
-      
-      <nav>
-      <img src='http://localhost:3000/image/1.png'
-      alt="logo" width="125" height="125" align="left" border="0">
-        <div class="background">
-          <ul class="nav-container">
-            <li class="nav-item"><a href="/">코딩나라란</a><li>
-            <li class="nav-item"><a href="/curriculum">커리큘럼</a><li>
-            <li class="nav-item"><a href="/enroll/sub">수강신청</a><li>
-            <li class="nav-item"><a href="/review">강좌후기</a><li>
-            <li class="nav-item"><a href="/ask">고객센터</a><li> 
-          </ul>
-        </div>
-      </nav>
       </head>
       <body>
-          ${authStatusUI}
+        <nav>
+        <img src='http://localhost:3000/image/1.png'
+        alt="logo" width="125" height="125" align="left" border="0">
+          <div class="background">
+            <ul class="nav-container">
+              <li class="nav-item"><a href="/">코딩나라란</a><li>
+              <li class="nav-item"><a href="/curriculum">커리큘럼</a><li>
+              <li class="nav-item"><a href="/enroll/sub">수강신청</a><li>
+              <li class="nav-item"><a href="/review">강좌후기</a><li>
+              <li class="nav-item"><a href="/ask">고객센터</a><li> 
+              <li class="nav-item"><a href="/ask">${authStatusUI}</a><li> 
+            </ul>
+          </div>
+        </nav>
           ${body}
+          <script>
+          document.cookie = "safeCookie1=foo; SameSite=Lax";
+          </script>
       </body>
       </html>
       `;
