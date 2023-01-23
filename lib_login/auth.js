@@ -443,11 +443,11 @@ router.post('/register_process', function(request, response) {
             var Recommand_ID = sanitizeHtml(0);
             var Point = sanitizeHtml(0);
             if (Login_ID &&Name && Password && Password2 && Phone_Number && Address && Email_Address ) { //필수정보
-                db.query('SELECT * FROM student WHERE Login_ID = ?', [Login_ID], function(error, results, fields) { // DB에 같은 이름의 회원아이디가 있는지 확인
+                db.query('SELECT * FROM Student WHERE Login_ID = ?', [Login_ID], function(error, results, fields) { // DB에 같은 이름의 회원아이디가 있는지 확인
                     console.log(results);
                     if (error) throw error;
                     if (results.length <= 0 && Password == Password2) {     // DB에 같은 이름의 회원아이디가 없고, 비밀번호가 올바르게 입력된 경우
-                        db.query('SELECT * FROM student WHERE recommendID = ?', [Recommand_ID], function(error, results_ID, fields){
+                        db.query('SELECT * FROM Student WHERE recommendID = ?', [Recommand_ID], function(error, results_ID, fields){
                         
                     }) 
                     bcrypt.hash(Password, saltRounds, function(err, hash){

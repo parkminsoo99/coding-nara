@@ -1,9 +1,9 @@
 var mysql = require('mysql2');
 var db = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    password: 'ksas1300qs!!',
-    database: 'Codingnara',
+    host: 'database-1.cogybem1ric1.ap-northeast-1.rds.amazonaws.com',
+    user: 'zzangorc99',
+    password: 'codingnara11223344',
+    database: 'codingnara',
     multipleStatements: true
 });
 db.connect();

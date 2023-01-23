@@ -6,7 +6,7 @@ const session = require('express-session')
 const bodyParser = require('body-parser');
 const FileStore = require('session-file-store')(session)
 const app = express()
-const port = 3000
+const port = 54213
 var qs = require('querystring');
 var authRouter = require('./lib_login/auth');
 var main_Router = require('./lib/main_page');
@@ -15,7 +15,7 @@ var ask_Router = require('./lib/ask_page');
 var mypage_Router = require('./lib/my_page');
 var enroll_Router = require('./lib/enroll_page');
 var review_Router = require('./lib/review_page');
-const handleListen = () => console.log("Listen on http://localhost:3000");
+const handleListen = () => console.log("Listen on http://localhost:54213");
 
 const __dirname = path.resolve();
 /*nsp check로 package.json에 있는 dependencies를 체크하여 문제가 있는 것들을 알려준다.*/
@@ -130,6 +130,6 @@ wsServer.on("connection", (socket) => {
   });
 });
 
-httpServer.listen(3000, apiLimiter,handleListen);
+httpServer.listen(port, apiLimiter,handleListen);
 
  
