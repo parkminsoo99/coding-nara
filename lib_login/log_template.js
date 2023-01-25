@@ -13,10 +13,33 @@ module.exports = {
   
           body {
               font-family: 'Noto Sans KR', sans-serif;
-              background-color: #AAA2C2;
+              background-color: #F5F5DC;
               margin: 50px;
           }
+          #logo {
+            background-image: url('http://localhost:3000/image/logo.jpg');
+            background-size: cover;
+            width: 70%;
+            height:110px; 
+            width:450px;
+            flex-shrink: 1;
+            margin-bottom: 50px;
+            z-index: 2;
+            position: relative;
+          }
+          #bg4 {
+            background-image: url('http://localhost:3000/image/4.jpg');
+            background-size: 100% 120%;
+            background-repeat: no-repeat;
+            height:480px; 
+            width:780px;
+            flex-shrink: 1;
+            margin-bottom: 50px;
+            z-index: 2;
+            position: relative;
+          }
           .background {
+            
               background-color: white;
               height: auto;
               width: 90%;
@@ -64,6 +87,18 @@ module.exports = {
           .btn:hover {
               background-color: #595787;
           }
+          details { margin:5px 0 10px; }
+details > summary { background:#444; color:#fff; padding:10px; outline:0; border-radius:5px; cursor:pointer; transition:background 0.5s; text-align:left; box-shadow: 1px 1px 2px gray;}
+details > summary::-webkit-details-marker { background:#444; color:#fff; background-size:contain; transform:rotate3d(0, 0, 1, 90deg); transition:transform 0.25s;}
+details[open] > summary::-webkit-details-marker { transform:rotate3d(0, 0, 1, 180deg);}
+details[open] > summary { background:#444;}
+details[open] > summary ~ * { animation:reveal 0.5s;}
+.tpt { background:#444; color:#fff; margin:5px 0 10px; padding:5px 10px; line-height:25px; border-radius:5px; box-shadow: 1px 1px 2px gray;}
+
+@keyframes reveal {
+    from { opacity:0; transform:translate3d(0, -30px, 0); }
+    to { opacity:1; transform:translate3d(0, 0, 0); }
+}
       </style>
       </head>
       <body>

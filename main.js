@@ -10,9 +10,6 @@ const app = express()
 const port = 3000
 var qs = require('querystring');
 var authRouter = require('./lib_login/auth');
-var authCheck = require('./lib_login/authCheck.js');
-var template_main = require('./lib_login/template.js');
-var template = require('./lib/template.js');
 var main_Router = require('./lib/main_page');
 var curi_Router = require('./lib/curi_page');
 var ask_Router = require('./lib/ask_page');
@@ -31,6 +28,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "pug");
 app.use("/static", express.static(__dirname + "/static"));
+app.use("/image", express.static(__dirname + "/image"));
 
 
 // app.use('/auth',bodyParser.urlencoded({ extended: false }));

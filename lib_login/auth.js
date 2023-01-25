@@ -26,7 +26,8 @@ router.get('/login', function (request, response) {
     if(request.session.type == 'naver') request.session.destroy();
     var title = '로그인';
     var html = log_template.HTML(title,`
-            <h2>로그인</h2>
+            <h2></h2>
+            <div id="logo"></div>
             <form action="/auth/login_process" method="post">
                 <p><input class="login" type="text" name="Login_ID" placeholder="아이디"></p>
                 <p><input class="login" type="password" name="pwd" placeholder="비밀번호"></p>

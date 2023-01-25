@@ -12,8 +12,136 @@ module.exports = {
           body {
               font-family: 'Noto Sans KR', sans-serif;
               background-color: white;
-              margin: 50px;
+              margin-top: 100px;
   
+          }
+          @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&family=Roboto:wght@300&display=swap');
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: inherit;
+}
+
+
+
+footer{
+  background-color: white;
+  text-align: center;
+  text-transform: uppercase;
+  padding-top: 30px;
+  margin-top: auto;
+}
+
+footer li{
+  list-style: none;
+  margin: 10px;
+  display: inline-block;
+}
+
+.icons a{
+  background: #FFFBAC;
+  color: #272727;
+  padding: 14px;
+  font-size: 20px;
+  border-radius: 100%;
+  display: flex;
+}
+.icons a:hover{
+  color: black;
+  transition: 0.5s;
+}
+
+.menu a{
+  color: black;
+  text-transform: capitalize;
+}
+.menu a:hover{
+  color: #52527a;
+  transition: 0.5s;
+}
+
+.footer-copyright{
+  background-color:#303030;
+  color: #ffffff;
+  padding: 15px;
+  margin-top: 30px;
+  text-transform: capitalize;
+}
+
+.footer-copyright p{
+  margin-bottom: 0px;
+}
+          
+          .father{
+
+            width:271px;
+            height:391px;
+            background-color:#ccc;
+            text-align:center;
+            line-height:2.7;
+            margin:auto;
+            margin-top:101px;
+            position:relative;
+            border-radius:21px;
+            transition:all 1s ease-in-out;
+            transform-style:preserve-3d;
+             
+        
+        }
+        
+        .lotaion{
+            line-height:9.1;
+            color:white;
+        }
+        
+        
+        .father>div{
+        
+            position:absolute;
+            top:0;
+            left:0;
+            width:100%;
+            height:100%;
+            border-radius:21px;
+        
+        
+        }
+        
+        .father .child1{
+            z-index:2;
+            background-color:rgb(19, 18, 18);
+            transition:all 1s ease-in-out;
+            -webkit-backface-visibility: hidden;
+            -moz-backface-visibility: hidden;
+            backface-visibility: hidden;
+        }
+        
+        .father:hover{
+            transform: rotateY(180deg);
+        }
+        
+        .father .child2{
+            z-index:1;
+            background-color:rgb(240, 58, 58);
+            transition:all 1s ease-in-out;
+            transform: rotateY(180deg);
+            -webkit-backface-visibility: hidden;
+            -moz-backface-visibility: hidden;
+            backface-visibility: hidden;
+        }
+          #logo {
+            background-image: url('http://localhost:3000/image/logo.jpg');
+            background-size: cover;
+            width: 70%;
+            height:110px; 
+            width:450px;
+            flex-shrink: 1;
+            margin-bottom: 50px;
+            z-index: 2;
+            position: relative;
+          }
+          a {
+            text-decoration: none;
           }
           
           .number-circle-list {
@@ -66,12 +194,7 @@ module.exports = {
           html {
             font-size: 16px;
           }
-          
-          
-          
-          
-          
-          
+
           .container{
             width: 90%;
             height: 100%;
@@ -99,7 +222,7 @@ module.exports = {
             top : 0;
             flex-direction: row;
             width: 100%;
-            margin: 0;
+            margin-bottom: 30px;
             padding: 0;
             background-color: white;
             list-style-type: none;
@@ -136,7 +259,7 @@ module.exports = {
           .background {
               background-color: white;
               height: auto;
-              width: 90%;
+              width: 100%;
               max-width: 450px;
               padding: 10px;
               margin: 0 auto;
@@ -195,7 +318,9 @@ module.exports = {
             padding: .375em 1.125em;
             font-size: 1rem;
           }
-          
+          .button-arounder > a {
+            color: white;
+          }
           .button-arounder {
             font-size: 2rem;
             background: hsl(190deg, 30%, 15%);
@@ -207,7 +332,7 @@ module.exports = {
             border-top-right-radius: 0px;
             border-bottom-left-radius: 0px;
             border-bottom-right-radius: 0px;
-            
+
             --dur: .15s;
             --delay: .15s;
             --radius: 16px;
@@ -241,38 +366,47 @@ module.exports = {
           #bg2 {
             background-image: url('http://localhost:3000/image/2.jpg');
             background-size: cover;
+            border-radius: 20px;
             width: 70%;
             height:720px; 
             width:1080px;
             flex-shrink: 1;
             margin-bottom: 50px;
+            z-index: 2;
+            position: relative;
           }
           #bg3 {
             background-image: url('http://localhost:3000/image/3.jpg');
             background-size: 100% 120%;
             background-repeat: no-repeat;
-            height:780px; 
-            width:1080px;
+            height:480px; 
+            width:780px;
             flex-shrink: 1;
             margin-bottom: 50px;
+            z-index: 2;
+            position: relative;
           }
           #bg4 {
             background-image: url('http://localhost:3000/image/4.jpg');
             background-size: 100% 120%;
             background-repeat: no-repeat;
-            height:720px; 
-            width:1080px;
+            height:480px; 
+            width:780px;
             flex-shrink: 1;
             margin-bottom: 50px;
+            z-index: 2;
+            position: relative;
           }
           #bg5 {
             background-image: url('http://localhost:3000/image/5.jpg');
             background-size: 100% 120%;
             background-repeat: no-repeat;
-            height:720px; 
-            width:1080px;
+            height:780px; 
+            width:380px;
             flex-shrink: 1;
             margin-bottom: 50px;
+            z-index: 2;
+            position: relative;
           }
           #bg6 {
             background-image: url('http://localhost:3000/image/6.jpg');
@@ -282,6 +416,8 @@ module.exports = {
             width:1080px;
             flex-shrink: 1;
             margin-bottom: 50px;
+            z-index: 2;
+            position: relative;
           }
           #title {
             margin: 50px;
@@ -444,14 +580,38 @@ module.exports = {
             border: 15px solid;
             border-color: #fff transparent transparent #fff;
           }
+          blockquote {
+            margin: 0px 0px 1.75em 0px;
+            position: relative;
+            padding: 20px 55px;
+          background: #f9f9f9;
+        }
+        
+        blockquote:after {
+            font-size: 76px;
+            position: absolute;
+            top: -15px;
+          left: 10px;
+            color: #0d689c;
+        }
+        
+        .entry-content blockquote p {
+            max-width: 100%;
+          padding: 0;
+          margin: 0 0 15px;
+          font-size: 20px;
+        }
+        
           
-
           
       </style>
       
       <nav>
       <img src='http://localhost:3000/image/1.png'
-      alt="카카오 라이언" width="125" height="125" align="left" border="0">
+      alt="카카오 라이언" width="100" height="100" align="left" border="0">
+      <div align="right">
+            ${authStatusUI}
+        </div>
         <div class="background">
           <ul class="nav-container">
             <li class="nav-item"><a href="/">코딩나라란</a><li>
@@ -464,10 +624,28 @@ module.exports = {
       </nav>
       </head>
       <body>
- 
-          ${authStatusUI}
           ${body}
       </body>
+      <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+      <!--Google Fonts-->
+      <link rel="preconnect" href="https://fonts.googleapis.com">
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+      <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap" rel="stylesheet">
+      <footer>
+      <ul class="icons">
+          <li><a href="#"><ion-icon name="logo-whatsapp"></ion-icon></a></li>
+          <li><a href="#"><ion-icon name="mail-outline"></ion-icon></a></li>
+          <li><a href="#"><ion-icon name="logo-instagram"></ion-icon></a></li>
+      </ul>
+      <ul class="menu">
+              <li><a href="#">Home</a></li>
+              <li><a href="#">About</a></li>
+              <li><a href="#">Contact Us</a></li>
+      </ul>
+          <div class="footer-copyright">
+              <p>Copyright @ 2022 All Rights Reserved.</p>
+          </div>
+  </footer>
       </html>
       `;
     }
