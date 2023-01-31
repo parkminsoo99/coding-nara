@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="#" />
+    <!-- Favicon-->
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+    <!-- Bootstrap Icons-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
+    <!-- Google fonts-->
+    <link href="https://fonts.googleapis.com/css?family=Merriweather+Sans:400,700" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic" rel="stylesheet" type="text/css" />
+    <!-- SimpleLightbox plugin CSS-->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/SimpleLightbox/2.1.0/simpleLightbox.min.css" rel="stylesheet" />
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="../CSS/styles.css" rel="stylesheet" />
+    <link href="../static/css/style.css" rel="stylesheet" />
+
+    <title>코딩나라</title>
+  </head>
+  <body>
+    <div class="mx-auto" id="welcome">
+    <section class="page-section" id="contact">
+      <div class="container px-4 px-lg-5">
+          <div class="row gx-4 gx-lg-5 justify-content-center">
+              <div class="col-lg-8 col-xl-6 text-center">
+                  <br><br><br>
+                  <h2 class="mt-0">강의실 입장하기</h2>
+                  <i class="bi bi-search fs-1 text-primary"></i>
+
+                  <hr class="divider" />
+                  <p class="text-muted mb-5">아이디를 입력하여 강의실에 접속하세요</p>
+              </div>
+          </div>
+          
+          <div class="row gx-4 gx-lg-5 justify-content-center mb-5">
+              <div class="col-lg-6">
+                  <form id="contactForm" method="post">
+                      <!-- Name input-->
+                      <div class="form-floating mb-3">
+                          <input class="form-control" id="name" type="text" name="Login_ID" placeholder="Enter your name..." data-sb-validations="required" />
+                          <label for="name">강의실 이름</label>
+                          <div class="invalid-feedback" data-sb-feedback="name:required">A name is required.</div>
+                      </div>
+                      <div class="d-none" id="submitSuccessMessage">
+                          <div class="text-center mb-3">
+                              <div class="fw-bolder">Form submission successful!</div>
+                              To activate this form, sign up at
+                              <br />
+                              <a href="https://startbootstrap.com/solution/contact-forms">https://startbootstrap.com/solution/contact-forms</a>
+                          </div>
+                      </div>
+                      <div class="d-none" id="submitErrorMessage"><div class="text-center text-danger mb-3">Error sending message!</div></div>
+                      <!-- Submit Button-->
+                      <div class="d-grid"><button class="btn btn-primary btn-xl" id="submitButton" type="submit">입장</button></div>
+                  </form>
+              </div>
+          </div>
+      </div>
+  </section>
+  </div>
+  
+    <main class="flex flex-row justify-center mx-auto">
+      <!-- <div class="mx-auto" id="welcome">
+        <form class="border-4 border-transparent">
+          <i class="bi bi-search fs-1 text-primary"></i>
+          <input placeholder="강의실 이름" required type="text" />
+          <button
+            class="border-l-4 border-transparent m-px"
+          >
+            입장
+          </button>
+        </form>
+      </div> -->
+      <div class="w-screen" id="call">
+        <div class="flex justify-start h-screen">
+          <video
+            class="mx-auto w-4/5 border-4 border-transparent"
+            id="peersFace"
+            autoplay
+            playsinline
+          ></video>
+          <div class="flex flex-col w-1/5 h-full">
+            <div class="w-full" id="myStream">
+              <div class="border-4 border-l-0 border-transparent">
+                <video
+                  class="mx-auto border-b-4 border-black myFace bg-gray-500"
+                  id="myFace"
+                  autoplay
+                  muted
+                  playsinline
+                  width="300"
+                  height="300"
+                ></video>
+                <div class="flex flex-col w-full mx-auto justify-center">
+                  <button class="border-4 border-black m-px" id="mute">
+                    음소거</button
+                  ><button class="border-4 border-black m-px" id="camera">
+                    카메라 Off</button
+                  ><select
+                    class="border-4 border-black m-px"
+                    id="cameras"
+                  ></select>
+                </div>
+              </div>
+            </div>
+            <div
+              class="flex flex-col border-4 border-l-0 border-t-0 border-black justify-between h-full overflow-y-auto w-full"
+              id="chat"
+            >
+              <div
+                class="flex-1 flex flex-col h-5/6 overflow-y-auto w-full"
+                id="chatList"
+              ></div>
+              <form
+                class="flex-none flex border-t-4 h-1/6 border-black"
+                id="chatForm"
+              >
+                <input
+                  class="w-10/12"
+                  type="text"
+                  required
+                  placeholder="Message"
+                /><button class="border-l-4 border-black w-2/12">전송</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="../static/script/app.js"></script>
+  </body>
+</html>
