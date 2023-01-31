@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Login TEST - ${title}</title>
+    <meta charset="utf-8" />
+    <script
+      type="text/javascript"
+      src="https://code.jquery.com/jquery-1.12.4.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"
+    ></script>
+    <link rel="stylesheet" type="text/css" href="/CSS/style_login.css" />
+  </head>
+  <body>
+    <!-- Navigation-->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top py-3" id="mainNav">
+      <div class="container px-4 px-lg-5">
+          <a class="navbar-brand" href="#page-top">Coding-nara</a>
+          <button class="navbar-toggler navbar-toggler-right" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+          <div class="collapse navbar-collapse" id="navbarResponsive">
+              <ul class="navbar-nav ms-auto my-2 my-lg-0">
+                  <li class="nav-item"><a class="nav-link" href="/">소개</a></li>
+                  <li class="nav-item"><a class="nav-link" href="/curriculum">커리큘럼</a></li>
+                  <li class="nav-item"><a class="nav-link" href="/enroll/sub">수강신청</a></li>
+                  <li class="nav-item"><a class="nav-link" href="/review">강좌후기</a></li>
+                  <li class="nav-item"><a class="nav-link" href="/ask">고객센터</a></li>
+                  <li class="nav-item"><a class="nav-link" href="/login"><%-authCheck %></a></li>
+              </ul>
+          </div>
+      </div>
+  </nav>
+  <!-- Masthead-->
+  <header class="masthead">
+      <div class="container px-4 px-lg-5 h-100">
+          <div class="row gx-4 gx-lg-5 h-100 align-items-center justify-content-center text-center">
+              <div class="col-lg-8 align-self-end">
+                  <h1 class="text-white font-weight-bold">실시간 온라인<br>코딩교육을 한곳에서</h1>
+                  <hr class="divider" />
+              </div>
+              <div class="col-lg-8 align-self-baseline">
+                  <p class="text-white-75 mb-5">우리 아이에 적합한 교육 서비스를 경험해보세요</p>
+                  <a class="btn btn-primary btn-xl" href="#about">Find Out More</a>
+              </div>
+          </div>
+      </div>
+  </header>
+    </script>
+    <script type="text/javascript">
+      var naver_id_login = new naver_id_login(
+        "sIwGUXdmGRyOPin4mTnj",
+        "http://localhost:3000/auth/naverLogin"
+      );
+      // 네이버 사용자 프로필 조회
+      naver_id_login.get_naver_userprofile("naverSignInCallback()");
+      // 네이버 사용자 프로필 조회 이후 프로필 정보를 처리할 callback function
+      function naverSignInCallback() {
+        alert(naver_id_login.getProfileData());
+        alert(naver_id_login.getProfileData("email"));
+        alert(naver_id_login.getProfileData("nickname"));
+        alert(naver_id_login.getProfileData("age"));
+      }
+    </script>
+  </body>
+</html>

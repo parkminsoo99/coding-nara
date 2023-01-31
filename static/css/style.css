@@ -67,6 +67,8 @@ html {
 }
 body {
     margin: 0;
+    background-image: url("../../image/room.jpg");
+    background-size:cover;
 }
 details,
 main {
@@ -6966,6 +6968,7 @@ video {
 }
 .text-6xl {
     font-size: 4rem;
+    color: white;
 }
 .leading-3 {
     line-height: 0.75rem;
