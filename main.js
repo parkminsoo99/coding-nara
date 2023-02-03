@@ -50,10 +50,10 @@ app.use((req, res, next) => {
 });
 app.use(helmet.contentSecurityPolicy({
   directives: {
-    "default-src":["'self'","'unsafe-inline'"],
+    "default-src":["'self'","*.google.com","'unsafe-inline'"],
     "frame-src" :['*'],
     "form-action" : ["'self'",'*.inicis.com','*.localhost:54213'],
-    "script-src": ["'self'",'*.naver.com',"unpkg.com","*.googleapis.com","*.cloudflare.com","*.jsdelivr.net","*.startbootstrap.com","*.kakaocdn.net",'*.jquery.com','*.iamport.kr','*.inicis.com',"'unsafe-inline'"],
+    "script-src": ["'self'",'*.daumcdn.net','parsleyjs.org','*.naver.com',"unpkg.com","*.googleapis.com","*.cloudflare.com","*.jsdelivr.net","*.startbootstrap.com","*.kakaocdn.net",'*.jquery.com','*.iamport.kr','*.inicis.com',"'unsafe-inline'"],
     "script-src-attr" : ["'self'","'unsafe-inline'"],
     "img-src": ["'self'", 'data:', "*.naver.com", "*.kakaocdn.net","localhost:54213","'unsafe-inline'"],
     "connect-src" : ["'self'","'unsafe-inline'","unpkg.com"],

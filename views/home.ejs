@@ -8,12 +8,25 @@
     <!-- Favicon-->
     <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
     <!-- Bootstrap Icons-->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"
+      rel="stylesheet"
+    />
     <!-- Google fonts-->
-    <link href="https://fonts.googleapis.com/css?family=Merriweather+Sans:400,700" rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic" rel="stylesheet" type="text/css" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Merriweather+Sans:400,700"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic"
+      rel="stylesheet"
+      type="text/css"
+    />
     <!-- SimpleLightbox plugin CSS-->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/SimpleLightbox/2.1.0/simpleLightbox.min.css" rel="stylesheet" />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/SimpleLightbox/2.1.0/simpleLightbox.min.css"
+      rel="stylesheet"
+    />
     <!-- Core theme CSS (includes Bootstrap)-->
     <link href="../CSS/styles.css" rel="stylesheet" />
     <link href="../static/css/style.css" rel="stylesheet" />
@@ -22,46 +35,74 @@
   </head>
   <body>
     <div class="mx-auto" id="welcome">
-    <section class="page-section" id="contact">
-      <div class="container px-4 px-lg-5">
+      <section class="page-section" id="contact">
+        <div class="container px-4 px-lg-5">
           <div class="row gx-4 gx-lg-5 justify-content-center">
-              <div class="col-lg-8 col-xl-6 text-center">
-                  <br><br><br>
-                  <h2 class="mt-0">강의실 입장하기</h2>
-                  <i class="bi bi-search fs-1 text-primary"></i>
+            <div class="col-lg-8 col-xl-6 text-center">
+              <br /><br /><br />
+              <h2 class="mt-0">강의실 입장하기</h2>
+              <i class="bi bi-search fs-1 text-primary"></i>
 
-                  <hr class="divider" />
-                  <p class="text-muted mb-5">아이디를 입력하여 강의실에 접속하세요</p>
-              </div>
+              <hr class="divider" />
+              <p class="text-muted mb-5">
+                아이디를 입력하여 강의실에 접속하세요
+              </p>
+            </div>
           </div>
-          
+
           <div class="row gx-4 gx-lg-5 justify-content-center mb-5">
-              <div class="col-lg-6">
-                  <form id="contactForm" method="post">
-                      <!-- Name input-->
-                      <div class="form-floating mb-3">
-                          <input class="form-control" id="name" type="text" name="Login_ID" placeholder="Enter your name..." data-sb-validations="required" />
-                          <label for="name">강의실 이름</label>
-                          <div class="invalid-feedback" data-sb-feedback="name:required">A name is required.</div>
-                      </div>
-                      <div class="d-none" id="submitSuccessMessage">
-                          <div class="text-center mb-3">
-                              <div class="fw-bolder">Form submission successful!</div>
-                              To activate this form, sign up at
-                              <br />
-                              <a href="https://startbootstrap.com/solution/contact-forms">https://startbootstrap.com/solution/contact-forms</a>
-                          </div>
-                      </div>
-                      <div class="d-none" id="submitErrorMessage"><div class="text-center text-danger mb-3">Error sending message!</div></div>
-                      <!-- Submit Button-->
-                      <div class="d-grid"><button class="btn btn-primary btn-xl" id="submitButton" type="submit">입장</button></div>
-                  </form>
-              </div>
+            <div class="col-lg-6">
+              <form id="contactForm" method="post">
+                <!-- Name input-->
+                <div class="form-floating mb-3">
+                  <input
+                    class="form-control"
+                    id="name"
+                    type="text"
+                    name="Login_ID"
+                    placeholder="Enter your name..."
+                    data-sb-validations="required"
+                  />
+                  <label for="name">강의실 이름</label>
+                  <div
+                    class="invalid-feedback"
+                    data-sb-feedback="name:required"
+                  >
+                    A name is required.
+                  </div>
+                </div>
+                <div class="d-none" id="submitSuccessMessage">
+                  <div class="text-center mb-3">
+                    <div class="fw-bolder">Form submission successful!</div>
+                    To activate this form, sign up at
+                    <br />
+                    <a href="https://startbootstrap.com/solution/contact-forms"
+                      >https://startbootstrap.com/solution/contact-forms</a
+                    >
+                  </div>
+                </div>
+                <div class="d-none" id="submitErrorMessage">
+                  <div class="text-center text-danger mb-3">
+                    Error sending message!
+                  </div>
+                </div>
+                <!-- Submit Button-->
+                <div class="d-grid">
+                  <button
+                    class="btn btn-primary btn-xl"
+                    id="submitButton"
+                    type="submit"
+                  >
+                    입장
+                  </button>
+                </div>
+              </form>
+            </div>
           </div>
-      </div>
-  </section>
-  </div>
-  
+        </div>
+      </section>
+    </div>
+
     <main class="flex flex-row justify-center mx-auto">
       <!-- <div class="mx-auto" id="welcome">
         <form class="border-4 border-transparent">
