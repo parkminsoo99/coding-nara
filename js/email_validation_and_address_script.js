@@ -58,6 +58,55 @@ function emailSend(email) {
         return alert("올바른 이메일 형식을 입력해 주세요.");
     }
 }
+//패스워드 변경시에 이메일 전송 기능
+function password_emailSend(email) {
+    var EA = document
+        .getElementsByName(email)[0]
+        .value;
+    var validateEA = $("#" + email).parsley();
+    if (validateEA.isValid() == true) {
+        password_emailSendAjax(EA);
+    } else {
+        return alert("올바른 이메일 형식을 입력해 주세요.");
+    }
+}
+function password_emailSendAjax(email) {
+    $
+        .ajax({
+            type: "POST",
+            url: "/auth/password_mail",
+            dataType: "json",
+            data: {
+                EA: email
+            }
+        })
+        .done(function (data) {
+            if (data.result == "not_exist") {
+                alert("존재하지 않는 이메일입니다.");
+            } else if (data.result == "send") {
+                alert("인증 번호를 전송했습니다.");
+                document
+                    .getElementsByName("EA")[0]
+                    .readOnly = true;
+                document
+                    .getElementById("CEA")
+                    .classList
+                    .remove("d-none");
+                document
+                    .getElementById("cerBtn")
+                    .classList
+                    .remove("d-none");
+                document
+                    .getElementById("sendBtn")
+                    .classList
+                    .add("d-none");
+                clearTimeout(timer);
+                stopWatch(300);
+            } else {
+                alert("인증 번호 전송에 실패했습니다.");
+            }
+        });
+}
 // 이메일 인증 기능
 function emailCer(cerNum) {
     var CEA = document
@@ -201,6 +250,38 @@ function chkPW() {
 	        alert("비밀번호에 아이디가 포함되었습니다.");
 	        return false;
 	    }else {
+            $.ajax({
+                type: "POST",
+                url : "/auth/password_check_success"
+            })
+            document
+                    .getElementById("err-msg3")
+                    .innerHTML = "사용가능한 비밀번호입니다.";
+            document
+                .getElementsByName("pwd")[0]
+                .readOnly = true;
+            document
+                .getElementsByName("pwd2")[0]
+                .readOnly = true;
+        }
+	}
+}
+function password_chkPW(){
+    var pw1 = $("#pwd").val();
+    var pw2 = $("#pwd2").val();
+	var checkNumber = pw1.search(/[0-9]/g);
+	var checkEnglish = pw1.search(/[a-z]/ig);
+    if (pw1 === pw2) {
+		if(!/^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,25}$/.test(pw1)){            
+	        alert('숫자+영문자+특수문자 조합으로 8자리 이상 사용해야 합니다.');
+	        return false;
+	    }else if(checkNumber <0 || checkEnglish <0){
+	        alert("숫자와 영문자를 혼용하여야 합니다.");
+	        return false;
+	    }else if(/(\w)\1\1\1/.test(pw1)){
+	        alert('같은 문자를 4번 이상 사용하실 수 없습니다.');
+	        return false;
+        }else {
             $.ajax({
                 type: "POST",
                 url : "/auth/password_check_success"
