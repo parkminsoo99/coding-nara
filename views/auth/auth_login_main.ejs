@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Login TEST - ${title}</title>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+    <!-- Bootstrap Icons-->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"
+      rel="stylesheet"
+    />
+    <!-- Google fonts-->
+    <link
+      href="https://fonts.googleapis.com/css?family=Merriweather+Sans:400,700"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <!-- SimpleLightbox plugin CSS-->
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/SimpleLightbox/2.1.0/simpleLightbox.min.css"
+      rel="stylesheet"
+    />
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="../CSS/styles.css" rel="stylesheet" />
+    <script
+      type="text/javascript"
+      src="https://code.jquery.com/jquery-1.12.4.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"
+    ></script>
+  </head>
+  <body>
+    <div class="loader-wrapper">
+      <span class="loader"><span class="loader-inner"></span></span>
+    </div>
+
+    <script>
+      $(window).on("load", function () {
+        $(".loader-wrapper").fadeOut(1000);
+      });
+    </script>
+    <!-- Navigation-->
+    <nav
+      class="navbar navbar-expand-lg navbar-light fixed-top py-3"
+      id="mainNav"
+    >
+      <div class="container px-4 px-lg-5">
+        <a class="navbar-brand" href="#page-top">Coding-nara</a>
+        <button
+          class="navbar-toggler navbar-toggler-right"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarResponsive"
+          aria-controls="navbarResponsive"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ms-auto my-2 my-lg-0">
+            <li class="nav-item"><a class="nav-link" href="/">소개</a></li>
+            <li class="nav-item">
+              <a class="nav-link" href="/curriculum">커리큘럼</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/enroll/sub">수강신청</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/review">강좌후기</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/ask">고객센터</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <!-- Masthead-->
+    <header class="masthead">
+      <div class="container px-4 px-lg-5 h-100">
+        <div
+          class="row gx-4 gx-lg-5 h-100 align-items-center justify-content-center text-center"
+        >
+          <div class="col-lg-8 align-self-end">
+            <h1 class="text-white font-weight-bold">로그인</h1>
+            <hr class="divider" />
+          </div>
+          <div class="col-lg-8 align-self-baseline">
+            <p class="text-white-75 mb-5">
+              우리 아이에 적합한 교육 서비스를 경험해보세요
+            </p>
+            <a class="btn btn-primary btn-xl" href="#about">Find Out More</a>
+          </div>
+        </div>
+      </div>
+    </header>
+    <section class="page-section" id="contact">
+      <div class="container px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+          <div class="col-lg-8 col-xl-6 text-center">
+            <h2 class="mt-0">로그인</h2>
+            <hr class="divider" />
+            <p class="text-muted mb-5">
+              저희와 함께할 준비가 되셨나요? 회원가입 후 서비스를 체험해보세요
+            </p>
+          </div>
+        </div>
+        <div class="row gx-4 gx-lg-5 justify-content-center mb-1">
+          <div class="col-lg-5">
+            <div class="form-floating mb-3">
+              <form action="/auth/login_process" id="contactForm" method="post">
+                <!-- Name input-->
+                <div class="form-floating mb-3">
+                  <input
+                    class="form-control"
+                    id="Email_Address"
+                    type="email"
+                    name="Email_Address"
+                    placeholder="Enter your name..."
+                    data-sb-validations="required"
+                  />
+                  <label for="name">아이디</label>
+                  <div
+                    class="invalid-feedback"
+                    data-sb-feedback="name:required"
+                  >
+                    A name is required.
+                  </div>
+                </div>
+                <!-- Name input-->
+                <div class="form-floating mb-3">
+                  <input
+                    class="form-control"
+                    id="name"
+                    name="pwd"
+                    type="password"
+                    placeholder="Enter your name..."
+                    data-sb-validations="required"
+                  />
+                  <label for="name">비밀번호</label>
+                  <div
+                    class="invalid-feedback"
+                    data-sb-feedback="name:required"
+                  >
+                    A name is required.
+                  </div>
+                </div>
+                <!--login submit-->
+                <div class="d-grid">
+                  <button
+                    class="btn btn-primary btn-xl"
+                    id="submitButton"
+                    type="submit"
+                  >
+                    로그인
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+          <div class="col-lg-4 text-center mb-5 mb-lg-0">
+            <div class="row g-3">
+              <div class="col-md-3">
+                <div class="form-floating">
+                  <p>
+                    <a href="/auth/register" style="font-size: 14px"
+                      >회원가입</a
+                    >
+                  </p>
+                </div>
+              </div>
+              <div class="col-md-1">
+                <div class="form-floating">
+                  <p style="font-size: 14px">|</p>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="form-floating">
+                  <p>
+                    <a href="/auth/find_ID" style="font-size: 14px"
+                      >아이디 찾기</a
+                    >
+                  </p>
+                </div>
+              </div>
+              <div class="col-md-1">
+                <div class="form-floating">
+                  <p style="font-size: 14px">|</p>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-floating">
+                  <p>
+                    <a href="/auth/find_PW" style="font-size: 14px"
+                      >비밀번호 찾기</a
+                    >
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row gx- gx-lg-5 justify-content-center">
+          <div class="col-lg-4 text-center mb-5 mb-lg-0">
+            <p class="text-muted mb">SNS 간편 로그인</p>
+          </div>
+        </div>
+        <div class="row gx- gx-lg-5 justify-content-center">
+          <div class="col-lg-4 text-center mb-5 mb-lg-0">
+            <div class="row g-1">
+              <div class="col-sm">
+                <div class="form-floating">
+                  <a id="naver_id_login" href="<%=API_URL%>">
+                    <img height="50" src="../image/naverlogin.png" />
+                  </a>
+                </div>
+              </div>
+              <div class="col-sm">
+                <div class="form-floating">
+                  <a id="kakao-login-btn" href="/auth/kakao/in">
+                    <img
+                      src="../image/kakaologin.png"
+                      width="50"
+                      ,
+                      height="50"
+                      alt="카카오 로그인 버튼"
+                    />
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+          <div class="col-lg-4 text-center mb-5 mb-lg-0">
+            <i class="bi-phone fs-2 mb-3 text-muted"></i>
+            <div>+1 (555) 123-4567</div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Footer-->
+    <footer class="bg-light py-5">
+      <div class="container px-4 px-lg-5">
+        <div class="small text-center text-muted">
+          Copyright &copy; 2022 - Company Name
+        </div>
+      </div>
+    </footer>
+    <!-- Bootstrap core JS-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- SimpleLightbox plugin JS-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/SimpleLightbox/2.1.0/simpleLightbox.min.js"></script>
+    <!-- Core theme JS-->
+    <script src="../js/scripts.js"></script>
+    <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
+    <!-- * *                               SB Forms JS                               * *-->
+    <!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
+    <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
+    <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
+  </body>
+</html>

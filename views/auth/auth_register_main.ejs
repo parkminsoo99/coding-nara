@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Login TEST - ${title}</title>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+
+    <!-- Favicon-->
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+    <!-- Bootstrap Icons-->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"
+      rel="stylesheet"
+    />
+    <!-- Google fonts-->
+    <link
+      href="https://fonts.googleapis.com/css?family=Merriweather+Sans:400,700"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <!-- SimpleLightbox plugin CSS-->
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/SimpleLightbox/2.1.0/simpleLightbox.min.css"
+      rel="stylesheet"
+    />
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="../CSS/styles.css" rel="stylesheet" />
+    <script
+      type="text/javascript"
+      src="https://code.jquery.com/jquery-1.12.4.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"
+    ></script>
+    <script src="http://parsleyjs.org/dist/parsley.js"></script>
+    <script src="../js/email_validation_and_address_script.js"></script>
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+  </head>
+  <body>
+    <div class="loader-wrapper">
+      <span class="loader"><span class="loader-inner"></span></span>
+    </div>
+
+    <script>
+      $(window).on("load", function () {
+        $(".loader-wrapper").fadeOut(1000);
+      });
+    </script>
+    <!-- Navigation-->
+    <nav
+      class="navbar navbar-expand-lg navbar-light fixed-top py-3"
+      id="mainNav"
+    >
+      <div class="container px-4 px-lg-5">
+        <a class="navbar-brand" href="#page-top">Coding-nara</a>
+        <button
+          class="navbar-toggler navbar-toggler-right"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarResponsive"
+          aria-controls="navbarResponsive"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ms-auto my-2 my-lg-0">
+            <li class="nav-item"><a class="nav-link" href="/">소개</a></li>
+            <li class="nav-item">
+              <a class="nav-link" href="/curriculum">커리큘럼</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/enroll/sub">수강신청</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/review">강좌후기</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/ask">고객센터</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <!-- Masthead-->
+    <header class="masthead">
+      <div class="container px-4 px-lg-5 h-100">
+        <div
+          class="row gx-4 gx-lg-5 h-100 align-items-center justify-content-center text-center"
+        >
+          <div class="col-lg-8 align-self-end">
+            <h1 class="text-white font-weight-bold">회원가입</h1>
+            <hr class="divider" />
+          </div>
+          <div class="col-lg-8 align-self-baseline">
+            <p class="text-white-75 mb-5">
+              우리 아이에 적합한 교육 서비스를 경험해보세요
+            </p>
+            <a class="btn btn-primary btn-xl" href="#about">Find Out More</a>
+          </div>
+        </div>
+      </div>
+    </header>
+    <!-- Contact-->
+    <section class="page-section" id="contact">
+      <div class="container px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+          <div class="col-lg-8 col-xl-6 text-center">
+            <h2 class="mt-0">시작하기</h2>
+            <hr class="divider" />
+            <p class="text-muted mb-5">
+              저희와 함께할 준비가 되셨나요? 회원가입 후 서비스를 체험해보세요
+            </p>
+          </div>
+        </div>
+        <div class="row gx-4 gx-lg-5 justify-content-center mb-5">
+          <div class="col-lg-6">
+            <form
+              id="contactForm"
+              action="/auth/register_process"
+              method="post"
+            >
+              <!-- Name input-->
+              <div class="form-floating mb-3">
+                <input
+                  class="form-control"
+                  id="name"
+                  name="username"
+                  type="text"
+                  placeholder="Enter your name..."
+                  data-sb-validations="required"
+                  required
+                />
+                <label for="name"
+                  >이름<span class="text-danger"> *</span></label
+                >
+                <div class="invalid-feedback" data-sb-feedback="name:required">
+                  A name is required.
+                </div>
+              </div>
+              <!-- Email address input-->
+              <div class="form-floating mb-3">
+                <input
+                  id="EA"
+                  name="EA"
+                  type="email"
+                  class="form-control form-control-lg inverse-mode"
+                  data-parsley-error-message="null"
+                  placeholder="name@example.com"
+                  data-sb-validations="required,email"
+                  required
+                />
+                <label class="control-label"
+                  >이메일<span class="text-danger"> *</span>
+                </label>
+                <div class="invalid-feedback" data-sb-feedback="email:required">
+                  An email is required.
+                </div>
+                <div class="invalid-feedback" data-sb-feedback="email:email">
+                  Email is not valid.
+                </div>
+                <input
+                  id="CEA"
+                  name="CEA"
+                  type="text"
+                  class="form-control form-control-lg inverse-model mt-3 d-none"
+                  data-parsley-error-message="null"
+                  data-parsley-errors-container="#err-msg2"
+                />
+                <div
+                  class="d-flex justify-content-between align-items-center mt-2"
+                >
+                  <div id="err-msg2" class="text-realred"></div>
+                  <input
+                    type="button"
+                    id="sendBtn"
+                    class="btn btn-primary btn-block btn-lg ml-auto custombtn"
+                    value="인증번호 요청"
+                    onclick="emailSend('EA')"
+                  />
+                  <input
+                    type="button"
+                    id="cerBtn"
+                    class="btn btn-primary btn-block btn-lg mt-0 ml-auto custombtn d-none"
+                    value="인증하기"
+                    onclick="emailCer('CEA')"
+                  />
+                  <input type="hidden" id="hideCK" name="hideCK" value="" />
+                </div>
+              </div>
+              <!-- password input-->
+              <div class="row g-2">
+                <div class="col-md">
+                  <div class="form-floating">
+                    <input
+                      class="form-control"
+                      id="pwd"
+                      name="pwd"
+                      type="password"
+                      placeholder="Enter your name..."
+                      data-sb-validations="required"
+                      required
+                    />
+                    <label for="name"
+                      >비밀번호<span class="text-danger"> *</span></label
+                    >
+                    <div
+                      class="invalid-feedback"
+                      data-sb-feedback="name:required"
+                    >
+                      A name is required.
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md">
+                  <div class="form-floating">
+                    <input
+                      class="form-control"
+                      id="pwd2"
+                      name="pwd2"
+                      type="password"
+                      placeholder="Enter your name..."
+                      data-sb-validations="required"
+                      required
+                    />
+
+                    <label for="name"
+                      >비밀번호 재확인<span class="text-danger"> *</span></label
+                    >
+                    <div
+                      class="invalid-feedback"
+                      data-sb-feedback="name:required"
+                    >
+                      A name is required.
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="form-floating mb-3">
+                <div
+                  class="d-flex justify-content-between align-items-center mt-2"
+                >
+                  <div id="err-msg3" class="text-realred"></div>
+                  <input
+                    type="button"
+                    id="sendBtn"
+                    class="btn btn-primary btn-block btn-lg ml-auto custombtn"
+                    value="비밀번호 검증"
+                    onclick="chkPW()"
+                  />
+                </div>
+              </div>
+              <!-- Phone number input-->
+              <div class="form-floating mb-3">
+                <input
+                  class="form-control"
+                  id="phone"
+                  name="number"
+                  type="tel"
+                  oninput="autoHyphen2(this)"
+                  maxlength="13"
+                  placeholder="010-1234-5678"
+                  data-sb-validations="required"
+                  required
+                />
+                <label for="phone"
+                  >전화번호<span class="text-danger"> *</span></label
+                >
+                <div class="invalid-feedback" data-sb-feedback="phone:required">
+                  A phone number is required.
+                </div>
+              </div>
+              <!-- address input-->
+              <div class="row g-2">
+                <div class="col-md-3">
+                  <div class="form-floating">
+                    <input
+                      class="form-control"
+                      id="member_post"
+                      name="member_post"
+                      type="text"
+                      placeholder="Zip Code"
+                      readonly
+                      required
+                      onclick="findAddr()"
+                    />
+                    <label for="phone"
+                      >우편번호<span class="text-danger"> *</span></label
+                    >
+                    <div
+                      class="invalid-feedback"
+                      data-sb-feedback="phone:required"
+                    >
+                      The Address is required.
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md">
+                  <div class="form-floating">
+                    <input
+                      class="form-control"
+                      id="member_addr"
+                      name="member_addr"
+                      type="text"
+                      placeholder="Address"
+                      readonly
+                      required
+                      onclick="findAddr()"
+                    />
+                    <label for="phone"
+                      >주소<span class="text-danger"> *</span></label
+                    >
+                    <div
+                      class="invalid-feedback"
+                      data-sb-feedback="phone:required"
+                    >
+                      The Address is required.
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="form-floating mb-1"></div>
+              <div class="form-floating mb-3">
+                <input
+                  class="form-control"
+                  id="member_leftover"
+                  name="member_leftover"
+                  type="text"
+                  placeholder="Detailed Address"
+                />
+                <label for="phone">나머지 주소</label>
+              </div>
+
+              <script></script>
+              <!-- Phone number input-->
+              <div class="form-floating mb-3">
+                <input
+                  class="form-control"
+                  id="recommend_ID"
+                  name="recommend_ID"
+                  type="text"
+                />
+                <label for="phone">추천인 ID</label>
+                <div class="invalid-feedback" data-sb-feedback="phone:required">
+                  A phone number is required.
+                </div>
+              </div>
+              <!-- Message input-->
+              <!-- <div class="form-floating mb-3">
+                        <textarea class="form-control" id="message" type="text" placeholder="Enter your message here..." style="height: 10rem" data-sb-validations="required"></textarea>
+                        <label for="message">Message</label>
+                        <div class="invalid-feedback" data-sb-feedback="message:required">A message is required.</div>
+                    </div> -->
+              <!-- Submit success message-->
+              <!---->
+              <!-- This is what your users will see when the form-->
+              <!-- has successfully submitted-->
+              <div class="d-none" id="submitSuccessMessage">
+                <div class="text-center mb-3">
+                  <div class="fw-bolder">Form submission successful!</div>
+                  To activate this form, sign up at
+                  <br />
+                  <a href="https://startbootstrap.com/solution/contact-forms"
+                    >https://startbootstrap.com/solution/contact-forms</a
+                  >
+                </div>
+              </div>
+              <!-- Submit error message-->
+              <!---->
+              <!-- This is what your users will see when there is-->
+              <!-- an error submitting the form-->
+              <div class="d-none" id="submitErrorMessage">
+                <div class="text-center text-danger mb-3">
+                  Error sending message!
+                </div>
+              </div>
+              <!-- Submit Button-->
+              <div class="d-grid">
+                <button
+                  class="btn btn-primary btn-xl"
+                  id="submitButton"
+                  type="submit"
+                >
+                  회원가입
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+          <div class="col-lg-4 text-center mb-5 mb-lg-0">
+            <p><a href="/auth/login">로그인화면으로 돌아가기</a></p>
+            <i class="bi-phone fs-2 mb-3 text-muted"></i>
+            <div>+1 (555) 123-4567</div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </body>
+</html>
