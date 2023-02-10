@@ -298,3 +298,11 @@ function password_chkPW(){
         }
 	}
 }
+
+function Change(){
+    $.ajax({
+        type: "get",
+        url: "/myinfo/update",
+        
+    })
+}
