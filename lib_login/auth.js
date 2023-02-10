@@ -18,7 +18,6 @@ const date = require('date-and-time');
 let start = Date.now();
 const date_now = new Date(start);
 require("dotenv").config();
-require("dotenv").config();
 ///
 var platform_type = '';
 var sanitizeHtml = require('sanitize-html');
@@ -49,21 +48,6 @@ router.get('/login', function (request, response) {
     }
 });
 
-// 로그인 화면
-router.get('/login', function (request, response) {
-    request.session.secret = tokens.secretSync();
-    var token = tokens.create(request.session.secret);
-    if (!tokens.verify(request.session.secret, token)) {
-      throw new Error('invalid token!')
-    }else{
-        if(request.session.type == 'kakao') request.session.destroy();
-        else if(request.session.type == 'naver') request.session.destroy();
-        response.render('./auth/auth_login_main',{
-            API_URL : api_url
-        })
-    }
-});
-
 // 회원가입 화면
 router.get('/register', async(request, response) =>{
     request.session.secret = tokens.secretSync();
@@ -75,7 +59,6 @@ router.get('/register', async(request, response) =>{
         if(request.session.type=='naver'){
             console.log('naver_register_in')
             response.render('./auth/auth_register_naver',{
-            response.render('./auth/auth_register_naver',{
                 Email : request.session.email,
                 Nickname : request.session.nickname,
                 Mobile : request.session.mobile,
@@ -84,14 +67,12 @@ router.get('/register', async(request, response) =>{
         else if(request.session.type=='kakao'){
             console.log('kakao_register_in')
             response.render('./auth/auth_register_kakao',{
-            response.render('./auth/auth_register_kakao',{
                 Email : request.session.email,
                 Nickname : request.session.nickname
             });
         }
         else{
             request.session.destroy();
-            response.render('./auth/auth_register_main',{
             response.render('./auth/auth_register_main',{
                 Authnum : authNum,
                 Email_Status : Email_status,
@@ -181,7 +162,7 @@ router.post('/register_process', function(request, response) {
             var Address = Address_addr +' '+ Address_leftover;
             var Point = sanitizeHtml(0);
             console.log('PN',request.session.mobile);
-            if(Address){
+            if(Address_post && Address_addr){
                 db.query(`SELECT * FROM Student WHERE Email_Address = ? or Phone_Number =?;
                             SELECT * FROM Student WHERE Email_Address = ?
                 `, [Email_Address,Phone_Number,Recommand_ID], function(error1, results) { // DB에 같은 이름의 회원아이디가 있는지 확인
@@ -226,7 +207,7 @@ router.post('/register_process', function(request, response) {
                     }
                     else {                                                  // DB에 같은 이름의 회원아이디가 있는 경우
                         response.send(`<script type="text/javascript">alert("이미 존재하는 회원입니다."); 
-                        document.location.href="/auth/register";</script>`);    
+                        document.location.href="/auth/login";</script>`);    
                     }    
                 })
             }
@@ -250,7 +231,7 @@ router.post('/register_process', function(request, response) {
             var Recommand_ID = sanitizeHtml(request.body.recommend_ID);
             var Point = sanitizeHtml(0);
             var Address = Address_addr +' '+ Address_leftover;
-            if(Phone_Number && Address){
+            if(Phone_Number && Address_post && Address_addr){
                 db.query(`SELECT * FROM Student WHERE Email_Address = ? or Phone_Number =?;
                             SELECT * FROM Student WHERE Email_Address = ?
                 `, [Email_Address,Phone_Number,Recommand_ID], function(error1, results) { // DB에 같은 이름의 회원아이디가 있는지 확인
@@ -295,7 +276,7 @@ router.post('/register_process', function(request, response) {
                     }
                     else {                                                  // DB에 같은 이름의 회원아이디가 있는 경우
                         response.send(`<script type="text/javascript">alert("이미 존재하는 회원입니다."); 
-                        document.location.href="/auth/register";</script>`);    
+                        document.location.href="/auth/login";</script>`);    
                     }    
                 })
             }
@@ -365,7 +346,7 @@ router.post('/register_process', function(request, response) {
                     } 
                     else {                                                  // DB에 같은 이름의 회원아이디가 있는 경우
                         response.send(`<script type="text/javascript">alert("이미 존재하는 회원입니다."); 
-                        document.location.href="/auth/register";</script>`);    
+                        document.location.href="/auth/login";</script>`);    
                     }    
                 })
             }
@@ -457,7 +438,7 @@ router.post('/password_mail', (req, res) => {
             if(result.length <= 0) res.send({ result : 'not_exist' })
             else{
                 console.log('mail_req');
-                let authNum = Math.random().toString().substr(2,6);
+                const authNum = Math.random().toString().substr(2,6);
                 const hashAuth = await bcrypt.hash(authNum, 12);
                 console.log(hashAuth);
                 req.session.hashAuth = hashAuth;
@@ -517,7 +498,6 @@ router.post('/mail', (req, res) => {
                 req.session.hashAuth = hashAuth;
                 console.log('req.session.session',req.session.hashAuth);
                 res.render('./auth/mail', {authCode : authNum}, function (err, data) {
-                res.render('./auth/mail', {authCode : authNum}, function (err, data) {
                 if(err){console.log(err)}
                 console.log(data)
                 emailTemplete = data;
@@ -528,8 +508,6 @@ router.post('/mail', (req, res) => {
                     port: 465,
                     secure: true,
                     auth: {
-                        user: process.env.NODEMAILER_USER,
-                        pass: process.env.NODEMAILER_PASS,
                         user: process.env.NODEMAILER_USER,
                         pass: process.env.NODEMAILER_PASS,
                     },tls: {
@@ -557,7 +535,6 @@ router.post('/mail', (req, res) => {
     })
 });
 
-
 router.post('/mail_expire', (req,res) => {
     req.session.destroy(function(){ 
         req.session;
@@ -581,8 +558,6 @@ router.post('/mail_validation', async (req, res, next) => {
       next(err);
     }
   });
-
-//-------naver
 
 //-------naver
 
@@ -625,7 +600,6 @@ router.get('/naver/login', async (req, res) => {
                 function(error,results1){
                     if(error) throw error;
                     if (results1.length > 0 && results1[0].Platform_type === 'naver') {       // db에서의 반환값이 있으면 로그인 성공
-                    if (results1.length > 0 && results1[0].Platform_type === 'naver') {       // db에서의 반환값이 있으면 로그인 성공
                         req.session.type = platform_type;
                         req.session.email = info_result_json.email;
                         req.session.is_logined = true;      // 세션 정보 갱신
@@ -648,19 +622,6 @@ router.get('/naver/login', async (req, res) => {
                 })
             }
 })
-
-router.get('/naverLogin', function (request, response) {
-    request.session.secret = tokens.secretSync();
-    var token = tokens.create(request.session.secret);
-    if (!tokens.verify(request.session.secret, token)) {
-      throw new Error('invalid token!')
-    }else{
-        response.render('./auth/auth_login_naver')
-    }
-});
-
-//-----kakao
-
 
 router.get('/naverLogin', function (request, response) {
     request.session.secret = tokens.secretSync();
@@ -728,10 +689,7 @@ router.get('/kakao/login', async(req, res) => {
             const { email } = user.data.kakao_account;
             db.query(`SELECT * FROM Student WHERE Email_Address = ?`, [email],
             function(error,results1){
-                
-                console.log('result1',);
                 if(error) throw error;
-                if (results1.length > 0 && results1[0].Platform_type === 'kakao') {       // db에서의 반환값이 있으면 로그인 성공
                 if (results1.length > 0 && results1[0].Platform_type === 'kakao') {       // db에서의 반환값이 있으면 로그인 성공
                     req.session.type = platform_type;
                     req.session.email = email;
