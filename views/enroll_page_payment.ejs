@@ -21,10 +21,15 @@
       type="text/css"
     />
     <!-- SimpleLightbox plugin CSS-->
+<<<<<<< HEAD
     <link
       href="https://cdnjs.cloudflare.com/ajax/libs/SimpleLightbox/2.1.0/simpleLightbox.min.css"
       rel="stylesheet"
     />
+=======
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/SimpleLightbox/2.1.0/simpleLightbox.min.css" rel="stylesheet" />
+    <link href="/CSS/styles.css" rel="stylesheet" />
+>>>>>>> Test
     <script
       type="text/javascript"
       src="https://code.jquery.com/jquery-1.12.4.min.js"
@@ -88,6 +93,7 @@
           </ul>
         </div>
       </div>
+<<<<<<< HEAD
     </nav>
     <br />
     <br />
@@ -98,24 +104,167 @@
       <span>현재 카운트 : <string id="count">1</string></span>
       <button onclick="countUp();price_change();">></button>
       <button onclick="countRset();">초기화</button>
+=======
+  </nav>
+  <!-- Masthead-->
+  <header class="masthead_curi">
+    <div class="container px-4 px-lg-5 h-100">
+        <div class="row gx-4 gx-lg-5 h-100 align-items-center justify-content-center text-center">
+            <div class="col-lg-8 align-self-end">
+              <h1 class="text-white font-weight-bold">수강신청</h1>
+                <hr class="divider" />
+            </div>
+            <div class="col-lg-8 align-self-baseline">
+                <p class="text-white-75 mb-5"></p>
+            </div>
+        </div>
+>>>>>>> Test
     </div>
-    <div class="price_div">
-      <p>가격 : <string id="price"></string><span>원</span></p>
-    </div>
-    <div class="point_div">
-      <p>포인트 잔액 : <string id="point"></string><span>원</span></p>
-    </div>
-    <div class="point_use_div">
-      <p>
-        포인트 사용 : <input type="text" id="point_use" value="0" /><span
-          >원</span
-        ><input type="button" value="적용" onClick="cal_result_price()" />
-      </p>
-      <div class="result_price_div">
-        <p>총 결제 금액 : <string id="result_price"></string><span>원</span></p>
+ </header>
+<!--화면-->
+<br>
+
+<!-- Page content-->
+<div class="container" style="overflow: auto">
+  <div class="row">
+      <!-- Blog entries-->
+      <div class="col-lg-8">
+          <!-- Featured blog post-->
+          <div class="card mb-4">
+              <div class="card-body">
+                  <!-- <div class="small text-muted">January 1, 2022</div> -->
+                  <h1 class="card-title"><%=Subject %></h1>
+                  <img id="image">
+                  <h5 class="card-text" id="subject"></h5>
+                  <!-- <a class="btn btn-primary" id="generate">결제하기 →</a> -->
+              </div>
+          </div>
+          <!-- Nested row for non-featured blog posts-->
+          <div class="row">
+              <div class="col-lg-6">
+                  <!-- Blog post-->
+                  <div class="card mb-4">
+                      <div class="card-body">
+                          <h2 class="card-title h4">과목특징</h2>
+                          <p class="card-text" id="feature"></p>
+                          <a class="btn btn-success" href="#!">상세보기</a>
+                          
+                      </div>
+                  </div>
+              </div>
+              <div class="col-lg-6">
+                  <!-- Blog post-->
+                  <div class="card mb-4">
+                      <div class="card-body">
+                          <h2 class="card-title h4"><%=Teacher_name%></h2>
+                          <p class="card-text">IT 전공인 강사이며 자세한 세부사항은 아래 버튼을 클릭해주세요.</p>
+                          <a class="btn btn-success" href="#!">상세보기</a>
+                      </div>
+                  </div> 
+              </div>
+              <div class="col-lg-6">
+                <!-- Blog post-->
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <p class="card-text">강의의 원활한 수강을 위해 개인정보를 확인해주세요</p>
+                        <p class="card-text">전화번호 : <%=Phone_Number%></p>
+                        <p>이메일 : <%=Email_Address%></p>
+                        <a class="btn btn-success" href="#!">개인정보수정</a>
+                    </div>
+                </div> 
+              </div>
+            <div class="col-lg-6">
+              <!-- Blog post-->
+              <div class="card mb-4">
+                  <div class="card-body">
+                      <h2 class="card-title h4">문의하기</h2>
+                      <p class="card-text"></p>
+                      <p class="card-text"></p>
+                      <p></p>
+                      <a class="btn btn-success" href="#!">문의하기</a>
+                  </div>
+              </div> 
+            </div>
+          </div>
       </div>
+      
+      <!-- Side widgets-->
+      <div class="col-lg-4">  
+          <!-- Categories widget-->
+          <div class="card mb-4">
+              <div class="card-header">변동사항</div>
+              <div class="card-body">
+                  <div class="row">
+                      <div class="col-sm-6" >
+                          <ul class="list-unstyled mb-0">
+                              <li><h3 class="text-black font-weight-bold">원하는 강좌<br> 횟수 : <string id="count">1</string></h3></li>
+                              <li><button class="btn btn-dark" onclick="countUp();price_change();"><i class="bi bi-arrow-up"></i></button>
+                                <button class="btn btn-dark" onclick="countDown();price_change();"><i class="bi bi-arrow-down"></i></button></li>
+                                
+                              <li>포인트 잔액 : <string id="point"></string></li>
+                              
+                              <h3>가격 : <string id="price"></string><span><br> 포인트 사용 : <input type="text" id="point_use" value="0" /><span
+                                ></span
+                              >
+                              <button class="btn btn-dark" type="button" onClick="cal_result_price()"">적용</button></h3>
+                          </ul>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <!-- Side widget-->
+          <div class="card mb-4">
+              <div class="card-header">최종 금액</div>
+              <div class="card-body">회원 본인은 주문내용을 확인했으며, 구매조건 및 개인정보처리방침과 결제에 동의합니다.<br>
+                <span><br><h2> 결제 금액 : <string id="result_price"></string><span>원</span></h2> </span></div>
+              <a class="btn btn-dark" onclick="requestPay()">결제하기</a>
+          </div>
+      </div>
+  </div>
+</div>
+
     </div>
-    <button onclick="requestPay()">결제하기</button>
+  </div>
+  
+</div>
+  <script>
+    var link =  document.location.href;
+    var sub = <%-JSON.stringify(Subject)%>
+    if(sub === "C언어")
+    {
+    document.getElementById("image").setAttribute("src","data:image/png;base64,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")
+    document.getElementById("subject").innerHTML = "<b>" + "C언어는 현재 사용하고 있는 거의 모든 컴퓨터 시스템에서 사용할 수 있는 프로그래밍 언어입니다.<br> 프로그래밍 언어란 컴퓨터의 시스템을 구동시키는 소프트웨어를 작성하기 위한 언어" + "</b>";
+    document.getElementById("feature").innerHTML = "<b>" + "고급과정 이수체계이며 평균 교육과정은 6~8개월입니다. <br>자세한 커리큘럼은 아래 버튼을 눌러주세요" + "</b>";
+    }
+    else if(sub === "Python")
+    {
+    document.getElementById("subject").innerHTML = "<b>" + "Phython은 웹 애플리케이션, 소프트웨어 개발, 데이터 과학, 기계 학습(ML)에 널리 사용되는 프로그래밍 언어입니다. 개발자는 Python이 효율적이고 배우기 쉬우며 여러 플랫폼에서 실행될 수 있으므로 Python을 사용합니다. " + "</b>";
+    document.getElementById("feature").innerHTML = "<b>" + "중급과정 이수체계이며 평균 교육과정은 6~8개월입니다. <br>자세한 커리큘럼은 아래 버튼을 눌러주세요" + "</b>";
+
+    }
+    else if(sub === "JAVA")
+    {
+    document.getElementById("subject").innerHTML = "<b>" + "썬에서 개발한 객체지향 언어이다. 가정용 단말기에 적용하려는 목적으로 1992년에 만든 '오크(OAK)'언어에서 비롯되었다. 오크는 상품화되지 못했지만, 인터넷이 발전하면서 인터넷 친화적인 개발 언어" + "</b>";
+    document.getElementById("feature").innerHTML = "<b>" + "고급과정 이수체계이며 평균 교육과정은 6~8개월입니다. <br>자세한 커리큘럼은 아래 버튼을 눌러주세요" + "</b>";
+
+    }
+    else if(sub === "App Inventor")
+    {
+    document.getElementById("subject").innerHTML = "<b>" + "앱 인벤터는 원래 구글이 제공한 오픈 소스 웹 애플리케이션으로, 지금은 매사추세츠 공과대학교에 의해 관리되고 있다. 컴퓨터 프로그래밍을 처음 접하는 사람들이 안드로이드 운영 체제용 응용 소프트웨어를 만들 수 있게 해준다." + "</b>";
+    document.getElementById("feature").innerHTML = "<b>" + "초급과정 이수체계이며 평균 교육과정은 3~4개월입니다. <br>자세한 커리큘럼은 아래 버튼을 눌러주세요" + "</b>";
+    }
+    else if(sub === "Scatch" || sub === "Entry")
+    {
+    document.getElementById("subject").innerHTML = "<b>" + "8세~16세의 아이들을 대상으로 만든 교육용, 블록형 프로그래밍 언어이다. 이 사이트에서 활동하는 사람들인 '스크래쳐'들은 블록을 조립하는 방식으로 프로젝트를 만든다." + "</b>";
+    document.getElementById("feature").innerHTML = "<b>" + "새싹과정 이수체계이며 평균 교육과정은 1~3개월입니다. <br>자세한 커리큘럼은 아래 버튼을 눌러주세요" + "</b>";
+
+    }
+    else if(sub === "웹 페이지 만들기")
+    {
+    document.getElementById("subject").innerHTML = "<b>" + "HTML, CSS, JavaScript를 사용하여 웹 사이트를 빌드하고, 브라우저에서 개발자 도구를 사용하여 작업을 확인하는 방법을 학습하여 웹 개발을 시작합니다." + "</b>";
+    document.getElementById("feature").innerHTML = "<b>" + "중급과정 이수체계이며 평균 교육과정은 4~6개월입니다. <br>자세한 커리큘럼은 아래 버튼을 눌러주세요" + "</b>";
+    }
+  </script>
     <script>
       var count = 1;
       var price = (<%-JSON.stringify(Price)%>).toLocaleString("ko-KR");
@@ -295,37 +444,24 @@
       }
     </script>
   </body>
-  <footer>
-    <ul class="icons">
-      <li>
-        <a href="#">
-          <ion-icon name="logo-whatsapp"></ion-icon>
-        </a>
-      </li>
-      <li>
-        <a href="#">
-          <ion-icon name="mail-outline"></ion-icon>
-        </a>
-      </li>
-      <li>
-        <a href="#">
-          <ion-icon name="logo-instagram"></ion-icon>
-        </a>
-      </li>
-    </ul>
-    <ul class="menu">
-      <li>
-        <a href="#">Home</a>
-      </li>
-      <li>
-        <a href="#">About</a>
-      </li>
-      <li>
-        <a href="#">Contact Us</a>
-      </li>
-    </ul>
-    <div class="footer-copyright">
-      <p>Copyright @ 2022 All Rights Reserved.</p>
-    </div>
-  </footer>
+  <!-- Footer-->
+  <footer class="bg-light py-5">
+    <div class="container px-4 px-lg-5"><div class="small text-center text-muted"><a href="/policy/private">개인정보처리방침</a> | <a href="/policy/tos">이용약관</a></div></div>
+    <div class="container px-4 px-lg-5"><div class="small text-center text-muted">코딩나라 | 대표자: 장영재, 박민수 | 사업자번호: 148-14-01860 사업자 정보 확인</div></div>
+    <div class="container px-4 px-lg-5"><div class="small text-center text-muted">주소: 서울특별시 서대문구 북가좌동</div></div>
+    <br>
+    <div class="container px-4 px-lg-5"><div class="small text-center text-muted">Copyright &copy;코딩나라(Coding-nara)</div></div>
+</footer>
+<!-- Bootstrap core JS-->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+<!-- SimpleLightbox plugin JS-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/SimpleLightbox/2.1.0/simpleLightbox.min.js"></script>
+<!-- Core theme JS-->
+<script src="/js/scripts.js"></script>
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
+<!-- * *                               SB Forms JS                               * *-->
+<!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
+<script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
+</body>
 </html>
