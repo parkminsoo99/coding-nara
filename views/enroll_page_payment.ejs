@@ -25,7 +25,6 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/SimpleLightbox/2.1.0/simpleLightbox.min.css"
       rel="stylesheet"
     />
-    <link href="CSS/styles.css" rel="stylesheet" />
     <script
       type="text/javascript"
       src="https://code.jquery.com/jquery-1.12.4.min.js"
@@ -34,7 +33,11 @@
       type="text/javascript"
       src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"
     ></script>
-    <link rel="stylesheet" type="text/css" href="/CSS/style.css" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="../../../../CSS/styles_none.css"
+    />
   </head>
   <body>
     <div class="loader-wrapper">
@@ -86,6 +89,10 @@
         </div>
       </div>
     </nav>
+    <br />
+    <br />
+    <br />
+    <br />
     <div class="count_button">
       <button onclick="countDown();price_change();"><</button>
       <span>현재 카운트 : <string id="count">1</string></span>
@@ -117,81 +124,81 @@
       var discount_price = 0;
       const input = document.querySelector("#point_use");
       input.addEventListener("keyup", function (e) {
-        let value = e.target.value;
-        value = Number(value.replaceAll(",", ""));
-        if (isNaN(value)) input.value = 0;
-        else {
+      let value = e.target.value;
+      value = Number(value.replaceAll(",", ""));
+      if (isNaN(value)) input.value = 0;
+      else {
           const formatValue = value.toLocaleString("ko-KR");
           input.value = formatValue;
-        }
+      }
       });
       function price_show() {
-        document.querySelector("#price").innerText = price;
+      document.querySelector("#price").innerText = price;
       }
       price_show();
       function result_price_show() {
-        document.querySelector("#result_price").innerText = price;
+      document.querySelector("#result_price").innerText = price;
       }
       result_price_show();
 
       function Point_show() {
-        document.querySelector("#point").innerText = point;
+      document.querySelector("#point").innerText = point;
       }
       Point_show();
       function cal_result_price() {
-        discount_price = document.getElementById("point_use").value;
-        discount_price = Number(discount_price.replaceAll(",", ""));
-        if (discount_price <= (<%-JSON.stringify(Point)%>)) {
+      discount_price = document.getElementById("point_use").value;
+      discount_price = Number(discount_price.replaceAll(",", ""));
+      if (discount_price <= (<%-JSON.stringify(Point)%>)) {
           result_price = (count * (<%-JSON.stringify(Price)%>)) - discount_price;
           document.querySelector("#result_price").innerText =
-            result_price.toLocaleString("ko-KR");
-        } else alert("포인트 초과");
+          result_price.toLocaleString("ko-KR");
+      } else alert("포인트 초과");
       }
       var price_change = function () {
-        price = (count * (<%-JSON.stringify(Price)%>)).toLocaleString("ko-KR");
-        document.querySelector("#price").innerText = price;
-        document.querySelector("#result_price").innerText = price;
+      price = (count * (<%-JSON.stringify(Price)%>)).toLocaleString("ko-KR");
+      document.querySelector("#price").innerText = price;
+      document.querySelector("#result_price").innerText = price;
       };
       var countUp = function () {
-        count = count + 1;
-        document.querySelector("#count").innerText = count;
+      count = count + 1;
+      document.querySelector("#count").innerText = count;
       };
       var countDown = function () {
-        if (count > 1) {
+      if (count > 1) {
           count = count - 1;
           document.querySelector("#count").innerText = count;
-        }
+      }
       };
       var countRset = function () {
-        count = 1;
-        price = (count * (<%-JSON.stringify(Price)%>)).toLocaleString("ko-KR");
-        document.querySelector("#price").innerText = price;
-        document.querySelector("#count").innerText = count;
+      count = 1;
+      price = (count * (<%-JSON.stringify(Price)%>)).toLocaleString("ko-KR");
+      document.querySelector("#price").innerText = price;
+      document.querySelector("#count").innerText = count;
       };
       const IMP = window.IMP;
       IMP.init("imp71467660");
       const make_merchant_uid = () => {
-        const current_time = new Date();
-        const year = current_time.getFullYear().toString();
-        const month = (current_time.getMonth() + 1).toString();
-        const day = current_time.getDate().toString();
-        const hour = current_time.getHours().toString();
-        const minute = current_time.getMinutes().toString();
-        const second = current_time.getSeconds().toString();
-        const merchant_uid =
+      const current_time = new Date();
+      const year = current_time.getFullYear().toString();
+      const month = (current_time.getMonth() + 1).toString();
+      const day = current_time.getDate().toString();
+      const hour = current_time.getHours().toString();
+      const minute = current_time.getMinutes().toString();
+      const second = current_time.getSeconds().toString();
+      const merchant_uid =
           "MIHEE" + year + month + day + hour + minute + second;
-        return merchant_uid;
+      return merchant_uid;
       };
       const merchant_uid = make_merchant_uid();
 
       function requestPay() {
-        if ((<%-JSON.stringify(Course_Active)%>) == 1) {
+      if ((<%-JSON.stringify(Course_Active)%>) == 1) {
           alert("이미 결제가 이뤄진 강의입니다.");
-          window.location.href = "http://localhost:3000/enroll/sub";
-        } else {
+          window.location.href = "http://localhost:54213/enroll/sub";
+      } else {
           // IMP.request_pay(param, callback) 결제창 호출
           IMP.request_pay(
-            {
+          {
               pg: "html5_inicis.INIpayTest", // version 1.1.0부터 지원.
               /*
                   'kakao':카카오페이,
@@ -235,16 +242,15 @@
                   결제가 끝나고 랜딩되는 URL을 지정
                   (카카오페이, 페이코, 다날의 경우는 필요없음. PC와 마찬가지로 callback함수로 결과가 떨어짐)
                   */
-            },
-            function (rsp) {
+          },
+          function (rsp) {
               if (rsp.status == "paid" && rsp.paid_amount == 100) {
-                if (rsp.success) {
-                  console.log(rsp);
+              if (rsp.success) {
                   var count_num = document.getElementById("count").textContent;
                   var original_price =
-                    document.getElementById("price").textContent;
+                  document.getElementById("price").textContent;
                   var final_price =
-                    document.getElementById("result_price").textContent;
+                  document.getElementById("result_price").textContent;
                   discount_price = document.getElementById("point_use").value;
                   discount_price = Number(discount_price.replaceAll(",", ""));
                   original_price = Number(original_price.replaceAll(",", ""));
@@ -256,33 +262,34 @@
                   msg += "카드 승인번호 : " + rsp.apply_num;
                   alert(msg);
                   window.location.href =
-                    "http://localhost:3000/enroll/payment/complete?point=" +
-                    discount_price +
-                    "&course_id=" +
-                    <%-JSON.stringify(Course_ID)%> +
-                    "&time_id=" +
-                    <%-JSON.stringify(Time_ID)%> +
-                    "&date_id=" +
-                    <%-JSON.stringify(Date_ID)%> +
-                    "&teacher_id=" +
-                    <%-JSON.stringify(Teacher_ID)%> +
-                    "&count=" +
-                    count_num +
-                    "&merchant_uid=" +
-                    rsp.merchant_uid +
-                    "&original_price=" +
-                    original_price +
-                    "&final_price=" +
-                    final_price;
-                } else {
+                  "http://localhost:54213/enroll/payment/complete?point=" +
+                  discount_price +
+                  "&course_id=" +
+                  <%-JSON.stringify(Course_ID)%> +
+                  "&time_id=" +
+                  <%-JSON.stringify(Time_ID)%> +
+                  "&date_id=" +
+                  <%-JSON.stringify(Date_ID)%> +
+                  "&teacher_id=" +
+                  <%-JSON.stringify(Teacher_ID)%> +
+                  "&count=" +
+                  count_num +
+                  "&merchant_uid=" +
+                  rsp.merchant_uid +
+                  "&original_price=" +
+                  original_price +
+                  "&final_price=" +
+                  final_price;
+              } else {
                   var msg = "결제에 실패하였습니다.";
                   msg += "에러내용 : " + rsp.error_msg;
                   alert(msg);
-                }
-              } else {
-                alert("위조");
               }
-            }
+              } else {
+              alert(rsp);
+              alert("위조");
+              }
+          }
           );
         }
       }

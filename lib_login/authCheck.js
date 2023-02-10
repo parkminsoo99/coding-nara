@@ -7,13 +7,12 @@ module.exports = {
       }
     },
     statusUI: function (request, response) {
-      var authStatusUI = '<div align="right"><a href="/auth/login">로그인</a></div>';
+      var authStatusUI = '<div class="auth_item-login" align="center"><a class="nav-link" href="/auth/login">로그인</a></div>';
       if (this.isOwner(request, response)) {
-        authStatusUI = `<div align="right">${request.session.nickname}님 환영합니다 
-        <a href="/auth/logout"
-        >로그아웃</a>
-        <a href="/myinfo"
-        >마이페이지</a>
+        authStatusUI = `<div class="auth_item" align="center">
+        <a class="nav-link" href="/auth/logout">로그아웃</a>
+        <a class="nav-link" href="/myinfo">마이페이지</a>
+        <a class="nav-link" href="/enroll/cart">장바구니</a>
         </div>
         `;
       }
