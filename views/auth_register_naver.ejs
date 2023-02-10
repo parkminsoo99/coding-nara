@@ -12,7 +12,8 @@
     <link href="https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic" rel="stylesheet" type="text/css" />
     <!-- SimpleLightbox plugin CSS-->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/SimpleLightbox/2.1.0/simpleLightbox.min.css" rel="stylesheet" />
-    <link href="../CSS/styles.css" rel="stylesheet" />
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="CSS/styles.css" rel="stylesheet" />
     <script
       type="text/javascript"
       src="https://code.jquery.com/jquery-1.12.4.min.js"
@@ -44,17 +45,16 @@
                   <li class="nav-item"><a class="nav-link" href="/enroll/sub">수강신청</a></li>
                   <li class="nav-item"><a class="nav-link" href="/review">강좌후기</a></li>
                   <li class="nav-item"><a class="nav-link" href="/ask">고객센터</a></li>
-                  <li class="nav-item"><a class="nav-link" href="/login"><%-authCheck %></a></li>
               </ul>
           </div>
       </div>
   </nav>
   <!-- Masthead-->
-  <header class="masthead_mypage">
+  <header class="masthead">
       <div class="container px-4 px-lg-5 h-100">
           <div class="row gx-4 gx-lg-5 h-100 align-items-center justify-content-center text-center">
               <div class="col-lg-8 align-self-end">
-                  <h1 class="text-white font-weight-bold">개인정보수정</h1>
+                  <h1 class="text-white font-weight-bold">실시간 온라인<br>코딩교육을 한곳에서</h1>
                   <hr class="divider" />
               </div>
               <div class="col-lg-8 align-self-baseline">
@@ -63,64 +63,85 @@
           </div>
       </div>
   </header>
-    <form action="/myinfo/update_mypage" method="post">
-      <input
-        type="hidden"
-        name="id"
-        value="${sanitizeHtml(authors[0].Student_ID)}"
-      />
+    <h2>회원가입</h2>
+    <form action="/auth/register_process" method="post">
       <p>
-        이름<input type="text" name="Name" placeholder="Name"
-        value="<%-JSON.stringify(Name).replace(/"/g,'')%>" />
-      </p>
-      <p>
-        전화번호<input type="text" name="Phone_Number"
-        placeholder="Phone_Number"
-        value="<%-JSON.stringify(Phone_Number).replace(/"/g,'')%>" />
-      </p>
-      <p>
-        비밀번호<input
+        <input
+          class="login"
           type="text"
-          name="Password"
-          placeholder="Password"
-          value=""
+          name="Login_ID"
+          placeholder="아이디"
+          value="<%-Email%>"
+          disabled
         />
       </p>
       <p>
-        비밀번호 재입력<input
+        <input
+          class="login"
           type="text"
-          name="Password"
-          placeholder="Password"
-          value=""
+          name="username"
+          placeholder="이름"
+          value="<%-Nickname%>"
+          disabled
         />
       </p>
       <p>
-        주소<input type="text" name="Address" placeholder="Address"
-        value="<%-JSON.stringify(Address).replace(/"/g,'')%>" />
+        <input
+          class="login"
+          type="password"
+          name="pwd"
+          placeholder="비밀번호"
+          disabled
+        />
       </p>
       <p>
-        <input type="submit" />
+        <input
+          class="login"
+          type="password"
+          name="pwd2"
+          placeholder="비밀번호 재확인"
+          disabled
+        />
       </p>
+      <p>
+        <input
+          class="login"
+          type="text"
+          name="number"
+          placeholder="전화번호"
+          value="<%-Mobile%>"
+        />
+      </p>
+      <p>
+        <input
+          class="login"
+          type="text"
+          name="address"
+          placeholder="주소"
+          value="서울"
+        />
+      </p>
+      <p>
+        <input
+          class="login"
+          type="text"
+          name="email"
+          placeholder="이메일"
+          value="<%-Email%>"
+          disabled
+        />
+      </p>
+      <p>
+        <input
+          class="login"
+          type="text"
+          name="recommendID"
+          placeholder="추천인ID"
+          value=""
+        />
+      </p>
+      <p><input class="btn" type="submit" value="제출" /></p>
     </form>
+    <p><a href="/auth/login">로그인화면으로 돌아가기</a></p>
   </body>
-  <!-- Footer-->
-  <footer class="bg-light py-5">
-    <div class="container px-4 px-lg-5"><div class="small text-center text-muted"><a href="/policy/private">개인정보처리방침</a> | <a href="/policy/tos">이용약관</a></div></div>
-    <div class="container px-4 px-lg-5"><div class="small text-center text-muted">코딩나라 | 대표자: 장영재, 박민수 | 사업자번호: 148-14-01860 사업자 정보 확인</div></div>
-    <div class="container px-4 px-lg-5"><div class="small text-center text-muted">주소: 서울특별시 서대문구 북가좌동</div></div>
-    <br>
-    <div class="container px-4 px-lg-5"><div class="small text-center text-muted">Copyright &copy;코딩나라(Coding-nara)</div></div>
-</footer>
-<!-- Bootstrap core JS-->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-<!-- SimpleLightbox plugin JS-->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/SimpleLightbox/2.1.0/simpleLightbox.min.js"></script>
-<!-- Core theme JS-->
-<script src="../js/scripts.js"></script>
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
-<!-- * *                               SB Forms JS                               * *-->
-<!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
-<script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
-</body>
 </html>

@@ -165,23 +165,23 @@
           basket.updateUI();
         </script>
       </div>
-      <div class="cart__information">
-        <ul>
-          <li>장바구니 강의는 최대 30일간 저장됩니다.</li>
-          <li>강의 신청은 선착순으로 진행됩니다.</li>
-        </ul>
-      </div>
       <div id="goorder" class="">
         <div class="clear center-align">
           <button
             type="button"
             class="btn btn-danger"
-            style="margin-left: 550px"
-            onclick="requestPay();"
+            style="margin-left: 550px; margin-bottom: 20px"
+            onclick="requestPay()"
           >
             강의 신청
           </button>
         </div>
+      </div>
+      <div class="cart__information">
+        <ul>
+          <li>장바구니 강의는 최대 30일간 저장됩니다.</li>
+          <li>강의 신청은 선착순으로 진행됩니다.</li>
+        </ul>
       </div>
     </section>
     <script>
@@ -265,6 +265,7 @@
               function (rsp) {
                   if (rsp.status == "paid" && rsp.paid_amount == 100) {
                   if (rsp.success) {
+                    basket.Enroll_info();
                     var count_num = document.getElementById("sum_p_num").textContent;
                     var final_price = document.getElementById("sum_p_price").textContent;
                     var discount_price = document.getElementById("point").textContent;
@@ -279,25 +280,9 @@
                     msg += "결제 금액 : " + rsp.paid_amount;
                     msg += "카드 승인번호 : " + rsp.apply_num;
                     alert(msg);
+
                     window.location.href =
-                    "http://localhost:54213/enroll/payment/complete?point=" +
-                    discount_price +
-                    "&course_id=" +
-                    <%-JSON.stringify(Course_ID)%> +
-                    "&time_id=" +
-                    <%-JSON.stringify(Time_ID)%> +
-                    "&date_id=" +
-                    <%-JSON.stringify(Date_ID)%> +
-                    "&teacher_id=" +
-                    <%-JSON.stringify(Teacher_ID)%> +
-                    "&count=" +
-                    count_num +
-                    "&merchant_uid=" +
-                    rsp.merchant_uid +
-                    "&original_price=" +
-                    original_price +
-                    "&final_price=" +
-                    final_price;
+                    "http://localhost:54213/myinfo"
                 } else {
                     var msg = "결제에 실패하였습니다.";
                     msg += "에러내용 : " + rsp.error_msg;

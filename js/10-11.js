@@ -57,6 +57,32 @@ let basket = {
             }
         }, this); 
     },
+    Enroll_info : function(){
+        document.querySelectorAll(".information").forEach(function (item){
+            if(item.parentElement.previousElementSibling.previousElementSibling.firstElementChild.checked == true){
+                var str = item.firstElementChild.nextElementSibling.nextElementSibling.innerText;
+                var count_position = item.parentElement.nextElementSibling.firstElementChild.nextElementSibling.firstElementChild.firstElementChild.nextElementSibling;
+                var count = count_position.getAttribute('value');
+                var str_split = str.split(' ');
+                var subject = item.firstElementChild.innerText;
+                var instructor_name = item.firstElementChild.nextElementSibling.innerText;
+                var time = str_split[0];
+                var day = str_split[1];
+                $.ajax({
+                    type: "post", 
+                    url: "/enroll/cart_payment",
+                    dataType: "json",
+                    data: {
+                        Subject: subject,
+                        Instructor_name : instructor_name,
+                        Time : time,
+                        Day : day,
+                        Count : count,
+                    }
+                })
+            }
+        })
+    },
     //화면 업데이트
     updateUI: function () {
         document.querySelector('#sum_p_num').textContent = '총 강의 횟수 : ' + this.totalCount.formatNumber() + '번';
@@ -120,7 +146,7 @@ let basket = {
             this.reCalc(this.original_price);
             this.updateUI();
         }
-    }
+    },
 }
 
 // 숫자 3자리 콤마찍기

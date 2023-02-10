@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Login TEST - ${title}</title>
+    <meta charset="utf-8" />
+    <!-- Favicon-->
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+    <!-- Bootstrap Icons-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
+    <!-- Google fonts-->
+    <link href="https://fonts.googleapis.com/css?family=Merriweather+Sans:400,700" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic" rel="stylesheet" type="text/css" />
+    <!-- SimpleLightbox plugin CSS-->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/SimpleLightbox/2.1.0/simpleLightbox.min.css" rel="stylesheet" />
+    <link href="/CSS/styles.css" rel="stylesheet" />
+    <script
+      type="text/javascript"
+      src="https://code.jquery.com/jquery-1.12.4.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"
+    ></script>
+    <link rel="stylesheet" type="text/css" href="/CSS/style.css" />
+  </head>
+  <body>
+    <div class="loader-wrapper">
+      <span class="loader"><span class="loader-inner"></span></span>
+    </div>
+
+    <script>
+      $(window).on("load", function () {
+        $(".loader-wrapper").fadeOut(1000);
+      });
+    </script>
+    <!-- Navigation-->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top py-3" id="mainNav">
+      <div class="container px-4 px-lg-5">
+          <a class="navbar-brand" href="#page-top">Coding-nara</a>
+          <button class="navbar-toggler navbar-toggler-right" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+          <div class="collapse navbar-collapse" id="navbarResponsive">
+              <ul class="navbar-nav ms-auto my-2 my-lg-0">
+                  <li class="nav-item"><a class="nav-link" href="/">소개</a></li>
+                  <li class="nav-item"><a class="nav-link" href="/curriculum">커리큘럼</a></li>
+                  <li class="nav-item"><a class="nav-link" href="/enroll/sub">수강신청</a></li>
+                  <li class="nav-item"><a class="nav-link" href="/review">강좌후기</a></li>
+                  <li class="nav-item"><a class="nav-link" href="/ask">고객센터</a></li>
+                  <li class="nav-item"><a class="nav-link" href="/login"><%-authCheck %></a></li>
+              </ul>
+          </div>
+      </div>
+  </nav>
+  <!-- Masthead-->
+  <header class="masthead_curi">
+    <div class="container px-4 px-lg-5 h-100">
+        <div class="row gx-4 gx-lg-5 h-100 align-items-center justify-content-center text-center">
+            <div class="col-lg-8 align-self-end">
+              <h1 class="text-white font-weight-bold">수강신청</h1>
+                <hr class="divider" />
+            </div>
+            <div class="col-lg-8 align-self-baseline">
+                <p class="text-white-75 mb-5"></p>
+            </div>
+        </div>
+    </div>
+</header>
+<!--화면-->
+<br><br>
+
+<!-- Page content-->
+<div class="container">
+  <div class="row">
+      <!-- Blog entries-->
+      <div class="col-lg-8">
+          <!-- Featured blog post-->
+          <div class="card mb-4">
+              <div class="card-body">
+                  <!-- <div class="small text-muted">January 1, 2022</div> -->
+                  <h1 class="card-title"><%=Subject %></h1>
+                  <h5 class="card-text" id="subject"></h5>
+                  <a class="btn btn-primary" id="generate">결제하기 →</a>
+              </div>
+          </div>
+          <!-- Nested row for non-featured blog posts-->
+          <div class="row">
+              <div class="col-lg-6">
+                  <!-- Blog post-->
+                  <div class="card mb-4">
+                      <div class="card-body">
+                          <h2 class="card-title h4">과목특징</h2>
+                          <p class="card-text" id="feature"></p>
+                          <a class="btn btn-primary" href="#!">상세보기</a>
+                          <script>
+                            var link =  document.location.href;
+                            console.log(link);
+                            document.getElementById("generate").href = link+"/payment";
+        
+                            var sub = <%-JSON.stringify(Subject)%>
+                            if(sub === "C언어")
+                            {
+                            document.getElementById("subject").innerHTML = "<b>" + "C언어는 현재 사용하고 있는 거의 모든 컴퓨터 시스템에서 사용할 수 있는 프로그래밍 언어입니다. 프로그래밍 언어란 컴퓨터의 시스템을 구동시키는 소프트웨어를 작성하기 위한 언어" + "</b>";
+                            document.getElementById("feature").innerHTML = "<b>" + "고급과정 이수체계이며 평균 교육과정은 6~8개월입니다. <br>자세한 커리큘럼은 아래 버튼을 눌러주세요" + "</b>";
+                            }
+                            else if(sub === "Python")
+                            {
+                            document.getElementById("subject").innerHTML = "<b>" + "Phython은 웹 애플리케이션, 소프트웨어 개발, 데이터 과학, 기계 학습(ML)에 널리 사용되는 프로그래밍 언어입니다. 개발자는 Python이 효율적이고 배우기 쉬우며 여러 플랫폼에서 실행될 수 있으므로 Python을 사용합니다. " + "</b>";
+                            document.getElementById("feature").innerHTML = "<b>" + "중급과정 이수체계이며 평균 교육과정은 6~8개월입니다. <br>자세한 커리큘럼은 아래 버튼을 눌러주세요" + "</b>";
+                    
+                            }
+                            else if(sub === "JAVA")
+                            {
+                            document.getElementById("subject").innerHTML = "<b>" + "썬에서 개발한 객체지향 언어이다. 가정용 단말기에 적용하려는 목적으로 1992년에 만든 '오크(OAK)'언어에서 비롯되었다. 오크는 상품화되지 못했지만, 인터넷이 발전하면서 인터넷 친화적인 개발 언어" + "</b>";
+                            document.getElementById("feature").innerHTML = "<b>" + "고급과정 이수체계이며 평균 교육과정은 6~8개월입니다. <br>자세한 커리큘럼은 아래 버튼을 눌러주세요" + "</b>";
+                    
+                            }
+                            else if(sub === "App Inventor")
+                            {
+                            document.getElementById("subject").innerHTML = "<b>" + "앱 인벤터는 원래 구글이 제공한 오픈 소스 웹 애플리케이션으로, 지금은 매사추세츠 공과대학교에 의해 관리되고 있다. 컴퓨터 프로그래밍을 처음 접하는 사람들이 안드로이드 운영 체제용 응용 소프트웨어를 만들 수 있게 해준다." + "</b>";
+                            document.getElementById("feature").innerHTML = "<b>" + "초급과정 이수체계이며 평균 교육과정은 3~4개월입니다. <br>자세한 커리큘럼은 아래 버튼을 눌러주세요" + "</b>";
+                            }
+                            else if(sub === "Scatch" || sub === "Entry")
+                            {
+                            document.getElementById("subject").innerHTML = "<b>" + "8세~16세의 아이들을 대상으로 만든 교육용, 블록형 프로그래밍 언어이다. 이 사이트에서 활동하는 사람들인 '스크래쳐'들은 블록을 조립하는 방식으로 프로젝트를 만든다." + "</b>";
+                            document.getElementById("feature").innerHTML = "<b>" + "새싹과정 이수체계이며 평균 교육과정은 1~3개월입니다. <br>자세한 커리큘럼은 아래 버튼을 눌러주세요" + "</b>";
+                    
+                            }
+                            else if(sub === "웹 페이지 만들기")
+                            {
+                            document.getElementById("subject").innerHTML = "<b>" + "HTML, CSS, JavaScript를 사용하여 웹 사이트를 빌드하고, 브라우저에서 개발자 도구를 사용하여 작업을 확인하는 방법을 학습하여 웹 개발을 시작합니다." + "</b>";
+                            document.getElementById("feature").innerHTML = "<b>" + "중급과정 이수체계이며 평균 교육과정은 4~6개월입니다. <br>자세한 커리큘럼은 아래 버튼을 눌러주세요" + "</b>";
+                            }
+                    
+                          </script>
+                      </div>
+                  </div>
+                  
+              </div>
+              <div class="col-lg-6">
+                  <!-- Blog post-->
+                  <div class="card mb-4">
+                      <div class="card-body">
+                          <h2 class="card-title h4"><%=Teacher_name%></h2>
+                          <p class="card-text">IT 전공인 강사이며 자세한 세부사항은 아래 버튼을 클릭해주세요.</p>
+                          <a class="btn btn-primary" href="#!">상세보기</a>
+                      </div>
+                  </div>
+                  
+              </div>
+          </div>
+      </div>
+      
+      <!-- Side widgets-->
+      <div class="col-lg-4">  
+          <!-- Categories widget-->
+          <div class="card mb-4">
+              <div class="card-header">변동사항</div>
+              <div class="card-body">
+                  <div class="row">
+                      <div class="col-sm-6" >
+                          <ul class="list-unstyled mb-0">
+                              <li><h3 class="text-black font-weight-bold">원하는 강좌<br> 횟수 : <string id="count">1</string></h3></li>
+                              <li><button class="btn btn-dark" onclick="countUp();price_change();"><i class="bi bi-arrow-up"></i></button>
+                                <button class="btn btn-dark" onclick="countDown();price_change();"><i class="bi bi-arrow-down"></i></button></li>
+                                <br>
+                              <li>포인트 잔액 : <string id="point"></string></li>
+                              <br>
+                              <h3>가격 : <string id="price"></string><span>원 포인트 사용 : <input type="text" id="point_use" value="0" /><span
+                                ></span
+                              ><br>
+                              <button class="btn btn-dark" type="button" onClick="cal_result_price()"">적용</button></h3>
+                          </ul>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <!-- Side widget-->
+          <div class="card mb-4">
+              <div class="card-header">최종 금액</div>
+              <div class="card-body"><span><br><h2> 결제 금액 : <string id="result_price"></string><span>원</span></h2> </span></div>
+              <a class="btn btn-dark" onclick="requestPay()">결제하기</a>
+          </div>
+      </div>
+  </div>
+</div>
+
+<!-- <div class="row align-items-md-stretch"> -->
+  <!-- <div class="col-md-6">
+    <div class="h-100 p-5 bg-light border rounded-3"> -->
+
+      <script>
+      </script>
+    </div>
+  </div>
+  
+</div>
+<!-- <section class="page-section bg-light" id="enroll"> -->
+    
+    
+      
+    
+    <!-- <div align="center"> -->
+    <!-- <button onclick="requestPay()" >결제하기</button> -->
+    <!-- <i class="bi bi-credit-card fs-1 text-primary"></i> -->
+    <!-- <button class="btn btn-dark" type="button" onclick="requestPay()">결제하기</button> -->
+    <!-- </div> -->
+<!-- </section> -->
+    <script>
+      var count = 1;
+      var price = (<%-JSON.stringify(Price)%>).toLocaleString("ko-KR");
+      var point = (<%-JSON.stringify(Point)%>).toLocaleString("ko-KR");
+      var result_price = (<%-JSON.stringify(Price)%>).toLocaleString("ko-KR");
+      var discount_price = 0;
+      const input = document.querySelector("#point_use");
+      input.addEventListener("keyup", function (e) {
+        let value = e.target.value;
+        value = Number(value.replaceAll(",", ""));
+        if (isNaN(value)) input.value = 0;
+        else {
+          const formatValue = value.toLocaleString("ko-KR");
+          input.value = formatValue;
+        }
+      });
+      function price_show() {
+        document.querySelector("#price").innerText = price;
+      }
+      price_show();
+      function result_price_show() {
+        document.querySelector("#result_price").innerText = price;
+      }
+      result_price_show();
+
+      function Point_show() {
+        document.querySelector("#point").innerText = point;
+      }
+      Point_show();
+      function cal_result_price() {
+        discount_price = document.getElementById("point_use").value;
+        discount_price = Number(discount_price.replaceAll(",", ""));
+        if (discount_price <= (<%-JSON.stringify(Point)%>)) {
+          result_price = (count * (<%-JSON.stringify(Price)%>)) - discount_price;
+          document.querySelector("#result_price").innerText =
+            result_price.toLocaleString("ko-KR");
+        } else alert("포인트 초과");
+      }
+      var price_change = function () {
+        price = (count * (<%-JSON.stringify(Price)%>)).toLocaleString("ko-KR");
+        document.querySelector("#price").innerText = price;
+        document.querySelector("#result_price").innerText = price;
+      };
+      var countUp = function () {
+        count = count + 1;
+        document.querySelector("#count").innerText = count;
+      };
+      var countDown = function () {
+        if (count > 1) {
+          count = count - 1;
+          document.querySelector("#count").innerText = count;
+        }
+      };
+      var countRset = function () {
+        count = 1;
+        price = (count * (<%-JSON.stringify(Price)%>)).toLocaleString("ko-KR");
+        document.querySelector("#price").innerText = price;
+        document.querySelector("#count").innerText = count;
+      };
+      const IMP = window.IMP;
+      IMP.init("imp71467660");
+      const make_merchant_uid = () => {
+        const current_time = new Date();
+        const year = current_time.getFullYear().toString();
+        const month = (current_time.getMonth() + 1).toString();
+        const day = current_time.getDate().toString();
+        const hour = current_time.getHours().toString();
+        const minute = current_time.getMinutes().toString();
+        const second = current_time.getSeconds().toString();
+        const merchant_uid =
+          "MIHEE" + year + month + day + hour + minute + second;
+        return merchant_uid;
+      };
+      const merchant_uid = make_merchant_uid();
+
+      function requestPay() {
+        if ((<%-JSON.stringify(Course_Active)%>) == 1) {
+          alert("이미 결제가 이뤄진 강의입니다.");
+          window.location.href = "http://localhost:3000/enroll/sub";
+        } else {
+          // IMP.request_pay(param, callback) 결제창 호출
+          IMP.request_pay(
+            {
+              pg: "html5_inicis.INIpayTest", // version 1.1.0부터 지원.
+              /*
+                  'kakao':카카오페이,
+                  html5_inicis':이니시스(웹표준결제)
+                      'nice':나이스페이
+                      'jtnet':제이티넷
+                      'uplus':LG유플러스
+                      'danal':다날
+                      'payco':페이코
+                      'syrup':시럽페이
+                      'paypal':페이팔
+                  */
+              pay_method: "card",
+              /*
+                  'samsung':삼성페이,
+                  'card':신용카드,
+                  'trans':실시간계좌이체,
+                  'vbank':가상계좌,
+                  'phone':휴대폰소액결제
+              */
+              merchant_uid: merchant_uid,
+              /*
+                  merchant_uid에 경우
+                  https://docs.iamport.kr/implementation/payment
+                  위에 url에 따라가시면 넣을 수 있는 방법이 있습니다.
+                  참고하세요.
+                  나중에 포스팅 해볼게요.
+                  */
+              name: <%-JSON.stringify(Subject)%>,
+              //결제창에서 보여질 이름
+              amount: 100, //result_price,
+              //가격
+              buyer_email: <%-JSON.stringify(Email_Address)%>,
+              buyer_name: <%-JSON.stringify(Name)%>,
+              buyer_tel: <%-JSON.stringify(Phone_Number)%>,
+              buyer_addr: <%-JSON.stringify(Address)%>,
+              buyer_postcode: 1,
+
+              /*
+                  모바일 결제시,
+                  결제가 끝나고 랜딩되는 URL을 지정
+                  (카카오페이, 페이코, 다날의 경우는 필요없음. PC와 마찬가지로 callback함수로 결과가 떨어짐)
+                  */
+            },
+            function (rsp) {
+              if (rsp.status == "paid" && rsp.paid_amount == 100) {
+                if (rsp.success) {
+                  console.log(rsp);
+                  var count_num = document.getElementById("count").textContent;
+                  var original_price =
+                    document.getElementById("price").textContent;
+                  var final_price =
+                    document.getElementById("result_price").textContent;
+                  discount_price = document.getElementById("point_use").value;
+                  discount_price = Number(discount_price.replaceAll(",", ""));
+                  original_price = Number(original_price.replaceAll(",", ""));
+                  final_price = Number(final_price.replaceAll(",", ""));
+                  var msg = "결제가 완료되었습니다.";
+                  msg += "고유ID : " + rsp.imp_uid;
+                  msg += "상점 거래ID : " + rsp.merchant_uid;
+                  msg += "결제 금액 : " + rsp.paid_amount;
+                  msg += "카드 승인번호 : " + rsp.apply_num;
+                  alert(msg);
+                  window.location.href =
+                    "http://localhost:3000/enroll/payment/complete?point=" +
+                    discount_price +
+                    "&course_id=" +
+                    <%-JSON.stringify(Course_ID)%> +
+                    "&time_id=" +
+                    <%-JSON.stringify(Time_ID)%> +
+                    "&date_id=" +
+                    <%-JSON.stringify(Date_ID)%> +
+                    "&teacher_id=" +
+                    <%-JSON.stringify(Teacher_ID)%> +
+                    "&count=" +
+                    count_num +
+                    "&merchant_uid=" +
+                    rsp.merchant_uid +
+                    "&original_price=" +
+                    original_price +
+                    "&final_price=" +
+                    final_price;
+                } else {
+                  var msg = "결제에 실패하였습니다.";
+                  msg += "에러내용 : " + rsp.error_msg;
+                  alert(msg);
+                }
+              } else {
+                alert("위조");
+              }
+            }
+          );
+        }
+      }
+    </script>
+  </body>
+  <!-- Footer-->
+  <footer class="bg-light py-5">
+    <div class="container px-4 px-lg-5"><div class="small text-center text-muted">Copyright &copy; 2022 - Company Name</div></div>
+</footer>
+<!-- Bootstrap core JS-->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+<!-- SimpleLightbox plugin JS-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/SimpleLightbox/2.1.0/simpleLightbox.min.js"></script>
+<!-- Core theme JS-->
+<script src="js/scripts.js"></script>
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
+<!-- * *                               SB Forms JS                               * *-->
+<!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
+<script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
+</body>
+</html>
