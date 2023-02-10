@@ -61,7 +61,7 @@ let basket = {
     updateUI: function () {
         document.querySelector('#sum_p_num').textContent = '총 강의 횟수 : ' + this.totalCount.formatNumber() + '번';
         document.querySelector('#sum_p_price').textContent = '총 합계금액 : ' + this.totalPrice.formatNumber() + '원';
-        document.querySelector('#point').textContent = '포인트 잔액 : ' + this.totalPoint.formatNumber() + '원';
+        document.querySelector('#point').textContent = this.totalPoint.formatNumber();
     },
     //개별 수량 변경
     
