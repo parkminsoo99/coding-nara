@@ -26,11 +26,62 @@ app.use("/js", express.static(__dirname + "/js"));
 app.use("/CSS", express.static(__dirname + "/CSS"));
 app.use("/static", express.static(__dirname + "/static"));
 app.use("/image", express.static(__dirname + "/image"));
+app.use("/assets", express.static(__dirname + "/assets"));
+
 
 app.set('views', __dirname + "/views" );
 app.set("view engine", "ejs");
 
-app.use(session({
+app.use("/main",session({
+  secret: '~~~',	// 원하는 문자 입력
+  resave: false,
+  saveUninitialized: true,
+  store:new FileStore({logFn: function(){}}),
+
+}))
+app.use("/main",session({
+  secret: '~~~',	// 원하는 문자 입력
+  resave: false,
+  saveUninitialized: true,
+  store:new FileStore({logFn: function(){}}),
+
+}))
+app.use("/auth",session({
+  secret: '~~~',	// 원하는 문자 입력
+  resave: false,
+  saveUninitialized: true,
+  store:new FileStore({logFn: function(){}}),
+
+}))
+app.use("/ask",session({
+  secret: '~~~',	// 원하는 문자 입력
+  resave: false,
+  saveUninitialized: true,
+  store:new FileStore({logFn: function(){}}),
+
+}))
+app.use("/myinfo",session({
+  secret: '~~~',	// 원하는 문자 입력
+  resave: false,
+  saveUninitialized: true,
+  store:new FileStore({logFn: function(){}}),
+
+}))
+app.use("/enroll",session({
+  secret: '~~~',	// 원하는 문자 입력
+  resave: false,
+  saveUninitialized: true,
+  store:new FileStore({logFn: function(){}}),
+
+}))
+app.use("/review",session({
+  secret: '~~~',	// 원하는 문자 입력
+  resave: false,
+  saveUninitialized: true,
+  store:new FileStore({logFn: function(){}}),
+
+}))
+app.use("/curriculum",session({
   secret: '~~~',	// 원하는 문자 입력
   resave: false,
   saveUninitialized: true,
@@ -80,6 +131,16 @@ app.get('/', (req, res) => {
   res.redirect('/main');
 })
 
+app.get("/room", (req, res) => {
+  res.render("home");
+});
+
+app.get("/policy/private", (req, res) => {
+  res.render("policy_private");
+});
+app.get("/policy/tos", (req, res) => {
+  res.render("tos");
+});
 
 // // 인증 라우터
 app.use('/auth', apiLimiter, authRouter);
