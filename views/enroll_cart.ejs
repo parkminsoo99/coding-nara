@@ -40,7 +40,7 @@
       type="text/javascript"
       src="../js/email_validation_and_address_script.js"
     ></script>
-    <script type="text/javascript" src="../js/10-11.js"></script>
+    <script type="text/javascript" src="../js/cart.js"></script>
     <script
       type="text/javascript"
       src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"
@@ -56,8 +56,10 @@
       $(window).on("load", function () {
         $(".loader-wrapper").fadeOut(1000);
       });
+      window.onload = function () {
+        basket.reload();
+      };
     </script>
-    <!-- Navigation-->
     <nav
       class="navbar navbar-expand-lg navbar-light fixed-top py-3"
       id="mainNav"
@@ -171,7 +173,7 @@
             type="button"
             class="btn btn-danger"
             style="margin-left: 550px; margin-bottom: 20px"
-            onclick="requestPay()"
+            onclick="javascript:basket.payment((<%-JSON.stringify(Course_Active)%>))"
           >
             강의 신청
           </button>
@@ -184,119 +186,6 @@
         </ul>
       </div>
     </section>
-    <script>
-        const IMP = window.IMP;
-        IMP.init("imp71467660");
-        const make_merchant_uid = () => {
-        const current_time = new Date();
-        const year = current_time.getFullYear().toString();
-        const month = (current_time.getMonth() + 1).toString();
-        const day = current_time.getDate().toString();
-        const hour = current_time.getHours().toString();
-        const minute = current_time.getMinutes().toString();
-        const second = current_time.getSeconds().toString();
-        const merchant_uid =
-            "MIHEE" + year + month + day + hour + minute + second;
-        return merchant_uid;
-        };
-        const merchant_uid = make_merchant_uid();
-
-        function requestPay() {
-          var count_num = document.getElementById("sum_p_num").textContent;
-          var final_price = document.getElementById("sum_p_price").textContent;
-          var discount_price = document.getElementById("point").textContent;
-          var original_point = <%=Point%>;
-          count_num = Number(count_num.replaceAll(",", "").match(/\d+/g));
-          final_price = Number(final_price.replaceAll(",", "").match(/\d+/g));
-          discount_price =  Number(discount_price.replaceAll(",", "").match(/\d+/g));
-          original_point = original_point - discount_price;
-          console.log(count_num, final_price, original_point)
-          if ((<%-JSON.stringify(Course_Active)%>) == 1) {
-              alert("이미 결제가 이뤄진 강의입니다.");
-              window.location.href = "http://localhost:54213/enroll/sub";
-          } else {
-              // IMP.request_pay(param, callback) 결제창 호출
-              IMP.request_pay(
-              {
-                  pg: "html5_inicis.INIpayTest", // version 1.1.0부터 지원.
-                  /*
-                      'kakao':카카오페이,
-                      html5_inicis':이니시스(웹표준결제)
-                          'nice':나이스페이
-                          'jtnet':제이티넷
-                          'uplus':LG유플러스
-                          'danal':다날
-                          'payco':페이코
-                          'syrup':시럽페이
-                          'paypal':페이팔
-                      */
-                  pay_method: "card",
-                  /*
-                      'samsung':삼성페이,
-                      'card':신용카드,
-                      'trans':실시간계좌이체,
-                      'vbank':가상계좌,
-                      'phone':휴대폰소액결제
-                  */
-                  merchant_uid: merchant_uid,
-                  /*
-                      merchant_uid에 경우
-                      https://docs.iamport.kr/implementation/payment
-                      위에 url에 따라가시면 넣을 수 있는 방법이 있습니다.
-                      참고하세요.
-                      나중에 포스팅 해볼게요.
-                      */
-                  name: <%-JSON.stringify(Subject)%>,
-                  //결제창에서 보여질 이름
-                  amount: 100,//final_price,
-                  //가격
-                  buyer_email: <%-JSON.stringify(Email_Address)%>,
-                  buyer_name: <%-JSON.stringify(Name)%>,
-                  buyer_tel: <%-JSON.stringify(Phone_Number)%>,
-                  buyer_addr: <%-JSON.stringify(Address)%>,
-                  buyer_postcode: 1,
-
-                  /*
-                      모바일 결제시,
-                      결제가 끝나고 랜딩되는 URL을 지정
-                      (카카오페이, 페이코, 다날의 경우는 필요없음. PC와 마찬가지로 callback함수로 결과가 떨어짐)
-                      */
-              },
-              function (rsp) {
-                  if (rsp.status == "paid" && rsp.paid_amount == 100) {
-                  if (rsp.success) {
-                    basket.Enroll_info();
-                    var count_num = document.getElementById("sum_p_num").textContent;
-                    var final_price = document.getElementById("sum_p_price").textContent;
-                    var discount_price = document.getElementById("point").textContent;
-                    var original_point = <%=Point%>;
-                    count_num = Number(count_num.replaceAll(",", "").match(/\d+/g));
-                    final_price = Number(final_price.replaceAll(",", "").match(/\d+/g));
-                    discount_price =  Number(discount_price.replaceAll(",", "").match(/\d+/g));
-                    original_point = original_point - discount_price;
-                    var msg = "결제가 완료되었습니다.";
-                    msg += "고유ID : " + rsp.imp_uid;
-                    msg += "상점 거래ID : " + rsp.merchant_uid;
-                    msg += "결제 금액 : " + rsp.paid_amount;
-                    msg += "카드 승인번호 : " + rsp.apply_num;
-                    alert(msg);
-
-                    window.location.href =
-                    "http://localhost:54213/myinfo"
-                } else {
-                    var msg = "결제에 실패하였습니다.";
-                    msg += "에러내용 : " + rsp.error_msg;
-                    alert(msg);
-                }
-                } else {
-                alert(rsp);
-                alert("위조");
-                }
-            }
-          );
-        }
-      }
-    </script>
   </body>
   <!-- Footer-->
   <footer class="bg-light py-5">
@@ -306,18 +195,7 @@
       </div>
     </div>
   </footer>
-  <!-- Bootstrap core JS-->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-  <!-- SimpleLightbox plugin JS-->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/SimpleLightbox/2.1.0/simpleLightbox.min.js"></script>
   <script src="../js/scripts.js"></script>
-
-  <!-- Core theme JS-->
-  <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-                * *-->
-  <!-- * * SB Forms JS * *-->
-  <!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms
-                * *-->
-  <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-                * *-->
 </html>
