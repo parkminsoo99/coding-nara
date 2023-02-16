@@ -35,6 +35,10 @@
       type="text/javascript"
       src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"
     ></script>
+    <script
+      type="text/javascript"
+      src = "../js/review.js"
+    ></script>
   </head>
   <body>
     <div class="loader-wrapper">
@@ -114,16 +118,13 @@
         </div>
       </div>
     </header>
-    <h2><%=Title%></h2>
+  </br>
     <section class="notice">
       <div class="page-title">
         <div class="container">
           <h3>강좌후기</h3>
         </div>
       </div>
-
-      <!-- board seach area -->
-
       <!-- board list area -->
       <div id="board-list">
         <div class="container">
@@ -131,18 +132,31 @@
             <thead>
               <tr>
                 <th scope="col" class="th-num">번호</th>
+                <th scope="col" class="th-num">강좌명</th>
                 <th scope="col" class="th-title">제목</th>
                 <th scope="col" class="th-date">등록일</th>
+                <th scope="col" class="th-date">글쓴이</th>
+                <th scope="col" class="th-date">공감</th>
               </tr>
             </thead>
-            <tbody>
+            <tbody id="information">
               <%-List %>
             </tbody>
           </table>
         </div>
       </div>
     </section>
-    <a href="/review/create">글생성</a>
+  </br>
+  <div style="display : flex;justify-content : center;">
+    <nav aria-label="Page navigation example">
+      <ul class="pagination">
+          <div id="page_list" style="display: flex;">
+            <%-Page_List%>
+          </div>
+      </ul>
+    </nav>
+  </div>
+</br>
   </body>
   <!-- Footer-->
   <footer class="bg-light py-5">

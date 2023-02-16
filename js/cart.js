@@ -61,7 +61,7 @@ let basket = {
             }
         }, this); 
     },
-    Enroll_info : function(){
+    Enroll_info : function(imp_uid, merchant_uid){
         document.querySelectorAll(".information").forEach(function (item){
             if(item.parentElement.previousElementSibling.previousElementSibling.firstElementChild.checked == true){
                 var str = item.firstElementChild.nextElementSibling.nextElementSibling.innerText;
@@ -82,6 +82,8 @@ let basket = {
                         Time : time,
                         Day : day,
                         Count : count,
+                        Imp_Uid : imp_uid,
+                        Merchant_Uid : merchant_uid
                     }
                 })
             }
@@ -268,7 +270,7 @@ let basket = {
         basket.get_price();
         setTimeout(() => {
             var price_point_name = basket.get_result_price_point();
-            const reg = /[\{\}\[\]\/?.,;:|\)*~`!^\-_+<>@\#$%&\\\=\(\'\"]/gi;
+            const reg = /[\{\}\[\]\/?,;:|\)*~`!^\-_+<>\#$%&\\\=\(\'\"]/gi;
             var result_price = JSON.stringify(price_point_name.p_price);
             var payment_name = (JSON.stringify(price_point_name.nickname)).replace(reg, "");
             var email_address = JSON.stringify(price_point_name.email_address).replace(reg, "");

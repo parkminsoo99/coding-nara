@@ -412,6 +412,8 @@ router.post('/find_pw_process', (request,response) => {
         }
     })
 })
+
+
 router.post('/password_change_process', (request,response) => {
     var Password = sanitizeHtml(request.body.pwd);    
     var Password2 = sanitizeHtml(request.body.pwd2);
