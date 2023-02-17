@@ -21,15 +21,8 @@
       type="text/css"
     />
     <!-- SimpleLightbox plugin CSS-->
-<<<<<<< HEAD
-    <link
-      href="https://cdnjs.cloudflare.com/ajax/libs/SimpleLightbox/2.1.0/simpleLightbox.min.css"
-      rel="stylesheet"
-    />
-=======
     <link href="https://cdnjs.cloudflare.com/ajax/libs/SimpleLightbox/2.1.0/simpleLightbox.min.css" rel="stylesheet" />
     <link href="/CSS/styles.css" rel="stylesheet" />
->>>>>>> Test
     <script
       type="text/javascript"
       src="https://code.jquery.com/jquery-1.12.4.min.js"
@@ -93,18 +86,6 @@
           </ul>
         </div>
       </div>
-<<<<<<< HEAD
-    </nav>
-    <br />
-    <br />
-    <br />
-    <br />
-    <div class="count_button">
-      <button onclick="countDown();price_change();"><</button>
-      <span>현재 카운트 : <string id="count">1</string></span>
-      <button onclick="countUp();price_change();">></button>
-      <button onclick="countRset();">초기화</button>
-=======
   </nav>
   <!-- Masthead-->
   <header class="masthead_curi">
@@ -118,7 +99,6 @@
                 <p class="text-white-75 mb-5"></p>
             </div>
         </div>
->>>>>>> Test
     </div>
  </header>
 <!--화면-->
@@ -134,7 +114,8 @@
               <div class="card-body">
                   <!-- <div class="small text-muted">January 1, 2022</div> -->
                   <h1 class="card-title"><%=Subject %></h1>
-                  <img id="image">
+                  <img id="image" style="float: left">
+                  <br><br><br>
                   <h5 class="card-text" id="subject"></h5>
                   <!-- <a class="btn btn-primary" id="generate">결제하기 →</a> -->
               </div>
@@ -147,7 +128,7 @@
                       <div class="card-body">
                           <h2 class="card-title h4">과목특징</h2>
                           <p class="card-text" id="feature"></p>
-                          <a class="btn btn-success" href="#!">상세보기</a>
+                          <a class="btn btn-danger" href="/curriculum/detail">상세보기</a>
                           
                       </div>
                   </div>
@@ -158,7 +139,7 @@
                       <div class="card-body">
                           <h2 class="card-title h4"><%=Teacher_name%></h2>
                           <p class="card-text">IT 전공인 강사이며 자세한 세부사항은 아래 버튼을 클릭해주세요.</p>
-                          <a class="btn btn-success" href="#!">상세보기</a>
+                          <a class="btn btn-primary" href="#!">상세보기</a>
                       </div>
                   </div> 
               </div>
@@ -169,22 +150,10 @@
                         <p class="card-text">강의의 원활한 수강을 위해 개인정보를 확인해주세요</p>
                         <p class="card-text">전화번호 : <%=Phone_Number%></p>
                         <p>이메일 : <%=Email_Address%></p>
-                        <a class="btn btn-success" href="#!">개인정보수정</a>
+                        <a class="btn btn-warning" href="#!">개인정보수정</a>
                     </div>
                 </div> 
               </div>
-            <div class="col-lg-6">
-              <!-- Blog post-->
-              <div class="card mb-4">
-                  <div class="card-body">
-                      <h2 class="card-title h4">문의하기</h2>
-                      <p class="card-text"></p>
-                      <p class="card-text"></p>
-                      <p></p>
-                      <a class="btn btn-success" href="#!">문의하기</a>
-                  </div>
-              </div> 
-            </div>
           </div>
       </div>
       
@@ -205,7 +174,7 @@
                               
                               <h3>가격 : <string id="price"></string><span><br> 포인트 사용 : <input type="text" id="point_use" value="0" /><span
                                 ></span
-                              >
+                              ><br>
                               <button class="btn btn-dark" type="button" onClick="cal_result_price()"">적용</button></h3>
                           </ul>
                       </div>
