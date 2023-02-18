@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Login TEST - ${title}</title>
+    <title>Login TEST</title>
     <meta charset="utf-8" />
     <meta
       name="viewport"
@@ -32,7 +32,7 @@
       rel="stylesheet"
     />
     <!-- Core theme CSS (includes Bootstrap)-->
-    <link href="../CSS/styles_none.css" rel="stylesheet" />
+    <link href="/CSS/styles_none.css" rel="stylesheet" />
     <script
       type="text/javascript"
       src="https://code.jquery.com/jquery-1.12.4.min.js"
@@ -135,99 +135,10 @@
       <div class="p-4 p-md-1 mb-1 rounded text-bg-dark">
         <div class="col-md-6 px-0">
           <h1 class="display-6 fst-italic">
-            Welcome to Codingnara
+            강의 기록입니다.
           </h1>
           <p class="lead my-4">
-            <%=Name%>님 환영합니다.
           </p>
-        </div>
-      </div>
-
-      <div class="row mb-2">
-        <div class="col-md-6">
-          <div
-            class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative"
-          >
-            <div class="col p-4 d-flex flex-column position-static">
-              <strong class="d-inline-block mb-2 text-primary"
-                ><i class="bi bi-piggy-bank fs-1 text-primary"></i>
-              </strong>
-              <h3 class="mb-0">포인트</h3>
-              <div class="mb-1 text-muted">-----------------------------</div>
-              <p class="card-text mb-auto text-muted">
-                다양한 이벤트에서 포인트를 적립하여 수강신청시 사용할 수
-                있습니다.
-              </p>
-            </div>
-            <div class="col-auto d-none d-lg-block">
-              <svg
-                class="bd-placeholder-img"
-                width="200"
-                height="250"
-                xmlns="http://www.w3.org/2000/svg"
-                role="img"
-                aria-label="Placeholder: Thumbnail"
-                preserveAspectRatio="xMidYMid slice"
-                focusable="false"
-              >
-                <title>Placeholder</title>
-                <rect width="100%" height="100%" fill="#55595c" />
-                <text
-                  x="50%"
-                  y="50%"
-                  fill="#eceeef"
-                  dy=".5em"
-                  style="font-size: 25px"
-                >
-                  ₩30,000
-                </text>
-              </svg>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-6">
-          <div
-            class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative"
-          >
-            <div class="col p-4 d-flex flex-column position-static">
-              <strong class="d-inline-block mb-2 text-success"
-                ><i class="bi bi-lock-fill fs-2 text-primary"></i
-              ></strong>
-              <h3 class="mb-0">개인 정보</h3>
-              <div class="mb-1 text-muted">-----------------------------</div>
-              <p class="card-text mb-auto text-muted">
-                개인정보를 수정하고 싶다면 아래 링크를 클릭해 본인임을 인증해 주세요.
-              </p>
-              <a href="/myinfo/user_information_change">인증</a>
-            </div>
-            <div class="col-auto d-none d-lg-block"  style="color:white">
-              <a
-              href="/myinfo/update" 
-              >
-                <svg
-                  class="bd-placeholder-img"
-                  width="200"
-                  height="250"
-                  xmlns="http://www.w3.org/2000/svg"
-                  role="img"
-                  aria-label="Placeholder: Thumbnail"
-                  preserveAspectRatio="xMidYMid slice"
-                  focusable="false"
-                >
-                  <rect width="100%" height="100%" fill="#55595c" style="color:white" />
-                  <text
-                    x="50%"
-                    y="50%"
-                    fill="#eceeef"
-                    dy=".5em"
-                    style="font-size: 25px;"
-                  >
-                    변경
-                  </text>
-                </svg>
-              </a>
-            </div>
-          </div>
         </div>
       </div>
     </main>
@@ -235,7 +146,7 @@
     <section class="notice">
       <div class="page-title">
         <div class="container">
-          <h3>강의 리스트</h3>
+          <h3>강의 기록리스트</h3>
         </div>
       </div>
 
@@ -247,20 +158,19 @@
           <table class="board-table">
             <thead>
               <tr>
-                <th scope="col" class="th-title">강좌명</th>
+                <th scope="col" class="th-title">강좌수</th>
+                <th scope="col" class="th-title">선생님</th>
+                <th scope="col" class="th-date">강의 과목</th>
+                <th scope="col" class="th-date">강의 요일</th>
                 <th scope="col" class="th-date">강의 시간</th>
-                <th scope="col" class="th-date">남은 횟수</th>
-                <th scope="col" class="th-date">선생님</th>
-                <th scope="col" class="th-date">리뷰</th>
-                <th scope="col" class="th-date">강의</th>
-                <th scope="col" class="th-date">강의 코드</th>
+                <th scope="col" class="th-date">강의 완료 시간</th>
+
               </tr>
             </thead>
 
             <tbody>
               <%-List %>
             </tbody>
-            <a href="/myinfo/lecture/history">강의 기록</a>
           </table>
         </div>
       </div>
@@ -280,6 +190,8 @@
   <!-- SimpleLightbox plugin JS-->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/SimpleLightbox/2.1.0/simpleLightbox.min.js"></script>
   <script src="../js/scripts.js"></script>
+  <script src="../js/instructor.js"></script>
+
 
   <!-- Core theme JS-->
   <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
