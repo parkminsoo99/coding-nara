@@ -14,6 +14,7 @@
         <link href="https://cdnjs.cloudflare.com/ajax/libs/SimpleLightbox/2.1.0/simpleLightbox.min.css" rel="stylesheet" />
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="../CSS/styles.css" rel="stylesheet" />
+        <link href="../CSS/styles1.css" rel="stylesheet" />
     <script
       type="text/javascript"
       src="https://code.jquery.com/jquery-1.12.4.min.js"
@@ -75,63 +76,205 @@
           </div>
       </div>
   </header>
+  <div align="center">
     <form action = "/enroll/sub_result" method="get">
-        <table border="1">
-            <tr>
-                <td id> 강의유형 </td>
-                <td>
-                    <input type="checkbox" id="Course_type" name="Course_type" value="1" checked><label for="C">C</label>
-                    <input type="checkbox" id="Course_type" name="Course_type" value="2"><label for="JAVA">JAVA</label>
-                    <input type="checkbox" id="Course_type" name="Course_type" value="3"><label for="Python">Python</label>
-                    <input type="checkbox" id="Course_type" name="Course_type" value="4"><label for="App_Inventor">App Inventor</label>
-                    <input type="checkbox" id="Course_type" name="Course_type" value="5"><label for="Scatch">Scatch</label>
-                    <input type="checkbox" id="Course_type" name="Course_type" value="6"><label for="Entry">Entry</label>
-                    <input type="checkbox" id="Course_type" name="Course_type" value="7"><label for="Make_Web">웹 페이지 만들기</label>
-                </td>
-            </tr>
-            <tr>
-                <td> 강의요일 </td>
-                <td>
-                    <input type="checkbox" name="Course_day" id="Course_day" value="1" checked><label for="Monday">월요일</label>
-                    <input type="checkbox" name="Course_day" id="Course_day" value="2"><label for="Tuesday">화요일</label>
-                    <input type="checkbox" name="Course_day" id="Course_day" value="3" ><label for="Wednesday">수요일</label>
-                    <input type="checkbox" name="Course_day" id="Course_day" value="4" ><label for="Thursday">목요일</label>
-                    <input type="checkbox" name="Course_day" id="Course_day" value="5" ><label for="Friday">금요일</label>
-                    <input type="checkbox" name="Course_day" id="Course_day" value="6" ><label for="Saturday">토요일</label>
-                    <input type="checkbox" name="Course_day" id="Course_day" value="7" ><label for="Sunday">일요일</label>
-                </td>
-            </tr>
-            <tr>
-                <td> 강의시간 </td>
-                <td>
-                <input type="checkbox" id="Course_time" name="Course_time" value="1" checked><label for="Time_1">07:00~08:00</label>
-                <input type="checkbox" id="Course_time" name="Course_time" value="2"><label for="Time_2">08:00~09:00</label>
-                <input type="checkbox" id="Course_time" name="Course_time" value="3"><label for="Time_3">09:00~10:00</label>
-                <input type="checkbox" id="Course_time" name="Course_time" value="4"><label for="Time_4">10:00~11:00</label>
-                <input type="checkbox" id="Course_time" name="Course_time" value="5"><label for="Time_5">11:00~12:00</label>
-                <input type="checkbox" id="Course_time" name="Course_time" value="6"><label for="Time_6">12:00~13:00</label>
-                <input type="checkbox" id="Course_time" name="Course_time" value="7"><label for="Time_7">13:00~14:00</label>
-                <input type="checkbox" id="Course_time" name="Course_time" value="8"><label for="Time_8">14:00~15:00</label>
-                <input type="checkbox" id="Course_time" name="Course_time" value="9"><label for="Time_9">15:00~16:00</label>
-                <input type="checkbox" id="Course_time" name="Course_time" value="10"><label for="Time_10">16:00~17:00</label>
-                <input type="checkbox" id="Course_time" name="Course_time" value="11"><label for="Time_11">17:00~18:00</label>
-                <input type="checkbox" id="Course_time" name="Course_time" value="12"><label for="Time_12">18:00~19:00</label>
-                <input type="checkbox" id="Course_time" name="Course_time" value="13"><label for="Time_13">19:00~20:00</label>
-                <input type="checkbox" id="Course_time" name="Course_time" value="14"><label for="Time_14">20:00~21:00</label>
-                <input type="checkbox" id="Course_time" name="Course_time" value="15"><label for="Time_15">21:00~22:00</label>
-                <input type="checkbox" id="Course_time" name="Course_time" value="16"><label for="Time_16">22:00~23:00</label>
-                <input type="checkbox" id="Course_time" name="Course_time" value="17"><label for="Time_17">23:00~00:00</label>
-                </td>
-            </tr>
-        </table>
-        </br>
-        <div align="right">
-            <i class="bi bi-search" type="submit" value="검색"></i>
-            <input type="submit" value="검색"></input>
-        </div>
+      <fieldset>
+        <label class="control" for="Monday">
+          <input type="checkbox" name="Course_day" id="Monday" value="1" checked>
+          <span class="control__content">
+            월요일
+          </span>
+        </label>
+        <label class="control" for="Tuesday">
+          <input type="checkbox" name="Course_day" id="Tuesday" value="2">
+          <span class="control__content">
+            화요일
+          </span>
+        </label>
+        <label class="control" for="Wednesday">
+          <input type="checkbox" name="Course_day" id="Wednesday" value="3">
+          <span class="control__content">
+            수요일
+          </span>
+        </label>
+        <label class="control" for="Thursday">
+          <input type="checkbox" name="Course_day" id="Thursday" value="4">
+          <span class="control__content">
+            목요일
+          </span>
+        </label>
+        <label class="control" for="Friday">
+          <input type="checkbox" name="Course_day" id="Friday" value="5">
+          <span class="control__content">
+            금요일
+          </span>
+        </label>
+        <label class="control" name="Saturday">
+          <input type="checkbox" name="Course_day" id="Saturday" value="6">
+          <span class="control__content">
+            토요일
+          </span>
+        </label>
+        <label class="control" for="Sunday">
+          <input type="checkbox" name="Course_day" id="Sunday" value="7">
+          <span class="control__content">
+            일요일
+          </span>
+      </fieldset>
+      <fieldset>
+        </label>
+        <label class="control" for="C">
+          <input type="checkbox" name="Course_type" id="C" value="1" checked>
+          <span class="control__content">
+          C
+          </span>
+        </label>
+        <label class="control" for="Python">
+          <input type="checkbox" name="Course_type" id="Python" value="2">
+          <span class="control__content">
+          Python
+          </span>
+        </label>
+        <label class="control" for="Mincraft Programming">
+          <input type="checkbox" name="Course_type" id="Mincraft Programming" value="3">
+          <span class="control__content">
+          Mincraft Programming
+          </span>
+        </label>
+        <label class="control" for="App Inventor">
+          <input type="checkbox" name="Course_type" id="App Inventor" value="4">
+          <span class="control__content">
+          App Inventor
+          </span>
+        </label>
+        <label class="control" for="Scatch">
+          <input type="checkbox" name="Course_type" id="Scatch" value="5">
+          <span class="control__content">
+          Scatch
+          </span>
+        </label>
+        <label class="control" name="Entry">
+          <input type="checkbox" name="Course_type" id="Entry" value="6">
+          <span class="control__content">
+          Entry
+          </span>
+        </label>
+        <label class="control" for="Make_Web">
+          <input type="checkbox" name="Course_type" id="Make_Web" value="7">
+          <span class="control__content">
+          웹 페이지 만들기
+          </span>
+        </label>
+      </fieldset>
+      <fieldset>
+        <label class="control" for="Time_1">
+          <input type="checkbox" name="Course_time" id="Time_1" value="1" checked>
+          <span class="control__content">
+          07:00
+          </span>
+        </label>
+        <label class="control" for="Time_2">
+          <input type="checkbox" name="Course_time" id="Time_2" value="2">
+          <span class="control__content">
+          08:00
+          </span>
+        </label>
+        <label class="control" for="Time_3">
+          <input type="checkbox" name="Course_time" id="Time_3" value="3">
+          <span class="control__content">
+          09:00
+          </span>
+        </label>
+        <label class="control" for="Time_4">
+          <input type="checkbox" name="Course_time" id="Time_4" value="4">
+          <span class="control__content">
+          10:00
+          </span>
+        </label>
+        <label class="control" for="Time_5">
+          <input type="checkbox" name="Course_time" id="Time_5" value="5">
+          <span class="control__content">
+          11:00
+          </span>
+        </label>
+        <label class="control" name="Time_6">
+          <input type="checkbox" name="Course_time" id="Time_6" value="6">
+          <span class="control__content">
+          12:00
+          </span>
+        </label>
+        <label class="control" for="Time_7">
+          <input type="checkbox" name="Course_time" id="Time_7" value="7">
+          <span class="control__content">
+          13:00
+          </span>
+        </label>
+        <label class="control" for="Time_8">
+          <input type="checkbox" name="Course_time" id="Time_8" value="8"> 
+          <span class="control__content">
+          14:00
+          </span>
+        </label>
+      </fieldset>
+      <fieldset>
+        <label class="control" for="Time_9">
+          <input type="checkbox" name="Course_time" id="Time_9" value="9">
+          <span class="control__content">
+          15:00
+          </span>
+        </label>
+        <label class="control" for="Time_10">
+          <input type="checkbox" name="Course_time" id="Time_10" value="10">
+          <span class="control__content">
+          16:00
+          </span>
+        </label>
+        <label class="control" for="Time_11">
+          <input type="checkbox" name="Course_time" id="Time_11" value="11">
+          <span class="control__content">
+          17:00
+          </span>
+        </label>
+        <label class="control" for="Time_12">
+          <input type="checkbox" name="Course_time" id="Time_12" value="12">
+          <span class="control__content">
+          18:00
+          </span>
+        </label>
+        <label class="control" for="Time_13">
+          <input type="checkbox" name="Course_time" id="Time_13" value="13">
+          <span class="control__content">
+          19:00
+          </span>
+        </label>
+        <label class="control" for="Time_14">
+          <input type="checkbox" name="Course_time" id="Time_14" value="14">
+          <span class="control__content">
+          20:00
+          </span>
+        </label>
+        <label class="control" for="Time_15">
+          <input type="checkbox" name="Course_time" id="Time_15" value="15">
+          <span class="control__content">
+          21:00
+          </span>
+        </label>
+        <label class="control" for="Time_16">
+          <input type="checkbox" name="Course_time" id="Time_16" value="16">
+          <span class="control__content">
+          22:00
+          </span>
+        </label>
+        <label class="control" for="Time_17">
+          <input type="checkbox" name="Course_time" id="Time_17" value="17">
+          <span class="control__content">
+          23:00
+          </span>
+        </label>
+      </fieldset><br>
+        <button type="submit" class="btn btn-dark">검색</button>
     </form>
-    <!-- <%-Enroll_list%> -->
-    <!-- board list area -->
+  </div>
     <div id="board-list">
         <div class="container">
           <table class="board-table">
@@ -160,10 +303,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/SimpleLightbox/2.1.0/simpleLightbox.min.js"></script>
 <!-- Core theme JS-->
 <script src="../js/scripts.js"></script>
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
-<!-- * *                               SB Forms JS                               * *-->
-<!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
 <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
 </body>
 </html>

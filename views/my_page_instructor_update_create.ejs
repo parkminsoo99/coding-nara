@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title></title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <!-- Favicon-->
+  <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+  <!-- Bootstrap Icons-->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
+  <!-- Google fonts-->
+  <link href="https://fonts.googleapis.com/css?family=Merriweather+Sans:400,700" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic"
+    rel="stylesheet" type="text/css" />
+  <!-- SimpleLightbox plugin CSS-->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/SimpleLightbox/2.1.0/simpleLightbox.min.css" rel="stylesheet" />
+  <!-- Core theme CSS (includes Bootstrap)-->
+  <link href="/CSS/styles_none.css" rel="stylesheet" />
+  <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+  <script type="text/javascript" src="../js/email_validation_and_address_script.js"></script>
+  <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
+  <style>
+    .bd-placeholder-img {
+      font-size: 1.125rem;
+      text-anchor: middle;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      user-select: none;
+    }
+
+    @media (min-width: 768px) {
+      .bd-placeholder-img-lg {
+        font-size: 3.5rem;
+      }
+    }
+
+    .bi {
+      vertical-align: -0.125em;
+      fill: currentColor;
+    }
+
+    a.change:link {
+      color: white;
+    }
+
+    a.change:visited {
+      color: white;
+    }
+
+    a.change:hover {
+      color: white;
+    }
+
+    a.change:active {
+      color: white;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="loader-wrapper">
+    <span class="loader"><span class="loader-inner"></span></span>
+  </div>
+
+  <script>
+    $(window).on("load", function () {
+      $(".loader-wrapper").fadeOut(1000);
+    });
+  </script>
+  <!-- Navigation-->
+  <nav class="navbar navbar-expand-lg navbar-light fixed-top py-3" id="mainNav">
+    <div class="container px-4 px-lg-5">
+      <a class="navbar-brand" href="#page-top">Coding-nara</a>
+      <button class="navbar-toggler navbar-toggler-right" type="button" data-bs-toggle="collapse"
+        data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
+        aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ms-auto my-2 my-lg-0">
+          <li class="nav-item"><a class="nav-link" href="/">소개</a></li>
+          <li class="nav-item">
+            <a class="nav-link" href="/curriculum">커리큘럼</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/enroll/sub">수강신청</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/review">강좌후기</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/ask">고객센터</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/login">
+              <%-authCheck %>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  </br>
+  </br>
+  </br>
+  <main class="container">
+    <div class="p-4 p-md-1 mb-1 rounded text-bg-dark">
+      <div class="col-md-6 px-0">
+        <h1 class="display-6 fst-italic">
+          과목, 강좌 가능일 변경 페이지
+        </h1>
+        <p class="lead my-4">
+        </p>
+      </div>
+    </div>
+
+  </main>
+
+  <section class="notice">
+    <div class="page-title">
+      <div class="container">
+        <h3>가능 강의 리스트</h3>
+      </div>
+    </div>
+
+    <!-- board seach area -->
+
+    <!-- board list area -->
+    <div id="board-list">
+      <div class="container">
+        <table class="board-table">
+          <thead>
+            <tr>
+              <th scope="col" class="th-title">강좌수</th>
+              <th scope="col" class="th-title">강좌명</th>
+              <th scope="col" class="th-date">강의 시간</th>
+              <th scope="col" class="th-date">강의 시간</th>
+              <th scope="col" class="th-date">신청 유무</th>
+              <th scope="col" class="th-date">강의 삭제</th>
+
+            </tr>
+          </thead>
+
+          <tbody>
+            <%-List %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div align="center">
+      <form action="/myinfo/instructor/update/create_process" method="post" id="myForm">
+        <input type="checkbox" id="Course_type" name="Course_type" value="1" checked><label for="C">C</label>
+        <input type="checkbox" id="Course_type" name="Course_type" value="2"><label for="Python">Python</label>
+        <input type="checkbox" id="Course_type" name="Course_type" value="3"><label for="Mincraft Programming">Mincraft Programming</label>
+        <input type="checkbox" id="Course_type" name="Course_type" value="4"><label for="App_Inventor">App Inventor</label>
+        <input type="checkbox" id="Course_type" name="Course_type" value="5"><label for="Scatch">Scatch</label>
+        <input type="checkbox" id="Course_type" name="Course_type" value="6"><label for="Entry">Entry</label>
+        <input type="checkbox" id="Course_type" name="Course_type" value="7"><label for="Make_Web">웹 페이지 만들기</label>
+        <br>
+        <input type="checkbox" name="Course_day" id="Course_day" value="1" checked><label for="Monday">월요일</label>
+        <input type="checkbox" name="Course_day" id="Course_day" value="2"><label for="Tuesday">화요일</label>
+        <input type="checkbox" name="Course_day" id="Course_day" value="3"><label for="Wednesday">수요일</label>
+        <input type="checkbox" name="Course_day" id="Course_day" value="4"><label for="Thursday">목요일</label>
+        <input type="checkbox" name="Course_day" id="Course_day" value="5"><label for="Friday">금요일</label>
+        <input type="checkbox" name="Course_day" id="Course_day" value="6"><label for="Saturday">토요일</label>
+        <input type="checkbox" name="Course_day" id="Course_day" value="7"><label for="Sunday">일요일</label>
+        <br>
+        <input type="checkbox" id="Course_time" name="Course_time" value="1" checked><label for="Time_1">07:00~08:00</label>
+        <input type="checkbox" id="Course_time" name="Course_time" value="2"><label for="Time_2">08:00~09:00</label>
+        <input type="checkbox" id="Course_time" name="Course_time" value="3"><label for="Time_3">09:00~10:00</label>
+        <input type="checkbox" id="Course_time" name="Course_time" value="4"><label for="Time_4">10:00~11:00</label>
+        <input type="checkbox" id="Course_time" name="Course_time" value="5"><label for="Time_5">11:00~12:00</label><br>
+        <input type="checkbox" id="Course_time" name="Course_time" value="6"><label for="Time_6">12:00~13:00</label>
+        <input type="checkbox" id="Course_time" name="Course_time" value="7"><label for="Time_7">13:00~14:00</label>
+        <input type="checkbox" id="Course_time" name="Course_time" value="8"><label for="Time_8">14:00~15:00</label>
+        <input type="checkbox" id="Course_time" name="Course_time" value="9"><label for="Time_9">15:00~16:00</label>
+        <input type="checkbox" id="Course_time" name="Course_time" value="10"><label for="Time_10">16:00~17:00</label><br>
+        <input type="checkbox" id="Course_time" name="Course_time" value="11"><label for="Time_11">17:00~18:00</label>
+        <input type="checkbox" id="Course_time" name="Course_time" value="12"><label for="Time_12">18:00~19:00</label>
+        <input type="checkbox" id="Course_time" name="Course_time" value="13"><label for="Time_13">19:00~20:00</label>
+        <input type="checkbox" id="Course_time" name="Course_time" value="14"><label for="Time_14">20:00~21:00</label>
+        <input type="checkbox" id="Course_time" name="Course_time" value="15"><label for="Time_15">21:00~22:00</label><br>
+        <input type="checkbox" id="Course_time" name="Course_time" value="16"><label for="Time_16">22:00~23:00</label>
+        <input type="checkbox" id="Course_time" name="Course_time" value="17"><label for="Time_17">23:00~00:00</label>
+        <input type="submit" />
+      </form>
+      <br>
+      <!-- <a class="btn btn-warning" href="/myinfo/instructor/update/create_process">강의추가</a> -->
+    </div>
+
+    <!-- <div align="center">
+        <form action="/instructor/update/create_process" method="post">
+          <p><input type="text" name="Course_ID" placeholder="가능과목" /></p>
+          <p>
+            <textarea name="DATE_ID" placeholder="가능요일"></textarea>
+          </p>
+          <p>
+            <textarea name="TIME_ID" placeholder="가능시간"></textarea>
+          </p> -->
+    <!-- <p><%-Nickname %></p> -->
+    <!-- <p>
+            <input type="submit" />
+          </p>
+        </form>
+        <br>
+        <a class="btn btn-warning" href="/myinfo/instructor/update/create">강의추가</a>
+    </div> -->
+
+  </section>
+  <p></p>
+</body>
+<!-- Footer-->
+<footer class="bg-light py-5">
+  <div class="container px-4 px-lg-5">
+    <div class="small text-center text-muted">
+      Copyright &copy; 2022 - Company Name
+    </div>
+  </div>
+</footer>
+<!-- Bootstrap core JS-->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+<!-- SimpleLightbox plugin JS-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/SimpleLightbox/2.1.0/simpleLightbox.min.js"></script>
+<script src="../js/scripts.js"></script>
+
+<!-- Core theme JS-->
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
+<!-- * *                               SB Forms JS                               * *-->
+<!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
+
+</html>

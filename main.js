@@ -127,6 +127,7 @@ const apiLimiter =  rateLimit({
 
 
 app.get('/', (req, res) => {
+  
   apiLimiter,
   res.redirect('/main');
 })

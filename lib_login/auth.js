@@ -95,7 +95,7 @@ router.post('/login_process', function (request, response) {
         var sanitizeHtml_password = sanitizeHtml(password);
         if(sanitizeHtml_Email_Address  != '' && sanitizeHtml_password != '' ){
             if (sanitizeHtml_Email_Address && sanitizeHtml_password) {             // id와 pw가 입력되었는지 확인
-                db.query('SELECT * FROM Student WHERE Email_Address = ?', [sanitizeHtml_Email_Address], function(error, results, fields) {
+                db.query('SELECT * FROM Student WHERE Email_Address = ?;', [sanitizeHtml_Email_Address], function(error, results, fields) {
                     if (error) throw error;
                     if (results.length > 0 && results[0].Platform_type === 'local') {       // db에서의 반환값이 있으면 로그인 성공
                         bcrypt.compare(password,results[0].Password, function(err, result){
