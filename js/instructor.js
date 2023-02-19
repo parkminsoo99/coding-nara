@@ -6,7 +6,7 @@ button_click.onclick= function disable(){
   if(end === 0)
   { 
   var end = start;
-  end=end+1;
+  end=1;
   }
   var diffTime = (end.getTime() - start.getTime()) / (1000*60*60);
   if(diffTime >= 20)
