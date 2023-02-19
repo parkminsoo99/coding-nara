@@ -38,7 +38,18 @@
     <!-- Navigation-->
     <nav class="navbar navbar-expand-lg navbar-light fixed-top py-3" id="mainNav">
       <div class="container px-4 px-lg-5">
-          <a class="navbar-brand" href="#page-top">Coding-nara</a>
+        <a
+        class="navbar-brand"
+        href="#page-top"
+        style="display: flex; flex-direction: row"
+      >
+        <img
+          src="../image/logo_mini.png"
+          width="30px"
+          height="30px"
+          style="margin-right: 7px"
+        />Coding-nara
+      </a>
           <button class="navbar-toggler navbar-toggler-right" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
           <div class="collapse navbar-collapse" id="navbarResponsive">
               <ul class="navbar-nav ms-auto my-2 my-lg-0">
@@ -66,43 +77,23 @@
           </div>
       </div>
   </header>
-    <h2><%=Title%></h2>
-    <%=Description %>
-    <p>by <%=Login_ID%></p>
-    <a href="/review/create">글생성</a>
-    <a href="/review/update/<%=Page_ID%>">글수정</a>
-    <form action="/review/delete_process" method="post">
-      <input type="hidden" name="id" value="<%=Page_ID%>" />
-      <input type="submit" value="삭제" />
-    </form>
-    <div id="board-list">
-      <div class="container">
-        <table class="board-table">
-          <thead>
-            <tr>
-              <th scope="col" class="th-num">번호</th>
-              <th scope="col" class="th-title">제목</th>
-              <th scope="col" class="th-date">등록일</th>
-            </tr>
-          </thead>
-          <tbody>
-            <%-List%>
-          </tbody>
-        </table>
-      </div>
-    </div>
+  <div class="mb-3">
+    <label for="exampleFormControlInput1" class="form-label">제목</label>
+    <input type="text" name="Title" class="form-control-plaintext" id="exampleFormControlInput1" value="<%=Title%>" readonly>
+  </div>
+  <div class="mb-3">
+    <label placeholder="Title" for="exampleFormControlTextarea1" class="form-label">내용</label>
+    <textarea type="text" name="Description" class="form-control-plaintext" id="exampleFormControlTextarea1" rows="3" readonly>
+      <%=Description %>
+    </textarea>
+  </div>
+  <center> 
+    <a class="btn btn-primary" href="/review/update/<%=Page_ID%>">글수정</a>
+  </center>
+   
+   
   </body>
-  <div align="center">
-  <nav aria-label="Page navigation example">
-    <ul class="pagination">
-      <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-      <li class="page-item"><a class="page-link" href="#">1</a></li>
-      <li class="page-item"><a class="page-link" href="#">2</a></li>
-      <li class="page-item"><a class="page-link" href="#">3</a></li>
-      <li class="page-item"><a class="page-link" href="#">Next</a></li>
-    </ul>
-  </nav>
-</div>
+ 
   <!-- Footer-->
   <footer class="bg-light py-5">
     <div class="container px-4 px-lg-5"><div class="small text-center text-muted"><a href="/policy/private">개인정보처리방침</a> | <a href="/policy/tos">이용약관</a></div></div>

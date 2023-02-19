@@ -37,7 +37,18 @@
     <!-- Navigation-->
     <nav class="navbar navbar-expand-lg navbar-light fixed-top py-3" id="mainNav">
       <div class="container px-4 px-lg-5">
-          <a class="navbar-brand" href="#page-top">Coding-nara</a>
+        <a
+        class="navbar-brand"
+        href="#page-top"
+        style="display: flex; flex-direction: row"
+      >
+        <img
+          src="../image/logo_mini.png"
+          width="30px"
+          height="30px"
+          style="margin-right: 7px"
+        />Coding-nara
+      </a>
           <button class="navbar-toggler navbar-toggler-right" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
           <div class="collapse navbar-collapse" id="navbarResponsive">
               <ul class="navbar-nav ms-auto my-2 my-lg-0">
@@ -264,63 +275,6 @@
         <button type="submit" class="btn btn-dark">검색</button>
     </form>
   </div>
-    <!-- <form action = "/enroll/sub_result" method="get">
-        <table border="1">
-            <tr>
-                <td id> 강의유형 </td>
-                <td>
-                    <input type="checkbox" id="Course_type" name="Course_type" value="1" checked><label for="C">C</label>
-                    <input type="checkbox" id="Course_type" name="Course_type" value="2"><label for="JAVA">JAVA</label>
-                    <input type="checkbox" id="Course_type" name="Course_type" value="3"><label for="Python">Python</label>
-                    <input type="checkbox" id="Course_type" name="Course_type" value="4"><label for="App_Inventor">App Inventor</label>
-                    <input type="checkbox" id="Course_type" name="Course_type" value="5"><label for="Scatch">Scatch</label>
-                    <input type="checkbox" id="Course_type" name="Course_type" value="6"><label for="Entry">Entry</label>
-                    <input type="checkbox" id="Course_type" name="Course_type" value="7"><label for="Make_Web">웹 페이지 만들기</label>
-                </td>
-            </tr>
-            <tr>
-                <td> 강의요일 </td>
-                <td>
-                    <input type="checkbox" name="Course_day" id="Course_day" value="1" checked><label for="Monday">월요일</label>
-                    <input type="checkbox" name="Course_day" id="Course_day" value="2"><label for="Tuesday">화요일</label>
-                    <input type="checkbox" name="Course_day" id="Course_day" value="3" ><label for="Wednesday">수요일</label>
-                    <input type="checkbox" name="Course_day" id="Course_day" value="4" ><label for="Thursday">목요일</label>
-                    <input type="checkbox" name="Course_day" id="Course_day" value="5" ><label for="Friday">금요일</label>
-                    <input type="checkbox" name="Course_day" id="Course_day" value="6" ><label for="Saturday">토요일</label>
-                    <input type="checkbox" name="Course_day" id="Course_day" value="7" ><label for="Sunday">일요일</label>
-                </td>
-            </tr>
-            <tr>
-                <td> 강의시간 </td>
-                <td>
-                <input type="checkbox" id="Course_time" name="Course_time" value="1" checked><label for="Time_1">07:00~08:00</label>
-                <input type="checkbox" id="Course_time" name="Course_time" value="2"><label for="Time_2">08:00~09:00</label>
-                <input type="checkbox" id="Course_time" name="Course_time" value="3"><label for="Time_3">09:00~10:00</label>
-                <input type="checkbox" id="Course_time" name="Course_time" value="4"><label for="Time_4">10:00~11:00</label>
-                <input type="checkbox" id="Course_time" name="Course_time" value="5"><label for="Time_5">11:00~12:00</label>
-                <input type="checkbox" id="Course_time" name="Course_time" value="6"><label for="Time_6">12:00~13:00</label>
-                <input type="checkbox" id="Course_time" name="Course_time" value="7"><label for="Time_7">13:00~14:00</label>
-                <input type="checkbox" id="Course_time" name="Course_time" value="8"><label for="Time_8">14:00~15:00</label>
-                <input type="checkbox" id="Course_time" name="Course_time" value="9"><label for="Time_9">15:00~16:00</label>
-                <input type="checkbox" id="Course_time" name="Course_time" value="10"><label for="Time_10">16:00~17:00</label>
-                <input type="checkbox" id="Course_time" name="Course_time" value="11"><label for="Time_11">17:00~18:00</label>
-                <input type="checkbox" id="Course_time" name="Course_time" value="12"><label for="Time_12">18:00~19:00</label>
-                <input type="checkbox" id="Course_time" name="Course_time" value="13"><label for="Time_13">19:00~20:00</label>
-                <input type="checkbox" id="Course_time" name="Course_time" value="14"><label for="Time_14">20:00~21:00</label>
-                <input type="checkbox" id="Course_time" name="Course_time" value="15"><label for="Time_15">21:00~22:00</label>
-                <input type="checkbox" id="Course_time" name="Course_time" value="16"><label for="Time_16">22:00~23:00</label>
-                <input type="checkbox" id="Course_time" name="Course_time" value="17"><label for="Time_17">23:00~00:00</label>
-                </td>
-            </tr>
-        </table>
-        </br>
-        <div align="right">
-            <i class="bi bi-search" type="submit" value="검색"></i>
-            <input type="submit" value="검색"></input>
-        </div>
-    </form> -->
-    <!-- <%-Enroll_list%> -->
-    <!-- board list area -->
     <div id="board-list">
         <div class="container">
           <table class="board-table">
@@ -349,10 +303,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/SimpleLightbox/2.1.0/simpleLightbox.min.js"></script>
 <!-- Core theme JS-->
 <script src="../js/scripts.js"></script>
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
-<!-- * *                               SB Forms JS                               * *-->
-<!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
 <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
 </body>
 </html>

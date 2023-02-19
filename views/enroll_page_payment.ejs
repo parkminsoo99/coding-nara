@@ -5,6 +5,7 @@
     <meta charset="utf-8" />
     <!-- Favicon-->
     <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
     <!-- Bootstrap Icons-->
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"
@@ -21,8 +22,11 @@
       type="text/css"
     />
     <!-- SimpleLightbox plugin CSS-->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/SimpleLightbox/2.1.0/simpleLightbox.min.css" rel="stylesheet" />
-    <link href="/CSS/styles.css" rel="stylesheet" />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/SimpleLightbox/2.1.0/simpleLightbox.min.css"
+      rel="stylesheet"
+    />
+    <script type="text/javascript" src="../../../../js/payment.js"></script>
     <script
       type="text/javascript"
       src="https://code.jquery.com/jquery-1.12.4.min.js"
@@ -34,7 +38,7 @@
     <link
       rel="stylesheet"
       type="text/css"
-      href="../../../../CSS/styles_none.css"
+      href="../../../../CSS/enroll_page.css"
     />
   </head>
   <body>
@@ -46,6 +50,7 @@
       $(window).on("load", function () {
         $(".loader-wrapper").fadeOut(1000);
       });
+      basket.reload(<%=Student_ID%>, <%=Course_ID%>, <%=Date_ID%>, <%=Time_ID%>,<%=Teacher_ID%>);
     </script>
     <!-- Navigation-->
     <nav
@@ -53,7 +58,18 @@
       id="mainNav"
     >
       <div class="container px-4 px-lg-5">
-        <a class="navbar-brand" href="#page-top">Coding-nara</a>
+        <a
+          class="navbar-brand"
+          href="#page-top"
+          style="display: flex; flex-direction: row"
+        >
+          <img
+            src="../../../../../image/logo_mini.png"
+            width="30px"
+            height="30px"
+            style="margin-right: 7px"
+          />Coding-nara
+        </a>
         <button
           class="navbar-toggler navbar-toggler-right"
           type="button"
@@ -86,351 +102,364 @@
           </ul>
         </div>
       </div>
-  </nav>
-  <!-- Masthead-->
-  <header class="masthead_curi">
-    <div class="container px-4 px-lg-5 h-100">
-        <div class="row gx-4 gx-lg-5 h-100 align-items-center justify-content-center text-center">
-            <div class="col-lg-8 align-self-end">
-              <h1 class="text-white font-weight-bold">수강신청</h1>
-                <hr class="divider" />
-            </div>
-            <div class="col-lg-8 align-self-baseline">
-                <p class="text-white-75 mb-5"></p>
-            </div>
-        </div>
-    </div>
- </header>
-<!--화면-->
-<br>
+    </nav>
+    <!-- Masthead-->
+    <!--화면-->
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
 
-<!-- Page content-->
-<div class="container" style="overflow: auto">
-  <div class="row">
-      <!-- Blog entries-->
-      <div class="col-lg-8">
+    <!-- Page content-->
+    <div class="container" style="overflow: auto">
+      <div class="row">
+        <!-- Blog entries-->
+        <div class="col-lg-8">
           <!-- Featured blog post-->
           <div class="card mb-4">
-              <div class="card-body">
-                  <!-- <div class="small text-muted">January 1, 2022</div> -->
-                  <h1 class="card-title"><%=Subject %></h1>
-                  <img id="image" style="float: left">
-                  <br><br><br>
-                  <h5 class="card-text" id="subject"></h5>
-                  <!-- <a class="btn btn-primary" id="generate">결제하기 →</a> -->
-              </div>
+            <div class="card-body">
+              <!-- <div class="small text-muted">January 1, 2022</div> -->
+              <section class="content-body">
+                <div class="body__title">
+                  <img id="image" /><br /><span>Why? <%=Subject%></span>
+                </div>
+                <div class="content">
+                  <div class="body__list-content">
+                    <div class="body__list1">
+                      <span class="check_icon"
+                        ><svg
+                          width="16"
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="16"
+                          height="16"
+                          viewBox="0 0 16 16"
+                        >
+                          <path
+                            fill="#01DF01"
+                            d="M13.78 4.22c.14.14.22.331.22.53s-.08.39-.22.53l-7.25 7.25c-.14.14-.331.22-.53.22s-.39-.08-.53-.22L2.22 9.28c-.133-.142-.205-.33-.201-.525.003-.194.082-.38.22-.517.137-.137.322-.216.516-.22.195-.003.383.07.525.202L6 10.94l6.72-6.72c.14-.14.331-.22.53-.22s.39.08.53.22z"
+                          /></svg></span
+                      ><span id="subject1"></span>
+                    </div>
+                  </div>
+                  <div class="body__list-content">
+                    <div class="body__list">
+                      <span class="check_icon"
+                        ><svg
+                          width="16"
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="16"
+                          height="16"
+                          viewBox="0 0 16 16"
+                        >
+                          <path
+                            fill="#01DF01"
+                            d="M13.78 4.22c.14.14.22.331.22.53s-.08.39-.22.53l-7.25 7.25c-.14.14-.331.22-.53.22s-.39-.08-.53-.22L2.22 9.28c-.133-.142-.205-.33-.201-.525.003-.194.082-.38.22-.517.137-.137.322-.216.516-.22.195-.003.383.07.525.202L6 10.94l6.72-6.72c.14-.14.331-.22.53-.22s.39.08.53.22z"
+                          /></svg></span
+                      ><span id="subject2"></span>
+                    </div>
+                  </div>
+                  <div class="body__list-content">
+                    <div class="body__list">
+                      <span class="check_icon"
+                        ><svg
+                          width="16"
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="16"
+                          height="16"
+                          viewBox="0 0 16 16"
+                        >
+                          <path
+                            fill="#01DF01"
+                            d="M13.78 4.22c.14.14.22.331.22.53s-.08.39-.22.53l-7.25 7.25c-.14.14-.331.22-.53.22s-.39-.08-.53-.22L2.22 9.28c-.133-.142-.205-.33-.201-.525.003-.194.082-.38.22-.517.137-.137.322-.216.516-.22.195-.003.383.07.525.202L6 10.94l6.72-6.72c.14-.14.331-.22.53-.22s.39.08.53.22z"
+                          /></svg></span
+                      ><span id="subject3"></span>
+                    </div>
+                  </div>
+                  <div class="body__list-content">
+                    <div class="body__list">
+                      <span class="check_icon"
+                        ><svg
+                          width="16"
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="16"
+                          height="16"
+                          viewBox="0 0 16 16"
+                        >
+                          <path
+                            fill="#01DF01"
+                            d="M13.78 4.22c.14.14.22.331.22.53s-.08.39-.22.53l-7.25 7.25c-.14.14-.331.22-.53.22s-.39-.08-.53-.22L2.22 9.28c-.133-.142-.205-.33-.201-.525.003-.194.082-.38.22-.517.137-.137.322-.216.516-.22.195-.003.383.07.525.202L6 10.94l6.72-6.72c.14-.14.331-.22.53-.22s.39.08.53.22z"
+                          /></svg></span
+                      ><span id="subject4"></span>
+                    </div>
+                  </div>
+                  <div class="body__list-content">
+                    <div class="body__list">
+                      <span class="check_icon"
+                        ><svg
+                          width="16"
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="16"
+                          height="16"
+                          viewBox="0 0 16 16"
+                        >
+                          <path
+                            fill="#01DF01"
+                            d="M13.78 4.22c.14.14.22.331.22.53s-.08.39-.22.53l-7.25 7.25c-.14.14-.331.22-.53.22s-.39-.08-.53-.22L2.22 9.28c-.133-.142-.205-.33-.201-.525.003-.194.082-.38.22-.517.137-.137.322-.216.516-.22.195-.003.383.07.525.202L6 10.94l6.72-6.72c.14-.14.331-.22.53-.22s.39.08.53.22z"
+                          /></svg></span
+                      ><span id="subject5"></span>
+                    </div>
+                  </div>
+                  <div class="body__list-content">
+                    <div class="body__list">
+                      <span class="check_icon"
+                        ><svg
+                          width="16"
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="16"
+                          height="16"
+                          viewBox="0 0 16 16"
+                        >
+                          <path
+                            fill="#01DF01"
+                            d="M13.78 4.22c.14.14.22.331.22.53s-.08.39-.22.53l-7.25 7.25c-.14.14-.331.22-.53.22s-.39-.08-.53-.22L2.22 9.28c-.133-.142-.205-.33-.201-.525.003-.194.082-.38.22-.517.137-.137.322-.216.516-.22.195-.003.383.07.525.202L6 10.94l6.72-6.72c.14-.14.331-.22.53-.22s.39.08.53.22z"
+                          /></svg></span
+                      ><span id="subject6"></span>
+                    </div>
+                  </div>
+                </div>
+              </section>
+            </div>
           </div>
           <!-- Nested row for non-featured blog posts-->
           <div class="row">
-              <div class="col-lg-6">
-                  <!-- Blog post-->
-                  <div class="card mb-4">
-                      <div class="card-body">
-                          <h2 class="card-title h4">과목특징</h2>
-                          <p class="card-text" id="feature"></p>
-                          <a class="btn btn-danger" href="/curriculum/detail">상세보기</a>
-                          
-                      </div>
-                  </div>
+            <div class="col-lg-6">
+              <!-- Blog post-->
+              <div class="card mb-4">
+                <div class="card-body">
+                  <h2 class="card-title h4">과목특징</h2>
+                  <p class="card-text" id="feature"></p>
+                  <a class="btn btn-warning" href="#!">상세보기</a>
+                </div>
               </div>
-              <div class="col-lg-6">
-                  <!-- Blog post-->
-                  <div class="card mb-4">
-                      <div class="card-body">
-                          <h2 class="card-title h4"><%=Teacher_name%></h2>
-                          <p class="card-text">IT 전공인 강사이며 자세한 세부사항은 아래 버튼을 클릭해주세요.</p>
-                          <a class="btn btn-primary" href="#!">상세보기</a>
-                      </div>
-                  </div> 
+            </div>
+            <div class="col-lg-6">
+              <!-- Blog post-->
+              <div class="card mb-4">
+                <div class="card-body">
+                  <h2 class="card-title h4">
+                    <span id="teacher_name"><%=Teacher_name%></span>
+                  </h2>
+                  <img src='http://localhost:54213/<%=Image%>' width="180" height="250">
+                  <p class="card-text">
+                    강사에 대한 자세한 세부사항은 아래 상세보기 버튼을
+                    클릭해주세요.
+                  </p>
+                  <a class="btn btn-warning" href="#!">상세보기</a>
+                </div>
               </div>
-              <div class="col-lg-6">
-                <!-- Blog post-->
-                <div class="card mb-4">
-                    <div class="card-body">
-                        <p class="card-text">강의의 원활한 수강을 위해 개인정보를 확인해주세요</p>
-                        <p class="card-text">전화번호 : <%=Phone_Number%></p>
-                        <p>이메일 : <%=Email_Address%></p>
-                        <a class="btn btn-warning" href="#!">개인정보수정</a>
-                    </div>
-                </div> 
-              </div>
+            </div>
           </div>
-      </div>
-      
-      <!-- Side widgets-->
-      <div class="col-lg-4">  
+        </div>
+
+        <!-- Side widgets-->
+        <div class="col-lg-4">
           <!-- Categories widget-->
+
           <div class="card mb-4">
-              <div class="card-header">변동사항</div>
-              <div class="card-body">
-                  <div class="row">
-                      <div class="col-sm-6" >
-                          <ul class="list-unstyled mb-0">
-                              <li><h3 class="text-black font-weight-bold">원하는 강좌<br> 횟수 : <string id="count">1</string></h3></li>
-                              <li><button class="btn btn-dark" onclick="countUp();price_change();"><i class="bi bi-arrow-up"></i></button>
-                                <button class="btn btn-dark" onclick="countDown();price_change();"><i class="bi bi-arrow-down"></i></button></li>
-                                
-                              <li>포인트 잔액 : <string id="point"></string></li>
-                              
-                              <h3>가격 : <string id="price"></string><span><br> 포인트 사용 : <input type="text" id="point_use" value="0" /><span
-                                ></span
-                              ><br>
-                              <button class="btn btn-dark" type="button" onClick="cal_result_price()"">적용</button></h3>
-                          </ul>
-                      </div>
-                  </div>
+            <div class="card-header">포인트</div>
+            <div class="card-body">
+              <div class="col-sm-6">
+                <ul class="list-unstyled mb-0">
+                  <li id="point_content">
+                    <span>포인트 잔액 : </span><string id="point"></string
+                    ><span> 원</span>
+                  </li>
+                  <li id="point_content">
+                    <input
+                      type="text"
+                      name="p_point"
+                      id="input_point"
+                      class="p_point"
+                      size="7"
+                      maxlength="7"
+                      placeholder="사용하실 포인트를 입력해주세요."
+                      onkeyup="javascript:basket.Point();"
+                    />
+                  </li>
+                </ul>
               </div>
+            </div>
+            <button
+              class="btn btn-dark"
+              name="p_point_button"
+              id="p_point_button"
+              onClick="javascript:basket.updateUI(); basket.Point_use(<%=Student_ID%>, <%=Course_ID%>, <%=Date_ID%>, <%=Time_ID%>,<%=Teacher_ID%>);"
+            >
+              포인트 적용
+            </button>
           </div>
           <!-- Side widget-->
           <div class="card mb-4">
-              <div class="card-header">최종 금액</div>
-              <div class="card-body">회원 본인은 주문내용을 확인했으며, 구매조건 및 개인정보처리방침과 결제에 동의합니다.<br>
-                <span><br><h2> 결제 금액 : <string id="result_price"></string><span>원</span></h2> </span></div>
-              <a class="btn btn-dark" onclick="requestPay()">결제하기</a>
+            <div class="card-header">최종 금액</div>
+            <div class="card-body">
+              회원 본인은 주문내용을 확인했으며,
+              <span id="accent">구매조건 및 개인정보처리방침과 결제에 동의</span
+              >합니다.
+              <br />
+              <br />
+              <div>
+                <div class="result_information">
+                  <div class="num" style="display: flex; flex-direction: row">
+                    <input
+                      type="text"
+                      name="p_num"
+                      id="p_num"
+                      min="1"
+                      max="99"
+                      size="2"
+                      maxlength="2"
+                      class="p_num"
+                      value="1"
+                      onkeyup="javascript:basket.changePNum(<%=Price%>);"
+                    />
+                    <div class="price_count">
+                      <div class="bigtext right-align sumcount" id="sum_p_num">
+                        <script>
+                          basket.reCalc(<%=Point%>,<%=Price%>);
+                        </script>
+                      </div>
+                      <div id="sum_p_price">
+                        <script>
+                          basket.reCalc(<%=Point%>,<%=Price%>);
+                          basket.updateUI();
+                        </script>
+                      </div>
+                    </div>
+                    <div>
+                      <a
+                        id="button_move_cart"
+                        class="btn btn-success"
+                        onclick="javascript:basket.move_cart(<%=Student_ID%>, <%=Course_ID%>, <%=Date_ID%>, <%=Time_ID%>,<%=Teacher_ID%>)"
+                      >
+                        장바구니에 담기
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div id="result_button" style="display: flex; flex-direction: row">
+              <span
+                class="btn btn-secondary down"
+                onclick="javascript:basket.changePNum(<%=Price%>);"
+                ><</span
+              >
+              <span
+                class="btn btn-secondary up"
+                onclick="javascript:basket.changePNum(<%=Price%>);"
+                >></span
+              >
+              <!-- <span onclick="javascript:basket.changePNum(<%=Price%>);"
+                  ><i class="bi bi-arrow-left-short fs-6 text-primary down"></i
+                ></span>
+                <span onclick="javascript:basket.changePNum(<%=Price%>);"
+                  ><i class="bi bi-arrow-right-short fs-6 text-primary up"></i
+                ></span> -->
+              <a
+                class="btn btn-dark"
+                id="result_button_enroll"
+                onclick="javascript:basket.payment(<%=Course_Active%>,<%=Student_ID%>, <%=Course_ID%>, <%=Date_ID%>, <%=Time_ID%>,<%=Teacher_ID%>,<%=Price%>)"
+                >수강 신청</a
+              >
+            </div>
           </div>
+        </div>
       </div>
-  </div>
-</div>
-
     </div>
-  </div>
-  
-</div>
-  <script>
-    var link =  document.location.href;
-    var sub = <%-JSON.stringify(Subject)%>
-    if(sub === "C언어")
-    {
-    document.getElementById("image").setAttribute("src","data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAANIAAADwCAMAAABCI8pNAAAAllBMVEX///9lmdIBQ4AAWJwARYBfkskAPHpnndV+ptIARYpklMcAU5ZmmNNtmMcAN3MAM3EAS455ocoAOXkALWtBZo8AOnGEqM0LRXaPprlPjspsiaUiTnt3oc8AT4orVoSMrtEAP3MqZZxGgLpRcZAhZ6Zwl7Zefp5/lahaibBFcZoydbQwa5tIeaAANnp9pcEHVoqbqL44danLktuoAAALZUlEQVR4nO2ci3baOBCGgdhySoyd2DgQSAhpmwttmu2+/8utZRtfQJZmpJEwe/jP2d10W4w/69dImhl3NLrooosuuuiiiy4apK6vn099C4Sa+b4/5vL96anvhUTTEqfS/wDqrgOUK/Rnp74nIz0fApUjdXfq+9LXbByKkMbjc3Xfo3CIKp2j++5lQGfpvqkciMeJ83LfTDFEZwd157eiQk+AKH/vXAJ6BSRjaUGdwTYJ5rlGgx8oVZwTQg069qnjnBhqsO7Deq6lYca+a30gPlCPp77/Y1WeA8U5MdT9qRG6mpmM0F5Dcp90gypTuB/UoGQaTED3Q327HWgYAX1qMH+OFA7AfZ39HIlOvZ3QXFulCk8Z+0jinEinct9R8odQp3HflHoSHUA5d9/MLhCXW/fZ9FxL7twnTjjakKuVl3wlkkI5AJo5JXKQRtI5iJvKrvtsbBbUsjhQBgdxQ1laeU/huRaUBfdZ289BRe2+3krRuUKd1nON6Nx3mjgn1JQkiTkIzzUydx/9Qdz0eqYB3YLnjB+RUQGHbm0Nec6OarwDbfeZH4pCnnv0/el0Vmk65b0qBHB6sc/ccznMo+C4ff84K8AML452n2lmwZ/OpMmD58epqQlw7jP0nA8rrZhSYWKfked8zDfNfLOq1LV9oBDvcbOhAh3kTb5Br9tuNq0eB14hJN9nsFsItdd1kwVwqmLyq+qVzrV1gQoofSaF1fWflnGhX2sKF5aSzqdHbSCCgrj+yiHzB/ai+3lHdN7UjLXBw0fvJXUNTXbY1BmoYPzr6lvvFfVGnrRsgr2FIPj+8+bqtm+YsINU2o44c4MzX/CQA+W6JXpCNoiKBwtdR4LgVwFEiqS/uvYLPKGCh6vbkujqpsd5GkhWmpmeQTuY3HN7oBzpRXilezyRpZoCoCaXx7mbq5bEzrseCpGaqYxzbYnDOBrJZt2ny3QQL/ZxjhzJaiVLMk7cc4dENEiWy913fUDB96sjIBok610J4s4KgeeokBxUugX7iMM4R4nkonZ/tE5yz92KicyRQjctFl3rddZWciRH7T3tENE3iYiQnNiOq55OueeOAzclkru+Mr8Ckg+ROZLDrrK7UO05AiRntuPiSTjh2kqJFLp9O2J8uEG1gOR0kEYjEJAZUqgRG555kWw6nYkKaAr9hhEZIWEH6dFv1VtCXKlm9PkNSGSEhMoTi9MIUKqv2/7dAiESJoD3vzADgnqBAxkhwQdJ/taZsiT+cQv1nCESfCYp69fSS309YYbICAm6A4f0hkkG6jcSyAAJOkj7LbSiZ6NnYiI9Z4YEDA7gvLboEaE9Z4YECw5TcFZb0FuMinPmSDDfoQogB0w6njNCAi2RcKLwkOn1SRNIGymE+A7xjkl48Jz+0fOcCRKsEwTdN1E9qM9v+kBWkab4vonisq+I/RwhEuDsp1HQKa6rGeeMkQCDpFUR//6iG+dMkQC+u0NPpCL5YwykiwTYOqAHSVhYcYekXpX6Cii9QOLCijsk9aqEHKTggQpIF0lJhEMKxsDkjz0kdXTAbO54FwYhkS0keK9M0OrCGDQS2He0nrOI9AwFCn7RhQUjJOWyBJtK9J7TR1IuS6DWaEhhZWhIcqCxBc/pIynfBVBGB8LNwkCQbHnuZEjUa+vJkfI4ZxNIE0lZ7pIg5Wsrm5if84iRQu1RCvOw4LFJrv+N8YKHpwIol2cNSmuU0OtSmSoKwp+ME3ke/5c199nZEImW2tpzHIf/k0MNB0m5bRXs8Vqeq7DywbLiPkuHiyOg8QvrEBX+y0fLgvucnJfytZX7rDBczbP/idx9Lk613HNVSBDIo3afJaRWzot7ToTSIqR1n+0MEfccO4Y4/BWl+/SQ1G8aTyug750454mJ+E90A2UrgVzULQKfe044g45NSOY+a2l+P8zPrR4D8VRUTwNHeh5zzyGI+J+9oUiv2Ksv/cPaqw8Qiv2r1epAgQQoqL8lKJxCbDMafYAb7wiRQlitdosbIT6gUfFBw9KmzYp6DLdd6dB4VX4Q01BIhgTqt1nFqHEqbFcJ3vZJhwTqipqzZgT6Bqf5TbZufxbftGaKBIl5o9G6Z3dXI5VExTFjknU/+6XboaKNBGuKXiiYSq5iuOKjD2s2Rtnux9skjbUEBqz/F9uKPq3lPutdk/NYNp32/z9Ziz+t02So39sKfd9ilVZzRaL4R+/HP9AHDxcdyOtYvtdj2VL2caz79JEQb1ysYskZg6X9Q1QK6T5H3fzzNBLbj6VzwMc/viGgtJEC5Etzq0VcB3Sv5snegB9HuM/lmzGfiyyOeDqPTRiL4mixQ3wY7j6jV7I0Xql9/ZyvF4v1fPeK/ugHkMkAKQh+SSMVuYAdr/pziSd/MuGnLWnDYGkkXaTAf8mnRKKKv5RKJ7Akph5SkfzhMSt1R5SVsVI9obSQqoQjX2cWroh2bB/9VQOlgVQkuaulxUugC4up0vL7+GNU1AXQSEWSu3VecGS9bNJC8qTuwyIdJLknR4dRO9q0S6KcSzJQOKQyyd1safgzY5BNmqHqnGBTpeqPfRikPM5NunWIorIXW59OS2GqyfwvGjksrFSPK+eK3y0jZcc8ktgHReJvDxzVj/c/RHaJtkdfWEsEBUQKxv9OJMc4qyGizpx1sn4Vo2BKgZAOPCcAs8i0qVZ1YQFbFPsgSHWc65c4Z0VG1C9BP4gY6b4zRC8KHpvjBMht5itvB+pGfKXmNb6m80chK9uILey72+67+S1HCvzDzYKE6YucCF76aNx323Nerv7Sn6LzB1ydTFe0QF8xpjK6d1/f3wh6XQBxz2HKrTHp3ugtrQYAdgf7o9RT3/V8/paUqjx0cE3PY4THp3lU3mi5TZV+b/3jTb/v+N8M8rNihz2h6j8swmd+hFpuW/tjyFMt/4h30+e7XAnzEEg10yTe9F8Trh2yJlrfaCKZz3PW224mvy7LjKPEcotuMNjf6FZ23Sp9gW3HyPWnp1gE1QY9RLWOS4kdxR18gJo/auK+eQxeCY+JFMecZRFE8YPE0VikGc9/6AN5nvowuowxjVodJF6V0LDfPE3Km9NiiiGTGOvq7r2kW1SgeF2n5UKohxQB18SvBSr2eM0yUvyUpHNoJeBHvK+9aw0Ri+CP7y1Cm7vF5bEkmitTE++7KBakNRBCTt2izF9tS4BNnR2xKN7uerHed9sY/9Ta3+ZNIvS0XVbu05u0JVYcZdvN52pZ+3C5fP2cL7LD4dG5NsJzjd7Mv5h/N4uiOKqU/3D0ygJevFEHUx5ta17HPoOxsqDYYKeyzCr3DQmJpWZZ0bfU1CiUT4NfC9QzIddc0TmjuAXSAc4nEcl5s4h9mjcma13TUJIRHTZHq6xdFzGU/iVYRFn4LvbKqnyALVVfSnN0bmmNSkbRK9lSea7Ra9SeUo7pmKUS3Y+0JnFMRO65Rmv9BIGBki19lrrRKtZ4T8RMLLVdFt6lbokseq7Rwr776imbyJt6yfSe2XGfdxh8bMU5kTQO8iCkbiClrYkotUHnMCFI7V8lC7ftmXwzG9lZnMqr6h3ETfUW2UHiTJKXF+zKIDUvVeKsh/FYy+wPPRCjLv8iRZNGaovgIG6q/b6PJlgkTlu2+1SV70yQvOoFQQaqQ7jQW8bMoKpF9mRxTqTyTTmDccqFT3LbVb7ymgExsuQPnVaZQeyjTf7Qaa59lDJJctuV5r4vymy3/ppohT91sEHFOZHqAo6kfOi16rPD9Vyj5RaxmU0MCyuuVLmv6ZrqlfLt2uForhqo8lB0Bp5raa3MuCSL8/Bco3f5yssid8kfOvU2O3nOkz906ivguE/+0GkZCaaUy4SjDfEUenegUhdJbrvatNsMWHrGnmtpt2B/uJLEO9eoINDfv39PfQsXXXTRRRdddBGN/gPaGwcbpNwESAAAAABJRU5ErkJggg==")
-    document.getElementById("subject").innerHTML = "<b>" + "C언어는 현재 사용하고 있는 거의 모든 컴퓨터 시스템에서 사용할 수 있는 프로그래밍 언어입니다.<br> 프로그래밍 언어란 컴퓨터의 시스템을 구동시키는 소프트웨어를 작성하기 위한 언어" + "</b>";
-    document.getElementById("feature").innerHTML = "<b>" + "고급과정 이수체계이며 평균 교육과정은 6~8개월입니다. <br>자세한 커리큘럼은 아래 버튼을 눌러주세요" + "</b>";
-    }
-    else if(sub === "Python")
-    {
-    document.getElementById("subject").innerHTML = "<b>" + "Phython은 웹 애플리케이션, 소프트웨어 개발, 데이터 과학, 기계 학습(ML)에 널리 사용되는 프로그래밍 언어입니다. 개발자는 Python이 효율적이고 배우기 쉬우며 여러 플랫폼에서 실행될 수 있으므로 Python을 사용합니다. " + "</b>";
-    document.getElementById("feature").innerHTML = "<b>" + "중급과정 이수체계이며 평균 교육과정은 6~8개월입니다. <br>자세한 커리큘럼은 아래 버튼을 눌러주세요" + "</b>";
-
-    }
-    else if(sub === "JAVA")
-    {
-    document.getElementById("subject").innerHTML = "<b>" + "썬에서 개발한 객체지향 언어이다. 가정용 단말기에 적용하려는 목적으로 1992년에 만든 '오크(OAK)'언어에서 비롯되었다. 오크는 상품화되지 못했지만, 인터넷이 발전하면서 인터넷 친화적인 개발 언어" + "</b>";
-    document.getElementById("feature").innerHTML = "<b>" + "고급과정 이수체계이며 평균 교육과정은 6~8개월입니다. <br>자세한 커리큘럼은 아래 버튼을 눌러주세요" + "</b>";
-
-    }
-    else if(sub === "App Inventor")
-    {
-    document.getElementById("subject").innerHTML = "<b>" + "앱 인벤터는 원래 구글이 제공한 오픈 소스 웹 애플리케이션으로, 지금은 매사추세츠 공과대학교에 의해 관리되고 있다. 컴퓨터 프로그래밍을 처음 접하는 사람들이 안드로이드 운영 체제용 응용 소프트웨어를 만들 수 있게 해준다." + "</b>";
-    document.getElementById("feature").innerHTML = "<b>" + "초급과정 이수체계이며 평균 교육과정은 3~4개월입니다. <br>자세한 커리큘럼은 아래 버튼을 눌러주세요" + "</b>";
-    }
-    else if(sub === "Scatch" || sub === "Entry")
-    {
-    document.getElementById("subject").innerHTML = "<b>" + "8세~16세의 아이들을 대상으로 만든 교육용, 블록형 프로그래밍 언어이다. 이 사이트에서 활동하는 사람들인 '스크래쳐'들은 블록을 조립하는 방식으로 프로젝트를 만든다." + "</b>";
-    document.getElementById("feature").innerHTML = "<b>" + "새싹과정 이수체계이며 평균 교육과정은 1~3개월입니다. <br>자세한 커리큘럼은 아래 버튼을 눌러주세요" + "</b>";
-
-    }
-    else if(sub === "웹 페이지 만들기")
-    {
-    document.getElementById("subject").innerHTML = "<b>" + "HTML, CSS, JavaScript를 사용하여 웹 사이트를 빌드하고, 브라우저에서 개발자 도구를 사용하여 작업을 확인하는 방법을 학습하여 웹 개발을 시작합니다." + "</b>";
-    document.getElementById("feature").innerHTML = "<b>" + "중급과정 이수체계이며 평균 교육과정은 4~6개월입니다. <br>자세한 커리큘럼은 아래 버튼을 눌러주세요" + "</b>";
-    }
-  </script>
     <script>
-      var count = 1;
-      var price = (<%-JSON.stringify(Price)%>).toLocaleString("ko-KR");
-      var point = (<%-JSON.stringify(Point)%>).toLocaleString("ko-KR");
-      var result_price = (<%-JSON.stringify(Price)%>).toLocaleString("ko-KR");
-      var discount_price = 0;
-      const input = document.querySelector("#point_use");
-      input.addEventListener("keyup", function (e) {
-      let value = e.target.value;
-      value = Number(value.replaceAll(",", ""));
-      if (isNaN(value)) input.value = 0;
-      else {
-          const formatValue = value.toLocaleString("ko-KR");
-          input.value = formatValue;
+      var link =  document.location.href;
+      var sub = <%-JSON.stringify(Subject)%>
+      if(sub === "C언어")
+      {
+      document.getElementById("image").setAttribute("src","data:image/png;base64,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")
+      document.getElementById("subject1").innerHTML = "<span>" + "C언어는 현재 사용하고 있는 거의 모든 컴퓨터 시스템에서 사용할 수 있는 프로그래밍 언어" + "<br></span>";
+      document.getElementById("subject2").innerHTML = "<span>" + "프로그래밍 언어란 컴퓨터의 시스템을 구동시키는 소프트웨어를 작성하기 위한 언어" + "<br></span>";
+      document.getElementById("subject3").innerHTML = "<span>" + "C언어는 빠른 언어로, 높은 성능과 속도를 요구하는 애플리케이션에 적합" + "<br></span>";
+      document.getElementById("subject4").innerHTML = "<span>" + "윈도우, 리눅스, macOS를 포함한 다양한 플랫폼에서 컴파일되고 실행됨" + "<br></span>";
+      document.getElementById("subject5").innerHTML = "<span>" + "C언어는 현재 사용하고 있는 거의 모든 컴퓨터 시스템에서 사용할 수 있는 프로그래밍 언어" + "<br></span>";
+      document.getElementById("subject6").innerHTML = "<span>" + "절차지향 언어로, 문제를 해결하기 위한 단계별 절차에 초점을 맞춤" + "<br></span>";
+      document.getElementById("feature").innerHTML = "<span>" + "고급과정 이수체계이며 평균 교육과정은 6~8개월입니다. <br>자세한 커리큘럼은 아래 버튼을 눌러주세요" + "<br></span>";
       }
-      });
-      function price_show() {
-      document.querySelector("#price").innerText = price;
+      else if(sub === "Python")
+      {
+      document.getElementById("subject").innerHTML = "<b>" + "Phython은 웹 애플리케이션, 소프트웨어 개발, 데이터 과학, 기계 학습(ML)에 널리 사용되는 프로그래밍 언어입니다. 개발자는 Python이 효율적이고 배우기 쉬우며 여러 플랫폼에서 실행될 수 있으므로 Python을 사용합니다. " + "</b>";
+      document.getElementById("subject3").innerHTML = "<span>" + "C언어는 빠른 언어로, 높은 성능과 속도를 요구하는 애플리케이션에 적합" + "<br></span>";
+      document.getElementById("subject4").innerHTML = "<span>" + "윈도우, 리눅스, macOS를 포함한 다양한 플랫폼에서 컴파일되고 실행됨" + "<br></span>";
+      document.getElementById("subject5").innerHTML = "<span>" + "C언어는 현재 사용하고 있는 거의 모든 컴퓨터 시스템에서 사용할 수 있는 프로그래밍 언어" + "<br></span>";
+      document.getElementById("subject6").innerHTML = "<span>" + "절차지향 언어로, 문제를 해결하기 위한 단계별 절차에 초점을 맞춤" + "<br></span>";
+      document.getElementById("feature").innerHTML = "<span>" + "고급과정 이수체계이며 평균 교육과정은 6~8개월입니다. <br>자세한 커리큘럼은 아래 버튼을 눌러주세요" + "<br></span>";
+      document.getElementById("feature").innerHTML = "<b>" + "중급과정 이수체계이며 평균 교육과정은 6~8개월입니다. <br>자세한 커리큘럼은 아래 버튼을 눌러주세요" + "</b>";
       }
-      price_show();
-      function result_price_show() {
-      document.querySelector("#result_price").innerText = price;
-      }
-      result_price_show();
+      else if(sub === "JAVA")
+      {
+      document.getElementById("subject").innerHTML = "<b>" + "썬에서 개발한 객체지향 언어이다. 가정용 단말기에 적용하려는 목적으로 1992년에 만든 '오크(OAK)'언어에서 비롯되었다. 오크는 상품화되지 못했지만, 인터넷이 발전하면서 인터넷 친화적인 개발 언어" + "</b>";
+      document.getElementById("feature").innerHTML = "<b>" + "고급과정 이수체계이며 평균 교육과정은 6~8개월입니다. <br>자세한 커리큘럼은 아래 버튼을 눌러주세요" + "</b>";
 
-      function Point_show() {
-      document.querySelector("#point").innerText = point;
       }
-      Point_show();
-      function cal_result_price() {
-      discount_price = document.getElementById("point_use").value;
-      discount_price = Number(discount_price.replaceAll(",", ""));
-      if (discount_price <= (<%-JSON.stringify(Point)%>)) {
-          result_price = (count * (<%-JSON.stringify(Price)%>)) - discount_price;
-          document.querySelector("#result_price").innerText =
-          result_price.toLocaleString("ko-KR");
-      } else alert("포인트 초과");
+      else if(sub === "App Inventor")
+      {
+      document.getElementById("subject").innerHTML = "<b>" + "앱 인벤터는 원래 구글이 제공한 오픈 소스 웹 애플리케이션으로, 지금은 매사추세츠 공과대학교에 의해 관리되고 있다. 컴퓨터 프로그래밍을 처음 접하는 사람들이 안드로이드 운영 체제용 응용 소프트웨어를 만들 수 있게 해준다." + "</b>";
+      document.getElementById("feature").innerHTML = "<b>" + "초급과정 이수체계이며 평균 교육과정은 3~4개월입니다. <br>자세한 커리큘럼은 아래 버튼을 눌러주세요" + "</b>";
       }
-      var price_change = function () {
-      price = (count * (<%-JSON.stringify(Price)%>)).toLocaleString("ko-KR");
-      document.querySelector("#price").innerText = price;
-      document.querySelector("#result_price").innerText = price;
-      };
-      var countUp = function () {
-      count = count + 1;
-      document.querySelector("#count").innerText = count;
-      };
-      var countDown = function () {
-      if (count > 1) {
-          count = count - 1;
-          document.querySelector("#count").innerText = count;
-      }
-      };
-      var countRset = function () {
-      count = 1;
-      price = (count * (<%-JSON.stringify(Price)%>)).toLocaleString("ko-KR");
-      document.querySelector("#price").innerText = price;
-      document.querySelector("#count").innerText = count;
-      };
-      const IMP = window.IMP;
-      IMP.init("imp71467660");
-      const make_merchant_uid = () => {
-      const current_time = new Date();
-      const year = current_time.getFullYear().toString();
-      const month = (current_time.getMonth() + 1).toString();
-      const day = current_time.getDate().toString();
-      const hour = current_time.getHours().toString();
-      const minute = current_time.getMinutes().toString();
-      const second = current_time.getSeconds().toString();
-      const merchant_uid =
-          "MIHEE" + year + month + day + hour + minute + second;
-      return merchant_uid;
-      };
-      const merchant_uid = make_merchant_uid();
+      else if(sub === "Scatch" || sub === "Entry")
+      {
+      document.getElementById("subject").innerHTML = "<b>" + "8세~16세의 아이들을 대상으로 만든 교육용, 블록형 프로그래밍 언어이다. 이 사이트에서 활동하는 사람들인 '스크래쳐'들은 블록을 조립하는 방식으로 프로젝트를 만든다." + "</b>";
+      document.getElementById("feature").innerHTML = "<b>" + "새싹과정 이수체계이며 평균 교육과정은 1~3개월입니다. <br>자세한 커리큘럼은 아래 버튼을 눌러주세요" + "</b>";
 
-      function requestPay() {
-      if ((<%-JSON.stringify(Course_Active)%>) == 1) {
-          alert("이미 결제가 이뤄진 강의입니다.");
-          window.location.href = "http://localhost:54213/enroll/sub";
-      } else {
-          // IMP.request_pay(param, callback) 결제창 호출
-          IMP.request_pay(
-          {
-              pg: "html5_inicis.INIpayTest", // version 1.1.0부터 지원.
-              /*
-                  'kakao':카카오페이,
-                  html5_inicis':이니시스(웹표준결제)
-                      'nice':나이스페이
-                      'jtnet':제이티넷
-                      'uplus':LG유플러스
-                      'danal':다날
-                      'payco':페이코
-                      'syrup':시럽페이
-                      'paypal':페이팔
-                  */
-              pay_method: "card",
-              /*
-                  'samsung':삼성페이,
-                  'card':신용카드,
-                  'trans':실시간계좌이체,
-                  'vbank':가상계좌,
-                  'phone':휴대폰소액결제
-              */
-              merchant_uid: merchant_uid,
-              /*
-                  merchant_uid에 경우
-                  https://docs.iamport.kr/implementation/payment
-                  위에 url에 따라가시면 넣을 수 있는 방법이 있습니다.
-                  참고하세요.
-                  나중에 포스팅 해볼게요.
-                  */
-              name: <%-JSON.stringify(Subject)%>,
-              //결제창에서 보여질 이름
-              amount: 100, //result_price,
-              //가격
-              buyer_email: <%-JSON.stringify(Email_Address)%>,
-              buyer_name: <%-JSON.stringify(Name)%>,
-              buyer_tel: <%-JSON.stringify(Phone_Number)%>,
-              buyer_addr: <%-JSON.stringify(Address)%>,
-              buyer_postcode: 1,
-
-              /*
-                  모바일 결제시,
-                  결제가 끝나고 랜딩되는 URL을 지정
-                  (카카오페이, 페이코, 다날의 경우는 필요없음. PC와 마찬가지로 callback함수로 결과가 떨어짐)
-                  */
-          },
-          function (rsp) {
-              if (rsp.status == "paid" && rsp.paid_amount == 100) {
-              if (rsp.success) {
-                  var count_num = document.getElementById("count").textContent;
-                  var original_price =
-                  document.getElementById("price").textContent;
-                  var final_price =
-                  document.getElementById("result_price").textContent;
-                  discount_price = document.getElementById("point_use").value;
-                  discount_price = Number(discount_price.replaceAll(",", ""));
-                  original_price = Number(original_price.replaceAll(",", ""));
-                  final_price = Number(final_price.replaceAll(",", ""));
-                  var msg = "결제가 완료되었습니다.";
-                  msg += "고유ID : " + rsp.imp_uid;
-                  msg += "상점 거래ID : " + rsp.merchant_uid;
-                  msg += "결제 금액 : " + rsp.paid_amount;
-                  msg += "카드 승인번호 : " + rsp.apply_num;
-                  alert(msg);
-                  window.location.href =
-                  "http://localhost:54213/enroll/payment/complete?point=" +
-                  discount_price +
-                  "&course_id=" +
-                  <%-JSON.stringify(Course_ID)%> +
-                  "&time_id=" +
-                  <%-JSON.stringify(Time_ID)%> +
-                  "&date_id=" +
-                  <%-JSON.stringify(Date_ID)%> +
-                  "&teacher_id=" +
-                  <%-JSON.stringify(Teacher_ID)%> +
-                  "&count=" +
-                  count_num +
-                  "&merchant_uid=" +
-                  rsp.merchant_uid +
-                  "&original_price=" +
-                  original_price +
-                  "&final_price=" +
-                  final_price;
-              } else {
-                  var msg = "결제에 실패하였습니다.";
-                  msg += "에러내용 : " + rsp.error_msg;
-                  alert(msg);
-              }
-              } else {
-              alert(rsp);
-              alert("위조");
-              }
-          }
-          );
-        }
+      }
+      else if(sub === "웹 페이지 만들기")
+      {
+      document.getElementById("subject").innerHTML = "<b>" + "HTML, CSS, JavaScript를 사용하여 웹 사이트를 빌드하고, 브라우저에서 개발자 도구를 사용하여 작업을 확인하는 방법을 학습하여 웹 개발을 시작합니다." + "</b>";
+      document.getElementById("feature").innerHTML = "<b>" + "중급과정 이수체계이며 평균 교육과정은 4~6개월입니다. <br>자세한 커리큘럼은 아래 버튼을 눌러주세요" + "</b>";
       }
     </script>
   </body>
   <!-- Footer-->
   <footer class="bg-light py-5">
-    <div class="container px-4 px-lg-5"><div class="small text-center text-muted"><a href="/policy/private">개인정보처리방침</a> | <a href="/policy/tos">이용약관</a></div></div>
-    <div class="container px-4 px-lg-5"><div class="small text-center text-muted">코딩나라 | 대표자: 장영재, 박민수 | 사업자번호: 148-14-01860 사업자 정보 확인</div></div>
-    <div class="container px-4 px-lg-5"><div class="small text-center text-muted">주소: 서울특별시 서대문구 북가좌동</div></div>
-    <br>
-    <div class="container px-4 px-lg-5"><div class="small text-center text-muted">Copyright &copy;코딩나라(Coding-nara)</div></div>
-</footer>
-<!-- Bootstrap core JS-->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-<!-- SimpleLightbox plugin JS-->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/SimpleLightbox/2.1.0/simpleLightbox.min.js"></script>
-<!-- Core theme JS-->
-<script src="/js/scripts.js"></script>
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
-<!-- * *                               SB Forms JS                               * *-->
-<!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
-<script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
-</body>
+    <div class="container px-4 px-lg-5">
+      <div class="small text-center text-muted">
+        <a href="/policy/private">개인정보처리방침</a> |
+        <a href="/policy/tos">이용약관</a>
+      </div>
+    </div>
+    <div class="container px-4 px-lg-5">
+      <div class="small text-center text-muted">
+        코딩나라 | 대표자: 장영재, 박민수 | 사업자번호: 148-14-01860 사업자 정보
+        확인
+      </div>
+    </div>
+    <div class="container px-4 px-lg-5">
+      <div class="small text-center text-muted">
+        주소: 서울특별시 서대문구 북가좌동
+      </div>
+    </div>
+    <br />
+    <div class="container px-4 px-lg-5">
+      <div class="small text-center text-muted">
+        Copyright &copy;코딩나라(Coding-nara)
+      </div>
+    </div>
+  </footer>
+  <!-- Bootstrap core JS-->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- SimpleLightbox plugin JS-->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/SimpleLightbox/2.1.0/simpleLightbox.min.js"></script>
+  <!-- Core theme JS-->
+  <script src="/js/scripts.js"></script>
+  <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
+  <!-- * *                               SB Forms JS                               * *-->
+  <!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
+  <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
+  <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
 </html>
