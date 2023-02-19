@@ -523,14 +523,14 @@ form {
   height: 30px;
   position: relative;
   border: 4px solid #Fff;
-  animation: loader 2s infinite ease;
+  animation: loader 100s infinite ease;
 }
 .loader-inner {
   vertical-align: top;
   display: inline-block;
   width: 100%;
   background-color: #fff;
-  animation: loader-inner 2s infinite ease-in;
+  animation: loader-inner 100s infinite ease-in;
 }
 
 @keyframes loader {

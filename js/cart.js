@@ -251,7 +251,7 @@ let basket = {
         })
         return ({p_price, p_point, nickname, email_address, phone_number, address, postcode});
     },
-    payment : function(Couser_Active){
+    payment : function(Course_Active){
         const IMP = window.IMP;
         IMP.init("imp71467660");
         const make_merchant_uid = () => {
@@ -277,8 +277,8 @@ let basket = {
             var phone_number = JSON.stringify(price_point_name.phone_number).replace(reg, "");
             var address = JSON.stringify(price_point_name.address).replace(reg, "");
             var postcode = JSON.stringify(price_point_name.postcode);
-            if (Couser_Active== 1) {
-                alert("이미 결제가 이뤄진 강의입니다.");
+            if (Course_Active== 1) {
+                alert("이미 결제가 이뤄진 강의가 존재합니다.");
                 window.location.href = "http://localhost:54213/enroll/sub";
             } else {
                 // IMP.request_pay(param, callback) 결제창 호출
@@ -365,6 +365,7 @@ let basket = {
             item.firstElementChild.nextElementSibling.innerText;
           var time = str_split[0];
           var day = str_split[1];
+          console.log("[window onload] : end");
           $.ajax({
             type: "post",
             url: "/enroll/delete_cart",
@@ -375,8 +376,8 @@ let basket = {
               Time: time,
               Day: day,
               Count: count,
-            },
-          });
+                },
+            })
         });
     }
 }

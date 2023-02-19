@@ -17,6 +17,7 @@ const request = require('request-promise');
 const date = require('date-and-time');
 let start = Date.now();
 const date_now = new Date(start);
+var authCheck = require('../lib_login/authCheck.js');
 require("dotenv").config();
 ///
 var platform_type = '';
@@ -43,7 +44,8 @@ router.get('/login', function (request, response) {
         if(request.session.type == 'kakao') request.session.destroy();
         else if(request.session.type == 'naver') request.session.destroy();
         response.render('./auth/auth_login_main',{
-            API_URL : api_url
+            API_URL : api_url,
+            authCheck : authCheck.statusUI(request, response),
         })
     }
 });
@@ -371,7 +373,9 @@ router.post('/register_process', function(request, response) {
 //find_Id && find_Passwrd
 
 router.get('/find_ID', (request,response)=>{
-    response.render('./auth/auth_find_id')
+    response.render('./auth/auth_find_id',{
+        authCheck : authCheck.statusUI(request, response),
+    })
 })
 router.post('/find_id_process', (request, response) => {
     var username = sanitizeHtml(request.body.username)
@@ -381,6 +385,7 @@ router.post('/find_id_process', (request, response) => {
         if(result.length > 0 && result[0].Platform_type == 'local'){
             console.log(result[0].Email_Address);
             response.render('./auth/auth_find_id_success',{
+                authCheck : authCheck.statusUI(request, response),
                 Email_Address : result[0].Email_Address,
             });
         }else{
@@ -390,7 +395,9 @@ router.post('/find_id_process', (request, response) => {
     })
 })
 router.get('/find_PW', (request, response) => {
-    response.render('./auth/auth_find_password');
+    response.render('./auth/auth_find_password',{
+        authCheck : authCheck.statusUI(request, response),
+    });
 })
 router.post('/find_pw_process', (request,response) => {
     var username = sanitizeHtml(request.body.username)
@@ -401,7 +408,9 @@ router.post('/find_pw_process', (request,response) => {
             if(request.session.email_check == 1){
                 request.session.username = username
                 request.session.Email_Address = Email_Address
-                response.render('./auth/auth_change_password');
+                response.render('./auth/auth_change_password',{
+                    authCheck : authCheck.statusUI(request, response),
+                });
             }else{
                 response.send(`<script type="text/javascript">alert("이메일 인증을 해주세요."); 
             document.location.href="/auth/find_PW";</script>`);
@@ -631,7 +640,9 @@ router.get('/naverLogin', function (request, response) {
     if (!tokens.verify(request.session.secret, token)) {
       throw new Error('invalid token!')
     }else{
-        response.render('./auth/auth_login_naver')
+        response.render('./auth/auth_login_naver',{
+            authCheck : authCheck.statusUI(request, response),
+        })
     }
 });
 
