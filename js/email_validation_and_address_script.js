@@ -306,3 +306,10 @@ function Change(){
         
     })
 }
+function myinfo_change(){
+    var email = document.getElementById('EA').value;
+    var isOK = document.getElementById('hideCK').value;
+    var username = document.getElementById('name').value;
+
+    window.location.href="http://localhost:54213/myinfo/validate_Mypage_Email?Email=" + email + "&isOkay=" + isOK + "&username=" + username; 
+}

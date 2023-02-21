@@ -4924,7 +4924,6 @@ textarea.form-control-lg {
   margin-top: -0.25rem;
   margin-bottom: 0;
 }
-
 .card-text:last-child {
   margin-bottom: 0;
 }
@@ -12074,7 +12073,7 @@ header.masthead_enroll h1, header.masthead_enroll .h1 {
     margin-right: 3px;
 }
 #image{
-    width: 100px;
+    width: 120px;
     height: 110px;
 }
 .body__title{
@@ -12109,4 +12108,106 @@ header.masthead_enroll h1, header.masthead_enroll .h1 {
 .body__list{
     margin-left: 20px;
     margin-bottom: 12px;
+}
+.col_title{
+  margin : 10px 30px 10px 30px;
+}
+.number-circle-list {
+  list-style: none;
+  padding-left: 1rem;
+  counter-reset: circle-counter;
+}
+.number-circle-list {
+  list-style: none;
+  padding-left: 1rem;
+  counter-reset: circle-counter;
+}
+
+.number-circle-list--list-item {
+  counter-increment: circle-counter;
+  margin-bottom: 0.25rem;
+}
+.number-circle-list--list-item:before {
+  content: counter(circle-counter);
+  background-color: #e1e1e1;
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 50%;
+  display: inline-block;
+  font-size: 0.75rem;
+  line-height: 1.5rem;
+  color: black;
+  text-align: center;
+  margin-right: 0.5rem;
+  position: relative;
+  top: -2px;
+}
+.number-circle-list--list-item:last-child {
+  margin-bottom: 0;
+}
+.number-circle-list--list-item .number-circle-list--list-item {
+  margin-left: 0.25rem;
+}
+
+.number-circle-list--primary-color .number-circle-list--list-item:before {
+  background-color: #0d5cab;
+  color: white;
+}
+
+.number-circle-list--secondary-color .number-circle-list--list-item:before {
+  background-color: #72c267;
+  color: white;
+}
+
+.number-circle-list--tertiary-color .number-circle-list--list-item:before {
+  background-color: #168dde;
+  color: white;
+}
+.number-circle-list--list-item {
+  counter-increment: circle-counter;
+  margin-bottom: 0.25rem;
+}
+.number-circle-list--list-item:before {
+  content: counter(circle-counter);
+  background-color: #e1e1e1;
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 50%;
+  display: inline-block;
+  font-size: 0.75rem;
+  line-height: 1.5rem;
+  color: black;
+  text-align: center;
+  margin-right: 0.5rem;
+  position: relative;
+  top: -2px;
+}
+.number-circle-list--list-item:last-child {
+  margin-bottom: 0;
+}
+.number-circle-list--list-item .number-circle-list--list-item {
+  margin-left: 0.25rem;
+}
+
+.number-circle-list--primary-color .number-circle-list--list-item:before {
+  background-color: #0d5cab;
+  color: white;
+}
+
+.number-circle-list--secondary-color .number-circle-list--list-item:before {
+  background-color: #72c267;
+  color: white;
+}
+
+.number-circle-list--tertiary-color .number-circle-list--list-item:before {
+  background-color: #168dde;
+  color: white;
+}
+#body_img1, #body_img2{
+  width: 855px;
+  height: 450px;
+}
+#body_img3{
+  width: 855px;
+  height: 600px;
 }
