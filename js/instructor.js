@@ -14,9 +14,15 @@ button_click.onclick= function disable(){
     button_click.disable= false;
     end=0;
   }
-
 }
 
-  
+const button = document.getElementById("modal");
+const dialog = document.getElementById("dialog");
+
+button.addEventListener("click", () =>{
+  dialog.showModal();
+})
+
+
 
   
