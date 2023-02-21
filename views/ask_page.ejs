@@ -42,6 +42,7 @@
       src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"
     ></script>
   </head>
+
   <body id="page-top">
     <div class="loader-wrapper">
       <span class="loader"><span class="loader-inner"></span></span>
@@ -97,7 +98,7 @@
               <a class="nav-link" href="/ask">고객센터</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/login"><%-authCheck %></a>
+              <a class="nav-link" href="/login"> <%-authCheck %> </a>
             </li>
           </ul>
         </div>
@@ -121,82 +122,225 @@
       </div>
     </header>
     <!-- About-->
-    <details>
-      <summary>강의는 얼마인가요?</summary>
-      <div class="tpt">
-        코딩나라는 총 7가지의 다양한 코딩 강의를 제공하고 있으며, 각 강의의
-        가격은 아래와 같습니다. 1. C언어 → 30,000(1회) 2. Python → 3.
+    <div class="accordion" id="accordionExample">
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="headingOne">
+          <button
+            class="accordion-button"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#collapseOne"
+            aria-expanded="true"
+            aria-controls="collapseOne"
+          >
+            <strong>강의는 얼마인가요?</strong>
+          </button>
+        </h2>
+        <div
+          id="collapseOne"
+          class="accordion-collapse collapse show"
+          aria-labelledby="headingOne"
+          data-bs-parent="#accordionExample"
+        >
+          <div class="accordion-body">
+            코딩나라는 총 7가지의 다양한 코딩 강의를 제공하고 있으며, 각 강의의
+            가격은 아래와 같습니다. 1. C언어 → 30,000(1회) 2. Python →
+            30.000(1회) 3. Mincraft Programming → 40.000(1회) 4. App Inventor →
+            40.000(1회) 5. Scatch, Entry → 30.000(1회) 6. 웹 페이지 만들기 →
+            30.000(1회)
+          </div>
+        </div>
       </div>
-    </details>
-    <details>
-      <summary>강의 진행 방식은 어떻게 되나요?</summary>
-      <div class="tpt">
-        코딩나라의 강의 진행 방식은 오로지 강사와 1:1 온라인 과외 형식으로
-        진행됩니다.
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="headingTwo">
+          <button
+            class="accordion-button collapsed"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#collapseTwo"
+            aria-expanded="false"
+            aria-controls="collapseTwo"
+          >
+            <strong>문의는 어떻게 하나요?</strong>
+          </button>
+        </h2>
+        <div
+          id="collapseTwo"
+          class="accordion-collapse collapse"
+          aria-labelledby="headingTwo"
+          data-bs-parent="#accordionExample"
+        >
+          <div class="accordion-body">
+            F&A에서 원하는 답변을 찾지 못하셨으면, 아래 보이시는 고객센터
+            연락처로 직접 연락을 주시거나 이메일로 문의 주시면 됩니다.
+          </div>
+        </div>
       </div>
-    </details>
-    <details>
-      <summary>문의는 어떻게 하나요?</summary>
-      <div class="tpt">
-        F&A에서 원하는 답변을 찾지 못하셨으면, 아래 보이시는 고객센터 연락처로
-        직접 연락을 주시거나 이메일로 문의 주시면 됩니다.
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="headingThree">
+          <button
+            class="accordion-button collapsed"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#collapseThree"
+            aria-expanded="false"
+            aria-controls="collapseThree"
+          >
+            <strong>포인트는 사라지나요?</strong>
+          </button>
+        </h2>
+        <div
+          id="collapseThree"
+          class="accordion-collapse collapse"
+          aria-labelledby="headingThree"
+          data-bs-parent="#accordionExample"
+        >
+          <div class="accordion-body">
+            코딩나라 홈페이지에서 얻으신 포인트는 사라지지 않습니다.
+          </div>
+        </div>
       </div>
-    </details>
-    <details>
-      <summary>포인트는 사라지나요?</summary>
-      <div class="tpt">
-        코딩나라 홈페이지에서 얻으신 포인트는 사라지지 않습니다.
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="headingFive">
+          <button
+            class="accordion-button collapsed"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#collapseFive"
+            aria-expanded="false"
+            aria-controls="collapseFive"
+          >
+            <strong>커리큘럼에 적힌대로 따라가야 하나요?</strong>
+          </button>
+        </h2>
+        <div
+          id="collapseFive"
+          class="accordion-collapse collapse"
+          aria-labelledby="headingFive"
+          data-bs-parent="#accordionExample"
+        >
+          <div class="accordion-body">
+            코딩나라 홈페이지에서 확인할 수 있는 커리큘럼은 저희가 해당 과목에
+            대한 희망 아이의 나이와 도움이 되는 선수과목을 제시한 것이며, 굳이
+            따라가실 필요는 없습니다.
+          </div>
+        </div>
       </div>
-    </details>
-    <details>
-      <summary>커리큘럼에 적힌대로 따라가야 하나요?</summary>
-      <div class="tpt">
-        코딩나라 홈페이지에서 확인할 수 있는 커리큘럼은 저희가 해당 과목에 대한
-        희망 아이의 나이와 도움이 되는 선수과목을 제시한 것이며, 굳이 따라가실
-        필요는 없습니다.
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="headingFour">
+          <button
+            class="accordion-button collapsed"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#collapseFour"
+            aria-expanded="false"
+            aria-controls="collapseFour"
+          >
+            <strong>우리 아이는 어떤 강의를 들어야 할까요?</strong>
+          </button>
+        </h2>
+        <div
+          id="collapseFour"
+          class="accordion-collapse collapse"
+          aria-labelledby="headingFour"
+          data-bs-parent="#accordionExample"
+        >
+          <div class="accordion-body">
+            아이가 어떤 강의를 들어야할 지 고민이라면, 고객센터 연락처(고객센터
+            연락처)로 연락주시면 자세한 상담 진행해 하도록 하겠습니다.
+          </div>
+        </div>
       </div>
-    </details>
-    <details>
-      <summary>우리 아이는 어떤 강의를 들어야 할까요?</summary>
-      <div class="tpt">
-        아이가 어떤 강의를 들어야할 지 고민이라면, 고객센터 연락처(고객센터
-        연락처)로 연락주시면 자세한 상담 진행해 하도록 하겠습니다.
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="headingSix">
+          <button
+            class="accordion-button collapsed"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#collapseSix"
+            aria-expanded="false"
+            aria-controls="collapseSix"
+          >
+            <strong>자격증 커리큘럼은 어떻게 신청하나요?</strong>
+          </button>
+        </h2>
+        <div
+          id="collapseSix"
+          class="accordion-collapse collapse"
+          aria-labelledby="headingSix"
+          data-bs-parent="#accordionExample"
+        >
+          <div class="accordion-body">
+            자격증 커리큘럼 같은 경우 자격증을 취득할 수 있는 강의를 선택한 후
+            고객센터로 연락주시면 해당 강사님께 전달하여 준비할 수 있도록
+            도와드립니다.
+          </div>
+        </div>
       </div>
-    </details>
-    <details>
-      <summary>자격증 커리큘럼은 어떻게 신청하나요?</summary>
-      <div class="tpt">
-        자격증 커리큘럼 같은 경우 자격증을 취득할 수 있는 강의를 선택한 후
-        고객센터로 연락주시면 해당 강사님께 전달하여 준비할 수 있도록
-        도와드립니다.
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="headingSeven">
+          <button
+            class="accordion-button collapsed"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#collapseSeven"
+            aria-expanded="false"
+            aria-controls="collapseSeven"
+          >
+            <strong>진행되고 있는 이벤트는 뭔가요?</strong>
+          </button>
+        </h2>
+        <div
+          id="collapseSeven"
+          class="accordion-collapse collapse"
+          aria-labelledby="headingSeven"
+          data-bs-parent="#accordionExample"
+        >
+          <div class="accordion-body">
+            현재 진행되고 있는 이벤트는 아래와 같습니다. 1. 추천인 가입 이벤트로
+            포인트 30,000원을 지급 2. 강의 듣고, 리뷰 작성할 시 5,000원을 지급
+          </div>
+        </div>
       </div>
-    </details>
-    <details>
-      <summary>진행되고 있는 이벤트는 뭔가요?</summary>
-      <div class="tpt">
-        현재 진행되고 있는 이벤트는 아래와 같습니다. 1. 추천인 가입 이벤트로
-        포인트 30,000원을 지급 2. 강의 듣고, 리뷰 작성할 시 5,000원을 지급
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="headingEight">
+          <button
+            class="accordion-button collapsed"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#collapseEight"
+            aria-expanded="false"
+            aria-controls="collapseEight"
+          >
+            <strong>강의를 환불 받고 싶습니다.</strong>
+          </button>
+        </h2>
+        <div
+          id="collapseEight"
+          class="accordion-collapse collapse"
+          aria-labelledby="headingEight"
+          data-bs-parent="#accordionExample"
+        >
+          <div class="accordion-body">
+            아래 조항을 살펴보시고 고객센터 연락처(고객센터 연락처)로 연락주시면
+            자세한 상담 진행해드리겠습니다. - 개인과외교습자는 학습자가 수강을
+            계속할 수 없는 경우 또는 학원의 등록말소, 교습소 폐지 등으로 교습을
+            계속할 수 없는 경우 학습자로부터 받은 교습비 등을 반환 사유
+            발생일부터 5일 이내에 반환해야 합니다(「학원의 설립·운영 및
+            과외교습에 관한 법률」 제18조제1항 및 「학원의 설립·운영 및
+            과외교습에 관한 법률 시행령」 제18조제3항). - 교습비 등 반환사유 및
+            반환기준(「학원의 설립·운영 및 과외교습에 관한 법률
+            시행령」제18조제2항·제3항 및 별표 4) (강의 환불 이미지 추가)
+          </div>
+        </div>
       </div>
-    </details>
-    <details>
-      <summary>강의를 환불 받고 싶습니다.</summary>
-      <div class="tpt">
-        아래 조항을 살펴보시고 고객센터 연락처(고객센터 연락처)로 연락주시면
-        자세한 상담 진행해드리겠습니다. - 개인과외교습자는 학습자가 수강을
-        계속할 수 없는 경우 또는 학원의 등록말소, 교습소 폐지 등으로 교습을
-        계속할 수 없는 경우 학습자로부터 받은 교습비 등을 반환 사유 발생일부터
-        5일 이내에 반환해야 합니다(「학원의 설립·운영 및 과외교습에 관한 법률」
-        제18조제1항 및 「학원의 설립·운영 및 과외교습에 관한 법률 시행령」
-        제18조제3항). - 교습비 등 반환사유 및 반환기준(「학원의 설립·운영 및
-        과외교습에 관한 법률 시행령」제18조제2항·제3항 및 별표 4) (강의 환불
-        이미지 추가)
-      </div>
-    </details>
+    </div>
 
     <style>
       details {
-        margin: 5px 0 10px;
+        margin: 5px 10px 10px 30px;
       }
+
       details > summary {
         background: #fff;
         color: #444;
@@ -208,6 +352,7 @@
         text-align: left;
         box-shadow: 1px 1px 2px gray;
       }
+
       details > summary::-webkit-details-marker {
         background: #fff;
         color: #444;
@@ -215,22 +360,26 @@
         transform: rotate3d(0, 0, 1, 90deg);
         transition: transform 0.25s;
       }
+
       details[open] > summary::-webkit-details-marker {
         transform: rotate3d(0, 0, 1, 180deg);
       }
+
       details[open] > summary {
         background: #fff;
       }
+
       details[open] > summary ~ * {
         animation: reveal 0.5s;
       }
+
       .tpt {
         background: #fff;
         color: #444;
         margin: 5px 0 10px;
         padding: 5px 10px;
         line-height: 25px;
-        border-radius: 5px;
+        border-radius: 2px;
         box-shadow: 1px 1px 2px gray;
       }
 
@@ -239,6 +388,7 @@
           opacity: 0;
           transform: translate3d(0, -30px, 0);
         }
+
         to {
           opacity: 1;
           transform: translate3d(0, 0, 0);

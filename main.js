@@ -5,6 +5,7 @@ const express = require('express')
 const session = require('express-session')
 const bodyParser = require('body-parser');
 const FileStore = require('session-file-store')(session)
+const fs = require("fs");
 const app = express()
 const port = 54213
 var qs = require('querystring');
@@ -15,8 +16,21 @@ var ask_Router = require('./lib/ask_page');
 var mypage_Router = require('./lib/my_page');
 var enroll_Router = require('./lib/enroll_page');
 var review_Router = require('./lib/review_page');
+
+const multer = require("multer");
 const handleListen = () => console.log("Listen on http://localhost:54213");
 const __dirname = path.resolve();
+
+const storage = multer.diskStorage({ //파일저장
+  destination: function (req, file, cb) {
+    cb(null, 'uploads')
+  },
+  filename: function (req, file, cb) {
+    cb(null, file.fieldname + '-' + Date.now())
+  }
+});
+
+const upload = multer({ storage: storage })
 /*nsp check로 package.json에 있는 dependencies를 체크하여 문제가 있는 것들을 알려준다.*/
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -27,7 +41,8 @@ app.use("/CSS", express.static(__dirname + "/CSS"));
 app.use("/static", express.static(__dirname + "/static"));
 app.use("/image", express.static(__dirname + "/image"));
 app.use("/assets", express.static(__dirname + "/assets"));
-
+app.use("/uploads", express.static(__dirname + "/uploads"));
+// app.use("/uploads", express.static("/uploads"));
 
 app.set('views', __dirname + "/views" );
 app.set("view engine", "ejs");
@@ -131,6 +146,15 @@ app.get('/', (req, res) => {
   apiLimiter,
   res.redirect('/main');
 })
+app.post('/upload', upload.single('image'), (req, res, next) => {
+  console.log(req.file.path);
+  
+  res.status(200).send({
+      message: "Ok",
+      fileInfo: req.file
+  })
+});
+
 
 app.get("/room", (req, res) => {
   res.render("home");
@@ -196,6 +220,13 @@ wsServer.on("connection", (socket) => {
   });
 });
 
-httpServer.listen(port, apiLimiter,handleListen);
+httpServer.listen(port, apiLimiter,handleListen =>{
+  const dir = "./uploads";
+    if(!fs.existsSync(dir)) {
+    	fs.mkdirSync(dir);
+    }
+    console.log("서버 실행");
+
+});
 
  

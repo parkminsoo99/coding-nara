@@ -275,6 +275,19 @@
       </div>
     </section>
     <p></p>
+    <button id="modal">Show modal</button>
+    <dialog id="dialog">
+      강사세부정보입니다.<br>
+      <%-Name %><br>
+
+      <form method="dialog">
+        <button>닫기</button>
+      </form>
+    </dialog>
+    <form id="form" action="/myinfo/upload" method="post" enctype="multipart/form-data" accept="image/gif, image/jpeg, image/png, image/webp">
+      <input type="file" name="image" />
+      <button type="submit">업로드</button>
+    </form>
   </body>
   <!-- Footer-->
   <footer class="bg-light py-5">

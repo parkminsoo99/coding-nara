@@ -319,6 +319,7 @@ Number.prototype.formatNumber = function(){
     let nstr = (this + '');
     while (regex.test(nstr)) nstr = nstr.replace(regex, '$1' + ',' + '$2');
     return nstr;
+<<<<<<< HEAD
 };
 
 function Show_Course_info(Subject){
@@ -636,3 +637,6 @@ function Show_Course_info(Subject){
       document.getElementById('body_img1_description_4').style.display = 'none'
       }
 }
+=======
+};
+>>>>>>> origin/Test
