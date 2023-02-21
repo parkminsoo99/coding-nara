@@ -114,89 +114,82 @@
         </div>
         <div class="row gx-4 gx-lg-5 justify-content-center mb-5">
           <div class="col-lg-6">
-            <form
-              id="contactForm"
-              action="/myinfo/validate_Mypage_Email"
-              method="post"
-            >
-              <!-- Name input-->
-              <div class="form-floating mb-3">
-                <input
-                  class="form-control"
-                  id="name"
-                  name="username"
-                  type="text"
-                  placeholder="Enter your name..."
-                  data-sb-validations="required"
-                  required
-                />
-                <label for="name"
-                  >이름<span class="text-danger"> *</span></label
-                >
-                <div class="invalid-feedback" data-sb-feedback="name:required">
-                  A name is required.
-                </div>
+            <!-- Name input-->
+            <div class="form-floating mb-3">
+              <input
+                class="form-control"
+                id="name"
+                name="username"
+                type="text"
+                placeholder="Enter your name..."
+                data-sb-validations="required"
+                required
+              />
+              <label for="name">이름<span class="text-danger"> *</span></label>
+              <div class="invalid-feedback" data-sb-feedback="name:required">
+                A name is required.
               </div>
-              <!-- Email address input-->
-              <div class="form-floating mb-3">
-                <input
-                  id="EA"
-                  name="EA"
-                  type="email"
-                  class="form-control form-control-lg inverse-mode"
-                  data-parsley-error-message="null"
-                  placeholder="name@example.com"
-                  data-sb-validations="required,email"
-                  required
-                />
-                <label class="control-label"
-                  >이메일<span class="text-danger"> *</span>
-                </label>
-                <div class="invalid-feedback" data-sb-feedback="email:required">
-                  An email is required.
-                </div>
-                <div class="invalid-feedback" data-sb-feedback="email:email">
-                  Email is not valid.
-                </div>
-                <input
-                  id="CEA"
-                  name="CEA"
-                  type="text"
-                  class="form-control form-control-lg inverse-model mt-3 d-none"
-                  data-parsley-error-message="null"
-                  data-parsley-errors-container="#err-msg2"
-                />
-                <div
-                  class="d-flex justify-content-between align-items-center mt-2"
-                >
-                  <div id="err-msg2" class="text-realred"></div>
-                  <input
-                    type="button"
-                    id="sendBtn"
-                    class="btn btn-primary btn-block btn-lg ml-auto custombtn"
-                    value="인증번호 요청"
-                    onclick="password_emailSend('EA')"
-                  />
-                  <input
-                    type="button"
-                    id="cerBtn"
-                    class="btn btn-primary btn-block btn-lg mt-0 ml-auto custombtn d-none"
-                    value="인증하기"
-                    onclick="emailCer('CEA')"
-                  />
-                  <input type="hidden" id="hideCK" name="hideCK" value="" />
-                </div>
+            </div>
+            <!-- Email address input-->
+            <div class="form-floating mb-3">
+              <input
+                id="EA"
+                name="EA"
+                type="email"
+                class="form-control form-control-lg inverse-mode"
+                data-parsley-error-message="null"
+                placeholder="name@example.com"
+                data-sb-validations="required,email"
+                required
+              />
+              <label class="control-label"
+                >이메일<span class="text-danger"> *</span>
+              </label>
+              <div class="invalid-feedback" data-sb-feedback="email:required">
+                An email is required.
               </div>
-              <!-- Submit Button-->
-              <div class="d-grid">
-                <input
-                  class="btn btn-primary btn-xl"
-                  id="submitButton"
-                  type="submit"
-                  value="제출"
-                />
+              <div class="invalid-feedback" data-sb-feedback="email:email">
+                Email is not valid.
               </div>
-            </form>
+              <input
+                id="CEA"
+                name="CEA"
+                type="text"
+                class="form-control form-control-lg inverse-model mt-3 d-none"
+                data-parsley-error-message="null"
+                data-parsley-errors-container="#err-msg2"
+              />
+              <div
+                class="d-flex justify-content-between align-items-center mt-2"
+              >
+                <div id="err-msg2" class="text-realred"></div>
+                <input
+                  type="button"
+                  id="sendBtn"
+                  class="btn btn-primary btn-block btn-lg ml-auto custombtn"
+                  value="인증번호 요청"
+                  onclick="password_emailSend('EA')"
+                />
+                <input
+                  type="button"
+                  id="cerBtn"
+                  class="btn btn-primary btn-block btn-lg mt-0 ml-auto custombtn d-none"
+                  value="인증하기"
+                  onclick="emailCer('CEA')"
+                />
+                <input type="hidden" id="hideCK" name="hideCK" value="" />
+              </div>
+            </div>
+            <!-- Submit Button-->
+            <div class="d-grid">
+              <button
+                onclick="myinfo_change()"
+                class="btn btn-primary btn-xl"
+                id="submitButton"
+              >
+                제출
+              </button>
+            </div>
           </div>
         </div>
         <div class="row gx-4 gx-lg-5 justify-content-center">
