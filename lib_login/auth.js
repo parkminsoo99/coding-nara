@@ -60,22 +60,22 @@ router.get('/register', async(request, response) =>{
     else{
         if(request.session.type=='naver'){
             response.render('./auth/auth_register_naver',{
-                Email : sanitizeHtml(request.session.email),
-                Nickname : sanitizeHtml(request.session.nickname),
-                Mobile : sanitizeHtml(request.session.mobile),
+                Email : request.session.email,
+                Nickname : request.session.nickname,
+                Mobile : request.session.mobile,
             });
         }
         else if(request.session.type=='kakao'){
             response.render('./auth/auth_register_kakao',{
-                Email : sanitizeHtml(request.session.email),
-                Nickname : sanitizeHtml(request.session.nickname)
+                Email : request.session.email,
+                Nickname : request.session.nickname
             });
         }
         else{
             request.session.destroy();
             response.render('./auth/auth_register_main',{
-                Authnum : sanitizeHtml(authNum),
-                Email_Status : sanitizeHtml(Email_status),
+                Authnum : authNum,
+                Email_Status : Email_status,
             });
         }      
     }
@@ -87,8 +87,8 @@ router.post('/login_process', function (request, response) {
     if (!tokens.verify(request.session.secret, token)) {
       throw new Error('invalid token!')
     }else{
-        var Email_Address = sanitizeHtml(request.body.Email_Address);
-        var password = sanitizeHtml(request.body.pwd);
+        var Email_Address = request.body.Email_Address;
+        var password = request.body.pwd;
         var sanitizeHtml_Email_Address = sanitizeHtml(Email_Address);
         var sanitizeHtml_password = sanitizeHtml(password);
         if(sanitizeHtml_Email_Address  != '' && sanitizeHtml_password != '' ){
@@ -363,250 +363,194 @@ router.post('/register_process', function(request, response) {
 //find_Id && find_Passwrd
 
 router.get('/find_ID', (request,response)=>{
-    request.session.secret = tokens.secretSync();
-    var token = tokens.create(request.session.secret);
-    if (!tokens.verify(request.session.secret, token)) {
-      throw new Error('invalid token!')
-    }else{
-        response.render('./auth/auth_find_id',{
-            authCheck : authCheck.statusUI(request, response),
-        })
-    }
+    response.render('./auth/auth_find_id',{
+        authCheck : authCheck.statusUI(request, response),
+    })
 })
 router.post('/find_id_process', (request, response) => {
-    request.session.secret = tokens.secretSync();
-    var token = tokens.create(request.session.secret);
-    if (!tokens.verify(request.session.secret, token)) {
-      throw new Error('invalid token!')
-    }else{
-        var username = sanitizeHtml(request.body.username)
-        var number = sanitizeHtml(request.body.number)
-        db.query('select * from Student where Name = ? and Phone_Number = ?',[username,  number], (error1,result)=>{
-            if(error1) throw error1;
-            if(result.length > 0 && result[0].Platform_type == 'local'){
-                response.render('./auth/auth_find_id_success',{
-                    authCheck : authCheck.statusUI(request, response),
-                    Email_Address : result[0].Email_Address,
-                });
-            }else{
-                response.send(`<script type="text/javascript">alert("계정이 존재하지 않거나 로컬 사용자가 아닙니다."); 
-                document.location.href="/auth/find_ID";</script>`);
-            }
-        })
-    }
+    var username = sanitizeHtml(request.body.username)
+    var number = sanitizeHtml(request.body.number)
+    db.query('select * from Student where Name = ? and Phone_Number = ?',[username,  number], (error1,result)=>{
+        if(error1) throw error1;
+        if(result.length > 0 && result[0].Platform_type == 'local'){
+            response.render('./auth/auth_find_id_success',{
+                authCheck : authCheck.statusUI(request, response),
+                Email_Address : result[0].Email_Address,
+            });
+        }else{
+            response.send(`<script type="text/javascript">alert("계정이 존재하지 않거나 로컬 사용자가 아닙니다."); 
+            document.location.href="/auth/find_ID";</script>`);
+        }
+    })
 })
 router.get('/find_PW', (request, response) => {
-    request.session.secret = tokens.secretSync();
-    var token = tokens.create(request.session.secret);
-    if (!tokens.verify(request.session.secret, token)) {
-      throw new Error('invalid token!')
-    }else{
-        response.render('./auth/auth_find_password',{
-            authCheck : authCheck.statusUI(request, response),
-        });
-    }
+    response.render('./auth/auth_find_password',{
+        authCheck : authCheck.statusUI(request, response),
+    });
 })
 router.post('/find_pw_process', (request,response) => {
-    request.session.secret = tokens.secretSync();
-    var token = tokens.create(request.session.secret);
-    if (!tokens.verify(request.session.secret, token)) {
-      throw new Error('invalid token!')
-    }else{
-        var username = sanitizeHtml(request.body.username)
-        var Email_Address = sanitizeHtml(request.body.EA)
-        db.query(`select * from Student where Name = ? and Email_Address = ?`,[username, Email_Address], (error1, result)=>{
-            if(error1) throw error1;
-            if(result.length > 0 && result[0].Platform_type == 'local'){
-                if(request.session.email_check == 1){
-                    request.session.username = username
-                    request.session.Email_Address = Email_Address
-                    response.render('./auth/auth_change_password',{
-                        authCheck : authCheck.statusUI(request, response),
-                    });
-                }else{
-                    response.send(`<script type="text/javascript">alert("이메일 인증을 해주세요."); 
-                document.location.href="/auth/find_PW";</script>`);
-                }
+    var username = sanitizeHtml(request.body.username)
+    var Email_Address = sanitizeHtml(request.body.EA)
+    db.query(`select * from Student where Name = ? and Email_Address = ?`,[username, Email_Address], (error1, result)=>{
+        if(error1) throw error1;
+        if(result.length > 0 && result[0].Platform_type == 'local'){
+            if(request.session.email_check == 1){
+                request.session.username = username
+                request.session.Email_Address = Email_Address
+                response.render('./auth/auth_change_password',{
+                    authCheck : authCheck.statusUI(request, response),
+                });
             }else{
-                response.send(`<script type="text/javascript">alert("계정이 존재하지 않거나 로컬 사용자가 아닙니다."); 
-                document.location.href="/auth/find_PW";</script>`);
+                response.send(`<script type="text/javascript">alert("이메일 인증을 해주세요."); 
+            document.location.href="/auth/find_PW";</script>`);
             }
-        })
-    }
+        }else{
+            response.send(`<script type="text/javascript">alert("계정이 존재하지 않거나 로컬 사용자가 아닙니다."); 
+            document.location.href="/auth/find_PW";</script>`);
+        }
+    })
 })
 
 
 router.post('/password_change_process', (request,response) => {
-    request.session.secret = tokens.secretSync();
-    var token = tokens.create(request.session.secret);
-    if (!tokens.verify(request.session.secret, token)) {
-      throw new Error('invalid token!')
-    }else{
-        var Password = sanitizeHtml(request.body.pwd);    
-        var Password2 = sanitizeHtml(request.body.pwd2);
-        if (Password == Password2 && request.session.password_check == 1) {     // DB에 같은 이름의 회원아이디가 없고, 비밀번호가 올바르게 입력된 경우
-            bcrypt.hash(Password, saltRounds, function(err, hash){
-                if(err) throw err;   
-                    db.query(`update Student set Password = ? where Name = ? and Email_Address = ?`, 
-                    [hash, request.session.username, request.session.Email_Address], 
-                        function (error2, data) {
-                        if(error2) throw error2;
-                        response.send(`<script type="text/javascript">alert("비밀번호 변경이 완료되었습니다!");
-                        document.location.href="/auth/login";</script>`);
-                    })
+    var Password = sanitizeHtml(request.body.pwd);    
+    var Password2 = sanitizeHtml(request.body.pwd2);
+    if (Password == Password2 && request.session.password_check == 1) {     // DB에 같은 이름의 회원아이디가 없고, 비밀번호가 올바르게 입력된 경우
+        bcrypt.hash(Password, saltRounds, function(err, hash){
+            if(err) throw err;   
+                db.query(`update Student set Password = ? where Name = ? and Email_Address = ?`, 
+                [hash, request.session.username, request.session.Email_Address], 
+                    function (error2, data) {
+                    if(error2) throw error2;
+                    response.send(`<script type="text/javascript">alert("비밀번호 변경이 완료되었습니다!");
+                    document.location.href="/auth/login";</script>`);
                 })
-            }
-    }
+            })
+        }
 })
 router.post('/password_mail', (req, res) => {
-    request.session.secret = tokens.secretSync();
-    var token = tokens.create(request.session.secret);
-    if (!tokens.verify(request.session.secret, token)) {
-      throw new Error('invalid token!')
-    }else{
-        const reademailaddress = sanitizeHtml(req.body.EA);
-        let emailTemplete;
-        db.query(`select * from Student where Email_Address = ?`,[reademailaddress], async(error, result) => {
-            if(error) throw error;
+    const reademailaddress = req.body.EA;
+    let emailTemplete;
+    db.query(`select * from Student where Email_Address = ?`,[reademailaddress], async(error, result) => {
+        if(error) throw error;
+        else{
+            if(result.length <= 0) res.send({ result : 'not_exist' })
             else{
-                if(result.length <= 0) res.send({ result : 'not_exist' })
-                else{
-                    const authNum = Math.random().toString().substr(2,6);
-                    const hashAuth = await bcrypt.hash(authNum, 12);
-                    req.session.hashAuth = hashAuth;
-                    res.render('./auth/password_mail', {authCode : authNum}, function (err, data) {
-                    if(err){console.log(err)}
-                    console.log(data)
-                    emailTemplete = data;
-                    });
-                    let transporter = await nodemailer.createTransport({
-                        service: 'daum',
-                        host: 'smtp.daum.net',
-                        port: 465,
-                        secure: true,
-                        auth: {
-                            user: process.env.NODEMAILER_USER,
-                            pass: process.env.NODEMAILER_PASS,
-                        },tls: {
-                            rejectUnauthorized: false
-                        }
-                    });
-                    const mailOptions = await transporter.sendMail({
-                        from: `admin@coding-nara.com`,
-                        to: 'zzangorc99@naver.com',
-                        subject: '비밀번호 변경을 위한 인증번호를 입력해주세요.',
-                        html: emailTemplete,
-                    });
-                    transporter.sendMail(mailOptions, function (error, info) {
-                        if (error) {
-                            console.log(error);
-                        }else{
-                            res.send(authNum);
-                            transporter.close()
-                        }
-                    });
-                    return res.send({ result : 'send', HashAuth : req.session.hashAuth});
-                }
+                const authNum = Math.random().toString().substr(2,6);
+                const hashAuth = await bcrypt.hash(authNum, 12);
+                req.session.hashAuth = hashAuth;
+                res.render('./auth/password_mail', {authCode : authNum}, function (err, data) {
+                if(err){console.log(err)}
+                console.log(data)
+                emailTemplete = data;
+                });
+                let transporter = await nodemailer.createTransport({
+                    service: 'daum',
+                    host: 'smtp.daum.net',
+                    port: 465,
+                    secure: true,
+                    auth: {
+                        user: process.env.NODEMAILER_USER,
+                        pass: process.env.NODEMAILER_PASS,
+                    },tls: {
+                        rejectUnauthorized: false
+                    }
+                });
+                const mailOptions = await transporter.sendMail({
+                    from: `admin@coding-nara.com`,
+                    to: 'zzangorc99@naver.com',
+                    subject: '비밀번호 변경을 위한 인증번호를 입력해주세요.',
+                    html: emailTemplete,
+                });
+                transporter.sendMail(mailOptions, function (error, info) {
+                    if (error) {
+                        console.log(error);
+                    }else{
+                        console.log('success')
+                        res.send(authNum);
+                        transporter.close()
+                    }
+                });
+                return res.send({ result : 'send', HashAuth : req.session.hashAuth});
             }
-        })
-    }
+        }
+    })
 });
 
 //mail & password_check
 
 router.post('/mail', (req, res) => {
-    request.session.secret = tokens.secretSync();
-    var token = tokens.create(request.session.secret);
-    if (!tokens.verify(request.session.secret, token)) {
-      throw new Error('invalid token!')
-    }else{
-        const reademailaddress =  sanitizeHtml(req.body.EA);
-        let emailTemplete;
-        db.query(`select * from Student where Email_Address = ?`,[reademailaddress], async(error, result) => {
-            if(error) throw error;
+    const reademailaddress = req.body.EA;
+    let emailTemplete;
+    db.query(`select * from Student where Email_Address = ?`,[reademailaddress], async(error, result) => {
+        if(error) throw error;
+        else{
+            if(result.length>0) res.send({ result : 'exist' })
             else{
-                if(result.length>0) res.send({ result : 'exist' })
-                else{
-                    let authNum = Math.random().toString().substr(2,6);
-                    const hashAuth = await bcrypt.hash(authNum, 12);
-                    req.session.hashAuth = hashAuth;
-                    res.render('./auth/mail', {authCode : authNum}, function (err, data) {
-                    if(err){console.log(err)}
-                    emailTemplete = data;
-                    });
-                    let transporter = await nodemailer.createTransport({
-                        service: 'daum',
-                        host: 'smtp.daum.net',
-                        port: 465,
-                        secure: true,
-                        auth: {
-                            user: process.env.NODEMAILER_USER,
-                            pass: process.env.NODEMAILER_PASS,
-                        },tls: {
-                            rejectUnauthorized: false
-                        }
-                    });
-                    const mailOptions = await transporter.sendMail({
-                        from: `admin@coding-nara.com`,
-                        to: 'zzangorc99@naver.com',
-                        subject: '회원가입을 위한 인증번호를 입력해주세요.',
-                        html: emailTemplete,
-                    });
-                    transporter.sendMail(mailOptions, function (error, info) {
-                        if (error) {
-                            console.log(error);
-                        }else{
-                            res.send(authNum);
-                            transporter.close()
-                        }
-                    });
-                    return res.send({ result : 'send', HashAuth : req.session.hashAuth});
-                }
+                let authNum = Math.random().toString().substr(2,6);
+                const hashAuth = await bcrypt.hash(authNum, 12);
+                req.session.hashAuth = hashAuth;
+                res.render('./auth/mail', {authCode : authNum}, function (err, data) {
+                if(err){console.log(err)}
+                console.log(data)
+                emailTemplete = data;
+                });
+                let transporter = await nodemailer.createTransport({
+                    service: 'daum',
+                    host: 'smtp.daum.net',
+                    port: 465,
+                    secure: true,
+                    auth: {
+                        user: process.env.NODEMAILER_USER,
+                        pass: process.env.NODEMAILER_PASS,
+                    },tls: {
+                        rejectUnauthorized: false
+                    }
+                });
+                const mailOptions = await transporter.sendMail({
+                    from: `admin@coding-nara.com`,
+                    to: 'zzangorc99@naver.com',
+                    subject: '회원가입을 위한 인증번호를 입력해주세요.',
+                    html: emailTemplete,
+                });
+                transporter.sendMail(mailOptions, function (error, info) {
+                    if (error) {
+                        console.log(error);
+                    }else{
+                        console.log('success')
+                        res.send(authNum);
+                        transporter.close()
+                    }
+                });
+                return res.send({ result : 'send', HashAuth : req.session.hashAuth});
             }
-        })
-    }
+        }
+    })
 });
 
 router.post('/mail_expire', (req,res) => {
-    request.session.secret = tokens.secretSync();
-    var token = tokens.create(request.session.secret);
-    if (!tokens.verify(request.session.secret, token)) {
-      throw new Error('invalid token!')
-    }else{
-        req.session.destroy(function(){ 
-            req.session;
-        });
-    }
+    req.session.destroy(function(){ 
+        req.session;
+    });
 })
 router.post('/password_check_success', (req,res) => {
-    request.session.secret = tokens.secretSync();
-    var token = tokens.create(request.session.secret);
-    if (!tokens.verify(request.session.secret, token)) {
-      throw new Error('invalid token!')
-    }else{
-        req.session.password_check = 1;
-        res.send();
-    }
+    req.session.password_check = 1;
+    res.send();
 })
 router.post('/mail_validation', async (req, res, next) => {
-    request.session.secret = tokens.secretSync();
-    var token = tokens.create(request.session.secret);
-    if (!tokens.verify(request.session.secret, token)) {
-      throw new Error('invalid token!')
-    }else{
-        try {
-            if(!req.session.hashAuth) res.send({ result : 'expire'});
-            else if(bcrypt.compareSync(req.body.CEA, req.session.hashAuth)) {
-                req.session.email_check = 1;
-                res.send({ result : 'success'});
-            }
-            else res.send({ result : 'fail'});
-        } catch(err) {
-        res.send({ result : 'fail'});
-        next(err);
+    try {
+        if(!req.session.hashAuth) res.send({ result : 'expire'});
+        else if(bcrypt.compareSync(req.body.CEA, req.session.hashAuth)) {
+            req.session.email_check = 1;
+            res.send({ result : 'success'});
         }
+        else res.send({ result : 'fail'});
+    } catch(err) {
+      res.send({ result : 'fail'});
+      console.error(err);
+      next(err);
     }
-});
+  });
 
 //-------naver
 
@@ -644,7 +588,7 @@ router.get('/naver/login', async (req, res) => {
             // string 형태로 값이 담기니 JSON 형식으로 parse를 해줘야 한다.
         const info_result_json = JSON.parse(info_result).response;
         
-        db.query(`SELECT * FROM Student WHERE Email_Address = ?`, [sanitizeHtml(info_result_json.email)],
+        db.query(`SELECT * FROM Student WHERE Email_Address = ?`, [info_result_json.email],
                 function(error,results1){
                     if(error) throw error;
                     if (results1.length > 0 && results1[0].Platform_type === 'naver') {       // db에서의 반환값이 있으면 로그인 성공
