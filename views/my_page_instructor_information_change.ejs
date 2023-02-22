@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Login TEST - ${title}</title>
+    <meta charset="utf-8" />
+    <!-- Favicon-->
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+    <!-- Bootstrap Icons-->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"
+      rel="stylesheet"
+    />
+    <!-- Google fonts-->
+    <link
+      href="https://fonts.googleapis.com/css?family=Merriweather+Sans:400,700"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <!-- SimpleLightbox plugin CSS-->
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/SimpleLightbox/2.1.0/simpleLightbox.min.css"
+      rel="stylesheet"
+    />
+    <link href="../CSS/styles.css" rel="stylesheet" />
+    <script
+      type="text/javascript"
+      src="https://code.jquery.com/jquery-1.12.4.min.js"
+    ></script>
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+    <script
+      type="text/javascript"
+      src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"
+    ></script>
+    <script src="../js/email_validation_and_address_script.js"></script>
+  </head>
+  <body>
+    <div class="loader-wrapper">
+      <span class="loader"><span class="loader-inner"></span></span>
+    </div>
+
+    <script>
+      $(window).on("load", function () {
+        $(".loader-wrapper").fadeOut(1000);
+      });
+    </script>
+    <!-- Navigation-->
+    <nav
+      class="navbar navbar-expand-lg navbar-light fixed-top py-3"
+      id="mainNav"
+    >
+      <div class="container px-4 px-lg-5">
+        <a
+          class="navbar-brand"
+          href="#page-top"
+          style="display: flex; flex-direction: row"
+        >
+          <img
+            src="../image/logo_mini.png"
+            width="30px"
+            height="30px"
+            style="margin-right: 7px"
+          />Coding-nara
+        </a>
+        <button
+          class="navbar-toggler navbar-toggler-right"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarResponsive"
+          aria-controls="navbarResponsive"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ms-auto my-2 my-lg-0">
+            <li class="nav-item"><a class="nav-link" href="/">소개</a></li>
+            <li class="nav-item">
+              <a class="nav-link" href="/curriculum">커리큘럼</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/enroll/sub">수강신청</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/review">강좌후기</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/ask">고객센터</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/login"><%-authCheck %></a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <!-- Masthead-->
+    <header class="masthead_mypage">
+      <div class="container px-4 px-lg-5 h-100">
+        <div
+          class="row gx-4 gx-lg-5 h-100 align-items-center justify-content-center text-center"
+        >
+          <div class="col-lg-8 align-self-end">
+            <h1 class="text-white font-weight-bold">개인정보수정</h1>
+            <hr class="divider" />
+          </div>
+          <div class="col-lg-8 align-self-baseline">
+            <p class="text-white-75 mb-5">
+              개인 정보를 변경하기 위해 아래 폼을 작성하세요.
+            </p>
+          </div>
+        </div>
+      </div>
+    </header>
+    <br />
+    <br />
+    <div class="row gx-4 gx-lg-5 justify-content-center mb-5">
+      <div class="col-lg-6">
+        <div class="form-floating mb-3">
+          <form
+            id="form"
+            action="/myinfo/upload"
+            method="post"
+            enctype="multipart/form-data"
+            accept="image/gif, image/jpeg, image/png, image/webp"
+          >
+            <input type="file" name="image" />
+            <button type="submit" class="btn btn-secondary">이미지 저장</button>
+          </form>
+        </div>
+        <br />
+        <form id="contactForm" action="/myinfo/update_mypage" method="post">
+          <!-- Name input-->
+          <div class="form-floating mb-3">
+            <input
+              class="form-control"
+              id="name"
+              name="username"
+              type="text"
+              placeholder="Enter your name..."
+              data-sb-validations="required"
+              value="<%-Nickname%>"
+            />
+            <label for="name">이름<span class="text-danger"> *</span></label>
+          </div>
+          <!-- Phone number input-->
+          <div class="form-floating mb-3">
+            <input
+              class="form-control"
+              id="phone"
+              name="number"
+              type="tel"
+              oninput="autoHyphen2(this)"
+              maxlength="13"
+              placeholder="010-1234-5678"
+              data-sb-validations="required"
+              value="<%=Mobile%>"
+            />
+            <label for="phone"
+              >전화번호<span class="text-danger"> *</span></label
+            >
+          </div>
+          <!-- address input-->
+          <div class="row g-2">
+            <div class="col-md-3">
+              <div class="form-floating">
+                <input
+                  class="form-control"
+                  id="member_post"
+                  name="member_post"
+                  type="text"
+                  placeholder="Zip Code"
+                  required
+                  readonly
+                  onclick="findAddr()"
+                />
+                <label for="phone">우편번호</label>
+                <div class="invalid-feedback" data-sb-feedback="phone:required">
+                  The Address is required.
+                </div>
+              </div>
+            </div>
+            <div class="col-md">
+              <div class="form-floating">
+                <input
+                  class="form-control"
+                  id="member_addr"
+                  name="member_addr"
+                  type="text"
+                  placeholder="Address"
+                  required
+                  readonly
+                  onclick="findAddr()"
+                />
+                <label for="phone">주소</label>
+                <div class="invalid-feedback" data-sb-feedback="phone:required">
+                  The Address is required.
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-floating mb-1"></div>
+          <div class="form-floating mb-3">
+            <input
+              class="form-control"
+              id="member_leftover"
+              name="member_leftover"
+              type="text"
+              placeholder="Detailed Address"
+            />
+            <label for="phone">나머지 주소</label>
+          </div>
+          <div class="d-none" id="submitSuccessMessage">
+            <div class="text-center mb-3">
+              <div class="fw-bolder">Form submission successful!</div>
+              To activate this form, sign up at
+              <br />
+              <a href="https://startbootstrap.com/solution/contact-forms"
+                >https://startbootstrap.com/solution/contact-forms</a
+              >
+            </div>
+          </div>
+          <div class="d-none" id="submitErrorMessage">
+            <div class="text-center text-danger mb-3">
+              Error sending message!
+            </div>
+          </div>
+          <div class="form-floating mb-3">
+            <input
+              class="form-control"
+              id="self_introduce"
+              name="self_introduce"
+              type="text"
+              placeholder="자기소개를 입력해주세요."
+              data-sb-validations="required"
+              value="<%=description%>"
+            />
+            <label for="self_introduce">한 줄 소개</label>
+          </div>
+          <div class="form-floating mb-3">
+            <input
+              class="form-control"
+              id="school"
+              name="school"
+              type="text"
+              placeholder="학력을 입력해주세요."
+              data-sb-validations="required"
+              value="<%=school%>"
+            />
+            <label for="school">학력</label>
+          </div>
+          <br />
+          <!-- Submit Button-->
+          <div class="d-grid">
+            <input
+              class="btn btn-primary btn-xl"
+              id="submitButton"
+              type="submit"
+              value="제출"
+            />
+          </div>
+        </form>
+      </div>
+    </div>
+  </body>
+  <!-- Footer-->
+  <footer class="bg-light py-5">
+    <div class="container px-4 px-lg-5">
+      <div class="small text-center text-muted">
+        <a href="/policy/private">개인정보처리방침</a> |
+        <a href="/policy/tos">이용약관</a>
+      </div>
+    </div>
+    <div class="container px-4 px-lg-5">
+      <div class="small text-center text-muted">
+        코딩나라 | 대표자: 장영재, 박민수 | 사업자번호: 148-14-01860 사업자 정보
+        확인
+      </div>
+    </div>
+    <div class="container px-4 px-lg-5">
+      <div class="small text-center text-muted">
+        주소: 서울특별시 서대문구 북가좌동
+      </div>
+    </div>
+    <br />
+    <div class="container px-4 px-lg-5">
+      <div class="small text-center text-muted">
+        Copyright &copy;코딩나라(Coding-nara)
+      </div>
+    </div>
+  </footer>
+  <!-- Bootstrap core JS-->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- SimpleLightbox plugin JS-->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/SimpleLightbox/2.1.0/simpleLightbox.min.js"></script>
+  <!-- Core theme JS-->
+  <script src="../js/scripts.js"></script>
+  <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
+  <!-- * *                               SB Forms JS                               * *-->
+  <!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
+  <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
+  <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
+</html>

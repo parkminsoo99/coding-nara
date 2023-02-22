@@ -3,19 +3,35 @@
   <head>
     <title>Login TEST - <%=Title%></title>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-     <!-- Favicon-->
-     <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
-     <!-- Bootstrap Icons-->
-     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
-     <!-- Google fonts-->
-     <link href="https://fonts.googleapis.com/css?family=Merriweather+Sans:400,700" rel="stylesheet" />
-     <link href="https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic" rel="stylesheet" type="text/css" />
-     <!-- SimpleLightbox plugin CSS-->
-     <link href="https://cdnjs.cloudflare.com/ajax/libs/SimpleLightbox/2.1.0/simpleLightbox.min.css" rel="stylesheet" />
-     <!-- Core theme CSS (includes Bootstrap)-->
-     <link href="/CSS/styles.css" rel="stylesheet" />
-    
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <!-- Favicon-->
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+    <!-- Bootstrap Icons-->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"
+      rel="stylesheet"
+    />
+    <!-- Google fonts-->
+    <link
+      href="https://fonts.googleapis.com/css?family=Merriweather+Sans:400,700"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <!-- SimpleLightbox plugin CSS-->
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/SimpleLightbox/2.1.0/simpleLightbox.min.css"
+      rel="stylesheet"
+    />
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="/CSS/styles.css" rel="stylesheet" />
+
     <script
       type="text/javascript"
       src="https://code.jquery.com/jquery-1.12.4.min.js"
@@ -36,82 +52,144 @@
       });
     </script>
     <!-- Navigation-->
-    <nav class="navbar navbar-expand-lg navbar-light fixed-top py-3" id="mainNav">
+    <nav
+      class="navbar navbar-expand-lg navbar-light fixed-top py-3"
+      id="mainNav"
+    >
       <div class="container px-4 px-lg-5">
         <a
-        class="navbar-brand"
-        href="#page-top"
-        style="display: flex; flex-direction: row"
-      >
-        <img
-          src="../image/logo_mini.png"
-          width="30px"
-          height="30px"
-          style="margin-right: 7px"
-        />Coding-nara
-      </a>
-          <button class="navbar-toggler navbar-toggler-right" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-          <div class="collapse navbar-collapse" id="navbarResponsive">
-              <ul class="navbar-nav ms-auto my-2 my-lg-0">
-                  <li class="nav-item"><a class="nav-link" href="/">소개</a></li>
-                  <li class="nav-item"><a class="nav-link" href="/curriculum">커리큘럼</a></li>
-                  <li class="nav-item"><a class="nav-link" href="/enroll/sub">수강신청</a></li>
-                  <li class="nav-item"><a class="nav-link" href="/review">강좌후기</a></li>
-                  <li class="nav-item"><a class="nav-link" href="/ask">고객센터</a></li>
-                  <li class="nav-item"><a class="nav-link" href="/login"><%-authCheck %></a></li>
-              </ul>
-          </div>
+          class="navbar-brand"
+          href="#page-top"
+          style="display: flex; flex-direction: row"
+        >
+          <img
+            src="../image/logo_mini.png"
+            width="30px"
+            height="30px"
+            style="margin-right: 7px"
+          />Coding-nara
+        </a>
+        <button
+          class="navbar-toggler navbar-toggler-right"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarResponsive"
+          aria-controls="navbarResponsive"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ms-auto my-2 my-lg-0">
+            <li class="nav-item"><a class="nav-link" href="/">소개</a></li>
+            <li class="nav-item">
+              <a class="nav-link" href="/curriculum">커리큘럼</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/enroll/sub">수강신청</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/review">강좌후기</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/ask">고객센터</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/login"><%-authCheck %></a>
+            </li>
+          </ul>
+        </div>
       </div>
-  </nav>
-  <!-- Masthead-->
-  <header class="masthead_review">
+    </nav>
+    <!-- Masthead-->
+    <header class="masthead_review">
       <div class="container px-4 px-lg-5 h-100">
-          <div class="row gx-4 gx-lg-5 h-100 align-items-center justify-content-center text-center">
-              <div class="col-lg-8 align-self-end">
-                  <h1 class="text-white font-weight-bold">강좌후기</h1>
-                  <hr class="divider" />
-              </div>
-              <div class="col-lg-8 align-self-baseline">
-                  <p class="text-white-75 mb-5">우리 아이에 적합한 교육 서비스를 경험해보세요</p>
-              </div>
+        <div
+          class="row gx-4 gx-lg-5 h-100 align-items-center justify-content-center text-center"
+        >
+          <div class="col-lg-8 align-self-end">
+            <h1 class="text-white font-weight-bold">강좌후기</h1>
+            <hr class="divider" />
           </div>
+          <div class="col-lg-8 align-self-baseline">
+            <p class="text-white-75 mb-5">
+              우리 아이에 적합한 교육 서비스를 경험해보세요
+            </p>
+          </div>
+        </div>
       </div>
-  </header>
-  <div class="mb-3">
-    <label for="exampleFormControlInput1" class="form-label">제목</label>
-    <input type="text" name="Title" class="form-control-plaintext" id="exampleFormControlInput1" value="<%=Title%>" readonly>
-  </div>
-  <div class="mb-3">
-    <label placeholder="Title" for="exampleFormControlTextarea1" class="form-label">내용</label>
-    <textarea type="text" name="Description" class="form-control-plaintext" id="exampleFormControlTextarea1" rows="3" readonly>
+    </header>
+    <div class="mb-3">
+      <label for="exampleFormControlInput1" class="form-label">제목</label>
+      <input
+        type="text"
+        name="Title"
+        class="form-control-plaintext"
+        id="exampleFormControlInput1"
+        value="<%=Title%>"
+        readonly
+      />
+    </div>
+    <div class="mb-3">
+      <label
+        placeholder="Title"
+        for="exampleFormControlTextarea1"
+        class="form-label"
+        >내용</label
+      >
+      <textarea
+        type="text"
+        name="Description"
+        class="form-control-plaintext"
+        id="exampleFormControlTextarea1"
+        rows="3"
+        readonly
+      >
       <%=Description %>
-    </textarea>
-  </div>
-  <center> 
-    <a class="btn btn-primary" href="/review/update/<%=Page_ID%>">글수정</a>
-  </center>
-   
-   
+    </textarea
+      >
+    </div>
+    <center>
+      <a class="btn btn-primary" href="/review/update/<%=Page_ID%>">글수정</a>
+    </center>
   </body>
- 
+
   <!-- Footer-->
   <footer class="bg-light py-5">
-    <div class="container px-4 px-lg-5"><div class="small text-center text-muted"><a href="/policy/private">개인정보처리방침</a> | <a href="/policy/tos">이용약관</a></div></div>
-    <div class="container px-4 px-lg-5"><div class="small text-center text-muted">코딩나라 | 대표자: 장영재, 박민수 | 사업자번호: 148-14-01860 사업자 정보 확인</div></div>
-    <div class="container px-4 px-lg-5"><div class="small text-center text-muted">주소: 서울특별시 서대문구 북가좌동</div></div>
-    <br>
-    <div class="container px-4 px-lg-5"><div class="small text-center text-muted">Copyright &copy;코딩나라(Coding-nara)</div></div>
-</footer>
-<!-- Bootstrap core JS-->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-<!-- SimpleLightbox plugin JS-->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/SimpleLightbox/2.1.0/simpleLightbox.min.js"></script>
-<!-- Core theme JS-->
-<script src="../js/scripts.js"></script>
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
-<!-- * *                               SB Forms JS                               * *-->
-<!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
-<script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
-</body>
+    <div class="container px-4 px-lg-5">
+      <div class="small text-center text-muted">
+        <a href="/policy/private">개인정보처리방침</a> |
+        <a href="/policy/tos">이용약관</a>
+      </div>
+    </div>
+    <div class="container px-4 px-lg-5">
+      <div class="small text-center text-muted">
+        코딩나라 | 대표자: 장영재, 박민수 | 사업자번호: 148-14-01860 사업자 정보
+        확인
+      </div>
+    </div>
+    <div class="container px-4 px-lg-5">
+      <div class="small text-center text-muted">
+        주소: 서울특별시 서대문구 북가좌동
+      </div>
+    </div>
+    <br />
+    <div class="container px-4 px-lg-5">
+      <div class="small text-center text-muted">
+        Copyright &copy;코딩나라(Coding-nara)
+      </div>
+    </div>
+  </footer>
+  <!-- Bootstrap core JS-->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- SimpleLightbox plugin JS-->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/SimpleLightbox/2.1.0/simpleLightbox.min.js"></script>
+  <!-- Core theme JS-->
+  <script src="../js/scripts.js"></script>
+  <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
+  <!-- * *                               SB Forms JS                               * *-->
+  <!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
+  <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
+  <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
 </html>

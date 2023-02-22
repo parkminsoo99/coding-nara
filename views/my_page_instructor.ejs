@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html>
   <head>
@@ -38,9 +36,10 @@
       src="https://code.jquery.com/jquery-1.12.4.min.js"
     ></script>
     <script
-    type="text/javascript"
-    src="../js/email_validation_and_address_script.js"
-  ></script>
+      type="text/javascript"
+      src="../js/email_validation_and_address_script.js"
+    ></script>
+    <script type="text/javascript" src="../js/mypage.js"></script>
     <script
       type="text/javascript"
       src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"
@@ -65,17 +64,17 @@
         fill: currentColor;
       }
       a.change:link {
-        color : white;
+        color: white;
       }
       a.change:visited {
-        color :white;
+        color: white;
       }
       a.change:hover {
-        color : white;
+        color: white;
       }
       a.change:active {
-        color : white;
-      } 
+        color: white;
+      }
     </style>
   </head>
   <body>
@@ -128,18 +127,14 @@
         </div>
       </div>
     </nav>
-  </br>
-  </br>
-  </br>
+    <br />
+    <br />
+    <br />
     <main class="container">
       <div class="p-4 p-md-1 mb-1 rounded text-bg-dark">
         <div class="col-md-6 px-0">
-          <h1 class="display-6 fst-italic">
-            강사페이지입니다.
-          </h1>
-          <p class="lead my-4">
-            <%=Name%>님 환영합니다.
-          </p>
+          <h1 class="display-6 fst-italic">강사페이지입니다.</h1>
+          <p class="lead my-4"><%=Name%>님 환영합니다.</p>
         </div>
       </div>
 
@@ -155,38 +150,41 @@
               <h3 class="mb-0">과목, 강좌 가능일</h3>
               <div class="mb-1 text-muted">-----------------------------</div>
               <p class="card-text mb-auto text-muted">
-                개인정보를 수정하고 싶다면 아래 링크를 클릭해 본인임을 인증해 주세요.
+                개인정보를 수정하고 싶다면 아래 링크를 클릭해 본인임을 인증해
+                주세요.
               </p>
               <a href="/myinfo/instructor/update">인증</a>
               <a href="/myinfo/instructor/lecture/history">강의 기록</a>
-
             </div>
-            <div class="col-auto d-none d-lg-block"  style="color:white">
-              <a
-              href="/myinfo/instructor/update" 
+            <div class="col-auto d-none d-lg-block" style="color: white">
+              <svg
+                id="change_button"
+                class="bd-placeholder-img"
+                width="200"
+                height="250"
+                xmlns="http://www.w3.org/2000/svg"
+                role="img"
+                aria-label="Placeholder: Thumbnail"
+                preserveAspectRatio="xMidYMid slice"
+                focusable="false"
+                onclick="javascript:mypage_list.button_validation()"
               >
-                <svg
-                  class="bd-placeholder-img"
-                  width="200"
-                  height="250"
-                  xmlns="http://www.w3.org/2000/svg"
-                  role="img"
-                  aria-label="Placeholder: Thumbnail"
-                  preserveAspectRatio="xMidYMid slice"
-                  focusable="false"
+                <rect
+                  width="100%"
+                  height="100%"
+                  fill="#55595c"
+                  style="color: white"
+                />
+                <text
+                  x="50%"
+                  y="50%"
+                  fill="#eceeef"
+                  dy=".5em"
+                  style="font-size: 35px"
                 >
-                  <rect width="100%" height="100%" fill="#55595c" style="color:white" />
-                  <text
-                    x="50%"
-                    y="50%"
-                    fill="#eceeef"
-                    dy=".5em"
-                    style="font-size: 25px;"
-                  >
-                    변경
-                  </text>
-                </svg>
-              </a>
+                  변경
+                </text>
+              </svg>
             </div>
           </div>
         </div>
@@ -201,43 +199,46 @@
               <h3 class="mb-0">개인 정보</h3>
               <div class="mb-1 text-muted">-----------------------------</div>
               <p class="card-text mb-auto text-muted">
-                개인정보를 수정하고 싶다면 아래 링크를 클릭해 본인임을 인증해 주세요.
+                개인정보를 수정하고 싶다면 아래 링크를 클릭해 본인임을 인증해
+                주세요.
               </p>
               <a href="/myinfo/user_information_change">인증</a>
               <a href="/myinfo/update/instructor">강사정보 추가</a>
             </div>
-            <div class="col-auto d-none d-lg-block"  style="color:white">
-              <a
-              href="/myinfo/update" 
+            <div class="col-auto d-none d-lg-block" style="color: white">
+              <svg
+                id="change_button"
+                class="bd-placeholder-img"
+                width="200"
+                height="250"
+                xmlns="http://www.w3.org/2000/svg"
+                role="img"
+                aria-label="Placeholder: Thumbnail"
+                preserveAspectRatio="xMidYMid slice"
+                focusable="false"
+                onclick="javascript:mypage_list.button_validation()"
               >
-                <svg
-                  class="bd-placeholder-img"
-                  width="200"
-                  height="250"
-                  xmlns="http://www.w3.org/2000/svg"
-                  role="img"
-                  aria-label="Placeholder: Thumbnail"
-                  preserveAspectRatio="xMidYMid slice"
-                  focusable="false"
+                <rect
+                  width="100%"
+                  height="100%"
+                  fill="#55595c"
+                  style="color: white"
+                />
+                <text
+                  x="50%"
+                  y="50%"
+                  fill="#eceeef"
+                  dy=".5em"
+                  style="font-size: 35px"
                 >
-                  <rect width="100%" height="100%" fill="#55595c" style="color:white" />
-                  <text
-                    x="50%"
-                    y="50%"
-                    fill="#eceeef"
-                    dy=".5em"
-                    style="font-size: 25px;"
-                  >
-                    변경
-                  </text>
-                </svg>
-              </a>
+                  변경
+                </text>
+              </svg>
             </div>
           </div>
         </div>
       </div>
     </main>
-    
     <section class="notice">
       <div class="page-title">
         <div class="container">
@@ -275,25 +276,30 @@
       </div>
     </section>
     <p></p>
-    <button id="modal">Show modal</button>
-    <dialog id="dialog">
-      강사세부정보입니다.<br>
-      <%-Name %><br>
-
-      <form method="dialog">
-        <button>닫기</button>
-      </form>
-    </dialog>
-    <form id="form" action="/myinfo/upload" method="post" enctype="multipart/form-data" accept="image/gif, image/jpeg, image/png, image/webp">
-      <input type="file" name="image" />
-      <button type="submit">업로드</button>
-    </form>
   </body>
   <!-- Footer-->
   <footer class="bg-light py-5">
     <div class="container px-4 px-lg-5">
       <div class="small text-center text-muted">
-        Copyright &copy; 2022 - Company Name
+        <a href="/policy/private">개인정보처리방침</a> |
+        <a href="/policy/tos">이용약관</a>
+      </div>
+    </div>
+    <div class="container px-4 px-lg-5">
+      <div class="small text-center text-muted">
+        코딩나라 | 대표자: 장영재, 박민수 | 사업자번호: 148-14-01860 사업자 정보
+        확인
+      </div>
+    </div>
+    <div class="container px-4 px-lg-5">
+      <div class="small text-center text-muted">
+        주소: 서울특별시 서대문구 북가좌동
+      </div>
+    </div>
+    <br />
+    <div class="container px-4 px-lg-5">
+      <div class="small text-center text-muted">
+        Copyright &copy;코딩나라(Coding-nara)
       </div>
     </div>
   </footer>
@@ -303,7 +309,6 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/SimpleLightbox/2.1.0/simpleLightbox.min.js"></script>
   <script src="../js/scripts.js"></script>
   <script src="../js/instructor.js"></script>
-
 
   <!-- Core theme JS-->
   <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->

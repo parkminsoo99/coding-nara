@@ -103,6 +103,7 @@ router.post('/login_process', function (request, response) {
                                 console.log(results[0].Email_Address);
                                 request.session.is_logined = true;      // 세션 정보 갱신
                                 request.session.email = results[0].Email_Address
+                                request.session.mobile = results[0].Phone_Number
                                 request.session.nickname = results[0].Name;
                                 request.session.Student_Id = results[0].Student_ID;
                                 request.session.save(function () {
