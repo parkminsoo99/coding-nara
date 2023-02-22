@@ -33,6 +33,7 @@
 
     <title>코딩나라</title>
   </head>
+
   <body>
     <div class="mx-auto" id="welcome">
       <section class="page-section" id="contact">
@@ -104,6 +105,17 @@
     </div>
 
     <main class="flex flex-row justify-center mx-auto">
+      <!-- <div class="mx-auto" id="welcome">
+        <form class="border-4 border-transparent">
+          <i class="bi bi-search fs-1 text-primary"></i>
+          <input placeholder="강의실 이름" required type="text" />
+          <button
+            class="border-l-4 border-transparent m-px"
+          >
+            입장
+          </button>
+        </form>
+      </div> -->
       <div class="w-screen" id="call">
         <div class="flex justify-start h-screen">
           <video
@@ -114,9 +126,9 @@
           ></video>
           <div class="flex flex-col w-1/5 h-full">
             <div class="w-full" id="myStream">
-              <div class="border-4 border-l-0 border-transparent">
+              <div class="border-2 border-l-0 border-black">
                 <video
-                  class="mx-auto border-b-4 border-black myFace bg-gray-500"
+                  class="mx-auto border-b-2 border-black myFace bg-gray-500"
                   id="myFace"
                   autoplay
                   muted
@@ -124,20 +136,23 @@
                   width="300"
                   height="300"
                 ></video>
-                <div class="flex flex-col w-full mx-auto justify-center">
-                  <button class="border-4 border-black m-px" id="mute">
-                    음소거</button
-                  ><button class="border-4 border-black m-px" id="camera">
-                    카메라 Off</button
+                <div class="flex flex-row w-full mx-auto justify-center">
+                  <button class="border-2 border-transparent m-px" id="mute">
+                    <i class="bi bi-mic-mute-fill fs-2 text-white"></i></button
+                  ><button class="border-2 border-transparent m-px" id="camera">
+                    <i
+                      class="bi bi-camera-video-off-fill fs-2 text-white"
+                    ></i></button
                   ><select
-                    class="border-4 border-black m-px"
+                    class="form-select"
+                    aria-label="Default select example"
                     id="cameras"
                   ></select>
                 </div>
               </div>
             </div>
             <div
-              class="flex flex-col border-4 border-l-0 border-t-0 border-black justify-between h-full overflow-y-auto w-full"
+              class="flex flex-col border-2 border-l-0 border-t-0 border-black justify-between h-full overflow-y-auto w-full"
               id="chat"
             >
               <div
@@ -145,7 +160,7 @@
                 id="chatList"
               ></div>
               <form
-                class="flex-none flex border-t-4 h-1/6 border-black"
+                class="flex-none flex border-t-2 h-1/6 border-black"
                 id="chatForm"
               >
                 <input
@@ -153,7 +168,7 @@
                   type="text"
                   required
                   placeholder="Message"
-                /><button class="border-l-4 border-black w-2/12">전송</button>
+                /><button class="btn btn-">전송</button>
               </form>
             </div>
           </div>

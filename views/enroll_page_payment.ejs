@@ -269,15 +269,25 @@
               <p class="card-text">
                 강사에 대한 자세한 세부사항은 아래 상세보기 버튼을 클릭해주세요.
               </p>
-              <button id="modal" onclick="Instructor_info_detail()">
+              <button
+                id="modal"
+                class="btn btn-dark"
+                onclick="Instructor_info_detail()"
+              >
                 상세보기
               </button>
-              <dialog id="dialog">
-                강사세부정보입니다.<br />
-                <%-Name %><br />
-
+              <dialog id="dialog" style="height: 550px; width: 20%">
+                <div align="center">
+                  <img
+                    src="http://localhost:54213/<%=Image%>"
+                    width="180"
+                    height="250"
+                  />
+                </div>
                 <form method="dialog">
-                  <button>닫기</button>
+                  <div align="center">
+                    <button class="btn btn-light">닫기</button>
+                  </div>
                 </form>
               </dialog>
             </div>

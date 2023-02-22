@@ -10,8 +10,8 @@ module.exports = {
       var authStatusUI = '<div class="auth_item-login" align="center"><a class="nav-link" href="/auth/login">로그인</a></div>';
       if (this.isOwner(request, response)) {
         authStatusUI = `<div class="auth_item" align="center">
-        <a class="nav-link" href="/auth/logout">로그아웃</a>
-        <a class="nav-link" href="/myinfo">마이페이지</a>
+        <a class="nav-link" href="/auth/logout">로그아웃 &nbsp; </a>
+        <a class="nav-link" href="/myinfo">마이페이지 &nbsp; </a>
         <a class="nav-link" href="/enroll/cart">장바구니</a>
         </div>
         `;
