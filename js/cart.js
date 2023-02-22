@@ -102,7 +102,6 @@ let basket = {
         this.updateUI();
     },
     delItem: function () {
-        alert(event.target.parentElement.parentElement.parentElement)
         event.target.parentElement.parentElement.parentElement.remove();
         this.reCalc(this.original_price);
         this.updateUI();
@@ -329,7 +328,6 @@ let basket = {
                         msg += "상점 거래ID : " + rsp.merchant_uid;
                         msg += "결제 금액 : " + rsp.paid_amount;
                         msg += "카드 승인번호 : " + rsp.apply_num;
-                        alert(msg);
                         window.location.href =
                         "http://localhost:54213/myinfo"
                     } else {
@@ -337,7 +335,6 @@ let basket = {
                         msg += "에러내용 : " + rsp.error_msg;
                         window.location.href =
                         "http://localhost:54213/enroll/cart"
-                        alert(msg);
                     }
                     } else {
                     alert("결제를 취소하거나 잘못된 결제입니다.");
@@ -349,7 +346,6 @@ let basket = {
         }, 300);
     },
     reload : function(){
-        console.log("[window onload] : [start]");
         document.querySelectorAll(".information").forEach(function (item) {
           var str =
             item.firstElementChild.nextElementSibling.nextElementSibling
@@ -365,7 +361,6 @@ let basket = {
             item.firstElementChild.nextElementSibling.innerText;
           var time = str_split[0];
           var day = str_split[1];
-          console.log("[window onload] : end");
           $.ajax({
             type: "post",
             url: "/enroll/delete_cart",

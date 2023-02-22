@@ -59,25 +59,23 @@ router.get('/register', async(request, response) =>{
     }
     else{
         if(request.session.type=='naver'){
-            console.log('naver_register_in')
             response.render('./auth/auth_register_naver',{
-                Email : request.session.email,
-                Nickname : request.session.nickname,
-                Mobile : request.session.mobile,
+                Email : sanitizeHtml(request.session.email),
+                Nickname : sanitizeHtml(request.session.nickname),
+                Mobile : sanitizeHtml(request.session.mobile),
             });
         }
         else if(request.session.type=='kakao'){
-            console.log('kakao_register_in')
             response.render('./auth/auth_register_kakao',{
-                Email : request.session.email,
-                Nickname : request.session.nickname
+                Email : sanitizeHtml(request.session.email),
+                Nickname : sanitizeHtml(request.session.nickname)
             });
         }
         else{
             request.session.destroy();
             response.render('./auth/auth_register_main',{
-                Authnum : authNum,
-                Email_Status : Email_status,
+                Authnum : sanitizeHtml(authNum),
+                Email_Status : sanitizeHtml(Email_status),
             });
         }      
     }
@@ -89,8 +87,8 @@ router.post('/login_process', function (request, response) {
     if (!tokens.verify(request.session.secret, token)) {
       throw new Error('invalid token!')
     }else{
-        var Email_Address = request.body.Email_Address;
-        var password = request.body.pwd;
+        var Email_Address = sanitizeHtml(request.body.Email_Address);
+        var password = sanitizeHtml(request.body.pwd);
         var sanitizeHtml_Email_Address = sanitizeHtml(Email_Address);
         var sanitizeHtml_password = sanitizeHtml(password);
         if(sanitizeHtml_Email_Address  != '' && sanitizeHtml_password != '' ){
@@ -100,7 +98,6 @@ router.post('/login_process', function (request, response) {
                     if (results.length > 0 && results[0].Platform_type === 'local') {       // db에서의 반환값이 있으면 로그인 성공
                         bcrypt.compare(password,results[0].Password, function(err, result){
                             if(result){
-                                console.log(results[0].Email_Address);
                                 request.session.is_logined = true;      // 세션 정보 갱신
                                 request.session.email = results[0].Email_Address
                                 request.session.mobile = results[0].Phone_Number
@@ -164,13 +161,11 @@ router.post('/register_process', function(request, response) {
             var Recommand_ID = sanitizeHtml(request.body.recommend_ID);
             var Address = Address_addr +' '+ Address_leftover;
             var Point = sanitizeHtml(0);
-            console.log('PN',request.session.mobile);
             if(Address_post && Address_addr){
                 db.query(`SELECT * FROM Student WHERE Email_Address = ? or Phone_Number =?;
                             SELECT * FROM Student WHERE Email_Address = ?
                 `, [Email_Address,Phone_Number,Recommand_ID], function(error1, results) { // DB에 같은 이름의 회원아이디가 있는지 확인
                     if (error1) throw error1;
-                    console.log('results',results);
                     if (results[0].length <= 0) {     // DB에 같은 이름의 회원아이디가 없고, 비밀번호가 올바르게 입력된 경우
                         bcrypt.hash(Password, saltRounds, function(err, hash){
                             if(err) throw err;   
@@ -220,8 +215,6 @@ router.post('/register_process', function(request, response) {
             }
         }
         else if(request.session.type=='kakao'){
-            console.log('kakao_register_in');
-            console.log(request)
             var Name = sanitizeHtml(request.session.nickname);
             var Password = sanitizeHtml(request.body.pwd);    
             var Password2 = sanitizeHtml(request.body.pwd2);
@@ -239,7 +232,6 @@ router.post('/register_process', function(request, response) {
                             SELECT * FROM Student WHERE Email_Address = ?
                 `, [Email_Address,Phone_Number,Recommand_ID], function(error1, results) { // DB에 같은 이름의 회원아이디가 있는지 확인
                     if (error1) throw error1;
-                    console.log('results',results);
                     if (results[0].length <= 0) {     // DB에 같은 이름의 회원아이디가 없고, 비밀번호가 올바르게 입력된 경우
                         bcrypt.hash(Password, saltRounds, function(err, hash){
                             if(err) throw err;   
@@ -305,7 +297,6 @@ router.post('/register_process', function(request, response) {
                           SELECT * FROM Student WHERE Email_Address = ?
                 `, [Email_Address,Phone_Number,Recommand_ID], function(error1, results) { // DB에 같은 이름의 회원아이디가 있는지 확인
                     if (error1) throw error1;
-                    console.log('results',results);
                     if (results[0].length <= 0 && Password == Password2) {     // DB에 같은 이름의 회원아이디가 없고, 비밀번호가 올바르게 입력된 경우
                         bcrypt.hash(Password, saltRounds, function(err, hash){
                             if(err) throw err;   
@@ -354,11 +345,9 @@ router.post('/register_process', function(request, response) {
                 })
             }
             else if(request.session.email_check != 1){
-                console.log("email_check value : ",request.session.email_check)
                 response.send(`<script type="text/javascript">alert("이메일 인증을 하세요.");
                 document.location.href="/auth/register";</script>`);
             }else if(request.session.password_check != 1){
-                console.log("password_check value : ",request.session.password_check)
                 response.send(`<script type="text/javascript">alert("패스워드 체크를 하세요.");
                 document.location.href="/auth/register";</script>`);
             }
@@ -384,7 +373,6 @@ router.post('/find_id_process', (request, response) => {
     db.query('select * from Student where Name = ? and Phone_Number = ?',[username,  number], (error1,result)=>{
         if(error1) throw error1;
         if(result.length > 0 && result[0].Platform_type == 'local'){
-            console.log(result[0].Email_Address);
             response.render('./auth/auth_find_id_success',{
                 authCheck : authCheck.statusUI(request, response),
                 Email_Address : result[0].Email_Address,
@@ -433,7 +421,6 @@ router.post('/password_change_process', (request,response) => {
                 db.query(`update Student set Password = ? where Name = ? and Email_Address = ?`, 
                 [hash, request.session.username, request.session.Email_Address], 
                     function (error2, data) {
-                        console.log(hash, request.session.username, request.session.Email_Address)
                     if(error2) throw error2;
                     response.send(`<script type="text/javascript">alert("비밀번호 변경이 완료되었습니다!");
                     document.location.href="/auth/login";</script>`);
@@ -442,19 +429,16 @@ router.post('/password_change_process', (request,response) => {
         }
 })
 router.post('/password_mail', (req, res) => {
-    const reademailaddress = req.body.EA;
+    const reademailaddress = sanitizeHtml(req.body.EA);
     let emailTemplete;
     db.query(`select * from Student where Email_Address = ?`,[reademailaddress], async(error, result) => {
         if(error) throw error;
         else{
             if(result.length <= 0) res.send({ result : 'not_exist' })
             else{
-                console.log('mail_req');
                 const authNum = Math.random().toString().substr(2,6);
                 const hashAuth = await bcrypt.hash(authNum, 12);
-                console.log(hashAuth);
                 req.session.hashAuth = hashAuth;
-                console.log('req.session.session',req.session.hashAuth);
                 res.render('./auth/password_mail', {authCode : authNum}, function (err, data) {
                 if(err){console.log(err)}
                 console.log(data)
@@ -482,7 +466,6 @@ router.post('/password_mail', (req, res) => {
                     if (error) {
                         console.log(error);
                     }else{
-                        console.log('success')
                         res.send(authNum);
                         transporter.close()
                     }
@@ -503,15 +486,11 @@ router.post('/mail', (req, res) => {
         else{
             if(result.length>0) res.send({ result : 'exist' })
             else{
-                console.log('mail_req');
                 let authNum = Math.random().toString().substr(2,6);
                 const hashAuth = await bcrypt.hash(authNum, 12);
-                console.log(hashAuth);
                 req.session.hashAuth = hashAuth;
-                console.log('req.session.session',req.session.hashAuth);
                 res.render('./auth/mail', {authCode : authNum}, function (err, data) {
                 if(err){console.log(err)}
-                console.log(data)
                 emailTemplete = data;
                 });
                 let transporter = await nodemailer.createTransport({
@@ -536,7 +515,6 @@ router.post('/mail', (req, res) => {
                     if (error) {
                         console.log(error);
                     }else{
-                        console.log('success')
                         res.send(authNum);
                         transporter.close()
                     }
@@ -566,7 +544,6 @@ router.post('/mail_validation', async (req, res, next) => {
         else res.send({ result : 'fail'});
     } catch(err) {
       res.send({ result : 'fail'});
-      console.error(err);
       next(err);
     }
   });
@@ -574,7 +551,6 @@ router.post('/mail_validation', async (req, res, next) => {
 //-------naver
 
 router.get('/naver/login', async (req, res) => {
-    console.log('naver in')
     req.session.secret = tokens.secretSync();
     var token = tokens.create(req.session.secret);
     if (!tokens.verify(req.session.secret, token)) {
@@ -608,7 +584,7 @@ router.get('/naver/login', async (req, res) => {
             // string 형태로 값이 담기니 JSON 형식으로 parse를 해줘야 한다.
         const info_result_json = JSON.parse(info_result).response;
         
-        db.query(`SELECT * FROM Student WHERE Email_Address = ?`, [info_result_json.email],
+        db.query(`SELECT * FROM Student WHERE Email_Address = ?`, [sanitizeHtml(info_result_json.email)],
                 function(error,results1){
                     if(error) throw error;
                     if (results1.length > 0 && results1[0].Platform_type === 'naver') {       // db에서의 반환값이 있으면 로그인 성공
@@ -679,8 +655,6 @@ router.get('/kakao/login', async(req, res) => {
     }else{
         try{
             platform_type = "kakao";
-            console.log('platform',platform_type);
-            console.log('inin');
             const url = 'https://kauth.kakao.com/oauth/token'
             const body = qs.stringify({
                 grant_type : 'authorization_code',
@@ -692,7 +666,6 @@ router.get('/kakao/login', async(req, res) => {
             const header = {'content-Type' : 'application/x-www-form-urlencoded;charset=utf-8'}
             const response = await axios.post(url,body,header);
             const token = response.data.access_token;
-            console.log("res", response.data.account_email);
             const user = await axios.get('https://kapi.kakao.com/v2/user/me',{
                 headers : {
                     'Content-Type' : 'application/x-www-form-urlencoded;charset=utf-8',
@@ -714,7 +687,6 @@ router.get('/kakao/login', async(req, res) => {
                     });
                 }
                 else{
-                    console.log('토큰!', token);
                     req.session.type = platform_type;
                     req.session.email = email;
                     req.session.is_logined = true;      // 세션 정보 갱신
@@ -725,7 +697,6 @@ router.get('/kakao/login', async(req, res) => {
                 }
             })
         }catch{
-            console.log('실패!');
             res.redirect('/');
         }
     }

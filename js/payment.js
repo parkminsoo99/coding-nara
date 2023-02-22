@@ -155,7 +155,6 @@ let basket = {
                 Teacher_ID : teacher_ID,
             },
             success: function(data) {
-                alert(JSON.stringify(data.result))
                 price = Number(JSON.stringify(data.result[0].Payment_Price));
                 point = Number(JSON.stringify(data.result[0].Use_Point));
                 nickname = JSON.stringify(data.result[0].Name);
@@ -248,14 +247,12 @@ let basket = {
                         msg += "상점 거래ID : " + rsp.merchant_uid;
                         msg += "결제 금액 : " + rsp.paid_amount;
                         msg += "카드 승인번호 : " + rsp.apply_num;
-                        alert(msg);
                         window.location.href =
                         "http://localhost:54213/myinfo"
                     } else {
                         var msg = "결제에 실패하였습니다.";
                         msg += "에러내용 : " + rsp.error_msg;
                         window.location.href = link
-                        alert(msg);
                     }
                     } else {
                     alert("결제를 취소하거나 잘못된 결제입니다.");
@@ -266,8 +263,6 @@ let basket = {
         }, 300);
     },
     reload : function(student_ID, course_ID, date_ID, time_ID, teacher_ID){
-        // window.location.href = "http://localhost:54213/enroll/enroll_delete_payment?Student_ID=" + student_ID + "&Course_ID=" + course_ID + "&Date_ID=" + date_ID + "&Time_ID=" + time_ID + "&Teacher_ID=" + teacher_ID;
-        console.log("[window onload] : [start]");
           $.ajax({
             type: "post",
             url: "http://localhost:54213/enroll/enroll_delete_payment",
@@ -282,7 +277,6 @@ let basket = {
                 Count: 1,
             },
         }).fail(function (jqXHR, textStatus, errorThrown) {
-            console.log('2. fail 을 탄다 : ' + errorThrown);
         });
     },
     move_cart : function(student_ID, course_ID, date_ID, time_ID, teacher_ID){
@@ -301,7 +295,6 @@ let basket = {
                 Count: count,
             },
             success : function(data){
-                alert(JSON.stringify(data.result))
                 if(JSON.stringify(data.result).replaceAll(reg,"") == "success"){
                     alert("장바구니에 해당 강좌를 담았습니다.")
                 }else{

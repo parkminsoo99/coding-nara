@@ -6,7 +6,6 @@ let mypage_list = {
             url:"/myinfo/button_change_validation",
             dataType: "json",
         }).done(function(data){
-            alert(JSON.stringify(data.result));
             if(JSON.stringify(data.result).replaceAll(reg,"") == 1){
                 document.getElementById('change_button').disabled = false;
                 document.location.href="http://localhost:54213/myinfo/update";
