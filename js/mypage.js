@@ -8,11 +8,11 @@ let mypage_list = {
         }).done(function(data){
             if(JSON.stringify(data.result).replaceAll(reg,"") == 1){
                 document.getElementById('change_button').disabled = false;
-                document.location.href="http://localhost:54213/myinfo/update";
+                document.location.href="https://coding-nara.com/myinfo/update";
             }
             else if(JSON.stringify(data.result).replaceAll(reg,"") == 2){
                 document.getElementById('change_button').disabled = false;
-                document.location.href="http://localhost:54213/myinfo/update";
+                document.location.href="https://coding-nara.com/myinfo/update";
             }
             else{
                 document.getElementById('change_button').disabled = true;

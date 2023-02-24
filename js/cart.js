@@ -278,7 +278,7 @@ let basket = {
             var postcode = JSON.stringify(price_point_name.postcode);
             if (Course_Active== 1) {
                 alert("이미 결제가 이뤄진 강의가 존재합니다.");
-                window.location.href = "http://localhost:54213/enroll/sub";
+                window.location.href = "https://coding-nara.com/enroll/sub";
             } else {
                 // IMP.request_pay(param, callback) 결제창 호출
                 IMP.request_pay(
@@ -329,17 +329,17 @@ let basket = {
                         msg += "결제 금액 : " + rsp.paid_amount;
                         msg += "카드 승인번호 : " + rsp.apply_num;
                         window.location.href =
-                        "http://localhost:54213/myinfo"
+                        "https://coding-nara.com/myinfo"
                     } else {
                         var msg = "결제에 실패하였습니다.";
                         msg += "에러내용 : " + rsp.error_msg;
                         window.location.href =
-                        "http://localhost:54213/enroll/cart"
+                        "https://coding-nara.com/enroll/cart"
                     }
                     } else {
                     alert("결제를 취소하거나 잘못된 결제입니다.");
                     window.location.href =
-                        "http://localhost:54213/enroll/cart"
+                        "https://coding-nara.com/enroll/cart"
                     }
                 }
             );}

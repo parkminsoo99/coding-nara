@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Login TEST - ${title}</title>
+    <title>마이페이지</title>
     <meta charset="utf-8" />
     <!-- Favicon-->
     <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
@@ -10,6 +10,7 @@
       href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"
       rel="stylesheet"
     />
+    <link rel="shortcut icon" type="image/x-icon" href="../image/logo_mini.png" />
     <!-- Google fonts-->
     <link
       href="https://fonts.googleapis.com/css?family=Merriweather+Sans:400,700"
@@ -120,20 +121,13 @@
     <br />
     <div class="row gx-4 gx-lg-5 justify-content-center mb-5">
       <div class="col-lg-6">
-        <div class="form-floating mb-3">
-          <form
-            id="form"
-            action="/myinfo/upload"
-            method="post"
-            enctype="multipart/form-data"
-            accept="image/gif, image/jpeg, image/png, image/webp"
-          >
-            <input type="file" name="image" />
-            <button type="submit" class="btn btn-secondary">이미지 저장</button>
-          </form>
-        </div>
-        <br />
-        <form id="contactForm" action="/myinfo/update_mypage" method="post">
+        <form
+          id="contactForm"
+          action="/myinfo/update_mypage"
+          enctype="multipart/form-data"
+          method="post"
+          accept="image/gif, image/jpeg, image/png, image/webp"
+        >
           <!-- Name input-->
           <div class="form-floating mb-3">
             <input
@@ -253,7 +247,12 @@
             />
             <label for="school">학력</label>
           </div>
-          <br />
+          <div class="form-floating mb-3">
+            <input type="file" name="image" value=""/>
+            <p style="font-size: 9px; color: red">
+              (* 사진 크기는 180 * 250 픽셀을 권장합니다.)
+            </p>
+          </div>
           <!-- Submit Button-->
           <div class="d-grid">
             <input

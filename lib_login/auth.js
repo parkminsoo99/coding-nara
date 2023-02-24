@@ -11,7 +11,7 @@ const ejs = require('ejs');
 var client_id = 'sIwGUXdmGRyOPin4mTnj';
 var client_secret = 'bWV7qU9Ngl';
 var state = "1004";
-var redirectURI = encodeURI("http://localhost:54213/auth/naver/login");
+var redirectURI = encodeURI("https://coding-nara.com/auth/naver/login");
 var api_url = 'https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=' + client_id + '&redirect_uri=' + redirectURI + '&state=' + state;
 const request = require('request-promise');
 const date = require('date-and-time');
@@ -30,13 +30,13 @@ const saltRounds = 10;
 const kakaoData = {
     client_id : 'f28ca6f29082d1991b42941c3178fe60',
     client_secret : 'fOdmb6jteLfVhsfoWVvqm4Us5CgRc6DS',
-    redirect_url : 'http://localhost:54213/auth/kakao/login',
-    logout_redirect_url : 'http://localhost:54213/auth/kakao/logout'
+    redirect_url : 'https://coding-nara.com/auth/kakao/login',
+    logout_redirect_url : 'https://coding-nara.com/auth/kakao/logout'
 }
 
 // 로그인 화면
 router.get('/login', function (request, response) {
-    request.session.secret = tokens.secretSync();
+	request.session.secret = tokens.secretSync();
     var token = tokens.create(request.session.secret);
     if (!tokens.verify(request.session.secret, token)) {
       throw new Error('invalid token!')
@@ -428,16 +428,16 @@ router.post('/password_change_process', (request,response) => {
             })
         }
 })
-router.post('/password_mail', (req, res) => {
+router.post('/password_mail', async(req, res) => {
     const reademailaddress = req.body.EA;
+    const authNum = Math.random().toString().substr(2,6);
+    const hashAuth = await bcrypt.hash(authNum, 12);
     let emailTemplete;
     db.query(`select * from Student where Email_Address = ?`,[reademailaddress], async(error, result) => {
         if(error) throw error;
         else{
             if(result.length <= 0) res.send({ result : 'not_exist' })
             else{
-                const authNum = Math.random().toString().substr(2,6);
-                const hashAuth = await bcrypt.hash(authNum, 12);
                 req.session.hashAuth = hashAuth;
                 res.render('./auth/password_mail', {authCode : authNum}, function (err, data) {
                 if(err){console.log(err)}
@@ -479,50 +479,55 @@ router.post('/password_mail', (req, res) => {
 
 //mail & password_check
 
-router.post('/mail', (req, res) => {
-    const reademailaddress = req.body.EA;
+router.post('/mail', async (req, res) => {
+    const reademailaddress = sanitizeHtml(req.body.EA);
+    let authNum = Math.random().toString().substr(2,6);
+    const hashAuth =  await bcrypt.hash(authNum, 12);
     let emailTemplete;
-    db.query(`select * from Student where Email_Address = ?`,[reademailaddress], async(error, result) => {
+    db.query(`select * from Student where Email_Address = ?`,[reademailaddress],async(error, result) => {
         if(error) throw error;
         else{
             if(result.length>0) res.send({ result : 'exist' })
             else{
-                let authNum = Math.random().toString().substr(2,6);
-                const hashAuth = await bcrypt.hash(authNum, 12);
+                console.log('mail_req');
+                console.log(hashAuth);
+
                 req.session.hashAuth = hashAuth;
+                console.log('asdasd',req.session.hashAuth)
+                console.log('req.session.session',req.session.hashAuth);
                 res.render('./auth/mail', {authCode : authNum}, function (err, data) {
-                if(err){console.log(err)}
-                console.log(data)
-                emailTemplete = data;
-                });
-                let transporter = await nodemailer.createTransport({
-                    service: 'daum',
-                    host: 'smtp.daum.net',
-                    port: 465,
-                    secure: true,
-                    auth: {
-                        user: process.env.NODEMAILER_USER,
-                        pass: process.env.NODEMAILER_PASS,
-                    },tls: {
-                        rejectUnauthorized: false
-                    }
-                });
-                const mailOptions = await transporter.sendMail({
-                    from: `admin@coding-nara.com`,
-                    to: 'zzangorc99@naver.com',
-                    subject: '회원가입을 위한 인증번호를 입력해주세요.',
-                    html: emailTemplete,
-                });
-                transporter.sendMail(mailOptions, function (error, info) {
-                    if (error) {
-                        console.log(error);
-                    }else{
-                        console.log('success')
-                        res.send(authNum);
-                        transporter.close()
-                    }
-                });
-                return res.send({ result : 'send', HashAuth : req.session.hashAuth});
+                    if(err){console.log(err)}
+                    console.log(data)
+                    emailTemplete = data;
+                    });
+                    let transporter = await nodemailer.createTransport({
+                        service: 'daum',
+                        host: 'smtp.daum.net',
+                        port: 465,
+                        secure: true,
+                        auth: {
+                            user: process.env.NODEMAILER_USER,
+                            pass: process.env.NODEMAILER_PASS,
+                        },tls: {
+                            rejectUnauthorized: false
+                        }
+                    });
+                    const mailOptions = await transporter.sendMail({
+                        from: 'admin@coding-nara.com',
+                        to: 'zzangorc99@naver.com',
+                        subject: '회원가입을 위한 인증번호를 입력해주세요.',
+                        html: emailTemplete,
+                    });
+                    transporter.sendMail(mailOptions, function (error, info) {
+                        if (error) {
+                            console.log(error);
+                        }else{
+                            console.log('success')
+                            res.send(authNum);
+                            transporter.close()
+                        }
+                    });
+                    return res.send({ result : 'send', HashAuth : req.session.hashAuth});
             }
         }
     })
@@ -647,7 +652,7 @@ router.get('/kakao/logout', async (req,res)=>{
       throw new Error('invalid token!')
     }else{
         req.session.destroy();
-        const kakaoAuthroize = 'https://kauth.kakao.com/oauth/logout?client_id=f28ca6f29082d1991b42941c3178fe60&logout_redirect_uri=http://localhost:54213/'
+        const kakaoAuthroize = 'https://kauth.kakao.com/oauth/logout?client_id=f28ca6f29082d1991b42941c3178fe60&logout_redirect_uri=https://coding-nara.com/'
         res.redirect(kakaoAuthroize);
     }
   })

@@ -197,7 +197,7 @@ let basket = {
             var count = JSON.stringify(price_point_name.count);
             if ( Course_Active == 1) {
                 alert("이미 결제가 이뤄진 강의가 존재합니다.");
-                window.location.href = "http://localhost:54213/enroll/sub";
+                window.location.href = "https://coding-nara.com/enroll/sub";
             } else {
                 // IMP.request_pay(param, callback) 결제창 호출
                 IMP.request_pay(
@@ -248,7 +248,7 @@ let basket = {
                         msg += "결제 금액 : " + rsp.paid_amount;
                         msg += "카드 승인번호 : " + rsp.apply_num;
                         window.location.href =
-                        "http://localhost:54213/myinfo"
+                        "https://coding-nara.com/myinfo"
                     } else {
                         var msg = "결제에 실패하였습니다.";
                         msg += "에러내용 : " + rsp.error_msg;
@@ -265,7 +265,7 @@ let basket = {
     reload : function(student_ID, course_ID, date_ID, time_ID, teacher_ID){
           $.ajax({
             type: "post",
-            url: "http://localhost:54213/enroll/enroll_delete_payment",
+            url: "https://coding-nara.com/enroll/enroll_delete_payment",
             dataType: "json",
             timeout : 3000,
             data: {
@@ -284,7 +284,7 @@ let basket = {
         const reg = /[\{\}\[\]\/?,;:|\)*~`!^\-_+<>\#$%&\\\=\(\'\"]/gi;
         $.ajax({
             type: "post", 
-            url: "http://localhost:54213/enroll/enroll_move_cart",
+            url: "https://coding-nara.com/enroll/enroll_move_cart",
             dataType: "json",
             data: {
                 Student_ID : student_ID,
