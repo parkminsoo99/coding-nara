@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>강좌 장바구니</title>
+    <title>Login TEST - ${title}</title>
     <meta charset="utf-8" />
     <meta
       name="viewport"
@@ -31,7 +31,7 @@
     />
     <!-- Core theme CSS (includes Bootstrap)-->
     <link href="../CSS/styles_none.css" rel="stylesheet" />
-    <link href="../CSS/10-11.css" rel="stylesheet" />
+    <link href="../CSS/cart.css" rel="stylesheet" />
     <script
       type="text/javascript"
       src="https://code.jquery.com/jquery-1.12.4.min.js"
@@ -133,57 +133,62 @@
             <td>포인트</td>
           </tr>
         </thead>
-        <tbody>
+        <tbody class="cart_table">
           <%-List %>
         </tbody>
         <tfoot>
           <tr>
-            <td></td>
-            <td></td>
-            <td colspan="3">
-              <div
-                class="right-align basketrowcmd"
-                style="display: flex; justify-content: flex-end; margin: 10px"
-              >
-                <string style="font-size: 20px">포인트 잔액 : </string
-                ><string id="point" style="font-size: 20px"></string
-                ><string style="font-size: 20px">원</string>
+            <td colspan="2">
+              <div class="cart_delete">
                 <a
                   href="javascript:void(0)"
-                  class="abutton"
+                  class="btn btn-dark abutton"
+                  style="margin-bottom: 10px"
                   onclick="javascript:basket.delCheckedItem();"
                   >선택강의삭제</a
                 >
                 <a
                   href="javascript:void(0)"
-                  class="abutton"
+                  class="btn btn-dark abutton delete_all"
                   onclick="javascript:basket.delAllItem();"
                   >장바구니비우기</a
                 >
               </div>
             </td>
+
+            <td class="result_price">
+              <div class="bigtext right-align sumcount" id="sum_p_num">
+                <script>
+                  basket.reCalc(<%=Point%>);
+                </script>
+              </div>
+              <div
+                class="bigtext right-align box blue summoney"
+                id="sum_p_price"
+              >
+                <script>
+                  basket.reCalc(<%=Point%>);
+                  basket.updateUI();
+                </script>
+              </div>
+            </td>
+            <td></td>
+            <td class="point_info">
+              <div class="right-align basketrowcmd" style="margin-right: 10px">
+                <string style="font-size: 20px">포인트 잔액 : </string
+                ><string id="point" style="font-size: 20px"><%=Point%></string
+                ><string style="font-size: 20px">원</string>
+              </div>
+            </td>
           </tr>
         </tfoot>
       </table>
-
-      <div class="bigtext right-align sumcount" id="sum_p_num">
-        <script>
-          basket.reCalc(<%=Point%>);
-        </script>
-      </div>
-
-      <div class="bigtext right-align box blue summoney" id="sum_p_price">
-        <script>
-          basket.reCalc(<%=Point%>);
-          basket.updateUI();
-        </script>
-      </div>
       <div id="goorder" class="">
         <div class="clear center-align">
           <button
             type="button"
             class="btn btn-danger"
-            style="margin-left: 550px; margin-bottom: 20px"
+            style="margin-left: 530px; margin-bottom: 20px; margin-top: 20px"
             onclick="javascript:basket.payment((<%-JSON.stringify(Course_Active)%>))"
           >
             강의 신청
@@ -200,6 +205,7 @@
             다른 사람이 먼저 강의를 신청할 시 장바구니에 담긴 강의가 자동 삭제될
             수 있습니다.
           </li>
+          <li>장바구니에 강의는 최대 5개만 담을 수 있습니다.</li>
         </ul>
       </div>
     </section>
@@ -234,3 +240,4 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/SimpleLightbox/2.1.0/simpleLightbox.min.js"></script>
   <script src="../js/scripts.js"></script>
 </html>
+

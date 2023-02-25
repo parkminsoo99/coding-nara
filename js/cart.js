@@ -329,7 +329,7 @@ let basket = {
                     merchant_uid: merchant_uid,
 
                     name: payment_name,
-                    amount: 100,//result_price,
+                    amount: result_price,
                     buyer_email: email_address,
                     buyer_name: payment_name,
                     buyer_tel: phone_number,
@@ -343,7 +343,7 @@ let basket = {
                         */
                 },
                 function (rsp) {
-                    if (rsp.status == "paid" && rsp.paid_amount == 100) { //result_price(실제 금액)
+                    if (rsp.status == "paid" && rsp.paid_amount == result_price) { //result_price(실제 금액)
                         if (rsp.success) {
                         basket.Enroll_info(rsp.imp_uid,rsp.merchant_uid); //결제 완료했을 떄 Section에 추가
                         var msg = "결제가 완료되었습니다.";
@@ -408,3 +408,28 @@ Number.prototype.formatNumber = function(){
     while (regex.test(nstr)) nstr = nstr.replace(regex, '$1' + ',' + '$2');
     return nstr;
 };
+function Show_Cart_Course_info(Subject,i){
+    var sub = Subject;
+    if(sub === "C언어")
+    {
+        document.getElementById("image"+i).setAttribute("src","data:image/png;base64,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");
+    }
+    else if(sub === "Python"){
+        document.getElementById("image"+i).setAttribute("src",'../image/python/1.png');
+    }
+    else if(sub === "Scatch"){
+        document.getElementById("image"+i).setAttribute("src",'../image/scratch/1.png');
+    }
+    else if(sub === "Entry"){
+        document.getElementById("image"+i).setAttribute("src",'../image/entry/1.png');
+    }
+    else if(sub === "App Inventor"){
+        document.getElementById("image"+i).setAttribute("src",'../image/app_inventor/1.png');
+    }
+    else if(sub === "웹 페이지 만들기"){
+        document.getElementById("image"+i).setAttribute("src",'../image/web/1.png');
+    }
+    else if(sub === "Minecraft Programming"){
+        document.getElementById("image"+i).setAttribute("src",'../image/minecraft/1.png');
+    }
+}

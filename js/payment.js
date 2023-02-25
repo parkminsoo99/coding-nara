@@ -228,7 +228,7 @@ let basket = {
                     merchant_uid: merchant_uid,
 
                     name: subject,
-                    amount: 100,//result_price,
+                    amount: result_price,
                     buyer_email: email_address,
                     buyer_name: payment_name,
                     buyer_tel: phone_number,
@@ -242,7 +242,7 @@ let basket = {
                         */
                 },
                 function (rsp) {
-                    if (rsp.status == "paid" && rsp.paid_amount == 100) { //result_price(실제 금액)
+                    if (rsp.status == "paid" && rsp.paid_amount == result_price) { //result_price(실제 금액)
                         if (rsp.success) {
                         basket.Enroll_info(rsp.imp_uid,rsp.merchant_uid, student_ID, course_ID, date_ID, time_ID, teacher_ID, price, count); //결제 완료했을 떄 Section에 추가
                         var msg = "결제가 완료되었습니다.";
@@ -300,6 +300,8 @@ let basket = {
             success : function(data){
                 if(JSON.stringify(data.result).replaceAll(reg,"") == "success"){
                     alert("장바구니에 해당 강좌를 담았습니다.")
+                }else if(JSON.stringify(data.result).replaceAll(reg,"") == "overflow"){
+                    alert("최대 5개의 강의만 담을 수 있스니다.")
                 }else{
                     alert("이미 존재하는 강좌입니다.")
                 }

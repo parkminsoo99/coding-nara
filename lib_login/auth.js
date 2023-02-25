@@ -428,6 +428,55 @@ router.post('/password_change_process', (request,response) => {
             })
         }
 })
+router.post('/info_chage_mail', async(req, res) => {
+    const reademailaddress = req.body.EA;
+    const authNum = Math.random().toString().substr(2,6);
+    const hashAuth = await bcrypt.hash(authNum, 12);
+    let emailTemplete;
+    db.query(`select * from Student where Email_Address = ?`,[reademailaddress], async(error, result) => {
+        if(error) throw error;
+        else{
+            if(result.length <= 0) res.send({ result : 'not_exist' })
+            else{
+                req.session.hashAuth = hashAuth;
+                res.render('./auth/info_change_mail', {authCode : authNum}, function (err, data) {
+                if(err){console.log(err)}
+                console.log(data)
+                emailTemplete = data;
+                });
+                let transporter = await nodemailer.createTransport({
+                    service: 'daum',
+                    host: 'smtp.daum.net',
+                    port: 465,
+                    secure: true,
+                    auth: {
+                        user: process.env.NODEMAILER_USER,
+                        pass: process.env.NODEMAILER_PASS,
+                    },tls: {
+                        rejectUnauthorized: false
+                    }
+                });
+                const mailOptions = await transporter.sendMail({
+                    from: `admin@coding-nara.com`,
+                    to: 'zzangorc99@naver.com',
+                    subject: '회원 정보 변경을 위한 인증번호를 입력해주세요.',
+                    html: emailTemplete,
+                });
+                transporter.sendMail(mailOptions, function (error, info) {
+                    if (error) {
+                        console.log(error);
+                    }else{
+                        console.log('success')
+                        res.send(authNum);
+                        transporter.close()
+                    }
+                });
+                return res.send({ result : 'send', HashAuth : req.session.hashAuth});
+            }
+        }
+    })
+});
+
 router.post('/password_mail', async(req, res) => {
     const reademailaddress = req.body.EA;
     const authNum = Math.random().toString().substr(2,6);
