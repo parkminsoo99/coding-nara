@@ -18,7 +18,7 @@ var enroll_Router = require('./lib/enroll_page');
 var review_Router = require('./lib/review_page');
 
 const multer = require("multer");
-const handleListen = () => console.log("Listen on http://localhost:54213");
+const handleListen = () => console.log("Listen on https://coding-nara.com:54213");
 const __dirname = path.resolve();
 
 const storage = multer.diskStorage({ //파일저장

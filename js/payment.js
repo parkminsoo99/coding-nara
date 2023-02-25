@@ -142,6 +142,7 @@ let basket = {
         var phone_number = '';
         var address = '';
         var postcode = 0;
+        const reg = /[\{\}\[\]\/?,;:|\)*~`!^\-_+<>\#$%&\\\=\(\'\"]/gi;
         $.ajax({
             type: "post", 
             url: "/enroll/enroll_get_result_price_point",
@@ -163,11 +164,12 @@ let basket = {
                 address = JSON.stringify(data.result[0].Address);
                 postcode = Number(JSON.stringify(data.result[0].PostCode));
                 count = Number(JSON.stringify(data.result[0].Count));
+                subject = JSON.stringify(data.result[0].Subject).replaceAll(reg,'');
             }
         })     
-        return ({price, point, nickname, email_address, phone_number, address, postcode, count});
+        return ({price, point, nickname, email_address, phone_number, address, postcode, count, subject});
     },
-    payment : function(Course_Active, student_ID, course_ID, date_ID, time_ID, teacher_ID, price){
+    payment : function(Course_Active, student_ID, course_ID, date_ID, time_ID, teacher_ID, price, subject){
         var link =  document.location.href;
         const IMP = window.IMP;
         IMP.init("imp71467660");
@@ -195,6 +197,7 @@ let basket = {
             var address = JSON.stringify(price_point_name.address).replace(reg, "");
             var postcode = JSON.stringify(price_point_name.postcode);
             var count = JSON.stringify(price_point_name.count);
+            var subject = JSON.stringify(price_point_name.subject);
             if ( Course_Active == 1) {
                 alert("이미 결제가 이뤄진 강의가 존재합니다.");
                 window.location.href = "http://localhost:54213/enroll/sub";
@@ -202,7 +205,7 @@ let basket = {
                 // IMP.request_pay(param, callback) 결제창 호출
                 IMP.request_pay(
                 {
-                    pg: "html5_inicis.INIpayTest",
+                    pg: "html5_inicis.MOI6344006",
                     /*
                         'kakao':카카오페이,
                         html5_inicis':이니시스(웹표준결제)
@@ -224,7 +227,7 @@ let basket = {
                     */
                     merchant_uid: merchant_uid,
 
-                    name: payment_name,
+                    name: subject,
                     amount: 100,//result_price,
                     buyer_email: email_address,
                     buyer_name: payment_name,
@@ -296,9 +299,12 @@ let basket = {
             },
             success : function(data){
                 if(JSON.stringify(data.result).replaceAll(reg,"") == "success"){
-                    alert("장바구니에 해당 강좌를 담았습니다.")
-                }else{
-                    alert("이미 존재하는 강좌입니다.")
+                    alert("장바구니에 해당 강의를 담았습니다.")
+                }else if(JSON.stringify(data.result).replaceAll(reg,"") == "overflow"){
+                    alert("최대 5개의 강의만 담을 수 있스니다.")
+                }
+                else{
+                    alert("이미 존재하는 강의입니다.")
                 }
             }
         })
@@ -315,7 +321,6 @@ Number.prototype.formatNumber = function(){
 };
 
 function Show_Course_info(Subject){
-    var link =  document.location.href;
       var sub = Subject;
       if(sub === "C언어")
       {
