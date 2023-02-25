@@ -1,11 +1,58 @@
 var timer;
+var hash ='';
 function stopWatch(TimeSet) {
     timer = setInterval(function () {
         sec = TimeSet % 60;
         document
             .getElementById("err-msg2")
             .innerHTML = "인증번호 유효시간은&nbsp;" + parseInt(TimeSet / 60) + "분" + sec + "초.<br><" +
-                    "a href='javascript:;' id='resend' class='text-red' onclick=emailSend('EA')><u>" +
+                    "a id='resend' class='text-red' onclick=emailSend('EA')><u>" +
+                    "인증번호 재전송</u></a>";
+        TimeSet--;
+        if (TimeSet < 0) {
+            $.ajax({type: "POST", url: "/auth/mail_expire"})
+            clearTimeout(timer);
+            alert("인증번호 만료");
+            document
+                .getElementsByName("CEA")[0]
+                .value = null;
+            document
+                .getElementsByName("EA")[0]
+                .readOnly = false;
+            document
+                .getElementsByName("CEA")[0]
+                .readOnly = false;
+            document
+                .getElementsByName("hideCK")[0]
+                .value = null;
+            document
+                .getElementsByName("hideCNU")[0]
+                .value = null;
+            document
+                .getElementById("CEA")
+                .classList
+                .add("d-none");
+            document
+                .getElementById("cerBtn")
+                .classList
+                .add("d-none");
+            document
+                .getElementById("sendBtn")
+                .classList
+                .remove("d-none");
+            document
+                .getElementById("err-msg2")
+                .innerHTML = "인증번호 재전송";
+        }
+    }, 1000);
+}
+function password_stopWatch(TimeSet) {
+    timer = setInterval(function () {
+        sec = TimeSet % 60;
+        document
+            .getElementById("err-msg2")
+            .innerHTML = "인증번호 유효시간은&nbsp;" + parseInt(TimeSet / 60) + "분" + sec + "초.<br><" +
+                    "a id='resend' class='text-red' onclick=password_emailSend('EA')><u>" +
                     "인증번호 재전송</u></a>";
         TimeSet--;
 
@@ -70,6 +117,7 @@ function password_emailSend(email) {
         return alert("올바른 이메일 형식을 입력해 주세요.");
     }
 }
+
 function password_emailSendAjax(email) {
     $
         .ajax({
@@ -101,7 +149,7 @@ function password_emailSendAjax(email) {
                     .classList
                     .add("d-none");
                 clearTimeout(timer);
-                stopWatch(300);
+                password_stopWatch(300);
             } else {
                 alert("인증 번호 전송에 실패했습니다.");
             }
@@ -197,10 +245,13 @@ function emailCerAjax(cerNum) {
             }
         });
 }
+
 function findAddr() {
     new daum
         .Postcode({
             oncomplete: function (data) {
+                console.log(data);
+
                 // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분. 도로명 주소의 노출 규칙에 따라 주소를 표시한다. 내려오는 변수가 값이
                 // 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
                 var roadAddr = data.roadAddress; // 도로명 주소 변수

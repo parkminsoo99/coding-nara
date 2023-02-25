@@ -236,7 +236,9 @@ table th {
 .board-table .th-date {
   width: 200px;
 }
-
+.board-table .th-date_instructor {
+  width: 130px;
+}
 .board-table th, .board-table td {
   padding: 14px 0;
 }
