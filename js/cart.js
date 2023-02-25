@@ -10,14 +10,33 @@ let basket = {
         op = Number(op.innerText.replaceAll(",", ""));
         this.original_price = op;
     },
-    
-        //체크한 장바구니 상품 비우기
+            //체크한 장바구니 상품 비우기
     delCheckedItem: function(){
-        document.querySelectorAll("input[name=buy]:checked").forEach(function (item) {
-            item.parentElement.parentElement.remove();
-        });
         //AJAX 서버 업데이트 전송
-    
+        document.querySelectorAll(".information").forEach(function (item){
+            if(item.parentElement.previousElementSibling.previousElementSibling.firstElementChild.checked == true){
+                var str = item.firstElementChild.nextElementSibling.nextElementSibling.innerText;
+                var str_split = str.split(' ');
+                var subject = item.firstElementChild.innerText;
+                var instructor_name = item.firstElementChild.nextElementSibling.innerText;
+                var time = str_split[0];
+                var day = str_split[1];
+                $.ajax({
+                    type: "post", 
+                    url: "/enroll/enroll_cart_delete",
+                    dataType: "json",
+                    data: {
+                        Subject: subject,
+                        Instructor_name : instructor_name,
+                        Time : time,
+                        Day : day,
+                    }
+                })
+                document.querySelectorAll("input[name=buy]:checked").forEach(function (item) {
+                    item.parentElement.parentElement.remove();
+                });
+            }
+        })
         //전송 처리 결과가 성공이면
         this.reCalc(this.original_price);
         this.updateUI();
@@ -28,13 +47,17 @@ let basket = {
             item.remove();
           });
           //AJAX 서버 업데이트 전송
-        
+          $.ajax({
+            type: "post", 
+            url: "/enroll/enroll_cart_all_delete",
+          })
           //전송 처리 결과가 성공이면
           this.totalCount = 0;
           this.totalPrice = 0;
           this.reCalc(this.original_price);
           this.updateUI();
     },
+
     //재계산
     reCalc: function(inital_point){
         if(this.count == 0) {
@@ -283,7 +306,7 @@ let basket = {
                 // IMP.request_pay(param, callback) 결제창 호출
                 IMP.request_pay(
                 {
-                    pg: "html5_inicis.INIpayTest",
+                    pg: "html5_inicis.MOI6344006",
                     /*
                         'kakao':카카오페이,
                         html5_inicis':이니시스(웹표준결제)
