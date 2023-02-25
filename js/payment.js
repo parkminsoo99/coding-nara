@@ -299,9 +299,12 @@ let basket = {
             },
             success : function(data){
                 if(JSON.stringify(data.result).replaceAll(reg,"") == "success"){
-                    alert("장바구니에 해당 강좌를 담았습니다.")
-                }else{
-                    alert("이미 존재하는 강좌입니다.")
+                    alert("장바구니에 해당 강의를 담았습니다.")
+                }else if(JSON.stringify(data.result).replaceAll(reg,"") == "overflow"){
+                    alert("최대 5개의 강의만 담을 수 있스니다.")
+                }
+                else{
+                    alert("이미 존재하는 강의입니다.")
                 }
             }
         })
@@ -318,7 +321,6 @@ Number.prototype.formatNumber = function(){
 };
 
 function Show_Course_info(Subject){
-    var link =  document.location.href;
       var sub = Subject;
       if(sub === "C언어")
       {
