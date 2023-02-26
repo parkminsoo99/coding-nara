@@ -228,7 +228,7 @@ let basket = {
                     merchant_uid: merchant_uid,
 
                     name: subject,
-                    amount: result_price,
+                    amount: 100,//result_price,
                     buyer_email: email_address,
                     buyer_name: payment_name,
                     buyer_tel: phone_number,
@@ -242,7 +242,7 @@ let basket = {
                         */
                 },
                 function (rsp) {
-                    if (rsp.status == "paid" && rsp.paid_amount == result_price) { //result_price(실제 금액)
+                    if (rsp.status == "paid" && rsp.paid_amount == 100) { //result_price(실제 금액)
                         if (rsp.success) {
                         basket.Enroll_info(rsp.imp_uid,rsp.merchant_uid, student_ID, course_ID, date_ID, time_ID, teacher_ID, price, count); //결제 완료했을 떄 Section에 추가
                         var msg = "결제가 완료되었습니다.";
