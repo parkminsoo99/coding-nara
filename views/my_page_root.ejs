@@ -41,6 +41,7 @@
       src="../js/email_validation_and_address_script.js"
     ></script>
     <script type="text/javascript" src="../js/mypage.js"></script>
+    <script type="text/javascript" src="../js/payment.js"></script>
     <script
       type="text/javascript"
       src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"
@@ -271,6 +272,7 @@
                 <th scope="col" class="th-date">리뷰</th>
                 <th scope="col" class="th-date">강의</th>
                 <th scope="col" class="th-date">강의 코드</th>
+                <th scope="col" class="th-date">추가 결제</th>
               </tr>
             </thead>
 
@@ -317,32 +319,82 @@
 
     <p></p>
   </body>
+  
   <!-- Footer-->
-  <footer class="bg-light py-5">
-    <div class="container px-4 px-lg-5">
-      <div class="small text-center text-muted">
-        <a href="/policy/private">개인정보처리방침</a> |
-        <a href="/policy/tos">이용약관</a>
+   <footer class="bg-light py-2">
+      <div style="display: flex; flex-direction: row">
+        <div style="display: flex; flex-direction: column">
+          <img
+            src="../image/all_logo.png"
+            width="400"
+            height="200"
+            style="margin-bottom: 5px; margin-left: 170px"
+          />
+          <div class="container px-4 px-lg-5">
+            <div class="small text-muted" style="margin-left: 300px">
+              Copyright &copy;코딩나라(Coding-nara)
+            </div>
+          </div>
+        </div>
+        <div
+          style="
+            margin-left: 200px;
+            display: flex;
+            flex-direction: column;
+            margin-top: 30px;
+          "
+        >
+          <div
+            style="display: flex; justify-content: center; margin-bottom: 10px"
+          >
+            <a
+              id="insta-btn"
+              href="https://www.instagram.com/coding_nara/saved/"
+              target="”_blank”"
+              style="margin-right: 10px"
+            >
+              <img
+                src="../image/insta_logo.png"
+                width="30px"
+                height="30px"
+                alt="인스타 버튼"
+              />
+            </a>
+            <a
+              id="kakao-login-btn"
+              href="http://pf.kakao.com/_xfyhFxj"
+              target="”_blank”"
+            >
+              <img
+                src="../image/kakaologin.png"
+                width="30"
+                height="30"
+                alt="카카오 버튼"
+              />
+            </a>
+          </div>
+          <div class="container px-4 px-lg-5" style="height: 45px" a>
+            <div class="small text-center text-muted">
+              <a href="/policy/private">개인정보처리방침</a> |
+              <a href="/policy/tos">이용약관</a>
+            </div>
+          </div>
+          <div class="container px-4 px-lg-5" style="margin-bottom: 10px">
+            <div class="small text-left text-muted">
+              <p>
+                대표자: 장영재, 박민수<br />
+                사업자번호: 148-14-01860 사업자 정보 확인<br />
+                통신판매업 신고번호 : 2023-서울서대문-0418 <br />
+                이메일: admin@coding-nara.com <br />
+                주소: 서울특별시 서대문구 거북골로 18길 16<br />
+                Tel : 010.6234.8291
+              </p>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
-    <div class="container px-4 px-lg-5">
-      <div class="small text-center text-muted">
-        코딩나라 | 대표자: 장영재, 박민수 | 사업자번호: 148-14-01860 사업자 정보
-        확인
-      </div>
-    </div>
-    <div class="container px-4 px-lg-5">
-      <div class="small text-center text-muted">
-        주소: 서울특별시 서대문구 북가좌동
-      </div>
-    </div>
-    <br />
-    <div class="container px-4 px-lg-5">
-      <div class="small text-center text-muted">
-        Copyright &copy;코딩나라(Coding-nara)
-      </div>
-    </div>
-  </footer>
+      <br />
+    </footer>
   <!-- Bootstrap core JS-->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
   <!-- SimpleLightbox plugin JS-->

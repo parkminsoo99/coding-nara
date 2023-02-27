@@ -142,7 +142,7 @@ let basket = {
         var phone_number = '';
         var address = '';
         var postcode = 0;
-	const reg = /[\{\}\[\]\/?,;:|\)*~`!^\-_+<>\#$%&\\\=\(\'\"]/gi;
+        const reg = /[\{\}\[\]\/?,;:|\)*~`!^\-_+<>\#$%&\\\=\(\'\"]/gi;
         $.ajax({
             type: "post", 
             url: "/enroll/enroll_get_result_price_point",
@@ -164,12 +164,12 @@ let basket = {
                 address = JSON.stringify(data.result[0].Address);
                 postcode = Number(JSON.stringify(data.result[0].PostCode));
                 count = Number(JSON.stringify(data.result[0].Count));
-		subject = JSON.stringify(data.result[0].Subject).replaceAll(reg,'');    
+                subject = JSON.stringify(data.result[0].Subject).replaceAll(reg,'');
             }
         })     
-        return ({price, point, nickname, email_address, phone_number, address, postcode, count,subject});
+        return ({price, point, nickname, email_address, phone_number, address, postcode, count, subject});
     },
-    payment : function(Course_Active, student_ID, course_ID, date_ID, time_ID, teacher_ID, price){
+    payment : function(Course_Active, student_ID, course_ID, date_ID, time_ID, teacher_ID, price, subject){
         var link =  document.location.href;
         const IMP = window.IMP;
         IMP.init("imp71467660");
@@ -197,10 +197,10 @@ let basket = {
             var address = JSON.stringify(price_point_name.address).replace(reg, "");
             var postcode = JSON.stringify(price_point_name.postcode);
             var count = JSON.stringify(price_point_name.count);
-	    var subject = JSON.stringify(price_point_name.subject);
+            var subject = JSON.stringify(price_point_name.subject);
             if ( Course_Active == 1) {
                 alert("이미 결제가 이뤄진 강의가 존재합니다.");
-                window.location.href = "https://coding-nara.com/enroll/sub";
+		window.location.href = "https://coding-nara.com/enroll/sub";
             } else {
                 // IMP.request_pay(param, callback) 결제창 호출
                 IMP.request_pay(
@@ -239,7 +239,7 @@ let basket = {
                         모바일 결제시,
                         결제가 끝나고 랜딩되는 URL을 지정
                         (카카오페이, 페이코, 다날의 경우는 필요없음. PC와 마찬가지로 callback함수로 결과가 떨어짐)
-                        */
+                    */
                 },
                 function (rsp) {
                     if (rsp.status == "paid" && rsp.paid_amount == 100) { //result_price(실제 금액)
@@ -251,7 +251,7 @@ let basket = {
                         msg += "결제 금액 : " + rsp.paid_amount;
                         msg += "카드 승인번호 : " + rsp.apply_num;
                         window.location.href =
-                        "https://coding-nara.com/myinfo"
+			"https://coding-nara.com/myinfo"
                     } else {
                         var msg = "결제에 실패하였습니다.";
                         msg += "에러내용 : " + rsp.error_msg;
@@ -264,6 +264,152 @@ let basket = {
                 }
             );}
         }, 300);
+    },
+    add_payment : function(Subject, Time, Date, Teacher_Name, number){
+        var link =  document.location.href;
+        const IMP = window.IMP;
+        IMP.init("imp71467660");
+        const make_merchant_uid = () => {
+          const current_time = new window.Date();
+          const year = current_time.getFullYear().toString();
+          const month = (current_time.getMonth() + 1).toString();
+          const day = current_time.getDate().toString();
+          const hour = current_time.getHours().toString();
+          const minute = current_time.getMinutes().toString();
+          const second = current_time.getSeconds().toString();
+          const merchant_uid =
+            "MIHEE" + year + month + day + hour + minute + second;
+          return merchant_uid;
+        };
+        const merchant_uid = make_merchant_uid();
+        setTimeout(() => {
+            var count = document.getElementById('add_count'+number).value;
+            var price_point_name = basket.add_payment_get_result_price_point(Subject, Time, Date, Teacher_Name,count);
+            const reg = /[\{\}\[\]\/?,;:|\)*~`!^\-_+<>\#$%&\\\=\(\'\"]/gi;
+            var result_price = JSON.stringify(price_point_name.price);
+            var payment_name = (JSON.stringify(price_point_name.nickname)).replace(reg, "");
+            var email_address = JSON.stringify(price_point_name.email_address).replace(reg, "");
+            var phone_number = JSON.stringify(price_point_name.phone_number)
+            var address = JSON.stringify(price_point_name.address)
+            var postcode = JSON.stringify(price_point_name.postcode);
+            // IMP.request_pay(param, callback) 결제창 호출
+            IMP.request_pay(
+                {
+                    pg: "html5_inicis.MOI6344006",
+                    /*
+                        'kakao':카카오페이,
+                        html5_inicis':이니시스(웹표준결제)
+                            'nice':나이스페이
+                            'jtnet':제이티넷
+                            'uplus':LG유플러스
+                            'danal':다날
+                            'payco':페이코
+                            'syrup':시럽페이
+                            'paypal':페이팔
+                            */
+                    pay_method: "card",
+                    /*
+                        'samsung':삼성페이,
+                        'card':신용카드,
+                        'trans':실시간계좌이체,
+                        'vbank':가상계좌,
+                        'phone':휴대폰소액결제
+                    */
+                    merchant_uid: merchant_uid,
+
+                    name: Subject,
+                    amount: 100,//result_price,
+                    buyer_email: email_address,
+                    buyer_name: payment_name,
+                    buyer_tel: phone_number,
+                    buyer_addr: address,
+                    buyer_postcode: postcode,
+
+                    /*
+                        모바일 결제시,
+                        결제가 끝나고 랜딩되는 URL을 지정
+                        (카카오페이, 페이코, 다날의 경우는 필요없음. PC와 마찬가지로 callback함수로 결과가 떨어짐)
+                    */
+                },
+                function (rsp) {
+                    if (rsp.status == "paid" && rsp.paid_amount == 100) { //result_price(실제 금액)
+                        if (rsp.success) {
+                        basket.add_payment_Enroll_info(rsp.imp_uid,rsp.merchant_uid, Subject, Time, Date, Teacher_Name, rsp.paid_amount, count);
+                        var msg = "결제가 완료되었습니다.";
+                        msg += "고유ID : " + rsp.imp_uid;
+                        msg += "상점 거래ID : " + rsp.merchant_uid;
+                        msg += "결제 금액 : " + rsp.paid_amount;
+                        msg += "카드 승인번호 : " + rsp.apply_num;
+                        window.location.href =
+			"https://coding-nara.com/myinfo"
+                    } else {
+                        var msg = "결제에 실패하였습니다.";
+                        msg += "에러내용 : " + rsp.error_msg;
+                        window.location.href = link
+                    }
+                    } else {
+                    alert("결제를 취소하거나 잘못된 결제입니다.");
+                    window.location.href = link
+                    }
+                }
+            );
+        }, 300);
+    },
+    add_payment_get_result_price_point : function(Subject, Time, Date, Teacher_Name, Count){
+        var price = 0;
+        var point = 0;
+        var nickname = '';
+        var email_address = '';
+        var phone_number = '';
+        var address = '';
+        var postcode = 0;
+        const reg = /[\{\}\[\]\/?,;:|\)*~`!^\-_+<>\#$%&\\\=\(\'\"]/gi;
+        $.ajax({
+            type: "post", 
+            url: "/enroll/add_payment_get_result_price_point",
+            dataType: "json",
+            async: false, 
+            data: {
+                Course_ID : Subject, 
+                Date_ID : Time, 
+                Time_ID : Date, 
+                Teacher_ID : Teacher_Name,
+                count : Count,
+            },
+            success: function(data) {
+                price = Number(JSON.stringify(data.result.Price));
+                nickname = JSON.stringify(data.result[1][0].Name);
+                email_address = JSON.stringify(data.result[1][0].Email_Address);
+                phone_number = JSON.stringify(data.result[0].Phone_Number);
+                address = JSON.stringify(data.result[0].Address);
+                postcode = Number(JSON.stringify(data.result[0].PostCode));
+            }
+        })     
+        return ({price, point, nickname, email_address, phone_number, address, postcode});
+    },
+    add_payment_Enroll_info : function(imp_uid, merchant_uid, Subject, Time, Date, Teacher_Name, Price, Count){
+        $.ajax({
+            type: "post", 
+            url: "/enroll/add_payment_Enroll_info",
+            dataType: "json",
+            data: {
+                Course_ID : Subject, 
+                Date_ID : Date, 
+                Time_ID : Time, 
+                Teacher_ID : Teacher_Name,
+                count: Count,
+                price : Price,
+                Imp_Uid : imp_uid,
+                Merchant_Uid : merchant_uid
+            }
+        })
+    },
+    add_Point : function(point){
+        var item = document.querySelector('input[name=add_count'+point+']');
+        item.addEventListener("keyup", function (e) {
+            e.target.value =  e.target.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1')
+            item.setAttribute('value',e.target.value);
+        })
     },
     reload : function(student_ID, course_ID, date_ID, time_ID, teacher_ID){
           $.ajax({
@@ -299,11 +445,12 @@ let basket = {
             },
             success : function(data){
                 if(JSON.stringify(data.result).replaceAll(reg,"") == "success"){
-                    alert("장바구니에 해당 강좌를 담았습니다.")
+                    alert("장바구니에 해당 강의를 담았습니다.")
                 }else if(JSON.stringify(data.result).replaceAll(reg,"") == "overflow"){
                     alert("최대 5개의 강의만 담을 수 있스니다.")
-                }else{
-                    alert("이미 존재하는 강좌입니다.")
+                }
+                else{
+                    alert("이미 존재하는 강의입니다.")
                 }
             }
         })
@@ -320,7 +467,6 @@ Number.prototype.formatNumber = function(){
 };
 
 function Show_Course_info(Subject){
-    var link =  document.location.href;
       var sub = Subject;
       if(sub === "C언어")
       {
@@ -637,9 +783,13 @@ function Show_Course_info(Subject){
 function Instructor_info_detail() {
     const button = document.getElementById("modal");
     const dialog = document.getElementById("dialog");
-
-    button.addEventListener("click", () =>{
     dialog.showModal();
-    })
 }
+function add_enroll(number) {
+    const button = document.getElementById("modal" + number);
+    const dialog = document.getElementById("dialog" + number);
+    dialog.showModal(); 
+}
+
+
 
