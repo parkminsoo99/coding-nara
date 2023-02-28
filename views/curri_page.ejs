@@ -1,282 +1,250 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Login TEST - ${title}</title>
-    <meta charset="utf-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1, shrink-to-fit=no"
-    />
-    <!-- Favicon-->
-    <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
-    <!-- Bootstrap Icons-->
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"
-      rel="stylesheet"
-    />
-    <!-- Google fonts-->
-    <link
-      href="https://fonts.googleapis.com/css?family=Merriweather+Sans:400,700"
-      rel="stylesheet"
-    />
-    <link
-      href="https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic"
-      rel="stylesheet"
-      type="text/css"
-    />
-    <!-- SimpleLightbox plugin CSS-->
-    <link
-      href="https://cdnjs.cloudflare.com/ajax/libs/SimpleLightbox/2.1.0/simpleLightbox.min.css"
-      rel="stylesheet"
-    />
-    <!-- Core theme CSS (includes Bootstrap)-->
-    <link href="CSS/styles.css" rel="stylesheet" />
 
-    <script
-      type="text/javascript"
-      src="https://code.jquery.com/jquery-1.12.4.min.js"
-    ></script>
-    <script
-      type="text/javascript"
-      src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"
-    ></script>
-  </head>
-  <body id="page-top">
-    <!-- Navigation-->
-    <nav
-      class="navbar navbar-expand-lg navbar-light fixed-top py-3"
-      id="mainNav"
-    >
-      <div class="container px-4 px-lg-5">
-        <a
-          class="navbar-brand"
-          href="#page-top"
-          style="display: flex; flex-direction: row"
-        >
-          <img
-            src="../image/logo_mini.png"
-            width="30px"
-            height="30px"
-            style="margin-right: 7px"
-          />Coding-nara
-        </a>
-        <button
-          class="navbar-toggler navbar-toggler-right"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarResponsive"
-          aria-controls="navbarResponsive"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarResponsive">
-          <ul class="navbar-nav ms-auto my-2 my-lg-0">
-            <li class="nav-item"><a class="nav-link" href="/">소개</a></li>
-            <li class="nav-item">
-              <a class="nav-link" href="/curriculum">커리큘럼</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/enroll/sub">수강신청</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/review">강좌후기</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/ask">고객센터</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/login"><%-authCheck %></a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </nav>
-    <!-- Masthead-->
-    <header class="masthead_curi">
-      <div class="container px-4 px-lg-5 h-100">
-        <div
-          class="row gx-4 gx-lg-5 h-100 align-items-center justify-content-center text-center"
-        >
-          <div class="col-lg-8 align-self-end">
-            <h1 class="text-white font-weight-bold">커리큘럼</h1>
-            <hr class="divider" />
-          </div>
-          <div class="col-lg-8 align-self-baseline">
-            <p class="text-white-75 mb-5"></p>
-          </div>
-        </div>
-      </div>
-    </header>
-    <!-- About-->
-    <section class="page-section" id="about">
-      <div class="container">
-        <div class="text-center">
-          <h2 class="section-heading text-uppercase"></h2>
-          <h3 class="section-subheading text-muted">
-            아이들이 이해하기 쉽게 맞춤 제작되었습니다.
-          </h3>
-        </div>
-        <ul class="timeline">
-          <li>
-            <div class="timeline-image">
-              <img
-                class="rounded-circle img-fluid"
-                src="/image/about/1.jpg"
-                alt="..."
-              />
-            </div>
-            <div class="timeline-panel">
-              <div class="timeline-heading">
-                <h4>1~3개월</h4>
-                <h4 class="subheading">새싹과정</h4>
-              </div>
-              <div class="timeline-body">
-                <p class="text-muted">
-                  스크레치, Entry를 통해<br />
-                  코딩에 대한 이해와 즐거움을 학습합니다.
-                </p>
-              </div>
-            </div>
+<head>
+  <title>Login TEST - ${title}</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <!-- Favicon-->
+  <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+  <!-- Bootstrap Icons-->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
+  <!-- Google fonts-->
+  <link href="https://fonts.googleapis.com/css?family=Merriweather+Sans:400,700" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic"
+    rel="stylesheet" type="text/css" />
+  <!-- SimpleLightbox plugin CSS-->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/SimpleLightbox/2.1.0/simpleLightbox.min.css" rel="stylesheet" />
+  <!-- Core theme CSS (includes Bootstrap)-->
+  <link href="CSS/styles.css" rel="stylesheet" />
+
+  <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+  <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
+</head>
+
+<body id="page-top">
+  <!-- Navigation-->
+  <nav class="navbar navbar-expand-lg navbar-light fixed-top py-3" id="mainNav">
+    <div class="container px-4 px-lg-5">
+      <a class="navbar-brand" href="#page-top" style="display: flex; flex-direction: row">
+        <img src="../image/logo_mini.png" width="30px" height="30px" style="margin-right: 7px" />Coding-nara
+      </a>
+      <button class="navbar-toggler navbar-toggler-right" type="button" data-bs-toggle="collapse"
+        data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
+        aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ms-auto my-2 my-lg-0">
+          <li class="nav-item"><a class="nav-link" href="/">소개</a></li>
+          <li class="nav-item">
+            <a class="nav-link" href="/curriculum">커리큘럼</a>
           </li>
-          <li class="timeline-inverted">
-            <div class="timeline-image">
-              <img
-                class="rounded-circle img-fluid"
-                src="/image/about/2.jpg"
-                alt="..."
-              />
-            </div>
-            <div class="timeline-panel">
-              <div class="timeline-heading">
-                <h4>3~4개월</h4>
-                <h4 class="subheading">초급과정</h4>
-              </div>
-              <div class="timeline-body">
-                <p class="text-muted">
-                  앱인벤터를 통해 직접 나만의 어플을 제작해봅니다.
-                </p>
-              </div>
-            </div>
+          <li class="nav-item">
+            <a class="nav-link" href="/enroll/sub">수강신청</a>
           </li>
-          <li>
-            <div class="timeline-image">
-              <img
-                class="rounded-circle img-fluid"
-                src="/image/about/3.jpg"
-                alt="..."
-              />
-            </div>
-            <div class="timeline-panel">
-              <div class="timeline-heading">
-                <h4>4~6개월</h4>
-                <h4 class="subheading">중급과정</h4>
-              </div>
-              <div class="timeline-body">
-                <p class="text-muted">
-                  파이썬, 웹 사이트 제작<br />프로그래밍 언어의 기초 문법
-                  학습하고, 간단한 프로그램을 만들어봅니다. 나만의 웹 사이트를
-                  제작해봅니다.
-                </p>
-              </div>
-            </div>
+          <li class="nav-item">
+            <a class="nav-link" href="/review">강좌후기</a>
           </li>
-          <li class="timeline-inverted">
-            <div class="timeline-image">
-              <img
-                class="rounded-circle img-fluid"
-                src="/image/about/4.jpg"
-                alt="..."
-              />
-            </div>
-            <div class="timeline-panel">
-              <div class="timeline-heading">
-                <h4>6~8개월</h4>
-                <h4 class="subheading">고급과정</h4>
-              </div>
-              <div class="timeline-body">
-                <p class="text-muted">
-                  마인크래프트 코딩, C언어, 파이썬 심화<br />프로그래밍 언어를
-                  심도있게 학습하며 프로그램을 직접 만들어봅니다.
-                </p>
-              </div>
-            </div>
+          <li class="nav-item">
+            <a class="nav-link" href="/ask">고객센터</a>
           </li>
-          <li class="timeline-inverted">
-            <div class="timeline-image">
-              <h4>
-                배운 내용으로
-                <br />
-                프로그램을 만들거나
-                <br />
-                대회를 나갑니다!
-              </h4>
-            </div>
+          <li class="nav-item">
+            <a class="nav-link" href="/login">
+              <%-authCheck %>
+            </a>
           </li>
         </ul>
       </div>
-    </section>
-    <!-- Footer-->
-    <footer class="bg-light py-5">
-      <div align="center">
-        <div class="footer_bottom_right is-hidden-mobile">
-          <a href="https://post.naver.com/inflearn" target="_blank" aria-label="네이버 포스트 바로가기"><i class="text" aria-hidden="true">N</i></a>
-          <a href="https://blog.naver.com/inflearn" target="_blank" aria-label="네이버 블로그 바로가기"><i class="text" aria-hidden="true">B</i></a>
-          <a href="https://www.instagram.com/inflearn__official" target="_blank" aria-label="인스타그램 바로가기"><i class="fab fa-instagram" aria-hidden="true"></i></a>
-          <a href="https://www.youtube.com/channel/UC0Y0T9JpgIBbyGDjvy9PbOg" target="_blank" aria-label="유튜브 바로가기"><i
-            class="fab fa-youtube" aria-hidden="true"></i></a>
-          <a href="https://www.facebook.com/inflearn" target="_blank" aria-label="페이스북 바로가기"><i class="fab fa-facebook-f" aria-hidden="true"></i></a>
-          <a href="https://twitter.com/inflearn" target="_blank" aria-label="트위터 바로가기"><i class="fa-brands fa-twitter" aria-hidden="true"></i></a>
+    </div>
+  </nav>
+  <!-- Masthead-->
+  <header class="masthead_curi">
+    <div class="container px-4 px-lg-5 h-100">
+      <div class="row gx-4 gx-lg-5 h-100 align-items-center justify-content-center text-center">
+        <div class="col-lg-8 align-self-end">
+          <h1 class="text-white font-weight-bold">커리큘럼</h1>
+          <hr class="divider" />
         </div>
-        <i class="bi bi-instagram fs-3"></i>
-        <i class="bi bi-envelope fs-3"></i>
+        <div class="col-lg-8 align-self-baseline">
+          <p class="text-white-75 mb-5"></p>
+        </div>
+      </div>
+    </div>
+  </header>
+  <!-- About-->
+  <section class="page-section" id="about">
+    <div class="container">
+      <div class="text-center">
+        <h2 class="section-heading text-uppercase"></h2>
+        <h3 class="section-subheading text-muted">
+          아이들이 이해하기 쉽게 맞춤 제작되었습니다.
+        </h3>
+      </div>
+      <ul class="timeline">
+        <li>
+          <div class="timeline-image">
+            <img class="rounded-circle img-fluid" src="/image/about/1.jpg" alt="..." />
+          </div>
+          <div class="timeline-panel">
+            <div class="timeline-heading">
+              <h4>1~3개월</h4>
+              <h4 class="subheading">새싹과정</h4>
+            </div>
+            <div class="timeline-body">
+              <p class="text-muted">
+                스크레치, Entry를 통해<br />
+                코딩에 대한 이해와 즐거움을 학습합니다.
+              </p>
+            </div>
+          </div>
+        </li>
+        <li class="timeline-inverted">
+          <div class="timeline-image">
+            <img class="rounded-circle img-fluid" src="/image/about/2.jpg" alt="..." />
+          </div>
+          <div class="timeline-panel">
+            <div class="timeline-heading">
+              <h4>3~4개월</h4>
+              <h4 class="subheading">초급과정</h4>
+            </div>
+            <div class="timeline-body">
+              <p class="text-muted">
+                앱인벤터를 통해 직접 나만의 어플을 제작해봅니다.
+              </p>
+            </div>
+          </div>
+        </li>
+        <li>
+          <div class="timeline-image">
+            <img class="rounded-circle img-fluid" src="/image/about/3.jpg" alt="..." />
+          </div>
+          <div class="timeline-panel">
+            <div class="timeline-heading">
+              <h4>4~6개월</h4>
+              <h4 class="subheading">중급과정</h4>
+            </div>
+            <div class="timeline-body">
+              <p class="text-muted">
+                파이썬, 웹 사이트 제작<br />프로그래밍 언어의 기초 문법
+                학습하고, 간단한 프로그램을 만들어봅니다. 나만의 웹 사이트를
+                제작해봅니다.
+              </p>
+            </div>
+          </div>
+        </li>
+        <li class="timeline-inverted">
+          <div class="timeline-image">
+            <img class="rounded-circle img-fluid" src="/image/about/4.jpg" alt="..." />
+          </div>
+          <div class="timeline-panel">
+            <div class="timeline-heading">
+              <h4>6~8개월</h4>
+              <h4 class="subheading">고급과정</h4>
+            </div>
+            <div class="timeline-body">
+              <p class="text-muted">
+                마인크래프트 코딩, C언어, 파이썬 심화<br />프로그래밍 언어를
+                심도있게 학습하며 프로그램을 직접 만들어봅니다.
+              </p>
+            </div>
+          </div>
+        </li>
+        <li class="timeline-inverted">
+          <div class="timeline-image">
+            <img class="rounded-circle img-fluid" src="/image/about/1.jpg" alt="..." />
+          </div>
+          <div class="timeline-panel">
+            <div class="timeline-heading">
+              <h4>6~8개월</h4>
+              <h4 class="subheading">자격증과정</h4>
+            </div>
+            <div class="timeline-body">
+              <p class="text-muted">
+                COS, COS pro 자격증취득을<br />
+                위하여 진행됩니다.
 
-      <a id="kakao-login-btn" href="">
-        <img
-          src="../image/kakaologin.png"
-          width="30"
-          height="30"
-          alt="카카오 로그인 버튼"
-        />
-      </a>
+              </p>
+            </div>
+          </div>
+        </li>
+        <li class="timeline-inverted">
+          <div class="timeline-image">
+            <h4 style="color:black">
+              배운 내용으로
+              <br />
+              프로그램을 만들거나
+              <br />
+              대회를 나갑니다!
+            </h4>
+          </div>
+        </li>
+      </ul>
       <br>
     </div>
-      <div class="container px-4 px-lg-5">
-        <div class="small text-center text-muted">
-          <a href="/policy/private">개인정보처리방침</a> |
-          <a href="/policy/privacy">이용약관</a>
-        </div>
-      </div>
-      <div class="container px-4 px-lg-5">
-        <div class="small text-center text-muted">
-          코딩나라 | 대표자: 장영재, 박민수 | 사업자번호: 148-14-01860 사업자
-          정보 확인
-        </div>
-      </div>
-      <div class="container px-4 px-lg-5">
-        <div class="small text-center text-muted">
-          주소: 서울특별시 서대문구 북가좌동
-        </div>
-      </div>
-      <br />
+  </section>
+  <!-- Footer-->
+  <footer class="bg-light py-2">
+    <div class="container text-center">
+      <div class="row justify-content-center">
+        <div class="col-4">
 
-      <div class="container px-4 px-lg-5">
-        <div class="small text-center text-muted">
-          Copyright &copy;코딩나라(Coding-nara)
+          <div style="display: flex; flex-direction: column; justify-content: center">
+            <img src="../image/all_logo.png" width="400" height="200" style="margin-bottom: 5px" />
+            <div class="container px-4 px-lg-5">
+              <div class="small text-muted" style="margin-left: 140px">
+                Copyright &copy;코딩나라(Coding-nara)
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-4">
+
+          <div style="display: flex; justify-content: center; margin-bottom: 10px">
+            <a id="insta-btn" href="https://www.instagram.com/coding_nara/saved/" target="”_blank”"
+              style="margin-right: 10px">
+              <img src="../image/insta_logo.png" width="30px" height="30px" alt="인스타 버튼" />
+            </a>
+            <a id="kakao-login-btn" href="http://pf.kakao.com/_xfyhFxj" target="”_blank”">
+              <img src="../image/kakaologin.png" width="30" height="30" alt="카카오 버튼" />
+            </a>
+          </div>
+          <div class="container px-4 px-lg-5" style="height: 45px" a>
+            <div class="small text-center text-muted">
+              <a href="/policy/private">개인정보처리방침</a> |
+              <a href="/policy/tos">이용약관</a>
+            </div>
+          </div>
+          <div class="container px-4 px-lg-5" style="margin-bottom: 10px">
+            <div class="small text-left text-muted">
+              <p>
+                대표자: 장영재, 박민수<br />
+                사업자번호: 148-14-01860 사업자 정보 확인<br />
+                통신판매업 신고번호 : 2023-서울서대문-0418 <br />
+                이메일: admin@coding-nara.com <br />
+                주소: 서울특별시 서대문구 거북골로 18길 16<br />
+                Tel : 010.6234.8291
+              </p>
+            </div>
+          </div>
+
         </div>
       </div>
-    </footer>
-    <!-- Bootstrap core JS-->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- SimpleLightbox plugin JS-->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/SimpleLightbox/2.1.0/simpleLightbox.min.js"></script>
-    <!-- Core theme JS-->
-    <script src="js/scripts.js"></script>
-    <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
-    <!-- * *                               SB Forms JS                               * *-->
-    <!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
-    <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
-    <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
-  </body>
+    </div>
+
+
+  </footer>
+  <!-- Bootstrap core JS-->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- SimpleLightbox plugin JS-->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/SimpleLightbox/2.1.0/simpleLightbox.min.js"></script>
+  <!-- Core theme JS-->
+  <script src="js/scripts.js"></script>
+  <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
+  <!-- * *                               SB Forms JS                               * *-->
+  <!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
+  <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
+  <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
+</body>
+
 </html>

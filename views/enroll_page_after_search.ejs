@@ -173,6 +173,10 @@
             <input type="checkbox" name="Course_type" id="Python" value="2" />
             <span class="control__content"> Python </span>
           </label>
+          <label class="control" for="Python_hard">
+            <input type="checkbox" name="Course_type" id="Python_hard" value="8" />
+            <span class="control__content"> Python 심화 </span>
+          </label>
           <label class="control" for="Minecraft Programming">
             <input
               type="checkbox"
@@ -202,6 +206,15 @@
           <label class="control" for="Make_Web">
             <input type="checkbox" name="Course_type" id="Make_Web" value="7" />
             <span class="control__content"> 웹 페이지 만들기 </span>
+          </label>
+          <br>
+          <label class="control" for="COS">
+            <input type="checkbox" name="Course_type" id="COS" value="9" />
+            <span class="control__content"> COS 자격증 </span>
+          </label>
+          <label class="control" for="COS pro">
+            <input type="checkbox" name="Course_type" id="COS pro" value="10" />
+            <span class="control__content"> COS Pro 자격증 </span>
           </label>
         </fieldset>
         <fieldset>
@@ -283,12 +296,9 @@
           </label>
         </fieldset>
         <br />
-        <input
-          type="submit"
-          class="btn btn-dark"
-          style="margin-bottom: 30px; width: 5%"
-          value="🔍   검색"
-        />
+        <button class="btn btn-dark">
+          <i class="bi bi-search"></i> 
+        </button>
       </form>
     </div>
     <div id="board-list">
@@ -296,10 +306,10 @@
         <table class="board-table">
           <thead>
             <tr>
-              <th scope="col" class="th-num">번호</th>
-              <th scope="col" class="th-title">강사이름</th>
-              <th scope="col" class="th-date">수강과목</th>
-              <th scope="col" class="th-num">수강요일</th>
+              <th scope="col" class="col-1">번호</th>
+              <th scope="col" class="col-1">강사이름</th>
+              <th scope="col" class="col-1">수강과목</th>
+              <th scope="col" class="col-1">수강요일</th>
             </tr>
           </thead>
           <tbody>

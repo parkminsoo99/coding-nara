@@ -1,209 +1,136 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Login TEST - <%=Title%></title>
-    <meta charset="utf-8" />
-    <!-- Favicon-->
-    <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
-    <!-- Bootstrap Icons-->
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"
-      rel="stylesheet"
-    />
-    <!-- Google fonts-->
-    <link
-      href="https://fonts.googleapis.com/css?family=Merriweather+Sans:400,700"
-      rel="stylesheet"
-    />
-    <link
-      href="https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic"
-      rel="stylesheet"
-      type="text/css"
-    />
-    <!-- SimpleLightbox plugin CSS-->
-    <link
-      href="https://cdnjs.cloudflare.com/ajax/libs/SimpleLightbox/2.1.0/simpleLightbox.min.css"
-      rel="stylesheet"
-    />
-    <!-- Core theme CSS (includes Bootstrap)-->
-    <link href="../CSS/styles.css" rel="stylesheet" />
-    <script
-      type="text/javascript"
-      src="https://code.jquery.com/jquery-1.12.4.min.js"
-    ></script>
-    <script
-      type="text/javascript"
-      src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"
-    ></script>
-    <script
-      type="text/javascript"
-      src = "../js/review.js"
-    ></script>
-  </head>
-  <body>
-    <div class="loader-wrapper">
-      <span class="loader"><span class="loader-inner"></span></span>
-    </div>
 
-    <script>
-      $(window).on("load", function () {
-        $(".loader-wrapper").fadeOut(1000);
-      });
-    </script>
-    <!-- Navigation-->
-    <nav
-      class="navbar navbar-expand-lg navbar-light fixed-top py-3"
-      id="mainNav"
-    >
-      <div class="container px-4 px-lg-5">
-        <a
-          class="navbar-brand"
-          href="#page-top"
-          style="display: flex; flex-direction: row"
-        >
-          <img
-            src="../image/logo_mini.png"
-            width="30px"
-            height="30px"
-            style="margin-right: 7px"
-          />Coding-nara
-        </a>
-        <button
-          class="navbar-toggler navbar-toggler-right"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarResponsive"
-          aria-controls="navbarResponsive"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarResponsive">
-          <ul class="navbar-nav ms-auto my-2 my-lg-0">
-            <li class="nav-item"><a class="nav-link" href="/">소개</a></li>
-            <li class="nav-item">
-              <a class="nav-link" href="/curriculum">커리큘럼</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/enroll/sub">수강신청</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/review">강좌후기</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/ask">고객센터</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/login"><%-authCheck %></a>
-            </li>
-          </ul>
+<head>
+  <title>Login TEST - ${title}</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+  <!-- Bootstrap Icons-->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
+  <!-- Google fonts-->
+  <link href="https://fonts.googleapis.com/css?family=Merriweather+Sans:400,700" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic"
+    rel="stylesheet" type="text/css" />
+  <!-- SimpleLightbox plugin CSS-->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/SimpleLightbox/2.1.0/simpleLightbox.min.css" rel="stylesheet" />
+  <!-- Core theme CSS (includes Bootstrap)-->
+  <link href="../CSS/styles.css" rel="stylesheet" />
+  <link href="../CSS/styles1.css" rel="stylesheet" />
+  <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+  <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
+</head>
+
+<body>
+  <div class="loader-wrapper">
+    <span class="loader"><span class="loader-inner"></span></span>
+  </div>
+
+  <script>
+    $(window).on("load", function () {
+      $(".loader-wrapper").fadeOut(1000);
+    });
+  </script>
+  <!-- Navigation-->
+  <nav class="navbar navbar-expand-lg navbar-light fixed-top py-3" id="mainNav">
+    <div class="container px-4 px-lg-5">
+      <a class="navbar-brand" href="#page-top" style="display: flex; flex-direction: row">
+        <img src="../image/logo_mini.png" width="30px" height="30px" style="margin-right: 7px" />Coding-nara
+      </a>
+      <button class="navbar-toggler navbar-toggler-right" type="button" data-bs-toggle="collapse"
+        data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
+        aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ms-auto my-2 my-lg-0">
+          <li class="nav-item"><a class="nav-link" href="/">소개</a></li>
+          <li class="nav-item">
+            <a class="nav-link" href="/curriculum">커리큘럼</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/enroll/sub">수강신청</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/review">강좌후기</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/ask">고객센터</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/login">
+              <%-authCheck %>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <!-- Masthead-->
+  <header class="masthead_enroll">
+    <div class="container px-4 px-lg-5 h-100">
+      <div class="row gx-4 gx-lg-5 h-100 align-items-center justify-content-center text-center">
+        <div class="col-lg-8 align-self-end">
+          <h1 class="text-white font-weight-bold">수강신청</h1>
+          <hr class="divider" />
+        </div>
+        <div class="col-lg-8 align-self-baseline">
+          <p class="text-white-75 mb-5">
+            스케줄에 맞춰서 원하는 시간에 수업을 들을 수 있습니다.
+          </p>
         </div>
       </div>
-    </nav>
-    <!-- Masthead-->
-    <header class="masthead_review">
-      <div class="container px-4 px-lg-5 h-100">
-        <div
-          class="row gx-4 gx-lg-5 h-100 align-items-center justify-content-center text-center"
-        >
-          <div
-            class="row gx-4 gx-lg-5 h-100 align-items-center justify-content-center text-center"
-          >
-            <div class="col-lg-8 align-self-end">
-              <h1 class="text-white font-weight-bold">강좌후기</h1>
-              <hr class="divider" />
-            </div>
-            <div class="col-lg-8 align-self-baseline">
-              <p class="text-white-75 mb-5">
-                우리 아이에 적합한 교육 서비스를 경험해보세요
-              </p>
-            </div>
-          </div>
-          <div class="col-lg-8 align-self-baseline">
-            <p class="text-white-75 mb-5">
-              우리 아이에 적합한 교육 서비스를 경험해보세요
-            </p>
-            <a class="btn btn-primary btn-xl" href="#about">Find Out More</a>
-          </div>
-        </div>
+    </div>
+  </header>
+  <br />
+  <div id="board-list">
+    <div class="container">
+      <div class="row">
+        <table class="board-table">
+          <thead>
+            <tr>
+              <th scope="col" class="col-1">번호</th>
+              <th scope="col" class="col-1">강좌명</th>
+              <th scope="col" class="col-3">제목</th>
+              <th scope="col" class="col-1">등록일</th>
+              <th scope="col" class="col-1">글쓴이</th>
+              <th scope="col" class="col-1">공감</th>
+            </tr>
+          </thead>
+          <tbody id="information">
+            <%-List %>
+          </tbody>
+        </table>
       </div>
-    </header>
+    </div>
+  </div>
+  </section>
   </br>
-    <section class="notice">
-      <div class="page-title">
-        <div class="container">
-          <h3></h3>
-        </div>
-      </div>
-      <!-- board list area -->
-      <div id="board-list">
-        <div class="container">
-          <table class="board-table">
-            <thead>
-              <tr>
-                <th scope="col" class="th-num">번호</th>
-                <th scope="col" class="th-num">강좌명</th>
-                <th scope="col" class="th-title">제목</th>
-                <th scope="col" class="th-date">등록일</th>
-                <th scope="col" class="th-date">글쓴이</th>
-                <th scope="col" class="th-date">공감</th>
-              </tr>
-            </thead>
-            <tbody id="information">
-              <%-List %>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </section>
-  </br>
-  <div style="display : flex;justify-content : center;">
+  <div style="display: flex; justify-content: center">
     <nav aria-label="Page navigation example">
       <ul class="pagination">
-          <div id="page_list" style="display: flex;">
-            <%-Page_List%>
-          </div>
+        <div id="page_list" style="display: flex"><%-Page_List%></div>
       </ul>
     </nav>
   </div>
-</br>
-  </body>
-  <!-- Footer-->
-  <footer class="bg-light py-5">
-    <div class="container px-4 px-lg-5">
-      <div class="small text-center text-muted">
-        <a href="/policy/private">개인정보처리방침</a> |
-        <a href="/policy/tos">이용약관</a>
-      </div>
+ 
+  </br>
+</body>
+
+<!-- Footer-->
+<footer class="bg-light py-5">
+  <div class="container px-4 px-lg-5">
+    <div class="small text-center text-muted">
+      Copyright &copy; 2022 - Company Name
     </div>
-    <div class="container px-4 px-lg-5">
-      <div class="small text-center text-muted">
-        코딩나라 | 대표자: 장영재, 박민수 | 사업자번호: 148-14-01860 사업자 정보
-        확인
-      </div>
-    </div>
-    <div class="container px-4 px-lg-5">
-      <div class="small text-center text-muted">
-        주소: 서울특별시 서대문구 북가좌동
-      </div>
-    </div>
-    <br />
-    <div class="container px-4 px-lg-5">
-      <div class="small text-center text-muted">
-        Copyright &copy;코딩나라(Coding-nara)
-      </div>
-    </div>
-  </footer>
-  <!-- Bootstrap core JS-->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-  <!-- SimpleLightbox plugin JS-->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/SimpleLightbox/2.1.0/simpleLightbox.min.js"></script>
-  <!-- Core theme JS-->
-  <script src="../js/scripts.js"></script>
-  <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
-  <!-- * *                               SB Forms JS                               * *-->
-  <!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
-  <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
-  <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
+  </div>
+</footer>
+<!-- Bootstrap core JS-->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+<!-- SimpleLightbox plugin JS-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/SimpleLightbox/2.1.0/simpleLightbox.min.js"></script>
+<!-- Core theme JS-->
+<script src="../js/scripts.js"></script>
+<script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
+
 </html>
