@@ -228,7 +228,7 @@ let basket = {
                     merchant_uid: merchant_uid,
 
                     name: subject,
-                    amount: 100,//result_price,
+                    amount: result_price,
                     buyer_email: email_address,
                     buyer_name: payment_name,
                     buyer_tel: phone_number,
@@ -242,7 +242,7 @@ let basket = {
                     */
                 },
                 function (rsp) {
-                    if (rsp.status == "paid" && rsp.paid_amount == 100) { //result_price(실제 금액)
+                    if (rsp.status == "paid" && rsp.paid_amount == result_price) { //result_price(실제 금액)
                         if (rsp.success) {
                         basket.Enroll_info(rsp.imp_uid,rsp.merchant_uid, student_ID, course_ID, date_ID, time_ID, teacher_ID, price, count); //결제 완료했을 떄 Section에 추가
                         var msg = "결제가 완료되었습니다.";
@@ -318,7 +318,7 @@ let basket = {
                     merchant_uid: merchant_uid,
 
                     name: Subject,
-                    amount: 100,//result_price,
+                    amount: result_price,
                     buyer_email: email_address,
                     buyer_name: payment_name,
                     buyer_tel: phone_number,
@@ -332,7 +332,7 @@ let basket = {
                     */
                 },
                 function (rsp) {
-                    if (rsp.status == "paid" && rsp.paid_amount == 100) { //result_price(실제 금액)
+                    if (rsp.status == "paid" && rsp.paid_amount == result_price) { //result_price(실제 금액)
                         if (rsp.success) {
                         basket.add_payment_Enroll_info(rsp.imp_uid,rsp.merchant_uid, Subject, Time, Date, Teacher_Name, rsp.paid_amount, count);
                         var msg = "결제가 완료되었습니다.";
@@ -371,13 +371,10 @@ let basket = {
             async: false, 
             data: {
                 Course_ID : Subject, 
-                Date_ID : Time, 
-                Time_ID : Date, 
-                Teacher_ID : Teacher_Name,
                 count : Count,
             },
             success: function(data) {
-                price = Number(JSON.stringify(data.result.Price));
+                price = Number(JSON.stringify(data.Price));
                 nickname = JSON.stringify(data.result[1][0].Name);
                 email_address = JSON.stringify(data.result[1][0].Email_Address);
                 phone_number = JSON.stringify(data.result[0].Phone_Number);
@@ -410,6 +407,26 @@ let basket = {
             e.target.value =  e.target.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1')
             item.setAttribute('value',e.target.value);
         })
+    },
+    add_isrefund : function(Subject, Time, Date, Teacher_Name, number){
+        $.ajax({
+            type: "post", 
+            url: "/enroll/add_isrefund",
+            dataType: "json",
+            async: false, 
+            data: {
+                Course_ID : Subject, 
+                Date_ID : Date, 
+                Time_ID : Time, 
+                Teacher_ID : Teacher_Name,
+            },
+            success: function(data) {
+                if(data.result === 'Y'){
+                    alert("이미 해당 강의는 환불 처리가 되었으므로 추가 결제가 불가능합니다.")
+                }
+                else add_enroll(number)   
+            }
+        }) 
     },
     reload : function(student_ID, course_ID, date_ID, time_ID, teacher_ID){
           $.ajax({
@@ -467,6 +484,7 @@ Number.prototype.formatNumber = function(){
 };
 
 function Show_Course_info(Subject){
+    var link =  document.location.href;
       var sub = Subject;
       if(sub === "C언어")
       {
@@ -526,6 +544,50 @@ function Show_Course_info(Subject){
       document.getElementById("subject6").innerHTML = "<span>" + "파이썬은 오픈 소스 언어로, 자유롭게 사용하고 수정 가능" + "<br></span>";
       //특징
       document.getElementById("feature").innerHTML = "<span>" + "중급과정 이수체계이며 평균 교육과정은 4~6개월입니다.<br /><span style=`color : red`>파이썬 심화는 고급과정 이수체계이며 평균 교육과정은 6~8개월입니다.</span>"+ "<br></span>";
+      //커리큘럼
+      document.getElementById("curri-body1").innerHTML = "<span>" + "코딩이란? 파이썬이란?" + "<br></span>";
+      document.getElementById("curri-body2").innerHTML = "<span>" + "파이썬 설치, 실행" + "<br></span>";
+      document.getElementById("curri-body3").innerHTML = "<span>" + "숫자형" + "<br></span>";
+      document.getElementById("curri-body4").innerHTML = "<span>" + "문자열 자료형" + "<br></span>";
+      document.getElementById("curri-body5").innerHTML = "<span>" + "리스트 자료형" + "<br></span>";
+      document.getElementById("curri-body6").innerHTML = "<span>" + "튜플 자료형" + "<br></span>";
+      document.getElementById("curri-body7").innerHTML = "<span>" + "딕셔너리 자료형" + "<br></span>";
+      document.getElementById("curri-body8").innerHTML = "<span>" + "집합 자료형" + "<br></span>";
+      document.getElementById("curri-body9").innerHTML = "<span>" + "변수" + "<br></span>";
+      document.getElementById("curri-body10").innerHTML = "<span>" + "if문" + "<br></span>";
+      document.getElementById("curri-body11").innerHTML = "<span>" + "while문" + "<br></span>";
+      document.getElementById("curri-body12").innerHTML = "<span>" + "for문" + "<br></span>";
+      document.getElementById("curri-body13").innerHTML = "<span>" + "함수" + "<br></span>";
+      document.getElementById("curri-body14").innerHTML = "<span>" + "사용자 입력과 출력" + "<br></span>";
+      document.getElementById("curri-body15").innerHTML = "<span>" + "클래스" + "<br></span>";
+      document.getElementById("curri-body16").innerHTML = "<span>" + "모듈" + "<br></span>";
+      document.getElementById("curri-body17").innerHTML = "<span>" + "패키지" + "<br></span>";
+      document.getElementById("curri-body18").innerHTML = "<span>" + "예외처리" + "<br></span>";
+      document.getElementById("curri-body19").innerHTML = "<span>" + "실습" + "<br></span>";
+      //과목관련 이미지
+      document.getElementById("body_img1").setAttribute("src", "../../../../image/python/2.jpeg")
+      document.getElementById("body_img3").setAttribute("src", "../../../../image/python/3.png")
+      document.getElementById('body_img2').style.display = 'none'
+      document.getElementById('second_img').style.display = 'none'
+
+      //Description
+      document.getElementById('body_img1_description_1').innerHTML = "“컴퓨터가 이해할 수 있는 코드는 어느 바보나 다 짤 수 있다. 좋은 프로그래머는 사람이 이해할 수 있는 코드를 짠다”"
+      document.getElementById('body_img1_description_2').innerHTML = "- 객체지향 설계자 '마틴 파울러'"
+      document.getElementById('body_img1_description_3').style.display = 'none'
+      document.getElementById('body_img1_description_4').innerHTML = '데이터 분석(파이썬 심화 과정)'
+      }
+      else if(sub === "Python_hard")
+      {
+      document.getElementById("image").setAttribute("src","../../../../image/python/1.png")
+      //과목 소개
+      document.getElementById("subject1").innerHTML = "<span>" + "본 강의는 Python에 대한 지식을 요구하는 강의로 Python 강의를 선 수강 할 것을 권장합니다." + "<br></span>";
+      document.getElementById("subject2").innerHTML = "<span>" + "동적이고 유연한 언어로, 웹 개발에서 과학 컴퓨팅, 데이터 분석에 이르기까지 광범위한 응용 분야에 사용" + "<br></span>";
+      document.getElementById("subject3").innerHTML = "<span>" + "윈도우, macOS, 리눅스를 포함한 다양한 운영 체제에서 실행" + "<br></span>";
+      document.getElementById("subject4").innerHTML = "<span>" + "파이썬은 객체 지향 언어로 객체와 클래스의 생성을 지원하여 보다 체계적이고 재사용 가능" + "<br></span>";
+      document.getElementById("subject5").innerHTML = "<span>" + "광범위한 기능을 제공하고 일반적인 프로그래밍 작업을 쉽게 수행할 수 있는 대규모 표준 라이브러리를 제공" + "<br></span>";
+      document.getElementById("subject6").innerHTML = "<span>" + "파이썬은 오픈 소스 언어로, 자유롭게 사용하고 수정 가능" + "<br></span>";
+      //특징
+      document.getElementById("feature").innerHTML = "<span>" + "고급과정 이수체계이며 평균 교육과정은 4~6개월입니다.<br /><span style=`color : red`>파이썬 심화는 고급과정 이수체계이며 평균 교육과정은 6~8개월입니다.</span>"+ "<br></span>";
       //커리큘럼
       document.getElementById("curri-body1").innerHTML = "<span>" + "코딩이란? 파이썬이란?" + "<br></span>";
       document.getElementById("curri-body2").innerHTML = "<span>" + "파이썬 설치, 실행" + "<br></span>";
@@ -735,6 +797,183 @@ function Show_Course_info(Subject){
       document.getElementById('body_img1_description_3').innerHTML = "관련기술로 제작한 코딩나라 홈페이지"
       document.getElementById('body_img1_description_4').style.display = 'none'
       }
+      else if(sub === "COS")
+      {
+        document.getElementById("image").setAttribute("src","../../../../image/cos/cos.jpg")
+        //과목 소개
+        document.getElementById("subject1").innerHTML = "<span>" + "Scratch, Entry(블록 코딩)에 대한 자격증으로 높은 수준의 프로그래밍 활용능력이 있음을 증명할 수 있습니다." + "<br></span>";
+        document.getElementById("subject2").innerHTML = "<span>" + "시작부터 종료까지 100% 컴퓨터상에서 진행되는 CBT(Computer Based Test)로 평가 방식이 정확함은 물론 시험 종료 즉시 시험 결과를 알 수 있습니다." + "<br></span>";
+      document.getElementById("subject3").innerHTML = "<span>" + "본 강의는 Scratch, Entry(블록 코딩)에 대한 지식을 요구하는 강의로 Scratch, Entry(블록 코딩) 강의를 선 수강 할 것을 권장합니다." + "<br></span>";
+      document.getElementById("subject4").innerHTML = "<span>" + "해당 강좌는 자격증 대비반으로 자격증 준비만을 위한 진도를 나아갑니다." + "<br></span>";
+      //특징
+      document.getElementById("feature").innerHTML = "<span>" + "자격증과정 이수체계이며 평균 교육과정은 6~8개월입니다." + "<br></span>";
+      //커리큘럼
+      document.getElementById("curri-body1").innerHTML = "<span>" + "제어 블럭" + "<br></span>";
+      document.getElementById("curri-body2").innerHTML = "<span>" + "제어 관련 문제풀이" + "<br></span>";
+      document.getElementById("curri-body3").innerHTML = "<span>" + "연산 블럭" + "<br></span>";
+      document.getElementById("curri-body4").innerHTML = "<span>" + "연산 관련 문제풀이" + "<br></span>";
+      document.getElementById("curri-body5").innerHTML = "<span>" + "함수" + "<br></span>";
+      document.getElementById("curri-body6").innerHTML = "<span>" + "함수 관련 문제풀이" + "<br></span>";
+      document.getElementById("curri-body7").innerHTML = "<span>" + "리스트" + "<br></span>";
+      document.getElementById("curri-body8").innerHTML = "<span>" + "리스트 관련 문제풀이" + "<br></span>";
+      document.getElementById("curri-body9").innerHTML = "<span>" + "변수" + "<br></span>";
+      document.getElementById("curri-body10").innerHTML = "<span>" + "변수 관련 문제풀이" + "<br></span>";
+      document.getElementById("curri-body11").innerHTML = "<span>" + "기출문제 풀이" + "<br></span>";
+      //과목관련 이미지
+      document.getElementById("body_img1").setAttribute("src", "../../../../image/cos/COS_자격증등급.png")
+      document.getElementById("body_img2").setAttribute("src", "../../../../image/entry/2.png")
+      //삭제
+      document.getElementById('curri-body12').style.display = 'none'
+      document.getElementById('curri-body13').style.display = 'none'
+      document.getElementById('curri-body14').style.display = 'none'
+      document.getElementById('curri-body15').style.display = 'none'
+      document.getElementById('curri-body16').style.display = 'none'
+      document.getElementById('curri-body17').style.display = 'none'
+      document.getElementById('curri-body18').style.display = 'none'
+      document.getElementById('curri-body19').style.display = 'none'
+      document.getElementById('body_img3').style.display = 'none'
+      document.getElementById('third_img').style.display = 'none'
+      //Description
+      document.getElementById('body_img1_description_1').innerHTML = "“13살 때, 처음으로 프로그램 만드는 것을 배웠습니다. 저는 프로그래밍을 통해 세계적인 회사를 일궈냈습니다.”"
+      document.getElementById('body_img1_description_2').innerHTML = "- 빌 게이츠(Bill Gates)"
+      document.getElementById('body_img1_description_3').innerHTML = "Entry를 통한 교육 일부"
+      document.getElementById('body_img1_description_4').style.display = 'none'
+      }
+      else if(sub === "COS pro")
+      {
+        document.getElementById("image").setAttribute("src","../../../../image/cospro/cospro.png")
+        //과목 소개
+      document.getElementById("subject1").innerHTML = "<span>" + "Python, C, C++, Java에 대한 자격증으로 높은 수준의 프로그래밍 활용능력이 있음을 증명할 수 있습니다." + "<br></span>";
+      document.getElementById("subject2").innerHTML = "<span>" + "시작부터 종료까지 100% 컴퓨터상에서 진행되는 CBT(Computer Based Test)로 평가 방식이 정확함은 물론 시험 종료 즉시 시험 결과를 알 수 있습니다." + "<br></span>";
+      document.getElementById("subject3").innerHTML = "<span>" + "본 강의는 Python, C에 대한 지식을 요구하는 강의로 Python, C 강의를 선 수강 할 것을 권장합니다." + "<br></span>";
+      document.getElementById("subject4").innerHTML = "<span>" + "해당 강좌는 자격증 대비반으로 자격증 준비만을 위한 진도를 나아갑니다." + "<br></span>";
+      //특징
+      document.getElementById("feature").innerHTML = "<span>" + "자격증과정 이수체계이며 평균 교육과정은 6~8개월입니다." + "<br></span>";
+      //커리큘럼
+      document.getElementById("curri-body1").innerHTML = "<span>" + "자료형 복습" + "<br></span>";
+      document.getElementById("curri-body2").innerHTML = "<span>" + "자료형 관련 문제풀이" + "<br></span>";
+      document.getElementById("curri-body3").innerHTML = "<span>" + "변수 복습" + "<br></span>";
+      document.getElementById("curri-body4").innerHTML = "<span>" + "변수 관련 문제풀이" + "<br></span>";
+      document.getElementById("curri-body5").innerHTML = "<span>" + "if문 복습" + "<br></span>";
+      document.getElementById("curri-body6").innerHTML = "<span>" + "if문 관련 문제풀이" + "<br></span>";
+      document.getElementById("curri-body7").innerHTML = "<span>" + "while문 복습" + "<br></span>";
+      document.getElementById("curri-body8").innerHTML = "<span>" + "while문 관련 문제풀이" + "<br></span>";
+      document.getElementById("curri-body9").innerHTML = "<span>" + "for문 복습" + "<br></span>";
+      document.getElementById("curri-body10").innerHTML = "<span>" + "for문 관련 문제풀이" + "<br></span>";
+      document.getElementById("curri-body11").innerHTML = "<span>" + "함수 복습" + "<br></span>";
+      document.getElementById("curri-body12").innerHTML = "<span>" + "함수 관련 문제풀이" + "<br></span>";
+      document.getElementById("curri-body13").innerHTML = "<span>" + "클래스 복습" + "<br></span>";
+      document.getElementById("curri-body14").innerHTML = "<span>" + "클래스 관련 문제풀이" + "<br></span>";
+      document.getElementById("curri-body15").innerHTML = "<span>" + "기출문제 풀이" + "<br></span>";
+
+
+
+      //과목관련 이미지
+      document.getElementById("body_img1").setAttribute("src", "../../../../image/cospro/1급.png")
+      document.getElementById("body_img2").setAttribute("src", "../../../../image/cospro/2급.png")
+      document.getElementById("body_img1").setAttribute("src", "../../../../image/cospro/3급.png")
+
+      //삭제
+      document.getElementById('curri-body16').style.display = 'none'
+      document.getElementById('curri-body17').style.display = 'none'
+      document.getElementById('curri-body18').style.display = 'none'
+      document.getElementById('curri-body19').style.display = 'none'
+      document.getElementById('body_img3').style.display = 'none'
+      document.getElementById('third_img').style.display = 'none'
+      //Description
+      document.getElementById('body_img1_description_1').innerHTML = "“13살 때, 처음으로 프로그램 만드는 것을 배웠습니다. 저는 프로그래밍을 통해 세계적인 회사를 일궈냈습니다.”"
+      document.getElementById('body_img1_description_2').innerHTML = "- 빌 게이츠(Bill Gates)"
+      document.getElementById('body_img1_description_3').innerHTML = "COS pro 자격증명서"
+      document.getElementById('body_img1_description_4').style.display = 'none'
+      }
+      else if(sub === "Python" || sub === "Python_hard")
+      {
+      document.getElementById("image").setAttribute("src","../../../../image/python/1.png")
+      //과목 소개
+      document.getElementById("subject1").innerHTML = "<span>" + "파이썬은 간단하고 배우기 쉬운 구문을 가지고 있어서 초보자들에게 인기 있는 언어" + "<br></span>";
+      document.getElementById("subject2").innerHTML = "<span>" + "동적이고 유연한 언어로, 웹 개발에서 과학 컴퓨팅, 데이터 분석에 이르기까지 광범위한 응용 분야에 사용" + "<br></span>";
+      document.getElementById("subject3").innerHTML = "<span>" + "윈도우, macOS, 리눅스를 포함한 다양한 운영 체제에서 실행" + "<br></span>";
+      document.getElementById("subject4").innerHTML = "<span>" + "파이썬은 객체 지향 언어로 객체와 클래스의 생성을 지원하여 보다 체계적이고 재사용 가능" + "<br></span>";
+      document.getElementById("subject5").innerHTML = "<span>" + "광범위한 기능을 제공하고 일반적인 프로그래밍 작업을 쉽게 수행할 수 있는 대규모 표준 라이브러리를 제공" + "<br></span>";
+      document.getElementById("subject6").innerHTML = "<span>" + "파이썬은 오픈 소스 언어로, 자유롭게 사용하고 수정 가능" + "<br></span>";
+      //특징
+      document.getElementById("feature").innerHTML = "<span>" + "중급과정 이수체계이며 평균 교육과정은 4~6개월입니다.<br /><span style=`color : red`>파이썬 심화는 고급과정 이수체계이며 평균 교육과정은 6~8개월입니다.</span>"+ "<br></span>";
+      //커리큘럼
+      document.getElementById("curri-body1").innerHTML = "<span>" + "코딩이란? 파이썬이란?" + "<br></span>";
+      document.getElementById("curri-body2").innerHTML = "<span>" + "파이썬 설치, 실행" + "<br></span>";
+      document.getElementById("curri-body3").innerHTML = "<span>" + "숫자형" + "<br></span>";
+      document.getElementById("curri-body4").innerHTML = "<span>" + "문자열 자료형" + "<br></span>";
+      document.getElementById("curri-body5").innerHTML = "<span>" + "리스트 자료형" + "<br></span>";
+      document.getElementById("curri-body6").innerHTML = "<span>" + "튜플 자료형" + "<br></span>";
+      document.getElementById("curri-body7").innerHTML = "<span>" + "딕셔너리 자료형" + "<br></span>";
+      document.getElementById("curri-body8").innerHTML = "<span>" + "집합 자료형" + "<br></span>";
+      document.getElementById("curri-body9").innerHTML = "<span>" + "변수" + "<br></span>";
+      document.getElementById("curri-body10").innerHTML = "<span>" + "if문" + "<br></span>";
+      document.getElementById("curri-body11").innerHTML = "<span>" + "while문" + "<br></span>";
+      document.getElementById("curri-body12").innerHTML = "<span>" + "for문" + "<br></span>";
+      document.getElementById("curri-body13").innerHTML = "<span>" + "함수" + "<br></span>";
+      document.getElementById("curri-body14").innerHTML = "<span>" + "사용자 입력과 출력" + "<br></span>";
+      document.getElementById("curri-body15").innerHTML = "<span>" + "클래스" + "<br></span>";
+      document.getElementById("curri-body16").innerHTML = "<span>" + "모듈" + "<br></span>";
+      document.getElementById("curri-body17").innerHTML = "<span>" + "패키지" + "<br></span>";
+      document.getElementById("curri-body18").innerHTML = "<span>" + "예외처리" + "<br></span>";
+      document.getElementById("curri-body19").innerHTML = "<span>" + "실습" + "<br></span>";
+      //과목관련 이미지
+      document.getElementById("body_img1").setAttribute("src", "../../../../image/python/2.jpeg")
+      document.getElementById("body_img3").setAttribute("src", "../../../../image/python/3.png")
+      document.getElementById('body_img2').style.display = 'none'
+      document.getElementById('second_img').style.display = 'none'
+
+      //Description
+      document.getElementById('body_img1_description_1').innerHTML = "“컴퓨터가 이해할 수 있는 코드는 어느 바보나 다 짤 수 있다. 좋은 프로그래머는 사람이 이해할 수 있는 코드를 짠다”"
+      document.getElementById('body_img1_description_2').innerHTML = "- 객체지향 설계자 '마틴 파울러'"
+      document.getElementById('body_img1_description_3').style.display = 'none'
+      document.getElementById('body_img1_description_4').innerHTML = '데이터 분석(파이썬 심화 과정)'
+      }
+      else if(sub === "Scatch")
+      {
+      document.getElementById("image").setAttribute("src","../../../../image/scratch/1.png")
+      //과목 소개
+      document.getElementById("subject1").innerHTML = "<span>" + "Scratch는 어린이와 초보자를 위해 설계되었으며 프로그래밍을 배우는 재미있고 대화형인 방법을 제공" + "<br></span>";
+      document.getElementById("subject2").innerHTML = "<span>" + "블록 기반 프로그래밍 언어로 프로그래밍 개념을 쉽게 배우고 이해 가능" + "<br></span>";
+      document.getElementById("subject3").innerHTML = "<span>" + "시각적 프로그래밍 언어로, 블록을 사용하여 프로그램 로직을 만듬" + "<br></span>";
+      document.getElementById("subject4").innerHTML = "<span>" + "프로그래밍 개념과 컴퓨터 과학 기술을 재미있고 매력적임" + "<br></span>";
+      document.getElementById("subject5").innerHTML = "<span>" + "대화형 프로그래밍을 허용하며, 이는 사용자가 프로그램이 실행되는 동안 프로그램과 상호 작용할 수 있음을 의미" + "<br></span>";
+      document.getElementById("subject6").innerHTML = "<span>" + "무료로 사용할 수 있으며 오픈 소스이므로 누구나 소스 코드를 수정 가능" + "<br></span>";
+      //특징
+      document.getElementById("feature").innerHTML = "<span>" + "새싹과정 이수체계이며 평균 교육과정은 1~3개월입니다." + "<br></span>";
+      //커리큘럼
+      document.getElementById("curri-body1").innerHTML = "<span>" + "코딩이란? 스크래치란?" + "<br></span>";
+      document.getElementById("curri-body2").innerHTML = "<span>" + "스크래치 실행 준비, 인터페이스 소개" + "<br></span>";
+      document.getElementById("curri-body3").innerHTML = "<span>" + "스크래치 블록, 스프라이트 움직이기" + "<br></span>";
+      document.getElementById("curri-body4").innerHTML = "<span>" + "프로젝트 저장과 열기" + "<br></span>";
+      document.getElementById("curri-body5").innerHTML = "<span>" + "말풍선으로 대화 출력" + "<br></span>";
+      document.getElementById("curri-body6").innerHTML = "<span>" + "애니메이션 효과 연출" + "<br></span>";
+      document.getElementById("curri-body7").innerHTML = "<span>" + "크기, 배경, 모양 바꾸기" + "<br></span>";
+      document.getElementById("curri-body8").innerHTML = "<span>" + "소리 추가, 재생하기" + "<br></span>";
+      document.getElementById("curri-body9").innerHTML = "<span>" + "펜 기능을 사용하여 작품 출력" + "<br></span>";
+      document.getElementById("curri-body10").innerHTML = "<span>" + "제어 블럭" + "<br></span>";
+      document.getElementById("curri-body11").innerHTML = "<span>" + "관찰 블럭" + "<br></span>";
+      document.getElementById("curri-body12").innerHTML = "<span>" + "방송하기 블럭" + "<br></span>";
+      document.getElementById("curri-body13").innerHTML = "<span>" + "연산 블럭" + "<br></span>";
+      document.getElementById("curri-body14").innerHTML = "<span>" + "함수" + "<br></span>";
+      document.getElementById("curri-body15").innerHTML = "<span>" + "리스트" + "<br></span>";
+      document.getElementById("curri-body16").innerHTML = "<span>" + "변수" + "<br></span>";
+      //과목관련 이미지
+      document.getElementById("body_img1").setAttribute("src", "../../../../image/scratch/2.png")
+      document.getElementById("body_img2").setAttribute("src", "../../../../image/scratch/3.png")
+      //삭제
+      document.getElementById('curri-body17').style.display = 'none'
+      document.getElementById('curri-body18').style.display = 'none'
+      document.getElementById('curri-body19').style.display = 'none'
+      document.getElementById('body_img3').style.display = 'none'
+      document.getElementById('third_img').style.display = 'none'
+      //Description
+      document.getElementById('body_img1_description_1').innerHTML = "“모든 사람들은 코딩하는 법을 배워야 한다. 코딩은 생각하는 법을 가쳐 준다.”"
+      document.getElementById('body_img1_description_2').innerHTML = "- 스티브 잡스"
+      document.getElementById('body_img1_description_3').innerHTML = "Scatch로 코딩한 게임"
+      document.getElementById('body_img1_description_4').style.display = 'none'
+      }
       else if(sub === "Minecraft Programming")
       {
         document.getElementById("image").setAttribute("src","../../../../image/minecraft/1.png")
@@ -780,13 +1019,12 @@ function Show_Course_info(Subject){
       document.getElementById('body_img1_description_4').style.display = 'none'
       }
 }
+
 function Instructor_info_detail() {
-    const button = document.getElementById("modal");
     const dialog = document.getElementById("dialog");
     dialog.showModal();
 }
 function add_enroll(number) {
-    const button = document.getElementById("modal" + number);
     const dialog = document.getElementById("dialog" + number);
     dialog.showModal(); 
 }

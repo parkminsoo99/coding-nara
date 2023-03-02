@@ -43,7 +43,7 @@
       href="../../../../CSS/enroll_page.css"
     />
   </head>
-  <body>
+   <body>
     <div class="loader-wrapper">
       <span class="loader"><span class="loader-inner"></span></span>
     </div>
@@ -233,15 +233,19 @@
               </section>
             </div>
           </div>
-          <div id="first_img" class="card mb-1">
-            <img id="body_img1" src="" />
+          <div id="first_img" class="card mb-1" style="overflow: hidden;">
+            <img id="body_img1" src="" style=" max-width: 100%;
+            height: auto;
+            display: block;"/>
           </div>
           <strong style="text-align: center; align-self: center"
             ><p id="body_img1_description_1"></p>
             <p id="body_img1_description_2" style="color: red"></p
           ></strong>
-          <div id="second_img" class="card mb-1">
-            <img id="body_img2" src="" />
+          <div id="second_img" class="card mb-1" style="overflow: hidden;">
+            <img id="body_img2" src="" style=" max-width: 100%;
+            height: auto;
+            display: block;"/>
           </div>
 
           <p
@@ -250,7 +254,9 @@
           ></p>
 
           <div id="third_img" class="card mb-1">
-            <img id="body_img3" src="" />
+            <img id="body_img3" src="" style=" max-width: 100%;
+            height: auto;
+            display: block;"/>
           </div>
           <p
             id="body_img1_description_4"
@@ -270,32 +276,24 @@
               <p class="card-text">
                 강사에 대한 자세한 세부사항은 아래 상세보기 버튼을 클릭해주세요.
               </p>
-              <button
-                id="modal"
-                class="btn btn-dark"
-                onclick="Instructor_info_detail()"
-              >
+              <button id="modal" class="btn btn-dark" onclick="Instructor_info_detail()">
                 상세보기
               </button>
-              <dialog id="dialog" style="height: 550px; width: 20%">
+              <dialog id="dialog">
                 <div align="center">
-                  <img
-                    src="https://coding-nara.com/<%=Image%>"
-                    width="180"
-                    height="250"
-                  />
-                </div>
+                <img src='https://coding-nara.com/<%=Image%>' width="180" height="250">
+              </div>
                 <form method="dialog">
                   <div align="center">
-                    <button class="btn btn-light">닫기</button>
-                  </div>
+                  <button class="btn btn-light">닫기</button>
+                </div>
                 </form>
               </dialog>
             </div>
           </div>
           <div class="card mb-4">
             <div class="card-header">포인트</div>
-            <div class="card-body">
+            <div class="card-body" style="overflow: hidden;">
               <div class="col-sm-6">
                 <ul class="list-unstyled mb-0">
                   <li id="point_content">
@@ -367,6 +365,7 @@
                       <a
                         id="button_move_cart"
                         class="btn btn-success"
+			style="width: 12vh"
                         onclick="javascript:basket.move_cart(<%=Student_ID%>, <%=Course_ID%>, <%=Date_ID%>, <%=Time_ID%>,<%=Teacher_ID%>)"
                       >
                         장바구니에 담기
@@ -396,7 +395,7 @@
               <a
                 class="btn btn-dark"
                 id="result_button_enroll"
-		onclick="javascript:basket.payment(<%=Course_Active%>,<%=Student_ID%>, <%=Course_ID%>, <%=Date_ID%>, <%=Time_ID%>,<%=Teacher_ID%>,<%=Price%>)"
+                onclick="javascript:basket.payment(<%=Course_Active%>,<%=Student_ID%>, <%=Course_ID%>, <%=Date_ID%>, <%=Time_ID%>,<%=Teacher_ID%>,<%=Price%>)"
                 >수강 신청</a
               >
             </div>
@@ -499,40 +498,100 @@
     </script>
   </body>
   <!-- Footer-->
-  <footer class="bg-light py-5">
-    <div class="container px-4 px-lg-5">
-      <div class="small text-center text-muted">
-        <a href="/policy/private">개인정보처리방침</a> |
-        <a href="/policy/tos">이용약관</a>
+  <footer class="bg-light py-2">
+      <div class="container text-center">
+        <div class="row">
+          <div class="col-md">
+            <div
+              style="
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+              "
+            >
+              <img
+                src="../../../../image/all_logo.png"
+                width="200"
+                height="200"
+                style="text-align: center"
+              />
+              <div class="row-md-6">
+                <div class="small text-muted">
+                  Copyright &copy;코딩나라(Coding-nara)
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6" style="margin-top: 20px">
+            <div
+              style="
+                display: flex;
+                justify-content: center;
+                margin-bottom: 15px;
+              "
+            >
+              <a
+                id="insta-btn"
+                href="https://www.instagram.com/coding_nara/saved/"
+                target="”_blank”"
+                style="margin-right: 10px"
+              >
+                <img
+                  src="../../../../image/insta_logo.png"
+                  width="30px"
+                  height="30px"
+                  alt="인스타 버튼"
+                />
+              </a>
+              <a
+                id="kakao-login-btn"
+                href="http://pf.kakao.com/_xfyhFxj"
+                target="”_blank”"
+              >
+                <img
+                  src="../../../../image/kakaologin.png"
+                  width="30"
+                  height="30"
+                  alt="카카오 버튼"
+                />
+              </a>
+            </div>
+            <div class="container px-4 px-lg-5" style="height: 35px" a>
+              <div class="small text-center text-muted">
+                <a href="/policy/private">개인정보처리방침</a> |
+                <a href="/policy/tos">이용약관</a>
+              </div>
+            </div>
+            <div class="container px-4 px-lg-5" style="margin-bottom: 10px">
+              <div
+                class="small text-left text-muted"
+                style="text-align: center"
+              >
+                <p>
+                  대표자: 장영재, 박민수<br />
+                  사업자번호: 148-14-01860<br />
+                  이메일: admin@coding-nara.com<br />
+                  주소: 서울특별시 서대문구 거북골로 18길 16<br />
+                  통신판매업 신고번호 : 2023-서울서대문-0418
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
-    <div class="container px-4 px-lg-5">
-      <div class="small text-center text-muted">
-        코딩나라 | 대표자: 장영재, 박민수 | 사업자번호: 148-14-01860 사업자 정보
-        확인
-      </div>
-    </div>
-    <div class="container px-4 px-lg-5">
-      <div class="small text-center text-muted">
-        주소: 서울특별시 서대문구 북가좌동
-      </div>
-    </div>
-    <br />
-    <div class="container px-4 px-lg-5">
-      <div class="small text-center text-muted">
-        Copyright &copy;코딩나라(Coding-nara)
-      </div>
-    </div>
+    </footer>
   </footer>
-  <!-- Bootstrap core JS-->
+  <!— Bootstrap core JS—>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-  <!-- SimpleLightbox plugin JS-->
+  <!— SimpleLightbox plugin JS—>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/SimpleLightbox/2.1.0/simpleLightbox.min.js"></script>
-  <!-- Core theme JS-->
+  <!— Core theme JS—>
   <script src="/js/scripts.js"></script>
-  <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
-  <!-- * *                               SB Forms JS                               * *-->
-  <!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
-  <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
+  <!— * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *—>
+  <!— * *                               SB Forms JS                               * *—>
+  <!— * * Activate your form at https://startbootstrap.com/solution/contact-forms * *—>
+  <!— * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *—>
   <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
 </html>
+

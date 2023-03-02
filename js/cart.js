@@ -329,7 +329,7 @@ let basket = {
                     merchant_uid: merchant_uid,
 
                     name: payment_name,
-                    amount: 100,//result_price,
+                    amount: result_price,
                     buyer_email: email_address,
                     buyer_name: payment_name,
                     buyer_tel: phone_number,
@@ -343,7 +343,7 @@ let basket = {
                         */
                 },
                 function (rsp) {
-                    if (rsp.status == "paid" && rsp.paid_amount == 100) { //result_price(실제 금액)
+                    if (rsp.status == "paid" && rsp.paid_amount == result_price) { //result_price(실제 금액)
                         if (rsp.success) {
                         basket.Enroll_info(rsp.imp_uid,rsp.merchant_uid); //결제 완료했을 떄 Section에 추가
                         var msg = "결제가 완료되었습니다.";
@@ -379,7 +379,7 @@ let basket = {
               .nextElementSibling;
           var count = count_position.getAttribute("value");
           var str_split = str.split(" ");
-          var subject = item.firstElementChild.innerText;
+	  var subject = item.firstElementChild.firstElementChild.innerText;
           var instructor_name =
             item.firstElementChild.nextElementSibling.innerText;
           var time = str_split[0];

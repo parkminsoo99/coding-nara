@@ -104,7 +104,10 @@
     <!-- Masthead-->
     <section class="page-section" id="contact">
       <div class="container px-4 px-lg-5">
-        <div class="row gx-4 gx-lg-5 justify-content-center">
+        <div
+          class="row gx-4 gx-lg-5 justify-content-center"
+          style="margin-top: 100px"
+        >
           <div class="col-lg-8 col-xl-6 text-center">
             <h2 class="mt-0">로그인</h2>
             <hr class="divider" />
@@ -113,7 +116,10 @@
             </p>
           </div>
         </div>
-        <div class="row gx-4 gx-lg-5 justify-content-center mb-1">
+        <div
+          class="row gx-4 gx-lg-5 justify-content-center mb-1"
+          style="margin-top: 10px"
+        >
           <div class="col-lg-5">
             <div class="form-floating mb-3">
               <form action="/auth/login_process" id="contactForm" method="post">
@@ -167,113 +173,58 @@
             </div>
           </div>
         </div>
-        <div class="row gx-4 gx-lg-5 justify-content-center">
-          <div class="col-lg-4 text-center mb-5 mb-lg-0">
-            <div class="row g-3">
-              <div class="col-md-3">
-                <div class="form-floating">
-                  <p>
-                    <a href="/auth/register" style="font-size: 14px"
-                      >회원가입</a
-                    >
-                  </p>
-                </div>
-              </div>
-              <div class="col-md-1">
-                <div class="form-floating">
-                  <p style="font-size: 14px">|</p>
-                </div>
-              </div>
-              <div class="col-md-3">
-                <div class="form-floating">
-                  <p>
-                    <a href="/auth/find_ID" style="font-size: 14px"
-                      >아이디 찾기</a
-                    >
-                  </p>
-                </div>
-              </div>
-              <div class="col-md-1">
-                <div class="form-floating">
-                  <p style="font-size: 14px">|</p>
-                </div>
-              </div>
-              <div class="col-md-4">
-                <div class="form-floating">
-                  <p>
-                    <a href="/auth/find_PW" style="font-size: 14px"
-                      >비밀번호 찾기</a
-                    >
-                  </p>
-                </div>
-              </div>
-            </div>
+        <div
+          class="row gx-5 gx-lg-4 justify-content-center"
+          style="margin-bottom: 10px"
+        >
+          <div class="col-lg-4 text-center mb-2 mb-lg-0">
+            <span>
+              <a href="/auth/register" style="font-size: 14px">회원가입</a>
+            </span>
+            <span style="font-size: 14px; margin-left: 5%; margin-right: 5%"
+              >|</span
+            >
+            <span
+              ><a href="/auth/find_ID" style="font-size: 14px">아이디 찾기</a>
+            </span>
+            <span style="font-size: 14px; margin-left: 5%; margin-right: 5%"
+              >|</span
+            >
+            <span>
+              <a href="/auth/find_PW" style="font-size: 14px">비밀번호 찾기</a>
+            </span>
           </div>
         </div>
         <div class="row gx- gx-lg-5 justify-content-center">
-          <div class="col-lg-4 text-center mb-5 mb-lg-0">
+          <div class="col-lg-4 text-center mb-2 mb-lg-0">
             <p class="text-muted mb">SNS 간편 로그인</p>
           </div>
         </div>
         <div class="row gx- gx-lg-5 justify-content-center">
           <div class="col-lg-4 text-center mb-5 mb-lg-0">
             <div class="row g-1">
-              <div
-                class="col-sm"
-                style="padding-left: 10px; padding-right: 50px"
-              >
-                <div class="form-floating">
-                  <a id="naver_id_login" href="<%=API_URL%>">
-                    <img width="50" height="50" src="../image/naverlogin.png" />
-                  </a>
-                </div>
-              </div>
               <div class="col-sm">
-                <div class="form-floating">
-                  <a id="kakao-login-btn" href="/auth/kakao/in">
-                    <img
-                      src="../image/kakaologin.png"
-                      width="50"
-                      height="50"
-                      alt="카카오 로그인 버튼"
-                    />
-                  </a>
-                </div>
+                <a
+                  id="naver_id_login"
+                  href="<%=API_URL%>"
+                  style="padding-right: 30%"
+                >
+                  <img width="50" height="50" src="../image/naverlogin.png" />
+                </a>
+                <a id="kakao-login-btn" href="/auth/kakao/in">
+                  <img
+                    src="../image/kakaologin.png"
+                    width="50"
+                    height="50"
+                    alt="카카오 로그인 버튼"
+                  />
+                </a>
               </div>
             </div>
           </div>
         </div>
-        <div class="row gx-4 gx-lg-5 justify-content-center">
-          <div class="col-lg-4 text-center mb-5 mb-lg-0"></div>
-        </div>
       </div>
     </section>
-    <!-- Footer-->
-    <footer class="bg-light py-5">
-      <div class="container px-4 px-lg-5">
-        <div class="small text-center text-muted">
-          <a href="/policy/private">개인정보처리방침</a> |
-          <a href="/policy/tos">이용약관</a>
-        </div>
-      </div>
-      <div class="container px-4 px-lg-5">
-        <div class="small text-center text-muted">
-          코딩나라 | 대표자: 장영재, 박민수 | 사업자번호: 148-14-01860 사업자
-          정보 확인
-        </div>
-      </div>
-      <div class="container px-4 px-lg-5">
-        <div class="small text-center text-muted">
-          주소: 서울특별시 서대문구 북가좌동
-        </div>
-      </div>
-      <br />
-      <div class="container px-4 px-lg-5">
-        <div class="small text-center text-muted">
-          Copyright &copy;코딩나라(Coding-nara)
-        </div>
-      </div>
-    </footer>
     <!-- Bootstrap core JS-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     <!-- SimpleLightbox plugin JS-->
@@ -287,3 +238,4 @@
     <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
   </body>
 </html>
+

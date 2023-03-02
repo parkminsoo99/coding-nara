@@ -441,7 +441,6 @@ router.post('/info_chage_mail', async(req, res) => {
                 req.session.hashAuth = hashAuth;
                 res.render('./auth/info_change_mail', {authCode : authNum}, function (err, data) {
                 if(err){console.log(err)}
-                console.log(data)
                 emailTemplete = data;
                 });
                 let transporter = await nodemailer.createTransport({
@@ -458,7 +457,7 @@ router.post('/info_chage_mail', async(req, res) => {
                 });
                 const mailOptions = await transporter.sendMail({
                     from: `admin@coding-nara.com`,
-                    to: 'zzangorc99@naver.com',
+                    to: reademailaddress,
                     subject: '회원 정보 변경을 위한 인증번호를 입력해주세요.',
                     html: emailTemplete,
                 });
@@ -490,7 +489,6 @@ router.post('/password_mail', async(req, res) => {
                 req.session.hashAuth = hashAuth;
                 res.render('./auth/password_mail', {authCode : authNum}, function (err, data) {
                 if(err){console.log(err)}
-                console.log(data)
                 emailTemplete = data;
                 });
                 let transporter = await nodemailer.createTransport({
@@ -507,7 +505,7 @@ router.post('/password_mail', async(req, res) => {
                 });
                 const mailOptions = await transporter.sendMail({
                     from: `admin@coding-nara.com`,
-                    to: 'zzangorc99@naver.com',
+                    to: reademailaddress,
                     subject: '비밀번호 변경을 위한 인증번호를 입력해주세요.',
                     html: emailTemplete,
                 });
@@ -538,15 +536,10 @@ router.post('/mail', async (req, res) => {
         else{
             if(result.length>0) res.send({ result : 'exist' })
             else{
-                console.log('mail_req');
-                console.log(hashAuth);
 
                 req.session.hashAuth = hashAuth;
-                console.log('asdasd',req.session.hashAuth)
-                console.log('req.session.session',req.session.hashAuth);
                 res.render('./auth/mail', {authCode : authNum}, function (err, data) {
                     if(err){console.log(err)}
-                    console.log(data)
                     emailTemplete = data;
                     });
                     let transporter = await nodemailer.createTransport({
@@ -563,7 +556,7 @@ router.post('/mail', async (req, res) => {
                     });
                     const mailOptions = await transporter.sendMail({
                         from: 'admin@coding-nara.com',
-                        to: 'zzangorc99@naver.com',
+                        to: reademailaddress,
                         subject: '회원가입을 위한 인증번호를 입력해주세요.',
                         html: emailTemplete,
                     });

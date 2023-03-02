@@ -1,78 +1,70 @@
 <!DOCTYPE html>
 <html>
-
-<head>
-  <title>마이페이지</title>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-  <!-- Favicon-->
-  <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
-  <!-- Bootstrap Icons-->
-  <link rel="shortcut icon" type="image/x-icon" href="../image/logo_mini.png" />
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
-  <!-- Google fonts-->
-  <link href="https://fonts.googleapis.com/css?family=Merriweather+Sans:400,700" rel="stylesheet" />
-  <link href="https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic"
-    rel="stylesheet" type="text/css" />
-  <!-- SimpleLightbox plugin CSS-->
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/SimpleLightbox/2.1.0/simpleLightbox.min.css" rel="stylesheet" />
-  <!-- Core theme CSS (includes Bootstrap)-->
-  <link href="/CSS/styles_none.css" rel="stylesheet" />
-  <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
-  <script type="text/javascript" src="../js/email_validation_and_address_script.js"></script>
-  <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
-  <style>
-    .bd-placeholder-img {
-      font-size: 1.125rem;
-      text-anchor: middle;
-      -webkit-user-select: none;
-      -moz-user-select: none;
-      user-select: none;
-    }
-
-    @media (min-width: 768px) {
-      .bd-placeholder-img-lg {
-        font-size: 3.5rem;
-      }
-    }
-
-    .bi {
-      vertical-align: -0.125em;
-      fill: currentColor;
-    }
-
-    a.change:link {
-      color: white;
-    }
-
-    a.change:visited {
-      color: white;
-    }
-
-    a.change:hover {
-      color: white;
-    }
-
-    a.change:active {
-      color: white;
-    }
-  </style>
-</head>
-
-<body>
+  <head>
+    <title>Login TEST - ${title}</title>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <!-- Favicon-->
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+    <!-- Bootstrap Icons-->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"
+      rel="stylesheet"
+    />
+    <!-- Google fonts-->
+    <link
+      href="https://fonts.googleapis.com/css?family=Merriweather+Sans:400,700"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <!-- SimpleLightbox plugin CSS-->
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/SimpleLightbox/2.1.0/simpleLightbox.min.css"
+      rel="stylesheet"
+    />
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="../CSS/styles_none.css" rel="stylesheet" />
+    <link href="../CSS/cart.css" rel="stylesheet" />
+    <script
+      type="text/javascript"
+      src="https://code.jquery.com/jquery-1.12.4.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="../js/email_validation_and_address_script.js"
+    ></script>
+    <script type="text/javascript" src="../js/cart.js"></script>
+    <script
+      type="text/javascript"
+      src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"
+    ></script>
+    <link rel="stylesheet" type="text/css" href="../CSS/cart.css" />
+  </head>
+  <body>
   <div class="loader-wrapper">
-    <span class="loader"><span class="loader-inner"></span></span>
+    <span class="loader"> <span class="loader-inner"></span></span>
   </div>
 
   <script>
     $(window).on("load", function () {
       $(".loader-wrapper").fadeOut(1000);
     });
+    window.onload = function () {
+      basket.reload();
+    };
   </script>
-  <!-- Navigation-->
   <nav class="navbar navbar-expand-lg navbar-light fixed-top py-3" id="mainNav">
     <div class="container px-4 px-lg-5">
-      <a class="navbar-brand" href="#page-top">Coding-nara</a>
+      <a class="navbar-brand" href="#page-top" style="display: flex; flex-direction: row">
+        <img src="../image/logo_mini.png" width="30px" height="30px" style="margin-right: 7px" />Coding-nara
+      </a>
       <button class="navbar-toggler navbar-toggler-right" type="button" data-bs-toggle="collapse"
         data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
         aria-label="Toggle navigation">
@@ -80,7 +72,9 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ms-auto my-2 my-lg-0">
-          <li class="nav-item"><a class="nav-link" href="/">소개</a></li>
+          <li class="nav-item">
+            <a class="nav-link" href="/">소개</a>
+          </li>
           <li class="nav-item">
             <a class="nav-link" href="/curriculum">커리큘럼</a>
           </li>
@@ -102,76 +96,89 @@
       </div>
     </div>
   </nav>
-  </br>
-  </br>
-  </br>
-  <main class="container">
-    <div class="p-4 p-md-1 mb-1 rounded text-bg-dark">
-      <div class="col-md-6 px-0">
-        <h1 class="display-6 fst-italic">
-          과목, 강좌 가능일 변경 페이지
-        </h1>
-        <p class="lead my-4">
-          <!-- <%=Name%>님 환영합니다. -->
-        </p>
-      </div>
-    </div>
-
-  </main>
-
+  <br />
+  <br />
+  <br />
+  <br />
   <section class="notice">
     <div class="page-title">
-      <div class="container">
-        <h3>가능 강의 리스트</h3>
+      <div class="container" style="display: flex">
+        <h3>수강바구니</h3>
       </div>
     </div>
-
-    <!-- board seach area -->
-
-    <!-- board list area -->
-    <div id="board-list">
-      <div class="container">
-        <table class="board-table">
-          <thead>
-            <tr>
-              <th scope="col" class="th-title">강좌수</th>
-              <th scope="col" class="th-title">강좌명</th>
-              <th scope="col" class="th-date">강의 시간</th>
-              <th scope="col" class="th-date">강의 시간</th>
-              <th scope="col" class="th-date">신청 유무</th>
-              <th scope="col" class="th-date">강의 삭제</th>
-            </tr>
-          </thead>
-
-          <tbody>
-            <%-List %>
-          </tbody>
-        </table>
-      </div>
-    </div>
-    <div align="center">
-      <h2>
-        <%=Name%>
-      </h2>
-      <%=Phone_Number %>
-        <p>by <%=Email_Address%>
-        </p>
-        <a href="/review/create">글생성</a>
-        <form action="/myinfo/instructor/update/delete" method="post">
-          <input type="hidden" name="course" value="<%=course%>" />
-          <input type="hidden" name="date" value="<%=date%>" />
-          <input type="hidden" name="time" value="<%=time%>" />
-          <input type="hidden" name="Teacher_ID" value="<%=Teacher_ID%>" />
-          <input type="submit" value="삭제" />
-        </form>
-        <br>
-        <a class="btn btn-warning" href="/myinfo/instructor/update/create">강의추가</a>
-    </div>
-
   </section>
-  <p></p>
+  <section class="cart">
+    <table class="cart__list">
+      <thead>
+        <tr>
+          <td>선택</td>
+          <td colspan="2">강의 정보</td>
+          <td>강의 횟수</td>
+          <td>포인트</td>
+        </tr>
+      </thead>
+      <tbody>
+        <%-List %>
+      </tbody>
+      <tfoot>
+        <tr>
+          <td></td>
+          <td></td>
+          <td colspan="3">
+            <div class="row justify-content-center">
+              <div align="center" class="col-md-3">
+                <string style="font-size: 20px">포인트 잔액 : </string>
+                <string id="point" style="font-size: 20px"></string>
+                <string style="font-size: 20px">원</string>
+              </div>
+              <div align="center" class="col-md-2" style="margin-bottom: 10px;">
+                <a href="javascript:void(0)" class="abutton" onclick="javascript:basket.delCheckedItem();">선택강의삭제</a>
+              </div>
+              <div align="center" class="col-md-1">
+                <a href="javascript:void(0)" class="abutton" onclick="javascript:basket.delAllItem();">장바구니비우기</a>
+              </div>
+            </div>
+          </td>
+        </tr>
+      </tfoot>
+    </table>
+
+    <div class="bigtext right-align sumcount" id="sum_p_num">
+      <script>
+        basket.reCalc(<%=Point %>);
+      </script>
+    </div>
+
+    <div class="bigtext right-align box blue summoney" id="sum_p_price">
+      <script>
+        basket.reCalc(<%=Point %>);
+        basket.updateUI();
+      </script>
+    </div>
+    <div id="goorder" class="">
+      <div align="center" class="clear center-align">
+        <button type="button" class="btn btn-danger" style="margin-bottom: 20px"
+          onclick="javascript:basket.payment((<%-JSON.stringify(Course_Active)%>))">
+          강의 신청
+        </button>
+      </div>
+    </div>
+
+    <div class="cart__information">
+      <ul>
+        <li>
+          강의를 한 번 이상 들을 시 사용하신 포인트는 환불되지 않습니다.
+        </li>
+        <li>강의 신청은 선착순으로 진행됩니다.</li>
+        <li>
+          다른 사람이 먼저 강의를 신청할 시 장바구니에 담긴 강의가 자동 삭제될
+          수 있습니다.
+        </li>
+      </ul>
+    </div>
+  </section>
 </body>
-<!-- Footer-->
+<!— Footer—>
 <footer class="bg-light py-2">
       <div class="container text-center">
         <div class="row">
@@ -255,16 +262,8 @@
         </div>
       </div>
     </footer>
-<!-- Bootstrap core JS-->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-<!-- SimpleLightbox plugin JS-->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/SimpleLightbox/2.1.0/simpleLightbox.min.js"></script>
 <script src="../js/scripts.js"></script>
-
-<!-- Core theme JS-->
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
-<!-- * *                               SB Forms JS                               * *-->
-<!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
 
 </html>

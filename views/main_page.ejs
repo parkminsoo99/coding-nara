@@ -6,6 +6,7 @@
       name="viewport"
       content="width=device-width, initial-scale=1, shrink-to-fit=no"
     />
+    <meta name="naver-site-verification" content="f56462290e4246f713c15f47f13851c0a6ed36b2" />
     <meta name="description" content="" />
     <meta name="author" content="" />
     <link rel="shortcut icon" type="image/x-icon" href="../image/logo_mini.png" />
@@ -48,11 +49,83 @@
       <span class="loader"><span class="loader-inner"></span></span>
     </div>
 
-    <script>
+    <script type="text/javascript">
       $(window).on("load", function () {
         $(".loader-wrapper").fadeOut(1000);
       });
+      //쿠키설정
+      function setCookie(name, value, expiredays) {
+        var todayDate = new Date();
+        todayDate.setDate(todayDate.getDate() + expiredays);
+        document.cookie =
+          name +
+          "=" +
+          escape(value) +
+          "; path=/; expires=" +
+          todayDate.toGMTString() +
+          ";";
+      }
+
+      //쿠키 불러오기
+      function getCookie(name) {
+        var obj = name + "=";
+        var x = 0;
+        while (x <= document.cookie.length) {
+          var y = x + obj.length;
+          if (document.cookie.substring(x, y) == obj) {
+            if ((endOfCookie = document.cookie.indexOf(";", y)) == -1)
+              endOfCookie = document.cookie.length;
+            return unescape(document.cookie.substring(y, endOfCookie));
+          }
+          x = document.cookie.indexOf(" ", x) + 1;
+
+          if (x == 0) break;
+        }
+        return "";
+      }
+
+      //닫기 버튼 클릭시
+      function closeWin(key) {
+        if ($("#todaycloseyn").prop("checked")) {
+          setCookie("divpop" + key, "Y", 1);
+        }
+        $("#divpop" + key + "").hide();
+      }
+
+      $(function () {
+        if (getCookie("divpop1") != "Y") {
+          $("#divpop1").show();
+        }
+      });
     </script>
+    <style>
+      .divpop {
+        position: absolute;
+        z-index: 1999;
+        top: 50px;
+        left: 350px;
+        height: 90vh;
+
+        width: 50vw;
+        border: 1px solid black;
+        background-image: url("../image/poster.png");
+        background-size: cover;
+        display: none;
+        background-repeat: no-repeat;
+        border-radius: 20px;
+        position: fixed;
+      }
+      .title_area {
+        font-weight: bold;
+        text-align: center;
+        width: 100%;
+      }
+      .button_area {
+        position: absolute;
+        bottom: 0;
+        left: 10px;
+      }
+    </style>
     <!-- Navigation-->
     <nav
       class="navbar navbar-expand-lg navbar-light fixed-top py-3"
@@ -98,7 +171,7 @@
               <a class="nav-link" href="/ask">고객센터</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/login"><%-authCheck %></a>
+              <a class="nav-link" href="/login"> <%-authCheck %> </a>
             </li>
           </ul>
         </div>
@@ -120,30 +193,39 @@
             <p class="text-white-75 mb-5">
               우리 아이에 적합한 교육 서비스를 경험해보세요
             </p>
-            <a class="btn btn-primary btn-xl" href="#about">Find Out More</a>
+            <a class="btn btn-primary btn-xl" href="/ask">Find Out More</a>
           </div>
         </div>
       </div>
     </header>
-    <!-- About-->
-    <section class="page-section bg-primary" id="about">
-      <div class="container px-4 px-lg-5">
-        <div class="row gx-4 gx-lg-5 justify-content-center">
-          <div class="col-lg-8 text-center">
-            <h2 class="text-white mt-0">처음 접하는 아이들에게 맞춤교육</h2>
-            <hr class="divider divider-light" />
-            <p class="text-white-75 mb-4">
-              코딩의 첫걸음을 쉽게 이끌어주도록 도와줍니다
-            </p>
-            <a class="btn btn-light btn-xl" href="#services">Get Started!</a>
+    <!--따라가기-->
+
+    <!--popup-->
+    <div align="center">
+      <form name="notice_form">
+        <div id="divpop1" class="divpop">
+          <div class="title_area"></div>
+          <div
+            class="button_area"
+            style="background-color: whitesmoke; border-radius: 5px"
+          >
+            <input
+              type="checkbox"
+              name="chkbox"
+              id="todaycloseyn"
+              value="Y"
+            />오늘 하루 열지 않음
+            <a href="#" onclick="javascript:closeWin(1);"><B>[닫기]</B></a>
           </div>
         </div>
-      </div>
-    </section>
+      </form>
+    </div>
     <!-- Services-->
     <section class="page-section" id="services">
       <div class="container px-4 px-lg-5">
-        <h2 class="text-center mt-0">서비스</h2>
+        <div class="wrapper">
+          <div class="typing-demo">Coding-nara Services</div>
+        </div>
         <hr class="divider" />
         <div class="row gx-4 gx-lg-5">
           <div class="col-lg-3 col-md-6 text-center">
@@ -151,9 +233,8 @@
               <div class="mb-2"><i class="bi-gem fs-1 text-primary"></i></div>
               <h3 class="h4 mb-2">즉각성</h3>
               <p class="text-muted mb-0">
-                수업방식은 과외와 똑같은 방식을 고수하고 있으며<br />실시간으로
-                아이들에게 문제해결을 하여<br />실력 향상을 목표로 두고
-                있습니다.
+                수업방식은 과외와 똑같은 방식을 고수하고 있으며, 실시간으로
+                아이들에게 문제해결을 하여 실력 향상을 목표로 두고 있습니다.
               </p>
             </div>
           </div>
@@ -164,8 +245,8 @@
               </div>
               <h3 class="h4 mb-2">편리성</h3>
               <p class="text-muted mb-0">
-                저희 코딩나라는 PC, 태블릿, 노트북으로 접속만 하면<br />
-                자체 내장된 프로그램을 통해 바로 수업을 들을 수 있습니다.
+                저희 코딩나라는 PC, 태블릿, 노트북으로 접속만 하면 자체 내장된
+                프로그램을 통해 바로 수업을 들을 수 있습니다.
               </p>
             </div>
           </div>
@@ -174,8 +255,8 @@
               <div class="mb-2"><i class="bi-globe fs-1 text-primary"></i></div>
               <h3 class="h4 mb-2">시간의 자유로움</h3>
               <p class="text-muted mb-0">
-                아침 7시부터 24시까지<br />수업은 운영되고 있으며<br />스케줄에
-                맞춰서 원하는 시간에 수업을 들을 수 있습니다.
+                아침 7시부터 24시까지 수업은 운영되고 있으며, 스케줄에 맞춰서
+                원하는 시간에 수업을 들을 수 있습니다.
               </p>
             </div>
           </div>
@@ -184,9 +265,8 @@
               <div class="mb-2"><i class="bi-heart fs-1 text-primary"></i></div>
               <h3 class="h4 mb-2">아이들에게 맞춤 교육</h3>
               <p class="text-muted mb-0">
-                저희는 처음 접하는 아이들에게 맞춰서<br />커리큘럼을 따로
-                맞추었으며<br />천천히 아이의 이해와 함께 진행하도록 하고
-                있습니다.
+                저희는 처음 접하는 아이들에게 맞춰서 커리큘럼을 따로 맞추었으며,
+                천천히 아이의 이해와 함께 진행하도록 하고 있습니다.
               </p>
             </div>
           </div>
@@ -207,6 +287,7 @@
                 class="img-fluid"
                 src="image/portfolio/thumbnails/1.jpg"
                 alt="..."
+                style="height: 350px; width: 650px"
               />
               <div class="portfolio-box-caption">
                 <div class="project-category text-white-50">Category</div>
@@ -224,6 +305,7 @@
                 class="img-fluid"
                 src="image/portfolio/thumbnails/2.jpg"
                 alt="..."
+                style="height: 350px; width: 650px"
               />
               <div class="portfolio-box-caption">
                 <div class="project-category text-white-50">Category</div>
@@ -241,59 +323,9 @@
                 class="img-fluid"
                 src="image/portfolio/thumbnails/3.jpg"
                 alt="..."
+                style="height: 350px; width: 650px"
               />
               <div class="portfolio-box-caption">
-                <div class="project-category text-white-50">Category</div>
-                <div class="project-name">Project Name</div>
-              </div>
-            </a>
-          </div>
-          <div class="col-lg-4 col-sm-6">
-            <a
-              class="portfolio-box"
-              href="image/portfolio/fullsize/4.jpg"
-              title="Project Name"
-            >
-              <img
-                class="img-fluid"
-                src="image/portfolio/thumbnails/4.jpg"
-                alt="..."
-              />
-              <div class="portfolio-box-caption">
-                <div class="project-category text-white-50">Category</div>
-                <div class="project-name">Project Name</div>
-              </div>
-            </a>
-          </div>
-          <div class="col-lg-4 col-sm-6">
-            <a
-              class="portfolio-box"
-              href="image/portfolio/fullsize/5.jpg"
-              title="Project Name"
-            >
-              <img
-                class="img-fluid"
-                src="image/portfolio/thumbnails/5.jpg"
-                alt="..."
-              />
-              <div class="portfolio-box-caption">
-                <div class="project-category text-white-50">Category</div>
-                <div class="project-name">Project Name</div>
-              </div>
-            </a>
-          </div>
-          <div class="col-lg-4 col-sm-6">
-            <a
-              class="portfolio-box"
-              href="image/portfolio/fullsize/6.jpg"
-              title="Project Name"
-            >
-              <img
-                class="img-fluid"
-                src="image/portfolio/thumbnails/6.jpg"
-                alt="..."
-              />
-              <div class="portfolio-box-caption p-3">
                 <div class="project-category text-white-50">Category</div>
                 <div class="project-name">Project Name</div>
               </div>
@@ -304,85 +336,197 @@
     </div>
     <!-- Call to action-->
     <section class="page-section bg-dark text-white">
-      <div class="container px-4 px-lg-5 text-center">
-        <h2 class="mb-4">코딩나라를 통해 성장해보세요!</h2>
-        <a class="btn btn-light btn-xl" href="">문의하기</a>
+      <div class="container px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+          <div class="col-lg-8 text-center">
+            <h2 class="text-white mt-0">처음 접하는 아이들에게 맞춤교육</h2>
+            <hr class="divider divider-light" />
+            <p class="text-white-75 mb-4">
+              코딩의 첫걸음을 쉽게 이끌어주도록 도와줍니다
+            </p>
+            <a class="btn btn-light btn-xl" href="/enroll/sub">Get Started!</a>
+          </div>
+        </div>
       </div>
     </section>
-    <!-- Footer-->
-     <footer class="bg-light py-2">
-      <div style="display: flex; flex-direction: row">
-        <div style="display: flex; flex-direction: column">
-          <img
-            src="../image/all_logo.png"
-            width="400"
-            height="200"
-            style="margin-bottom: 5px; margin-left: 170px"
-          />
-          <div class="container px-4 px-lg-5">
-            <div class="small text-muted" style="margin-left: 300px">
-              Copyright &copy;코딩나라(Coding-nara)
+    <!--Review-->
+    <div class="testimonial-heading">
+      <span>BEST COMMENTS</span>
+      <h4>강좌 후기</h4>
+    </div>
+    <!--testimonials-box-container------>
+    <div class="testimonial-box-container" style="margin-bottom: 20px">
+      <!--BOX-1-------------->
+      <div class="testimonial-box">
+        <!--top------------------------->
+        <div class="box-top">
+          <!--profile----->
+          <div class="profile">
+            <!--name-and-username-->
+            <div class="name-user">
+              <strong>박&#9675;은</strong>
             </div>
           </div>
+          <!--reviews------>
         </div>
-        <div
-          style="
-            margin-left: 200px;
-            display: flex;
-            flex-direction: column;
-            margin-top: 30px;
-          "
-        >
-          <div
-            style="display: flex; justify-content: center; margin-bottom: 10px"
-          >
-            <a
-              id="insta-btn"
-              href="https://www.instagram.com/coding_nara/saved/"
-              target="”_blank”"
-              style="margin-right: 10px"
-            >
-              <img
-                src="../image/insta_logo.png"
-                width="30px"
-                height="30px"
-                alt="인스타 버튼"
-              />
-            </a>
-            <a
-              id="kakao-login-btn"
-              href="http://pf.kakao.com/_xfyhFxj"
-              target="”_blank”"
-            >
-              <img
-                src="../image/kakaologin.png"
-                width="30"
-                height="30"
-                alt="카카오 버튼"
-              />
-            </a>
-          </div>
-          <div class="container px-4 px-lg-5" style="height: 45px" a>
-            <div class="small text-center text-muted">
-              <a href="/policy/private">개인정보처리방침</a> |
-              <a href="/policy/tos">이용약관</a>
+        <!--Comments---------------------------------------->
+        <div class="client-comment">
+          <p>
+            선생님이 차근차근 설명도 잘 해주시고 칭찬도 잘 해주셔서 아이가
+            이해하는데 도움이 많이 되었어요. 특히 아이에게 이유를 설명을
+            잘해주시는게 미음에 너무들었습니다. 좋은 선생님 소개시켜주셔서
+            감사합니다.
+          </p>
+        </div>
+      </div>
+      <!--BOX-2-------------->
+      <div class="testimonial-box">
+        <!--top------------------------->
+        <div class="box-top">
+          <!--profile----->
+          <div class="profile">
+            <!--name-and-username-->
+            <div class="name-user">
+              <strong>장&#9675;정</strong>
             </div>
           </div>
-          <div class="container px-4 px-lg-5" style="margin-bottom: 10px">
-            <div class="small text-left text-muted">
-              <p>
-                대표자: 장영재, 박민수<br />
-                사업자번호: 148-14-01860 사업자 정보 확인<br />
-                통신판매업 신고번호 : 2023-서울서대문-0418 <br />
-                이메일: admin@coding-nara.com <br />
-                주소: 서울특별시 서대문구 거북골로 18길 16<br />
-                Tel : 010.6234.8291
-              </p>
+          <!--reviews------>
+        </div>
+        <!--Comments---------------------------------------->
+        <div class="client-comment">
+          <p>
+            요즘 아이가 코딩을 배우고 싶어해서 강의를 알아보던중 온라인으로
+            수업가능한 코딩나라를 찾았네요. 비대면이어서 아이들 바쁜데
+            시간절약도 되고 바로 수업 가능해서 정말 좋았습니다.
+          </p>
+        </div>
+      </div>
+      <!--BOX-3-------------->
+      <div class="testimonial-box">
+        <!--top------------------------->
+        <div class="box-top">
+          <!--profile----->
+          <div class="profile">
+            <!--name-and-username-->
+            <div class="name-user">
+              <strong>이&#9675;민</strong>
+            </div>
+          </div>
+          <!--reviews------>
+        </div>
+        <!--Comments---------------------------------------->
+        <div class="client-comment">
+          <p>
+            코딩수업을 비대면 원격을 해보니 상당히 효과가 좋네요. 아이도
+            비대면으로 교육받으니 엄청 재미있어 하네요
+          </p>
+        </div>
+      </div>
+      <!--BOX-4-------------->
+      <div class="testimonial-box">
+        <!--top------------------------->
+        <div class="box-top">
+          <!--profile----->
+          <div class="profile">
+            <!--name-and-username-->
+            <div class="name-user">
+              <strong>김&#9675;연</strong>
+            </div>
+          </div>
+          <!--reviews------>
+        </div>
+        <!—Comments————————————————————>
+        <div class="client-comment">
+          <p>
+            컴퓨터 게임에만 흥미를 가지던 아이가 코딩에 빠져서 열심히 배우겠다고
+            하네요ㅎㅎ 덕분에 컴퓨터관련 고등학교를 진학한다고하니 참 뿌듯하네요
+          </p>
+        </div>
+      </div>
+    </div>
+    <!-- Footer-->
+    <footer class="bg-light py-2">
+      <div class="container text-center">
+        <div class="row">
+          <div class="col-md">
+            <div
+              style="
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+              "
+            >
+              <img
+                src="../image/all_logo.png"
+                width="200"
+                height="200"
+                style="text-align: center"
+              />
+              <div class="row-md-6">
+                <div class="small text-muted">
+                  Copyright &copy;코딩나라(Coding-nara)
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6" style="margin-top: 20px">
+            <div
+              style="
+                display: flex;
+                justify-content: center;
+                margin-bottom: 15px;
+              "
+            >
+              <a
+                id="insta-btn"
+                href="https://www.instagram.com/coding_nara/saved/"
+                target="”_blank”"
+                style="margin-right: 10px"
+              >
+                <img
+                  src="../image/insta_logo.png"
+                  width="30px"
+                  height="30px"
+                  alt="인스타 버튼"
+                />
+              </a>
+              <a
+                id="kakao-login-btn"
+                href="http://pf.kakao.com/_xfyhFxj"
+                target="”_blank”"
+              >
+                <img
+                  src="../image/kakaologin.png"
+                  width="30"
+                  height="30"
+                  alt="카카오 버튼"
+                />
+              </a>
+            </div>
+            <div class="container px-4 px-lg-5" style="height: 35px" a>
+              <div class="small text-center text-muted">
+                <a href="/policy/private">개인정보처리방침</a> |
+                <a href="/policy/tos">이용약관</a>
+              </div>
+            </div>
+            <div class="container px-4 px-lg-5" style="margin-bottom: 10px">
+              <div
+                class="small text-left text-muted"
+                style="text-align: center"
+              >
+                <p>
+                  대표자: 장영재, 박민수<br />
+                  사업자번호: 148-14-01860<br />
+                  이메일: admin@coding-nara.com<br />
+                  주소: 서울특별시 서대문구 거북골로 18길 16<br />
+                  통신판매업 신고번호 : 2023-서울서대문-0418
+                </p>
+              </div>
             </div>
           </div>
         </div>
       </div>
-      <br />
     </footer>
     <!-- Bootstrap core JS-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
