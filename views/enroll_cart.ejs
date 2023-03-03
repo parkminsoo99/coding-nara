@@ -123,7 +123,7 @@
         </div>
       </div>
     </section>
-    <section class="cart">
+     <section class="cart">
       <table class="cart__list">
         <thead>
           <tr>
@@ -138,15 +138,8 @@
         </tbody>
         <tfoot>
           <tr>
-            <td colspan="2" style="padding-left:10vh">
-              <div class="cart_delete"
-	           style="
-                  	display: flex;
-                  	justify-content: center;
-                  	height: 10vh;
-                  	width: 50vh;
-                	"
-		>
+            <td colspan="2">
+              <div class="cart_delete">
                 <a
                   href="javascript:void(0)"
                   class="btn btn-dark abutton"
@@ -154,6 +147,7 @@
                   onclick="javascript:basket.delCheckedItem();"
                   >선택강의삭제</a
                 >
+
                 <a
                   href="javascript:void(0)"
                   class="btn btn-dark abutton delete_all"
@@ -162,7 +156,6 @@
                 >
               </div>
             </td>
-
             <td class="result_price">
               <div class="bigtext right-align sumcount" id="sum_p_num">
                 <script>
@@ -179,9 +172,11 @@
                 </script>
               </div>
             </td>
-            <td></td>
-            <td class="point_info">
-              <div class="right-align basketrowcmd" style="margin-right: 10px">
+            <td class="point_info" colspan="2">
+              <div
+                class="right-align basketrowcmd"
+                style="display: flex; justify-content: end; margin-right: 20px"
+              >
                 <string style="font-size: 20px">포인트 잔액 : </string
                 ><string id="point" style="font-size: 20px"><%=Point%></string
                 ><string style="font-size: 20px">원</string>
@@ -192,16 +187,16 @@
       </table>
       <div id="goorder" class="">
         <div class="clear center-align">
-	 <center>
-          <button
-            type="button"
-            class="btn btn-danger"
-            style="margin-left: 530px; margin-bottom: 20px; margin-top: 20px"
-            onclick="javascript:basket.payment((<%-JSON.stringify(Course_Active)%>))"
-          >
-            강의 신청
-          </button>
-	 </center>
+          <center>
+            <button
+              type="button"
+              class="btn btn-danger"
+              style="margin-bottom: 20px; margin-top: 20px"
+              onclick="javascript:basket.payment((<%-JSON.stringify(Course_Active)%>))"
+            >
+              강의 신청
+            </button>
+          </center>
         </div>
       </div>
       <div class="cart__information">

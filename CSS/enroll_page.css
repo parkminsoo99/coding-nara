@@ -98,7 +98,6 @@ dialog {
   max-width: 400px;
 }
 
-
 table {
   border: 1px solid #ccc;
   border-collapse: collapse;
@@ -122,7 +121,6 @@ table tr {
 table th,
 table td {
   padding: .625em;
-  text-align: center;
 }
 
 table th {
@@ -161,7 +159,7 @@ table th {
     border-bottom: 1px solid #ddd;
     display: block;
     font-size: .8em;
-    text-align: right;
+  
   }
   
   table td::before {
@@ -11940,12 +11938,11 @@ header.masthead_enroll h1, header.masthead_enroll .h1 {
   margin-left: 150px;
 }
 
-#button_move_cart{
-    margin-left: 10px;
-    margin-right: 10px;
-    width: 100%;
+#button_move_cart
+{
     text-align: center;
     padding: 15px 0px;
+    width: 16vh
 }
 .result_information{
     height: 50px;
@@ -12006,21 +12003,21 @@ header.masthead_enroll h1, header.masthead_enroll .h1 {
 .body__title{
     border-top: none;
     border-left: none;
-    border-right: 2px solid #087990;
-    border-bottom : none;
-    padding: 50px;
+    border-right: none;
+    border-bottom : 2px solid #087990;
+    padding-bottom: 20px;
     align-content: center;
     align-items: center;
     text-align: center;
-   
 }
 .content-body{
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
    
 }
 #subject1,#subject2,#subject3,#subject4,#subject5,#subject6{
     margin-left: 10px;
+    font-size: 0.83em;
 
 }
 .content{

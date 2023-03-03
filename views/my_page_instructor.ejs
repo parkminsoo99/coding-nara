@@ -138,35 +138,34 @@
           <p class="lead my-4"><%=Name%>님 환영합니다.</p>
         </div>
       </div>
-
-      <div class="row mb-2">
-        <div class="col-md-6">
+	<div class="row mb-3">
+        <div class="col-md-4">
           <div
             class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative"
           >
             <div class="col p-4 d-flex flex-column position-static">
               <strong class="d-inline-block mb-2 text-success"
-                ><i class="bi bi-lock-fill fs-2 text-primary"></i
+                ><i class="bi bi-piggy-bank fs-2 text-primary"></i
               ></strong>
               <h3 class="mb-0">과목, 강좌 가능일</h3>
               <div class="mb-1 text-muted">-----------------------------</div>
               <p class="card-text mb-auto text-muted">
-               과목, 강좌 가능일을 수정하고 싶다면 오른쪽 변경 버튼을 눌러주세요.
-	      </p>
-              <a href="/myinfo/instructor/lecture/history">강의 기록</a>
+                과목, 강좌 가능일을 수정하고 싶다면 오른쪽 변경 버튼을
+                눌러주세요.
+              </p>
             </div>
-            <div class="col-auto d-none d-lg-block" style="color: white">
-	     <a href="/myinfo/instructor/update">
+            <div style="display: flex">
               <svg
                 id="change_button"
                 class="bd-placeholder-img"
-                width="200"
-                height="250"
                 xmlns="http://www.w3.org/2000/svg"
                 role="img"
+                height="5vh"
+                width="70vh"
                 aria-label="Placeholder: Thumbnail"
                 preserveAspectRatio="xMidYMid slice"
                 focusable="false"
+                onclick="javascript:mypage_list.instructor_update_button()"
               >
                 <rect
                   width="100%"
@@ -179,39 +178,85 @@
                   y="50%"
                   fill="#eceeef"
                   dy=".5em"
-                  style="font-size: 35px"
+                  style="font-size: 20px"
+                  id="point"
                 >
                   변경
                 </text>
               </svg>
-	     </a>
             </div>
           </div>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-4">
           <div
             class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative"
           >
             <div class="col p-4 d-flex flex-column position-static">
               <strong class="d-inline-block mb-2 text-success"
-                ><i class="bi bi-lock-fill fs-2 text-primary"></i
+                ><i class="bi bi-clock-history fs-2 text-primary"></i
+              ></strong>
+              <h3 class="mb-0">강의 기록</h3>
+              <div class="mb-1 text-muted">-----------------------------</div>
+              <p class="card-text mb-auto text-muted">
+                코딩나라에서 현재까지 수강하신 강의 기록을 볼 수 있습니다.
+              </p>
+            </div>
+            <div style="display: flex">
+              <svg
+                id="change_button"
+                class="bd-placeholder-img"
+                xmlns="http://www.w3.org/2000/svg"
+                role="img"
+                height="5vh"
+                width="70vh"
+                aria-label="Placeholder: Thumbnail"
+                preserveAspectRatio="xMidYMid slice"
+                focusable="false"
+                onclick="javascript:mypage_list.move_history()"
+              >
+                <rect
+                  width="100%"
+                  height="100%"
+                  fill="#55595c"
+                  style="color: white"
+                />
+                <text
+                  x="50%"
+                  y="50%"
+                  fill="#eceeef"
+                  dy=".5em"
+                  style="font-size: 20px"
+                >
+                  강의 기록
+                </text>
+              </svg>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div
+            class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative"
+          >
+            <div class="col p-4 d-flex flex-column position-static">
+              <strong class="d-inline-block mb-2 text-success"
+                ><i class="bi bi-lock fs-2 text-primary"></i
               ></strong>
               <h3 class="mb-0">개인 정보</h3>
               <div class="mb-1 text-muted">-----------------------------</div>
               <p class="card-text mb-auto text-muted">
-                개인정보를 수정하고 싶다면 아래 링크를 클릭해 본인임을 인증해
-                주세요.
+                개인정보를 수정하고 싶다면
+                <a href="/myinfo/user_information_change">인증</a> 클릭해
+                본인임을 인증해 주세요.
               </p>
-              <a href="/myinfo/user_information_change">인증</a>
             </div>
-            <div class="col-auto d-none d-lg-block" style="color: white">
+            <div style="display: flex">
               <svg
                 id="change_button"
                 class="bd-placeholder-img"
-                width="200"
-                height="250"
                 xmlns="http://www.w3.org/2000/svg"
                 role="img"
+                height="5vh"
+                width="70vh"
                 aria-label="Placeholder: Thumbnail"
                 preserveAspectRatio="xMidYMid slice"
                 focusable="false"
@@ -228,7 +273,7 @@
                   y="50%"
                   fill="#eceeef"
                   dy=".5em"
-                  style="font-size: 35px"
+                  style="font-size: 20px"
                 >
                   변경
                 </text>
@@ -364,7 +409,6 @@
   <!-- SimpleLightbox plugin JS-->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/SimpleLightbox/2.1.0/simpleLightbox.min.js"></script>
   <script src="../js/scripts.js"></script>
-  <script src="../js/instructor.js"></script>
 
   <!-- Core theme JS-->
   <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->

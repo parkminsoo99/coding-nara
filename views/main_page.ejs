@@ -6,11 +6,18 @@
       name="viewport"
       content="width=device-width, initial-scale=1, shrink-to-fit=no"
     />
-    <meta name="naver-site-verification" content="f56462290e4246f713c15f47f13851c0a6ed36b2" />
+    <meta
+      name="naver-site-verification"
+      content="f56462290e4246f713c15f47f13851c0a6ed36b2"
+    />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <link rel="shortcut icon" type="image/x-icon" href="../image/logo_mini.png" />
-    <title>코딩나라 - 메인</title>
+    <link
+      rel="shortcut icon"
+      type="image/x-icon"
+      href="../image/logo_mini.png"
+    />
+    <title>코딩나라</title>
     <meta charset="utf-8" />
     <!-- Favicon-->
     <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
@@ -65,7 +72,6 @@
           todayDate.toGMTString() +
           ";";
       }
-
       //쿠키 불러오기
       function getCookie(name) {
         var obj = name + "=";
@@ -78,12 +84,10 @@
             return unescape(document.cookie.substring(y, endOfCookie));
           }
           x = document.cookie.indexOf(" ", x) + 1;
-
           if (x == 0) break;
         }
         return "";
       }
-
       //닫기 버튼 클릭시
       function closeWin(key) {
         if ($("#todaycloseyn").prop("checked")) {
@@ -91,7 +95,6 @@
         }
         $("#divpop" + key + "").hide();
       }
-
       $(function () {
         if (getCookie("divpop1") != "Y") {
           $("#divpop1").show();
@@ -99,22 +102,6 @@
       });
     </script>
     <style>
-      .divpop {
-        position: absolute;
-        z-index: 1999;
-        top: 50px;
-        left: 350px;
-        height: 90vh;
-
-        width: 50vw;
-        border: 1px solid black;
-        background-image: url("../image/poster.png");
-        background-size: cover;
-        display: none;
-        background-repeat: no-repeat;
-        border-radius: 20px;
-        position: fixed;
-      }
       .title_area {
         font-weight: bold;
         text-align: center;
@@ -177,7 +164,6 @@
         </div>
       </div>
     </nav>
-    <!-- Masthead-->
     <header class="masthead">
       <div class="container px-4 px-lg-5 h-100">
         <div
@@ -198,28 +184,6 @@
         </div>
       </div>
     </header>
-    <!--따라가기-->
-
-    <!--popup-->
-    <div align="center">
-      <form name="notice_form">
-        <div id="divpop1" class="divpop">
-          <div class="title_area"></div>
-          <div
-            class="button_area"
-            style="background-color: whitesmoke; border-radius: 5px"
-          >
-            <input
-              type="checkbox"
-              name="chkbox"
-              id="todaycloseyn"
-              value="Y"
-            />오늘 하루 열지 않음
-            <a href="#" onclick="javascript:closeWin(1);"><B>[닫기]</B></a>
-          </div>
-        </div>
-      </form>
-    </div>
     <!-- Services-->
     <section class="page-section" id="services">
       <div class="container px-4 px-lg-5">
@@ -355,9 +319,9 @@
       <h4>강좌 후기</h4>
     </div>
     <!--testimonials-box-container------>
-    <div class="testimonial-box-container" style="margin-bottom: 20px">
+    <div class="testimonial-box-container col-md-4" style="margin-bottom: 20px">
       <!--BOX-1-------------->
-      <div class="testimonial-box">
+      <div class="testimonial-box col-md-2">
         <!--top------------------------->
         <div class="box-top">
           <!--profile----->
@@ -367,7 +331,6 @@
               <strong>박&#9675;은</strong>
             </div>
           </div>
-          <!--reviews------>
         </div>
         <!--Comments---------------------------------------->
         <div class="client-comment">
@@ -380,17 +343,16 @@
         </div>
       </div>
       <!--BOX-2-------------->
-      <div class="testimonial-box">
+      <div class="testimonial-box col-md-2">
         <!--top------------------------->
         <div class="box-top">
           <!--profile----->
           <div class="profile">
             <!--name-and-username-->
             <div class="name-user">
-              <strong>장&#9675;정</strong>
+              <strong>이&#9675;민</strong>
             </div>
           </div>
-          <!--reviews------>
         </div>
         <!--Comments---------------------------------------->
         <div class="client-comment">
@@ -401,41 +363,19 @@
           </p>
         </div>
       </div>
-      <!--BOX-3-------------->
-      <div class="testimonial-box">
-        <!--top------------------------->
+      <!————————————————————BOX-3———————>
+      <div class="testimonial-box col-md-2">
+        <!———————top————————————>
         <div class="box-top">
-          <!--profile----->
+          <!————————————profile——>
           <div class="profile">
-            <!--name-and-username-->
+            <!——name-and-username——>
             <div class="name-user">
-              <strong>이&#9675;민</strong>
+              <strong>김&#9675;정</strong>
             </div>
           </div>
-          <!--reviews------>
         </div>
-        <!--Comments---------------------------------------->
-        <div class="client-comment">
-          <p>
-            코딩수업을 비대면 원격을 해보니 상당히 효과가 좋네요. 아이도
-            비대면으로 교육받으니 엄청 재미있어 하네요
-          </p>
-        </div>
-      </div>
-      <!--BOX-4-------------->
-      <div class="testimonial-box">
-        <!--top------------------------->
-        <div class="box-top">
-          <!--profile----->
-          <div class="profile">
-            <!--name-and-username-->
-            <div class="name-user">
-              <strong>김&#9675;연</strong>
-            </div>
-          </div>
-          <!--reviews------>
-        </div>
-        <!—Comments————————————————————>
+        <!——Comments————————————————————>
         <div class="client-comment">
           <p>
             컴퓨터 게임에만 흥미를 가지던 아이가 코딩에 빠져서 열심히 배우겠다고
@@ -541,3 +481,4 @@
     <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
   </body>
 </html>
+

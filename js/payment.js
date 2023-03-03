@@ -32,8 +32,7 @@ let basket = {
     },
     //화면 업데이트
     updateUI: function () {
-        document.querySelector('#sum_p_num').textContent = '총 강의 횟수 : ' + this.totalCount.formatNumber() + ' 회';
-        document.querySelector('#sum_p_price').textContent = '총 합계금액 : ' + this.totalPrice.formatNumber() + ' 원';
+        document.querySelector('#sum_p_price').textContent = '총 금액 : ' + this.totalPrice.formatNumber() + ' 원';
         document.querySelector('#point').textContent = this.totalPoint.formatNumber();
     },
     Enroll_info : function(imp_uid, merchant_uid, student_ID, course_ID, date_ID, time_ID, teacher_ID, price, count){

@@ -32,6 +32,7 @@
     />
     <!-- Core theme CSS (includes Bootstrap)-->
     <link href="../CSS/styles.css" rel="stylesheet" />
+    <link href="../CSS/cart.css" rel="stylesheet" />
     <script
       type="text/javascript"
       src="https://code.jquery.com/jquery-1.12.4.min.js"
@@ -41,7 +42,7 @@
       src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"
     ></script>
   </head>
-   <body>
+  <body>
     <div class="loader-wrapper">
       <span class="loader"><span class="loader-inner"></span></span>
     </div>
@@ -52,59 +53,116 @@
       });
     </script>
     <!-- Navigation-->
-    <nav class="navbar navbar-expand-lg navbar-light fixed-top py-3" id="mainNav">
+    <nav
+      class="navbar navbar-expand-lg navbar-light fixed-top py-3"
+      id="mainNav"
+    >
       <div class="container px-4 px-lg-5">
         <a
-        class="navbar-brand"
-        href="#page-top"
-        style="display: flex; flex-direction: row"
-      >
-        <img
-          src="../image/logo_mini.png"
-          width="30px"
-          height="30px"
-          style="margin-right: 7px"
-        />Coding-nara
-      </a>
-          <button class="navbar-toggler navbar-toggler-right" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-          <div class="collapse navbar-collapse" id="navbarResponsive">
-              <ul class="navbar-nav ms-auto my-2 my-lg-0">
-                  <li class="nav-item"><a class="nav-link" href="/">소개</a></li>
-                  <li class="nav-item"><a class="nav-link" href="/curriculum">커리큘럼</a></li>
-                  <li class="nav-item"><a class="nav-link" href="/enroll/sub">수강신청</a></li>
-                  <li class="nav-item"><a class="nav-link" href="/review">강좌후기</a></li>
-                  <li class="nav-item"><a class="nav-link" href="/ask">고객센터</a></li>
-                  <li class="nav-item"><a class="nav-link" href="/login"><%-authCheck %></a></li>
-              </ul>
-          </div>
+          class="navbar-brand"
+          href="#page-top"
+          style="display: flex; flex-direction: row"
+        >
+          <img
+            src="../image/logo_mini.png"
+            width="30px"
+            height="30px"
+            style="margin-right: 7px"
+          />Coding-nara
+        </a>
+        <button
+          class="navbar-toggler navbar-toggler-right"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarResponsive"
+          aria-controls="navbarResponsive"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ms-auto my-2 my-lg-0">
+            <li class="nav-item"><a class="nav-link" href="/">소개</a></li>
+            <li class="nav-item">
+              <a class="nav-link" href="/curriculum">커리큘럼</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/enroll/sub">수강신청</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/review">강좌후기</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/ask">고객센터</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/login"><%-authCheck %></a>
+            </li>
+          </ul>
+        </div>
       </div>
-  </nav>
-  <!-- Masthead-->
-  <header class="masthead_review">
+    </nav>
+    <!-- Masthead-->
+    <header class="masthead_review">
       <div class="container px-4 px-lg-5 h-100">
-          <div class="row gx-4 gx-lg-5 h-100 align-items-center justify-content-center text-center">
-              <div class="col-lg-8 align-self-end">
-                  <h1 class="text-white font-weight-bold">강좌후기</h1>
-                  <hr class="divider" />
-              </div>
-              <div class="col-lg-8 align-self-baseline">
-                  <p class="text-white-75 mb-5">우리 아이에 적합한 교육 서비스를 경험해보세요</p>
-              </div>
+        <div
+          class="row gx-4 gx-lg-5 h-100 align-items-center justify-content-center text-center"
+        >
+          <div class="col-lg-8 align-self-end">
+            <h1 class="text-white font-weight-bold">강좌후기</h1>
+            <hr class="divider" />
           </div>
+          <div class="col-lg-8 align-self-baseline">
+            <p class="text-white-75 mb-5">
+              우리 아이에 적합한 교육 서비스를 경험해보세요
+            </p>
+          </div>
+        </div>
       </div>
-  </header>
+    </header>
     <form action="/review/create_process" method="post">
-      <div class="mb-3">
-        <label for="exampleFormControlInput1" class="form-label">제목</label>
-        <input type="text" name="Title" class="form-control" id="exampleFormControlInput1" placeholder="제목">
-      </div>
-      <div class="mb-3">
-        <label placeholder="Title" for="exampleFormControlTextarea1" class="form-label">내용</label>
-        <textarea type="text" name="Description" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-      </div>
-        <center><input type="submit"  class="btn btn-primary" value="등록하기"/></center>
+      <center>
+        <div
+          class="mb-3"
+          style="margin-top: 40px; width: 60vh; padding-bottom: 30px"
+        >
+          <textarea
+            type="text"
+            name="Description"
+            class="form-control"
+            id="exampleFormControlTextarea1"
+            rows="3"
+          ></textarea>
+        </div>
+        <input type="hidden" id="Subject" name="Subject" value="<%=Subject%>" />
+        <input type="hidden" id="Time" name="Time" value="<%=Time%>" />
+        <input type="hidden" id="Day" name="Day" value="<%=Day%>" />
+        <input type="hidden" id="Teacher" name="Teacher" value="<%=Teacher%>" />
+      </center>
+      <center>
+        <input type="submit" class="btn btn-primary" value="등록하기" />
+      </center>
     </form>
-  </br>
+    <section class="cart">
+      <div class="cart__information">
+        <ul>
+          <li>
+            남을 비방하는 글을 작성할 시 관리자에 의해 자동 삭제될 수 있습니다.
+          </li>
+          <li>
+            솔직한 후기는 다른 사람이 강의를 신청할 때 많은 도움이 됩니다.
+          </li>
+	  <li>
+            리뷰는 한 번 작성시 관리자에 의해서만 수정이 가능하므로 신중히 작성바랍니다.
+    	  </li>
+	  <li>
+	    불가피하게 리뷰 수정을 원하는 경우 <span style="color : red">admin@coding-nara.com</span>으로 문의 주시길 바랍니다.
+	  </li>
+        </ul>
+      </div>
+    </section>
+    <br />
   </body>
   <!-- Footer-->
   <footer class="bg-light py-2">
@@ -168,8 +226,8 @@
             </div>
             <div class="container px-4 px-lg-5" style="height: 35px" a>
               <div class="small text-center text-muted">
-                <a href="/policy/private">개인정보처리방침</a> |
-                <a href="/policy/tos">이용약관</a>
+                <a href="/policy/private" style="color : #f4623a; text-decoration : underline">개인정보처리방침</a> |
+                <a href="/policy/tos" style="color:#f4623a;text-decoration:underline">이용약관</a>
               </div>
             </div>
             <div class="container px-4 px-lg-5" style="margin-bottom: 10px">

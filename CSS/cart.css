@@ -187,10 +187,11 @@
     margin-left: 10px;
   }
   .cart_delete{
-    display: inline-flex;
+    display: flex;
     flex-direction: column;
-    padding-right: 350px;
-
+    justify-content: center;
+    width: 25vh;
+    writing-mode: horizontal-tb
   }
 
   .result_price{

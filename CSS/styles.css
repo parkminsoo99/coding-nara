@@ -11996,9 +11996,6 @@ header.masthead_enroll h1, header.masthead_enroll .h1 {
   }
 }
 
-#portfolio .container-fluid, #portfolio .container-sm, #portfolio .container-md, #portfolio .container-lg, #portfolio .container-xl, #portfolio .container-xxl {
-  max-width: 1920px;
-}
 #portfolio .container-fluid .portfolio-box, #portfolio .container-sm .portfolio-box, #portfolio .container-md .portfolio-box, #portfolio .container-lg .portfolio-box, #portfolio .container-xl .portfolio-box, #portfolio .container-xxl .portfolio-box {
   position: relative;
   display: block;
@@ -12144,7 +12141,7 @@ a{
   overflow: hidden;
   border-right: 3px solid;
   font-family: monospace;
-  font-size: 2em;
+  font-size: 1.8em;
 }
 
 @keyframes typing {
