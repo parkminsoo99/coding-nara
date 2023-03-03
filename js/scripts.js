@@ -56,4 +56,8 @@ window.addEventListener('DOMContentLoaded', event => {
         elements: '#portfolio a.portfolio-box'
     });
 
+    var x =document.body.querySelector('.popup');
+    x.click();
+    x.hidden = true;
+
 });

@@ -47,4 +47,15 @@ let mypage_list = {
           document.body.removeChild(textArea);
           alert('강의 코드가 복사되었습니다.');
     },
+    review_button : function(number) {
+        var item = document.querySelector('a[id=review_button'+number+']');
+        var subject = item.parentElement.previousElementSibling.previousElementSibling.previousElementSibling.previousElementSibling.textContent;
+        var str = item.parentElement.previousElementSibling.previousElementSibling.previousElementSibling.textContent;
+        var teacher = item.parentElement.previousElementSibling.textContent;
+        var str_split = str.split(' ');
+        var time = str_split[0];
+        var day = str_split[1];
+        document.location.href="/review/create?Subject="+subject+"&Time=" + time + "&Day=" + day + "&Teacher=" + teacher;
+    },
 }
+

@@ -32,64 +32,82 @@
     $(window).on("load", function () {
       $(".loader-wrapper").fadeOut(1000);
     });
-     //쿠키설정    
-     function setCookie( name, value, expiredays ) {
-    var todayDate = new Date();
-    todayDate.setDate( todayDate.getDate() + expiredays );
-    document.cookie = name + '=' + escape( value ) + '; path=/; expires=' + todayDate.toGMTString() + ';'
+    //쿠키설정    
+    function setCookie(name, value, expiredays) {
+      var todayDate = new Date();
+      todayDate.setDate(todayDate.getDate() + expiredays);
+      document.cookie = name + '=' + escape(value) + '; path=/; expires=' + todayDate.toGMTString() + ';'
     }
 
     //쿠키 불러오기
-    function getCookie(name) 
-    { 
-        var obj = name + "="; 
-        var x = 0; 
-        while ( x <= document.cookie.length ) 
-        { 
-            var y = (x+obj.length); 
-            if ( document.cookie.substring( x, y ) == obj ) 
-            { 
-                if ((endOfCookie=document.cookie.indexOf( ";", y )) == -1 ) 
-                    endOfCookie = document.cookie.length;
-                return unescape( document.cookie.substring( y, endOfCookie ) ); 
-            } 
-            x = document.cookie.indexOf( " ", x ) + 1; 
-            
-            if ( x == 0 ) break; 
-        } 
-        return ""; 
+    function getCookie(name) {
+      var obj = name + "=";
+      var x = 0;
+      while (x <= document.cookie.length) {
+        var y = (x + obj.length);
+        if (document.cookie.substring(x, y) == obj) {
+          if ((endOfCookie = document.cookie.indexOf(";", y)) == -1)
+            endOfCookie = document.cookie.length;
+          return unescape(document.cookie.substring(y, endOfCookie));
+        }
+        x = document.cookie.indexOf(" ", x) + 1;
+
+        if (x == 0) break;
+      }
+      return "";
     }
 
     //닫기 버튼 클릭시
-    function closeWin(key)
-    {
-        if($("#todaycloseyn").prop("checked"))
-        {
-            setCookie('divpop'+key, 'Y' , 1 );
-        }
-        $("#divpop"+key+"").hide();
+    function closeWin(key) {
+      if ($("#todaycloseyn").prop("checked")) {
+        setCookie('divpop' + key, 'Y', 1);
+      }
+      $("#divpop" + key + "").hide();
     }
-  
-    $(function(){    
-        if(getCookie("divpop1") !="Y"){
-            $("#divpop1").show();
-        }
+
+    $(function () {
+      if (getCookie("divpop1") != "Y") {
+        $("#divpop1").show();
+      }
     });
+
+    $(document).ready(function(){
+      console.log(1+1);
+    
+  });
   </script>
   <style>
     .divpop {
-        position: absolute; z-index:1999; top:50px; left:350px;
-        height: 90vh;
+      position: absolute;
+      z-index: 1999;
+      width: 50%;
+      height: 100%;
+      left: 50%;
+      top: 50%;
+      margin-left: -150px;
+      margin-top: -300px;
+      background-image: url("../image/poster.png");
+      background-size: cover;
+      background-repeat: no-repeat;
+      border-radius: 20px;
+      background-position: center;
+      border: 1px solid black;
 
-        width: 50vw; border:1px solid black;background-image: url("../image/poster.png"); background-size : cover ; display:none;
-        background-repeat: no-repeat;
-        border-radius: 20px;
-        position:fixed;
-        
+
 
     }
-    .title_area {font-weight:bold;text-align:center;width:100%}
-    .button_area {position:absolute;bottom:0;left:10px;} 
+
+    .title_area {
+      font-weight: bold;
+      text-align: center;
+      width: 100%
+    }
+
+    .button_area {
+      position: absolute;
+      bottom: 0;
+      left: 10px;
+    }
   </style>
   <!-- Navigation-->
   <nav class="navbar navbar-expand-lg navbar-light fixed-top py-3" id="mainNav">
@@ -141,25 +159,22 @@
             우리 아이에 적합한 교육 서비스를 경험해보세요
           </p>
           <a class="btn btn-primary btn-xl" href="/ask">Find Out More</a>
+
+          <div id="portfolio">
+            <div class="container-fluid p-0">
+              <a class="portfolio-box btn btn-primary btn-xl popup" href="image/poster.png" title="이벤트">
+                진행중인 이벤트
+              </a>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </header>
   <!--따라가기-->
-  
-  
-  <!--popup-->
-  <div align="center">
-  <form name="notice_form">
-    <div id="divpop1" class="divpop">    
-        <div class="title_area"></div>
-         <div class="button_area" style="background-color: whitesmoke; border-radius: 5px;">
-             <input type='checkbox' name='chkbox' id='todaycloseyn' value='Y'>오늘 하루 열지 않음    
-             <a href='#' onclick="javascript:closeWin(1);"><B>[닫기]</B></a>
-         </div>
-    </div>
-</form> 
-</div>
+
+
+
   <!-- About-->
   <section class="page-section bg-primary" id="about">
     <div class="container px-4 px-lg-5">
@@ -182,7 +197,7 @@
         <div class="typing-demo">
           This is a Coding-nara
         </div>
-    </div>
+      </div>
       <h2 class="text-center mt-0">서비스</h2>
       <hr class="divider" />
       <div class="row gx-4 gx-lg-5">
@@ -239,7 +254,8 @@
       <div class="row g-0">
         <div class="col-lg-4 col-sm-6">
           <a class="portfolio-box" href="image/portfolio/fullsize/1.jpg" title="Project Name">
-            <img class="img-fluid" src="image/portfolio/thumbnails/1.jpg" alt="..."  style="height: 350px; width: 650px;"/>
+            <img class="img-fluid" src="image/portfolio/thumbnails/1.jpg" alt="..."
+              style="height: 350px; width: 650px;" />
             <div class="portfolio-box-caption">
               <div class="project-category text-white-50">Category</div>
               <div class="project-name">Project Name</div>
@@ -248,7 +264,8 @@
         </div>
         <div class="col-lg-4 col-sm-6">
           <a class="portfolio-box" href="image/portfolio/fullsize/2.jpg" title="Project Name">
-            <img class="img-fluid" src="image/portfolio/thumbnails/2.jpg" alt="..." style="height: 350px; width: 650px;"/>
+            <img class="img-fluid" src="image/portfolio/thumbnails/2.jpg" alt="..."
+              style="height: 350px; width: 650px;" />
             <div class="portfolio-box-caption">
               <div class="project-category text-white-50">Category</div>
               <div class="project-name">Project Name</div>
@@ -257,7 +274,8 @@
         </div>
         <div class="col-lg-4 col-sm-6">
           <a class="portfolio-box" href="image/portfolio/fullsize/3.jpg" title="Project Name">
-            <img class="img-fluid" src="image/portfolio/thumbnails/3.jpg" alt="..." style="height: 350px; width: 650px;"/>
+            <img class="img-fluid" src="image/portfolio/thumbnails/3.jpg" alt="..."
+              style="height: 350px; width: 650px;" />
             <div class="portfolio-box-caption">
               <div class="project-category text-white-50">Category</div>
               <div class="project-name">Project Name</div>
@@ -280,40 +298,28 @@
     <h4>고객 후기</h4>
   </div>
   <!--testimonials-box-container------>
-  <div class="testimonial-box-container">
+  <div class="testimonial-box-container col-md-4">
     <!--BOX-1-------------->
-    <div class="testimonial-box">
+    <div class="testimonial-box col-md-2">
       <!--top------------------------->
       <div class="box-top">
         <!--profile----->
         <div class="profile">
-       
+
           <!--name-and-username-->
           <div class="name-user">
             <strong>박&#9675;&#9675;</strong>
-            <span>@liammendes</span>
           </div>
-        </div>
-        <!--reviews------>
-        <div class="reviews">
-          <i class="bi bi-star-fill"></i>
-          <i class="bi bi-star-fill"></i>
-          <i class="bi bi-star-fill"></i>
-          <i class="bi bi-star-fill"></i>
-
-       
-          
-          <!--Empty star-->
-          <i class="bi bi-star"></i>
         </div>
       </div>
       <!--Comments---------------------------------------->
       <div class="client-comment">
-        <p>선생님이 차근차근 설명도 잘 해주시고 칭찬도 잘 해주셔서 아이가 이해하는데 도움이 많이 되었어요. 특히 아이에게 이유를 설명을 잘해주시는게 미음에 너무들었습니다. 좋은 선생님 소개시켜주셔서 감사합니다.</p>
+        <p>선생님이 차근차근 설명도 잘 해주시고 칭찬도 잘 해주셔서 아이가 이해하는데 도움이 많이 되었어요. 특히 아이에게 이유를 설명을 잘해주시는게 미음에 너무들었습니다. 좋은 선생님 소개시켜주셔서
+          감사합니다.</p>
       </div>
     </div>
     <!--BOX-2-------------->
-    <div class="testimonial-box">
+    <div class="testimonial-box col-md-2">
       <!--top------------------------->
       <div class="box-top">
         <!--profile----->
@@ -321,19 +327,9 @@
           <!--name-and-username-->
           <div class="name-user">
             <strong>양&#9675;&#9675;</strong>
-            <span>@noahwood</span>
           </div>
         </div>
-        <!--reviews------>
-        <div class="reviews">
-          <i class="bi bi-star-fill"></i>
-          <i class="bi bi-star-fill"></i>
-          <i class="bi bi-star-fill"></i>
-          <i class="bi bi-star-fill"></i>
-          <!--Empty star-->
-          <i class="bi bi-star"></i>
 
-        </div>
       </div>
       <!--Comments---------------------------------------->
       <div class="client-comment">
@@ -341,27 +337,18 @@
       </div>
     </div>
     <!--BOX-3-------------->
-    <div class="testimonial-box">
+    <div class="testimonial-box col-md-2">
       <!--top------------------------->
       <div class="box-top">
         <!--profile----->
         <div class="profile">
-        
+
           <!--name-and-username-->
           <div class="name-user">
             <strong>이&#9675;&#9675;</strong>
-            <span>@oliverqueen</span>
           </div>
         </div>
-        <!--reviews------>
-        <div class="reviews">
-          <i class="bi bi-star-fill"></i>
-          <i class="bi bi-star-fill"></i>
-          <i class="bi bi-star-fill"></i>
-          <i class="bi bi-star-fill"></i>
-          <!--Empty star-->
-          <i class="bi bi-star"></i>
-        </div>
+
       </div>
       <!--Comments---------------------------------------->
       <div class="client-comment">
@@ -369,30 +356,18 @@
       </div>
     </div>
     <!--BOX-4-------------->
-    <div class="testimonial-box">
+    <div class="testimonial-box col-md-2">
       <!--top------------------------->
       <div class="box-top">
         <!--profile----->
         <div class="profile">
-          
+
           <!--name-and-username-->
           <div class="name-user">
             <strong>김&#9675;&#9675;</strong>
-            <span>@barryallen</span>
           </div>
         </div>
-        <!--reviews------>
-        <div class="reviews">
-          <i class="bi bi-star-fill"></i>
-          <i class="bi bi-star-fill"></i>
-          <i class="bi bi-star-fill"></i>
-          <i class="bi bi-star-fill"></i>
 
-       
-          
-          <!--Empty star-->
-          <i class="bi bi-star"></i>
-        </div>
       </div>
       <!--Comments---------------------------------------->
       <div class="client-comment">

@@ -232,15 +232,19 @@
               </section>
             </div>
           </div>
-          <div id="first_img" class="card mb-1">
-            <img id="body_img1" src="" />
+          <div id="first_img" class="card mb-1" style="overflow: hidden;">
+            <img id="body_img1" src="" style=" max-width: 100%;
+            height: auto;
+            display: block;"/>
           </div>
           <strong style="text-align: center; align-self: center"
             ><p id="body_img1_description_1"></p>
             <p id="body_img1_description_2" style="color: red"></p
           ></strong>
-          <div id="second_img" class="card mb-1">
-            <img id="body_img2" src="" />
+          <div id="second_img" class="card mb-1" style="overflow: hidden;">
+            <img id="body_img2" src="" style=" max-width: 100%;
+            height: auto;
+            display: block;"/>
           </div>
 
           <p
@@ -249,7 +253,9 @@
           ></p>
 
           <div id="third_img" class="card mb-1">
-            <img id="body_img3" src="" />
+            <img id="body_img3" src="" style=" max-width: 100%;
+            height: auto;
+            display: block;"/>
           </div>
           <p
             id="body_img1_description_4"
@@ -273,8 +279,19 @@
                 상세보기
               </button>
               <dialog id="dialog">
+                
                 <div align="center">
-                <img src='http://localhost:54213/<%=Image%>' width="180" height="250">
+                  <div class="card" style="width: 18rem;">
+                    <img src='http://localhost:54213/<%=Image%>' class="card-img-top" width="180" height="250">
+
+                    <div class="card-body">
+                      <h5 class="card-title"><%=School%></h5>
+                      <p class="card-text"><%=Description%></p>
+                    </div>
+                  </div>
+
+
+                
               </div>
                 <form method="dialog">
                   <div align="center">
@@ -286,7 +303,7 @@
           </div>
           <div class="card mb-4">
             <div class="card-header">포인트</div>
-            <div class="card-body">
+            <div class="card-body" style="overflow: hidden;">
               <div class="col-sm-6">
                 <ul class="list-unstyled mb-0">
                   <li id="point_content">

@@ -76,18 +76,41 @@
           </div>
       </div>
   </header>
-    <form action="/review/create_process" method="post">
-      <div class="mb-3">
-        <label for="exampleFormControlInput1" class="form-label">제목</label>
-        <input type="text" name="Title" class="form-control" id="exampleFormControlInput1" placeholder="제목">
-      </div>
-      <div class="mb-3">
-        <label placeholder="Title" for="exampleFormControlTextarea1" class="form-label">내용</label>
-        <textarea type="text" name="Description" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-      </div>
-        <center><input type="submit"  class="btn btn-primary" value="등록하기"/></center> 
-    </form>
-  </br>
+  <form action="/review/create_process" method="post">
+    <div class="mb-3">
+      <label for="exampleFormControlInput1" class="form-label">제목</label>
+      <input
+        type="text"
+        name="Title"
+        class="form-control"
+        id="exampleFormControlInput1"
+        placeholder="제목"
+      />
+    </div>
+    <div class="mb-3">
+      <label
+        placeholder="Title"
+        for="exampleFormControlTextarea1"
+        class="form-label"
+        >내용</label
+      >
+      <textarea
+        type="text"
+        name="Description"
+        class="form-control"
+        id="exampleFormControlTextarea1"
+        rows="3"
+      ></textarea>
+    </div>
+    <input type="hidden" id="Subject" name="Subject" value="<%=Subject%>" />
+    <input type="hidden" id="Time" name="Time" value="<%=Time%>" />
+    <input type="hidden" id="Day" name="Day" value="<%=Day%>" />
+    <input type="hidden" id="Teacher" name="Teacher" value="<%=Teacher%>" />
+    <center>
+      <input type="submit" class="btn btn-primary" value="등록하기" />
+    </center>
+  </form>
+  <br />
   </body>
   <!-- Footer-->
   <footer class="bg-light py-5">

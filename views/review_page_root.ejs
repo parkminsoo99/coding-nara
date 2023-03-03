@@ -16,7 +16,7 @@
   <link href="https://cdnjs.cloudflare.com/ajax/libs/SimpleLightbox/2.1.0/simpleLightbox.min.css" rel="stylesheet" />
   <!-- Core theme CSS (includes Bootstrap)-->
   <link href="../CSS/styles.css" rel="stylesheet" />
-  <link href="../CSS/styles1.css" rel="stylesheet" />
+  <script type="text/javascript" src="../js/review.js"></script>
   <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
   <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
 </head>
@@ -82,38 +82,31 @@
       </div>
     </div>
   </header>
-  <br />
-  <div id="board-list">
-    <div class="container">
-      <div class="row">
-        <table class="board-table">
-          <thead>
-            <tr>
-              <th scope="col" class="col-1">번호</th>
-              <th scope="col" class="col-1">강좌명</th>
-              <th scope="col" class="col-3">제목</th>
-              <th scope="col" class="col-1">등록일</th>
-              <th scope="col" class="col-1">글쓴이</th>
-              <th scope="col" class="col-1">공감</th>
-            </tr>
-          </thead>
-          <tbody id="information">
-            <%-List %>
-          </tbody>
-        </table>
-      </div>
-    </div>
+
+
+  <!--Review-->
+  <div class="testimonial-heading">
+    <span>Comments</span>
+    <h4>고객 후기</h4>
   </div>
+  <!--testimonials-box-container------>
+  <div class="testimonial-box-container col-md-4">
+    <%-List %>
+  </div>
+  <br />
+  
   </section>
   </br>
   <div style="display: flex; justify-content: center">
     <nav aria-label="Page navigation example">
       <ul class="pagination">
-        <div id="page_list" style="display: flex"><%-Page_List%></div>
+        <div id="page_list" style="display: flex">
+          <%-Page_List%>
+        </div>
       </ul>
     </nav>
   </div>
- 
+
   </br>
 </body>
 
