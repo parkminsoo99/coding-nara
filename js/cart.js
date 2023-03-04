@@ -116,7 +116,6 @@ let basket = {
     updateUI: function () {
         document.querySelector('#sum_p_num').textContent = '총 강의 횟수 : ' + this.totalCount.formatNumber() + '번';
         document.querySelector('#sum_p_price').textContent = '총 합계금액 : ' + this.totalPrice.formatNumber() + '원';
-        document.querySelector('#point').textContent = this.totalPoint.formatNumber();
     },
     //개별 수량 변경
     
@@ -299,73 +298,136 @@ let basket = {
             var phone_number = JSON.stringify(price_point_name.phone_number).replace(reg, "");
             var address = JSON.stringify(price_point_name.address).replace(reg, "");
             var postcode = JSON.stringify(price_point_name.postcode);
-            if (Course_Active== 1) {
-                alert("이미 결제가 이뤄진 강의가 존재합니다.");
-                window.location.href = "https://coding-nara.com/enroll/sub";
-            } else {
-                // IMP.request_pay(param, callback) 결제창 호출
-                IMP.request_pay(
-                {
-                    pg: "html5_inicis.MOI6344006",
-                    /*
-                        'kakao':카카오페이,
-                        html5_inicis':이니시스(웹표준결제)
-                            'nice':나이스페이
-                            'jtnet':제이티넷
-                            'uplus':LG유플러스
-                            'danal':다날
-                            'payco':페이코
-                            'syrup':시럽페이
-                            'paypal':페이팔
-                        */
-                    pay_method: "card",
-                    /*
-                        'samsung':삼성페이,
-                        'card':신용카드,
-                        'trans':실시간계좌이체,
-                        'vbank':가상계좌,
-                        'phone':휴대폰소액결제
-                    */
-                    merchant_uid: merchant_uid,
-
-                    name: payment_name,
-                    amount: result_price,
-                    buyer_email: email_address,
-                    buyer_name: payment_name,
-                    buyer_tel: phone_number,
-                    buyer_addr: address,
-                    buyer_postcode: postcode,
-
-                    /*
-                        모바일 결제시,
-                        결제가 끝나고 랜딩되는 URL을 지정
-                        (카카오페이, 페이코, 다날의 경우는 필요없음. PC와 마찬가지로 callback함수로 결과가 떨어짐)
-                        */
-                },
-                function (rsp) {
-                    if (rsp.status == "paid" && rsp.paid_amount == result_price) { //result_price(실제 금액)
-                        if (rsp.success) {
-                        basket.Enroll_info(rsp.imp_uid,rsp.merchant_uid); //결제 완료했을 떄 Section에 추가
-                        var msg = "결제가 완료되었습니다.";
-                        msg += "고유ID : " + rsp.imp_uid;
-                        msg += "상점 거래ID : " + rsp.merchant_uid;
-                        msg += "결제 금액 : " + rsp.paid_amount;
-                        msg += "카드 승인번호 : " + rsp.apply_num;
-                        window.location.href =
-                        "https://coding-nara.com/myinfo"
-                    } else {
-                        var msg = "결제에 실패하였습니다.";
-                        msg += "에러내용 : " + rsp.error_msg;
-                        window.location.href =
-                        "https://coding-nara.com/enroll/cart"
+	    if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)){
+                document.querySelectorAll(".information").forEach(function (item){
+                    if(item.parentElement.previousElementSibling.previousElementSibling.firstElementChild.checked == true){
+                        str = item.firstElementChild.nextElementSibling.nextElementSibling.innerText;
+                        count_position = item.parentElement.nextElementSibling.firstElementChild.nextElementSibling.firstElementChild.firstElementChild.nextElementSibling;
+                        count = count_position.getAttribute('value');
+                        str_split = str.split(' ');
+                        subject = item.firstElementChild.innerText;
+                        instructor_name = item.firstElementChild.nextElementSibling.innerText;
+                        time = str_split[0];
+                        day = str_split[1];
+			    alert(str)
+			    alert(day)
+			    alert(instructor_name)
+                        if (Course_Active== 1) {
+                            alert("이미 결제가 이뤄진 강의가 존재합니다.");
+                            window.location.href = "https:/coding-nara.com/enroll/cart";
+                        } else {
+                            // IMP.request_pay(param, callback) 결제창 호출
+                            IMP.request_pay(
+                            {
+                                pg: "html5_inicis.MOI6344006",
+                                /*
+                                    'kakao':카카오페이,
+                                    html5_inicis':이니시스(웹표준결제)
+                                        'nice':나이스페이
+                                        'jtnet':제이티넷
+                                        'uplus':LG유플러스
+                                        'danal':다날
+                                        'payco':페이코
+                                        'syrup':시럽페이
+                                        'paypal':페이팔
+                                    */
+                                pay_method: "card",
+                                /*
+                                    'samsung':삼성페이,
+                                    'card':신용카드,
+                                    'trans':실시간계좌이체,
+                                    'vbank':가상계좌,
+                                    'phone':휴대폰소액결제
+                                */
+                                merchant_uid: merchant_uid,
+            
+                                name: payment_name,
+                                amount: 10,//result_price,
+                                buyer_email: email_address,
+                                buyer_name: payment_name,
+                                buyer_tel: phone_number,
+                                buyer_addr: address,
+                                buyer_postcode: postcode,
+                                m_redirect_url:"https://coding-nara.com/enroll/cart_enroll_normal_payment_mobile?Subject=" + subject + "&Time=" + time + "&Day=" + day + "&Instructor_name=" + instructor_name,
+            
+                                /*
+                                    모바일 결제시,
+                                    결제가 끝나고 랜딩되는 URL을 지정
+                                    (카카오페이, 페이코, 다날의 경우는 필요없음. PC와 마찬가지로 callback함수로 결과가 떨어짐)
+                                    */
+                            })
+                        }
                     }
-                    } else {
-                    alert("결제를 취소하거나 잘못된 결제입니다.");
-                    window.location.href =
-                        "https://coding-nara.com/enroll/cart"
+                })
+            }else{
+                if (Course_Active== 1) {
+                    alert("이미 결제가 이뤄진 강의가 존재합니다.");
+                    window.location.href = "http://localhost:54213/enroll/sub";
+                } else {
+                    // IMP.request_pay(param, callback) 결제창 호출
+                    IMP.request_pay(
+                    {
+                        pg: "html5_inicis.MOI6344006",
+                        /*
+                            'kakao':카카오페이,
+                            html5_inicis':이니시스(웹표준결제)
+                                'nice':나이스페이
+                                'jtnet':제이티넷
+                                'uplus':LG유플러스
+                                'danal':다날
+                                'payco':페이코
+                                'syrup':시럽페이
+                                'paypal':페이팔
+                            */
+                        pay_method: "card",
+                        /*
+                            'samsung':삼성페이,
+                            'card':신용카드,
+                            'trans':실시간계좌이체,
+                            'vbank':가상계좌,
+                            'phone':휴대폰소액결제
+                        */
+                        merchant_uid: merchant_uid,
+    
+                        name: payment_name,
+                        amount: 100//result_price,
+                        buyer_email: email_address,
+                        buyer_name: payment_name,
+                        buyer_tel: phone_number,
+                        buyer_addr: address,
+                        buyer_postcode: postcode,
+    
+                        /*
+                            모바일 결제시,
+                            결제가 끝나고 랜딩되는 URL을 지정
+                            (카카오페이, 페이코, 다날의 경우는 필요없음. PC와 마찬가지로 callback함수로 결과가 떨어짐)
+                            */
+                    },
+                    function (rsp) {
+                        if (rsp.status == "paid" && rsp.paid_amount == 100) { //result_price(실제 금액)
+                            if (rsp.success) {
+                            basket.Enroll_info(rsp.imp_uid,rsp.merchant_uid); //결제 완료했을 떄 Section에 추가
+                            var msg = "결제가 완료되었습니다.";
+                            msg += "고유ID : " + rsp.imp_uid;
+                            msg += "상점 거래ID : " + rsp.merchant_uid;
+                            msg += "결제 금액 : " + rsp.paid_amount;
+                            msg += "카드 승인번호 : " + rsp.apply_num;
+                            window.location.href =
+                            "https://coding-nara.com/myinfo"
+                        } else {
+                            var msg = "결제에 실패하였습니다.";
+                            msg += "에러내용 : " + rsp.error_msg;
+                            window.location.href =
+                            "https://coding-nara.com/enroll/cart"
+                        }
+                        } else {
+                        alert("결제를 취소하거나 잘못된 결제입니다.");
+                        window.location.href =
+                            "https://coding-nara.com/enroll/cart"
+                        }
                     }
-                }
-            );}
+                );}
+            } 
         }, 300);
     },
     reload : function(){
@@ -379,7 +441,7 @@ let basket = {
               .nextElementSibling;
           var count = count_position.getAttribute("value");
           var str_split = str.split(" ");
-	  var subject = item.firstElementChild.firstElementChild.innerText;
+	  var subject = item.firstElementChild.innerText;
           var instructor_name =
             item.firstElementChild.nextElementSibling.innerText;
           var time = str_split[0];

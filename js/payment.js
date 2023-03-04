@@ -233,6 +233,7 @@ let basket = {
                     buyer_tel: phone_number,
                     buyer_addr: address,
                     buyer_postcode: postcode,
+		    m_redirect_url: "https://coding-nara.com/enroll/enroll_normal_payment_mobile?Student_ID=" + student_ID + "&Course_ID=" + course_ID + "&Date_ID=" + date_ID + "&Time_ID=" + time_ID + "&Teacher_ID=" + teacher_ID + "&Price=" + result_price + "&Count=" + count ,
 
                     /*
                         모바일 결제시,
@@ -241,7 +242,7 @@ let basket = {
                     */
                 },
                 function (rsp) {
-                    if (rsp.status == "paid" && rsp.paid_amount == result_price) { //result_price(실제 금액)
+                    if (rsp.status == "paid" && rsp.paid_amount == 10) { //result_price(실제 금액)
                         if (rsp.success) {
                         basket.Enroll_info(rsp.imp_uid,rsp.merchant_uid, student_ID, course_ID, date_ID, time_ID, teacher_ID, price, count); //결제 완료했을 떄 Section에 추가
                         var msg = "결제가 완료되었습니다.";
@@ -323,7 +324,7 @@ let basket = {
                     buyer_tel: phone_number,
                     buyer_addr: address,
                     buyer_postcode: postcode,
-
+		    m_redirect_url: "https://coding-nara.com/enroll/add_enroll_normal_payment_mobile?Subject=" + Subject + "&Time=" + Time + "&Date=" + Date + "&Teacher_Name=" + Teacher_Name + "&Price=" + result_price  + "&Count=" + count,
                     /*
                         모바일 결제시,
                         결제가 끝나고 랜딩되는 URL을 지정
