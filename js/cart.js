@@ -390,7 +390,7 @@ let basket = {
                         merchant_uid: merchant_uid,
     
                         name: payment_name,
-                        amount: 100//result_price,
+                        amount: 100,//result_price,
                         buyer_email: email_address,
                         buyer_name: payment_name,
                         buyer_tel: phone_number,

@@ -3,13 +3,12 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>마이페이지</title>
-    <meta charset="utf-8" />
+    <title>강의 기록</title>
+        <meta charset="utf-8" />
     <meta
       name="viewport"
       content="width=device-width, initial-scale=1, shrink-to-fit=no"
     />
-    <link rel="shortcut icon" type="image/x-icon" href="../../..//image/logo_mini.png" />
     <!-- Favicon-->
     <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
     <!-- Bootstrap Icons-->
@@ -32,13 +31,16 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/SimpleLightbox/2.1.0/simpleLightbox.min.css"
       rel="stylesheet"
     />
-    <!-- Core theme CSS (includes Bootstrap)-->
-    <link href="../../../CSS/styles_none.css" rel="stylesheet" />
     <script
       type="text/javascript"
       src="https://code.jquery.com/jquery-1.12.4.min.js"
     ></script>
-  </script>
+    <!-- Bootstrap core JS-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- SimpleLightbox plugin JS-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/SimpleLightbox/2.1.0/simpleLightbox.min.js"></script>
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="../../../CSS/styles.css" rel="stylesheet" />
     <script
       type="text/javascript"
       src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"
@@ -63,17 +65,17 @@
         fill: currentColor;
       }
       a.change:link {
-        color : white;
+        color: white;
       }
       a.change:visited {
-        color :white;
+        color: white;
       }
       a.change:hover {
-        color : white;
+        color: white;
       }
       a.change:active {
-        color : white;
-      } 
+        color: white;
+      }
     </style>
   </head>
   <body>
@@ -116,7 +118,7 @@
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
-          <ul class="navbar-nav ms-auto my-2 my-lg-1" width="100px;">
+          <ul class="navbar-nav ms-auto my-2 my-lg-0">
             <li class="nav-item"><a class="nav-link" href="/">소개</a></li>
             <li class="nav-item">
               <a class="nav-link" href="/curriculum">커리큘럼</a>
@@ -131,28 +133,29 @@
               <a class="nav-link" href="/ask">고객센터</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/login"> <%-authCheck %> </a>
+              <a class="nav-link" href="/login"><%-authCheck %></a>
             </li>
           </ul>
         </div>
       </div>
     </nav>
-  <br />
-  <br />
-  <br />
-    <main class="container">
-      <div class="p-4 p-md-1 mb-1 rounded text-bg-dark">
-        <div class="col-md-6 px-0">
-          <h1 class="display-6 fst-italic">
-            강의 기록입니다.
-          </h1>
-          <p class="lead my-4">
-          </p>
+    <header class="masthead_review">
+      <div class="container px-4 px-lg-5 h-100">
+        <div
+          class="row gx-4 gx-lg-5 h-100 align-items-center justify-content-center text-center"
+        >
+          <div class="col-lg-8 align-self-end">
+            <h1 class="text-white font-weight-bold">강의 기록</h1>
+            <hr class="divider" />
+          </div>
+          <div class="col-lg-8 align-self-baseline"></div>
         </div>
       </div>
-    </main>
-    
-    <section class="notice">
+    </header>
+    <br />
+    <br />
+
+    <section class="notice" style="margin-bottom: 150px; margin-top:10px;">
       <div class="page-title">
         <div class="container">
           <h3>강의 기록리스트</h3>
@@ -173,7 +176,6 @@
                 <th scope="col" class="th-date">강의 요일</th>
                 <th scope="col" class="th-date">강의 시간</th>
                 <th scope="col" class="th-date">강의 완료 시간</th>
-
               </tr>
             </thead>
 
@@ -242,7 +244,7 @@
               />
             </a>
           </div>
-          <div class="container px-4 px-lg-5" style="height: 35px" a>
+          <div class="container px-4 px-lg-5" style="height: 35px" >
             <div class="small text-center text-muted">
               <a href="/policy/private">개인정보처리방침</a> |
               <a href="/policy/tos">이용약관</a>
@@ -263,15 +265,4 @@
       </div>
     </div>
   </footer>
-  <!-- Bootstrap core JS-->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-  <!-- SimpleLightbox plugin JS-->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/SimpleLightbox/2.1.0/simpleLightbox.min.js"></script>
-
-
-  <!-- Core theme JS-->
-  <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
-  <!-- * *                               SB Forms JS                               * *-->
-  <!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
-  <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
 </html>

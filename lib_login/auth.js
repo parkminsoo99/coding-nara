@@ -174,7 +174,7 @@ router.post('/register_process', function(request, response) {
                                     Email_Address , Password, PostCode, Address , Date , Recommand_ID, Point) 
                                     VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`, 
                                 [type, Name, Phone_Number, Email_Address, 
-                                    hash, Address_post, Address, date_now, Recommand_ID, Point], function (error2, data) {
+                                    hash, Address_post, Address, date_now, Recommand_ID, 30000], function (error2, data) {
                                     if(error2) throw error2;
                                     response.send(`<script type="text/javascript">alert("회원가입이 완료되었습니다!");
                                     document.location.href="/";</script>`);
@@ -183,7 +183,7 @@ router.post('/register_process', function(request, response) {
                             else if(results[1].length>0 && Recommand_ID != Email_Address){
                                 db.query(`INSERT INTO Student (Platform_type , Name , Phone_Number ,
                                     Email_Address , Password, PostCode,Address , Date , Recommand_ID, Point) 
-                                    VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`, 
+                                    VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, 35000)`, 
                                 [type, Name, Phone_Number, Email_Address, 
                                     hash,Address_post, Address, date_now, Recommand_ID, Point], function (error2, data) {
                                     if(error2) throw error2;
@@ -238,7 +238,7 @@ router.post('/register_process', function(request, response) {
                             if(Recommand_ID === ''){
                                 db.query(`INSERT INTO Student (Platform_type , Name , Phone_Number ,
                                     Email_Address , Password, PostCode, Address , Date , Recommand_ID, Point) 
-                                    VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`, 
+                                    VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, 30000)`, 
                                 [type, Name, Phone_Number, Email_Address, 
                                     hash, Address_post, Address, date_now, Recommand_ID, Point], function (error2, data) {
                                     if(error2) throw error2;
@@ -249,7 +249,7 @@ router.post('/register_process', function(request, response) {
                             else if(results[1].length>0 && Recommand_ID != Email_Address){
                                 db.query(`INSERT INTO Student (Platform_type , Name , Phone_Number ,
                                     Email_Address , Password, PostCode,Address , Date , Recommand_ID, Point) 
-                                    VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`, 
+                                    VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, 35000)`, 
                                 [type, Name, Phone_Number, Email_Address, 
                                     hash,Address_post, Address, date_now, Recommand_ID, Point], function (error2, data) {
                                     if(error2) throw error2;
@@ -303,7 +303,7 @@ router.post('/register_process', function(request, response) {
                             if(Recommand_ID === ''){
                                 db.query(`INSERT INTO Student (Platform_type , Name , Phone_Number ,
                                     Email_Address , Password, PostCode,Address , Date , Recommand_ID, Point) 
-                                    VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`, 
+                                    VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, 30000)`, 
                                 ['local', Name, Phone_Number, Email_Address, 
                                     hash,Address_post, Address, date_now, Recommand_ID, Point], function (error2, data) {
                                     if(error2) throw error2;
@@ -314,7 +314,7 @@ router.post('/register_process', function(request, response) {
                             else if(results[1].length>0 && Recommand_ID != Email_Address){
                                 db.query(`INSERT INTO Student (Platform_type , Name , Phone_Number ,
                                     Email_Address , Password, PostCode,Address , Date , Recommand_ID, Point) 
-                                    VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`, 
+                                    VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, 35000)`, 
                                 ['local', Name, Phone_Number, Email_Address, 
                                     hash,Address_post, Address, date_now, Recommand_ID, Point], function (error2, data) {
                                     if(error2) throw error2;
