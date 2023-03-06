@@ -6,7 +6,8 @@ let review_list = {
         button.disabled = true;
         var new_num = num + 1;
         document.getElementById('p_num'+point).innerText = new_num;
-        var order = Number(document.getElementById('number'+point).innerText)
+        var order = document.getElementById('number'+point).getAttribute('value')
+        
         $.ajax({
             type: "post", 
             url: "/review/increase_recommand",

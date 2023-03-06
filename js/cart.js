@@ -299,66 +299,8 @@ let basket = {
             var address = JSON.stringify(price_point_name.address).replace(reg, "");
             var postcode = JSON.stringify(price_point_name.postcode);
 	    if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)){
-                document.querySelectorAll(".information").forEach(function (item){
-                    if(item.parentElement.previousElementSibling.previousElementSibling.firstElementChild.checked == true){
-                        str = item.firstElementChild.nextElementSibling.nextElementSibling.innerText;
-                        count_position = item.parentElement.nextElementSibling.firstElementChild.nextElementSibling.firstElementChild.firstElementChild.nextElementSibling;
-                        count = count_position.getAttribute('value');
-                        str_split = str.split(' ');
-                        subject = item.firstElementChild.innerText;
-                        instructor_name = item.firstElementChild.nextElementSibling.innerText;
-                        time = str_split[0];
-                        day = str_split[1];
-			    alert(str)
-			    alert(day)
-			    alert(instructor_name)
-                        if (Course_Active== 1) {
-                            alert("이미 결제가 이뤄진 강의가 존재합니다.");
-                            window.location.href = "https:/coding-nara.com/enroll/cart";
-                        } else {
-                            // IMP.request_pay(param, callback) 결제창 호출
-                            IMP.request_pay(
-                            {
-                                pg: "html5_inicis.MOI6344006",
-                                /*
-                                    'kakao':카카오페이,
-                                    html5_inicis':이니시스(웹표준결제)
-                                        'nice':나이스페이
-                                        'jtnet':제이티넷
-                                        'uplus':LG유플러스
-                                        'danal':다날
-                                        'payco':페이코
-                                        'syrup':시럽페이
-                                        'paypal':페이팔
-                                    */
-                                pay_method: "card",
-                                /*
-                                    'samsung':삼성페이,
-                                    'card':신용카드,
-                                    'trans':실시간계좌이체,
-                                    'vbank':가상계좌,
-                                    'phone':휴대폰소액결제
-                                */
-                                merchant_uid: merchant_uid,
-            
-                                name: payment_name,
-                                amount: 10,//result_price,
-                                buyer_email: email_address,
-                                buyer_name: payment_name,
-                                buyer_tel: phone_number,
-                                buyer_addr: address,
-                                buyer_postcode: postcode,
-                                m_redirect_url:"https://coding-nara.com/enroll/cart_enroll_normal_payment_mobile?Subject=" + subject + "&Time=" + time + "&Day=" + day + "&Instructor_name=" + instructor_name,
-            
-                                /*
-                                    모바일 결제시,
-                                    결제가 끝나고 랜딩되는 URL을 지정
-                                    (카카오페이, 페이코, 다날의 경우는 필요없음. PC와 마찬가지로 callback함수로 결과가 떨어짐)
-                                    */
-                            })
-                        }
-                    }
-                })
+		    alert("원할한 결제를 위해 PC에서 결제를 진행해 주세요.");
+		    window.location.href="/enroll/cart";
             }else{
                 if (Course_Active== 1) {
                     alert("이미 결제가 이뤄진 강의가 존재합니다.");
