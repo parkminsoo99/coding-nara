@@ -27,7 +27,7 @@ let basket = {
         this.totalPrice += count * price;
         if(document.getElementById('p_point_button').disabled == true){
             this.totalPoint = parseInt(this.totalPoint) -  parseInt(use_point);
-            this.totalPrice -= use_point;
+			this.totalPrice -= use_point;
         }
     },
     //화면 업데이트
@@ -92,29 +92,34 @@ let basket = {
         item_point = Number(item_point.innerText.replaceAll(",", ""));
         if(point > item_point){alert("포인트 초과"); return false;}
         else{
-            item_button.disabled=true;
-            item.disabled = true;
-            item_point -= point;
-            document.querySelector('#point').textContent = item_point.toLocaleString("ko-KR");
-            if(point != null){
-                var count = document.querySelector('input[name=p_num ]').getAttribute('value');
-                $.ajax({
-                        type: "post", 
-                        url: "/enroll/enroll_insert_point",
-                        dataType: "json",
-                        data: {
-                            Student_ID : student_ID,
-                            Course_ID : course_ID, 
-                            Date_ID : date_ID, 
-                            Time_ID : time_ID, 
-                            Teacher_ID : teacher_ID,
-                            Count: count,
-                            Point : point,
-                        }
-                    })}
-            this.reCalc(this.original_point,this.original_price);
-            this.updateUI();
-        }
+			var temp_original_price = this.original_price;
+			temp_original_price -= point;
+			if(temp_original_price < 0) alert('총 금액보다 많은 포인트를 사용할 수 없습니다.');
+			else{
+				item_button.disabled=true;
+            	item.disabled = true;
+				item_point -= point;
+            	document.querySelector('#point').textContent = item_point.toLocaleString("ko-KR");
+            	if(point != null){
+                	var count = document.querySelector('input[name=p_num ]').getAttribute('value');
+                	$.ajax({
+                        	type: "post", 
+                        	url: "/enroll/enroll_insert_point",
+                        	dataType: "json",
+                        	data: {
+                            	Student_ID : student_ID,
+                            	Course_ID : course_ID, 
+                            	Date_ID : date_ID, 
+                            	Time_ID : time_ID, 
+                            	Teacher_ID : teacher_ID,
+                            	Count: count,
+                            	Point : point,
+                        	}
+                    	})}
+           		this.reCalc(this.original_point,this.original_price);
+            	this.updateUI();
+			}
+		}
     },
     set_price : function(student_ID, course_ID, date_ID, time_ID, teacher_ID, price){
         var count = document.querySelector('input[name=p_num ]').getAttribute('value');

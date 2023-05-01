@@ -46,7 +46,13 @@ app.use("/uploads", express.static(__dirname + "/uploads"));
 
 app.set('views', __dirname + "/views" );
 app.set("view engine", "ejs");
-
+//robots.txt
+app.get("/robots.txt", (req, res) => {
+  res.type("text/plain");
+  res.send(
+    "User-agent: *\nDisallow: /auth/login\nDisallow: /auth/register\nDisallow: /enroll/cart\n"
+  );
+});
 app.use("/main",session({
   secret: '~~~',	// 원하는 문자 입력
   resave: false,

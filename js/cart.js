@@ -304,7 +304,7 @@ let basket = {
             }else{
                 if (Course_Active== 1) {
                     alert("이미 결제가 이뤄진 강의가 존재합니다.");
-                    window.location.href = "http://localhost:54213/enroll/sub";
+                    window.location.href = "https://coding-nara.com/enroll/sub";
                 } else {
                     // IMP.request_pay(param, callback) 결제창 호출
                     IMP.request_pay(
@@ -332,7 +332,7 @@ let basket = {
                         merchant_uid: merchant_uid,
     
                         name: payment_name,
-                        amount: 100,//result_price,
+                        amount: result_price,
                         buyer_email: email_address,
                         buyer_name: payment_name,
                         buyer_tel: phone_number,
@@ -346,7 +346,7 @@ let basket = {
                             */
                     },
                     function (rsp) {
-                        if (rsp.status == "paid" && rsp.paid_amount == 100) { //result_price(실제 금액)
+                        if (rsp.status == "paid" && rsp.paid_amount == result_price) { //result_price(실제 금액)
                             if (rsp.success) {
                             basket.Enroll_info(rsp.imp_uid,rsp.merchant_uid); //결제 완료했을 떄 Section에 추가
                             var msg = "결제가 완료되었습니다.";
